@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">医疗追踪器</string>
+    <string name="login_text_username">用户名：</string>
+    <string name="login_text_password">密码：</string>
+    <string name="login_button_login">登录</string>
+    <string name="login_button_register">注册</string>
+    <string name="title_activity_main">医疗信息</string>
+    <string name="nav_header_title">用户名</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_subtitle">病人或医生</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
+    <string name="nav_item_profile">个人信息</string>
+    <string name="nav_item_gallery">图册</string>
+    <string name="nav_item_doctor">医生</string>
+    <string name="nav_item_other">其他</string>
+    <string name="nav_item_setting">设置</string>
+    <string name="nav_item_logout">登出</string>
+</resources>
