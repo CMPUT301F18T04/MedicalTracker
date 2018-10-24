@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
 
         setToolBarListener(toolbar);
@@ -86,9 +87,22 @@ public class MainActivity extends AppCompatActivity
 
             View headerView = navigationView.getHeaderView(0);
 
-            TextView textView = headerView.findViewById(R.id.nav_bar_username);
+            final TextView userDisplayName = headerView.findViewById(R.id.nav_bar_username);
 
-            textView.setText(DataController.getUser().getName());
+            TextView userRole = headerView.findViewById(R.id.nav_bar_role);
+            if(DataController.getUser().isDoctor())
+                userRole.setText("Doctor");
+            else
+                userRole.setText("Patient");
+
+            userDisplayName.setText(DataController.getUser().getName());
+
+            DataController.getUser().addListener(new Listener() {
+                @Override
+                public void update() {
+                    userDisplayName.setText(DataController.getUser().getName());
+                }
+            });
         }
     }
 
@@ -140,9 +154,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_doctor) {
             Toast.makeText(MainActivity.this, "You clicked doctor.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_setting) {
-            Toast.makeText(MainActivity.this, "You clicked setting.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(MainActivity.this, "You clicked logout.", Toast.LENGTH_SHORT).show();
+            DataController.setUser(null);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
