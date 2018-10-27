@@ -1,12 +1,13 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Activity;
 
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import ca.ualberta.t04.medicaltracker.Activity.ImageAdapter;
+import ca.ualberta.t04.medicaltracker.R;
 
 public class SlideShowActivity extends AppCompatActivity {
 

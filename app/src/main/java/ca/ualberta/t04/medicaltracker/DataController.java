@@ -2,7 +2,7 @@ package ca.ualberta.t04.medicaltracker;
 
 public class DataController
 {
-    private static User user = null;
+    private static User user;
 
     public static User getUser() {
         return user;

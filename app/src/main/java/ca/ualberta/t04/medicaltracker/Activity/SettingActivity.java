@@ -1,10 +1,13 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import ca.ualberta.t04.medicaltracker.DataController;
+import ca.ualberta.t04.medicaltracker.R;
 
 public class SettingActivity extends AppCompatActivity {
 

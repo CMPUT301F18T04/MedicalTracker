@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.ualberta.t04.medicaltracker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".Activity.LoginActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +24,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.PatientActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".SlideShowActivity" />
-        <activity android:name=".SettingActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.DoctorActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.SlideShowActivity" />
+        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.AboutActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.AddRecordActivity" />
+        <activity android:name=".Activity.RecordHistoryActivity" />
+        <activity android:name=".Activity.RecordViewActivity" />
+        <activity android:name=".Activity.GalleryActivity" />
+        <activity android:name=".Activity.DoctorViewActivity"></activity>
     </application>
 
 </manifest>

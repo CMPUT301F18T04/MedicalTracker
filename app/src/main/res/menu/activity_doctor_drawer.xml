@@ -8,22 +8,18 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/nav_item_profile" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_item_gallery" />
-        <item
-            android:id="@+id/nav_doctor"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/nav_item_doctor" />
     </group>
 
     <item android:title="@string/nav_item_other">
         <menu>
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_manage"
                 android:title="@string/nav_item_setting" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="@string/nav_item_about" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_send"

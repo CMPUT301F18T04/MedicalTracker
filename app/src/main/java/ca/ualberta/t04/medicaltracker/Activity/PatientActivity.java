@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +16,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.Inet4Address;
+import ca.ualberta.t04.medicaltracker.DataController;
+import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.R;
 
-public class MainActivity extends AppCompatActivity
+public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_patient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -48,13 +50,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(DataController.getUser()==null)
-        {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
         setToolBarListener(toolbar);
     }
 
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if(item.getItemId() == R.id.action_settings)
                 {
-                    Intent intent = new Intent(MainActivity.this, SlideShowActivity.class);
+                    Intent intent = new Intent(PatientActivity.this, SlideShowActivity.class);
                     startActivity(intent);
                 }
                 return false;
@@ -148,19 +143,22 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile)
         {
-            Toast.makeText(MainActivity.this, "You clicked profile.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PatientActivity.this, "You clicked profile.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gallery) {
-            Toast.makeText(MainActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) {
-            Toast.makeText(MainActivity.this, "You clicked doctor.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PatientActivity.this, "You clicked doctor.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_setting) {
-            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            Intent intent = new Intent(PatientActivity.this, SettingActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
             DataController.setUser(null);
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else if(id == R.id.nav_about) {
+            Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User
 {
@@ -8,11 +9,17 @@ public class User
     private String name;
     private ArrayList<Listener> listeners;
     private Boolean isDoctor;
+    private Date birthday;
+    private String email;
+    private Boolean isMale;
+    private String phoneNumber;
+    private String password;
 
-    public User(String userName, Boolean isDoctor)
+    public User(String userName, String password, Boolean isDoctor)
     {
         this.userName = userName;
         this.isDoctor = isDoctor;
+        this.password = password;
         if(listeners == null)
         {
             listeners = new ArrayList<>();
@@ -53,5 +60,45 @@ public class User
 
     public Boolean isDoctor() {
         return isDoctor;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getMale() {
+        return isMale;
+    }
+
+    public void setMale(Boolean isMale) {
+        this.isMale = isMale;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
