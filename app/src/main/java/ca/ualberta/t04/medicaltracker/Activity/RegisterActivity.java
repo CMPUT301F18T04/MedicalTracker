@@ -14,6 +14,7 @@ import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
 
@@ -74,31 +75,27 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Try to sign up by using elastic search
-        try {
-            Boolean done;
-            if(isDoctor) {
-                Doctor doctor = new Doctor(userName, password);
-                addInformationToUser(doctor, email, birthday, phoneNumber, isMale);
-                // If succeed to sign up, then return true
-                done = new ElasticSearchController.SignUpTask().execute(doctor).get();
-            } else {
-                Patient patient = new Patient(userName, password);
-                addInformationToUser(patient, email, birthday, phoneNumber, isMale);
-                done = new ElasticSearchController.SignUpTask().execute(patient).get();
-            }
-
-            if(!done)
-                Toast.makeText(RegisterActivity.this, "Duplicated UserName", Toast.LENGTH_SHORT).show();
-            else{
-                Toast.makeText(RegisterActivity.this, "Succeed to Sign Up", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        Boolean done;
+        if(isDoctor) {
+            Doctor doctor = new Doctor(userName, password);
+            doctor.setName(userName);
+            addInformationToUser(doctor, email, birthday, phoneNumber, isMale);
+            // If succeed to sign up, then return true
+            done = ElasticSearchController.signUp(doctor);
+        } else {
+            Patient patient = new Patient(userName, password);
+            patient.setName(userName);
+            addInformationToUser(patient, email, birthday, phoneNumber, isMale);
+            done = ElasticSearchController.signUp(patient);
         }
+
+        if(!done)
+            Toast.makeText(RegisterActivity.this, "Duplicated UserName", Toast.LENGTH_SHORT).show();
+        else{
+            Toast.makeText(RegisterActivity.this, "Succeed to Sign Up", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 
     // If optional information is input by user, then add them to the user's information

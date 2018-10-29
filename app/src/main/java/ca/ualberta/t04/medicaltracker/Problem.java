@@ -10,7 +10,7 @@ public class Problem
     private String title;
     private String description;
     private Date time;
-    private ArrayList<Listener> listeners;
+    private transient ArrayList<Listener> listeners = new ArrayList<>();
 
     public Problem(String title, String description) {
         this.title = title;
@@ -20,7 +20,6 @@ public class Problem
         Calendar calendar = Calendar.getInstance();
         time = calendar.getTime();
 
-        listeners = new ArrayList<>();
     }
 
     public ArrayList<Record> getRecords() {
@@ -60,10 +59,14 @@ public class Problem
     }
 
     public void addListener(Listener listener){
+        if(listeners==null)
+            listeners = new ArrayList<>();
         listeners.add(listener);
     }
 
     public void notifyAllListener() {
+        if(listeners==null)
+            listeners = new ArrayList<>();
         for (Listener listener:listeners){
             listener.update();
         }

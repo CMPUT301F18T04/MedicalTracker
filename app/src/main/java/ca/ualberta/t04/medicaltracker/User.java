@@ -7,7 +7,7 @@ public class User
 {
     private String userName;
     private String name;
-    private ArrayList<Listener> listeners;
+    private transient ArrayList<Listener> listeners = new ArrayList<>();
     private Boolean isDoctor;
     private Date birthday;
     private String email;
@@ -20,10 +20,6 @@ public class User
         this.userName = userName;
         this.isDoctor = isDoctor;
         this.password = password;
-        if(listeners == null)
-        {
-            listeners = new ArrayList<>();
-        }
     }
 
     public String getUserName()
@@ -47,11 +43,15 @@ public class User
 
     public void addListener(Listener listener)
     {
+        if(listeners==null)
+            listeners = new ArrayList<>();
         listeners.add(listener);
     }
 
     public void notifyAllListeners()
     {
+        if(listeners==null)
+            listeners = new ArrayList<>();
         for(Listener listener:listeners)
         {
             listener.update();

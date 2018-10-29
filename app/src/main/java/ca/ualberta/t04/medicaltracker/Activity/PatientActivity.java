@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.ualberta.t04.medicaltracker.DataController;
+import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.R;
 
@@ -96,6 +97,7 @@ public class PatientActivity extends AppCompatActivity
                 @Override
                 public void update() {
                     userDisplayName.setText(DataController.getUser().getName());
+                    ElasticSearchController.updateUser(DataController.getUser());
                 }
             });
         }

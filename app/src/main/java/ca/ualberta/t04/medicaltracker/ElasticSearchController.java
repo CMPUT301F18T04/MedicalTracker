@@ -45,6 +45,29 @@ public class ElasticSearchController
         }
     }
 
+    // Used to sign up user
+    public static Boolean signUp(User user){
+        Boolean done = false;
+        try {
+            done = new SignUpTask().execute(user).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return done;
+    }
+
+    // Used to delete user
+    public static void deleteUser(String userName){
+        new ElasticSearchController.DeleteUserTask().execute(userName);
+    }
+
+    // Used to search user
+    public static void updateUser(User user){
+        new ElasticSearchController.UpdateUserTask().execute(user);
+    }
+
     // Used to search user
     public static User searchUser(String userName){
         try {
@@ -62,6 +85,55 @@ public class ElasticSearchController
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static class UpdateUserTask extends AsyncTask<User, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(User... users) {
+            setClient();
+
+            User user = users[0];
+            String userName = user.getUserName();
+
+            // Build the search query
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"query_string\" : {\n" +
+                    "            \"query\" : \"(userName:" + userName + " AND _type:" + USER_TYPE + ")\" \n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+
+            DeleteByQuery deleteByQuery = new DeleteByQuery.Builder(query)
+                    .addIndex(INDEX_NAME)
+                    .addType(USER_TYPE)
+                    .build();
+
+            // Re-add the User
+            Index userNameIndex = new Index.Builder(user).index(INDEX_NAME).type(USER_TYPE).build();
+            // If searched, then return object, otherwise return null
+            try {
+                // Execute the delete action
+                JestResult jestResult = client.execute(deleteByQuery);
+                if(jestResult.isSucceeded()){
+                    Log.d("Succeed", "Deleted!");
+                    // Execute the add action
+                    DocumentResult result = client.execute(userNameIndex);
+                    if(result.isSucceeded()){
+                        Log.d("Succeed", "Re-added it!");
+                    }
+                }
+                else{
+                    Log.d("Succeed", "Nothing Found!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+                return null;
+            }
+            return null;
+        }
     }
 
     public static class DeleteUserTask extends AsyncTask<String, Void, Void>
@@ -103,7 +175,7 @@ public class ElasticSearchController
         }
     }
 
-    public static class SearchUserTask extends AsyncTask<String, Void, User>
+    private static class SearchUserTask extends AsyncTask<String, Void, User>
     {
         @Override
         protected User doInBackground(String... userNames) {
@@ -158,7 +230,7 @@ public class ElasticSearchController
         }
     }
 
-    public static class SignUpTask extends AsyncTask<User, Void, Boolean>
+    private static class SignUpTask extends AsyncTask<User, Void, Boolean>
     {
         @Override
         protected Boolean doInBackground(User... users) {

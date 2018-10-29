@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view)
     {
+        new ElasticSearchController.DeleteUserTask().execute("mjy");
         EditText username_text = findViewById(R.id.login_username);
         EditText password_text = findViewById(R.id.login_password);
         if(username_text.getText().toString().equals("") || password_text.getText().toString().equals("")){
@@ -33,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         String userName = username_text.getText().toString();
         User user = ElasticSearchController.searchUser(userName);
-        user.setName(username_text.getText().toString());
 
         if(password_text.getText().toString().equals(user.getPassword())){
             if(user.isDoctor()){

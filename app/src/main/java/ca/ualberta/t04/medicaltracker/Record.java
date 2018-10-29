@@ -20,7 +20,7 @@ public class Record
 
     private HashMap<Doctor, ArrayList<String>> comments;
     private Location location;
-    private ArrayList<Listener> listeners;
+    private transient ArrayList<Listener> listeners = new ArrayList<>();
 
     public Record(String title, Date dateStart, String description, ArrayList<Image> bodyLocationImage, Location location)
     {
@@ -32,7 +32,6 @@ public class Record
 
         comments = new HashMap<>();
         normalImages = new ArrayList<>();
-        listeners = new ArrayList<>();
     }
 
     public String getTitle() {
@@ -100,10 +99,14 @@ public class Record
     }
 
     public void addListener(Listener listener){
+        if(listeners==null)
+            listeners = new ArrayList<>();
         listeners.add(listener);
     }
 
     public void notifyAllListener() {
+        if(listeners==null)
+            listeners = new ArrayList<>();
         for (Listener listener:listeners){
             listener.update();
         }
