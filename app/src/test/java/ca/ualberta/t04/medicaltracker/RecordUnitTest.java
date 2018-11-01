@@ -32,6 +32,12 @@ public class RecordUnitTest {
         assertEquals(record.getBodyLocationImage(),bodyImage);
         assertEquals(record.getLocation(),location);
 
+        //setLocation and getLocation test
+        Location testLocation = new Location("Test");
+        record.setLocation(testLocation);
+        assertEquals(testLocation,record.getLocation());
+
+
         //setComments and getComments test
         ArrayList<String> comments = new ArrayList<>();
         comments.add("Test1");
@@ -55,6 +61,21 @@ public class RecordUnitTest {
         testImages.add(image1);
         testImages.add(image3);
         assertNotEquals(testImages,record.getNormalImages());
+
+        //addBodyImage and removeBodyImage test
+        Image testImage1 = null;
+        Image testImage2 = null;
+
+        bodyImage.add(testImage1);
+        bodyImage.add(testImage2);
+
+        record.addBodyLocationImage(testImage1);
+        record.addBodyLocationImage(testImage2);
+
+        assertEquals(bodyImage,record.getBodyLocationImage());
+
+        record.removeBodyLocationImage(testImage1);
+        assertEquals(bodyImage,record.getBodyLocationImage());
     }
 
 }
