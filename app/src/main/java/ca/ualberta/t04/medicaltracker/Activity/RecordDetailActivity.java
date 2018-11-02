@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import ca.ualberta.t04.medicaltracker.R;
 
-public class RecordViewActivity extends AppCompatActivity {
+public class RecordDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
