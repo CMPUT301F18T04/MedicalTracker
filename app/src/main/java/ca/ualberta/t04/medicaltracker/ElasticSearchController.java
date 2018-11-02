@@ -27,7 +27,7 @@ public class ElasticSearchController
 {
     private static JestClient client = null;
     private static String USER_TYPE = "user";
-    private static String INDEX_NAME = "medicaltracker";
+    private static String INDEX_NAME = "cmput301f18t04";
     private static String IS_DOCTOR = "isDoctor";
 
     public static JestClient getClient()
@@ -63,7 +63,7 @@ public class ElasticSearchController
         new ElasticSearchController.DeleteUserTask().execute(userName);
     }
 
-    // Used to search user
+    // Used to update user
     public static void updateUser(User user){
         new ElasticSearchController.UpdateUserTask().execute(user);
     }
@@ -72,6 +72,8 @@ public class ElasticSearchController
     public static User searchUser(String userName){
         try {
             User user = new ElasticSearchController.SearchUserTask().execute(userName).get();
+            if(user==null)
+                return null;
             if(user.isDoctor()){
                 Doctor doctor = (Doctor) user;
                 return doctor;
@@ -201,7 +203,7 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 SearchResult searchResult = client.execute(search);
-                if(searchResult.isSucceeded()){
+                if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
                     Log.d("Succeed", searchResult.getSourceAsStringList().get(0));
 
                     // JsonParser is used to convert source string to JsonObject
