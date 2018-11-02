@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view)
     {
-        new ElasticSearchController.DeleteUserTask().execute("mjy");
         EditText username_text = findViewById(R.id.login_username);
         EditText password_text = findViewById(R.id.login_password);
         if(username_text.getText().toString().equals("") || password_text.getText().toString().equals("")){
@@ -35,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         String userName = username_text.getText().toString();
         User user = ElasticSearchController.searchUser(userName);
 
-        if(password_text.getText().toString().equals(user.getPassword())){
+        if(user!=null && password_text.getText().toString().equals(user.getPassword())){
             if(user.isDoctor()){
                 Doctor doctor = (Doctor) user;
                 DataController.setUser(doctor);
@@ -49,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             finish();
+        } else if(user==null) {
+            Toast.makeText(this, "UserName does not exist!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "UserName does not match the password!", Toast.LENGTH_SHORT).show();
         }
