@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="90"
         android:title="@string/action_search"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_add"
+        android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_menu_send"
-        android:title="@string/action_settings"
+        android:title="@string/action_add"
         app:showAsAction="always" />
 
 </menu>

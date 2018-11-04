@@ -19,6 +19,10 @@
     <string name="title_activity_main">MainActivity</string>
     <!-- end for Main Page -->
 
+    <!-- String for Patient Page -->
+    <string name="patient_inner_text_record">records</string>
+    <!-- end for Patient Page -->
+
 
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -38,7 +42,7 @@
 
 
     <!-- String for Menu -->
-    <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
     <string name="action_search">Search</string>
     <!-- end for Menu -->
 
@@ -78,5 +82,13 @@
     <string name="profile_email">Email:</string>
     <string name="profile_address">Address:</string>
     <string name="profile_button_edit">Edit</string>
-    <!-- end for About Page -->
+    <!-- end for Profile Page -->
+
+    <!-- String for Add Problem Page -->
+    <string name="add_problem_title">Add A Problem:</string>
+    <string name="add_problem_problem_title">Problem Title:</string>
+    <string name="add_problem_problem_date">Date Start:</string>
+    <string name="add_problem_problem_description">Brief Description:</string>
+    <string name="add_problem_button_add">Add</string>
+    <!-- end for Add Problem Page -->
 </resources>

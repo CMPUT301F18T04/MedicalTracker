@@ -40,7 +40,8 @@
         <activity android:name=".Activity.RecordHistoryActivity" />
         <activity android:name=".Activity.RecordDetailActivity" />
         <activity android:name=".Activity.GalleryActivity" />
-        <activity android:name=".Activity.DoctorViewActivity"></activity>
+        <activity android:name=".Activity.DoctorViewActivity" />
+        <activity android:name=".Activity.AddProblemActivity"></activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class ProblemUnitTest {
     public void problem_test() {
 
         //Constructor test
-        Problem problem = new Problem("Headache", "My head is not comfortable");
+        Problem problem = new Problem("Headache", new Date(), "My head is not comfortable");
         assertTrue("Title should be 'Headache'", problem.getTitle().equals("Headache"));
         assertTrue("Title should be 'My head is not comfortable'", problem.getDescription().equals("My head is not comfortable"));
 

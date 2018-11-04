@@ -22,4 +22,12 @@ public class DataController
         getUser().setAddress(address);
         getUser().notifyAllListeners();
     }
+
+    public static Patient getPatient(){
+        return (Patient) user;
+    }
+
+    public static Doctor getDoctor(){
+        return (Doctor) user;
+    }
 }

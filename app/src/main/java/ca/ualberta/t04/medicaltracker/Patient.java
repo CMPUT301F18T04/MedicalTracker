@@ -21,10 +21,12 @@ public class Patient extends User
 
     public void addProblem(Problem problem) {
         problems.add(problem);
+        notifyAllListeners();
     }
 
     public void removeProblem(Problem problem) {
         problems.remove(problem);
+        notifyAllListeners();
     }
 
     public ArrayList<Doctor> getDoctors() {
@@ -33,9 +35,11 @@ public class Patient extends User
 
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
+        notifyAllListeners();
     }
 
     public void removeDoctor(Doctor doctor) {
         doctors.remove(doctor);
+        notifyAllListeners();
     }
 }

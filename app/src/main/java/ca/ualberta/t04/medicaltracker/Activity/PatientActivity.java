@@ -3,9 +3,8 @@ package ca.ualberta.t04.medicaltracker.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -52,6 +57,15 @@ public class PatientActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolBarListener(toolbar);
+
+        initListView();
+    }
+
+    private void initListView(){
+        ListView listView = findViewById(R.id.main_page_list_view);
+        ArrayList<Problem> problems = DataController.getPatient().getProblems();
+        ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
+        listView.setAdapter(adapter);
     }
 
     // Used to set OnMenuItemClickListener to ToolBar
@@ -61,9 +75,9 @@ public class PatientActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemClick(MenuItem item)
             {
-                if(item.getItemId() == R.id.action_settings)
+                if(item.getItemId() == R.id.action_add)
                 {
-                    Intent intent = new Intent(PatientActivity.this, SlideShowActivity.class);
+                    Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
                     startActivity(intent);
                 }
                 return false;
@@ -130,7 +144,7 @@ public class PatientActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add) {
             return true;
         }
 
