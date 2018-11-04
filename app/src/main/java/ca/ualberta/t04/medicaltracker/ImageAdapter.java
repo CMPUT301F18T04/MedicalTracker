@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker.Activity;
+package ca.ualberta.t04.medicaltracker;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

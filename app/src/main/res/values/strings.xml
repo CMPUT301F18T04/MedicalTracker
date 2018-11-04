@@ -68,4 +68,15 @@
     <string name="register_text_doctor">Doctor</string>
     <string name="register_button_sign_up">Sign up</string>
     <!-- end for Register Page -->
+
+    <!-- String for Profile Page -->
+    <string name="profile_title">Your Profile:</string>
+    <string name="profile_username">UserName:</string>
+    <string name="profile_birthday">Birthday:</string>
+    <string name="profile_sex">Sex:</string>
+    <string name="profile_tel">Tel:</string>
+    <string name="profile_email">Email:</string>
+    <string name="profile_address">Address:</string>
+    <string name="profile_button_edit">Edit</string>
+    <!-- end for About Page -->
 </resources>

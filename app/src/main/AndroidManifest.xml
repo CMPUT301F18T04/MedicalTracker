@@ -38,7 +38,7 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.AddRecordActivity" />
         <activity android:name=".Activity.RecordHistoryActivity" />
-        <activity android:name=".Activity.RecordViewActivity" />
+        <activity android:name=".Activity.RecordDetailActivity" />
         <activity android:name=".Activity.GalleryActivity" />
         <activity android:name=".Activity.DoctorViewActivity"></activity>
     </application>

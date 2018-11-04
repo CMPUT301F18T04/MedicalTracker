@@ -1,7 +1,10 @@
 package ca.ualberta.t04.medicaltracker;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class User
 {
@@ -14,6 +17,7 @@ public class User
     private Boolean isMale;
     private String phoneNumber;
     private String password;
+    private String address;
 
     public User(String userName, String password, Boolean isDoctor)
     {
@@ -66,6 +70,13 @@ public class User
         return birthday;
     }
 
+    public String getBirthdayString(){
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        if(birthday!=null)
+            return format.format(birthday);
+        return "";
+    }
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
@@ -101,4 +112,14 @@ public class User
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
 }

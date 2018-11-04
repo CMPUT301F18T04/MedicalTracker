@@ -145,7 +145,8 @@ public class PatientActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile)
         {
-            Toast.makeText(PatientActivity.this, "You clicked profile.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) {
