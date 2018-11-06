@@ -16,6 +16,7 @@ import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Util;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -28,33 +29,39 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initPage(){
+        // get username
         TextView username = findViewById(R.id.profile_username);
         username.setText(DataController.getUser().getUserName());
 
+        // get birthday
         EditText birthday = findViewById(R.id.profile_birthday);
         if(DataController.getUser().getBirthday()!=null){
             birthday.setText(DataController.getUser().getBirthdayString());
         }
 
+        // get sex
         if(DataController.getUser().getMale()!=null){
             RadioButton male = findViewById(R.id.profile_male);
             RadioButton female = findViewById(R.id.profile_female);
             if(DataController.getUser().getMale())
                 male.setChecked(true);
-            else
+            else if(!DataController.getUser().getMale())
                 female.setChecked(true);
         }
 
+        // get phone number
         if(DataController.getUser().getPhoneNumber()!=null){
             EditText phone = findViewById(R.id.profile_phone);
             phone.setText(DataController.getUser().getPhoneNumber());
         }
 
+        // get email
         if(DataController.getUser().getEmail()!=null){
             EditText email = findViewById(R.id.profile_email);
             email.setText(DataController.getUser().getEmail());
         }
 
+        // get address
         if(DataController.getUser().getAddress()!=null){
             EditText address = findViewById(R.id.profile_address);
             address.setText(DataController.getUser().getAddress());
@@ -66,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void edit(View view){
         // get new birthday
         EditText birthday = findViewById(R.id.profile_birthday);
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        DateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
         Date newBirthday = null;
         try {
             newBirthday = format.parse(birthday.getText().toString());

@@ -20,9 +20,15 @@
     <!-- end for Main Page -->
 
     <!-- String for Patient Page -->
+    <string name="patient_page_title">Problems</string>
+    <string name="patient_page_description">Description: </string>
     <string name="patient_inner_text_record">records</string>
     <!-- end for Patient Page -->
 
+    <!-- String for Record History Page -->
+    <string name="record_history_description">Description: </string>
+    <string name="record_history_title">Records</string>
+    <!-- end for Record History Page -->
 
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -91,4 +97,12 @@
     <string name="add_problem_problem_description">Brief Description:</string>
     <string name="add_problem_button_add">Add</string>
     <!-- end for Add Problem Page -->
+
+    <!-- String for Add Record Page -->
+    <string name="add_record_title">Add A Record:</string>
+    <string name="add_record_record_title">Record Title:</string>
+    <string name="add_record_record_date">Date Start:</string>
+    <string name="add_record_record_description">Brief Description:</string>
+    <string name="add_record_button_add">Add</string>
+    <!-- end for Add Record Page -->
 </resources>

@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Util;
 
 public class ProblemAdapter extends ArrayAdapter {
 
@@ -32,16 +36,16 @@ public class ProblemAdapter extends ArrayAdapter {
         TextView date = view.findViewById(R.id.problem_list_date);
         TextView description = view.findViewById(R.id.problem_list_description);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
 
-        title.setText(problem.getTitle() + "(" + problem.getRecords().size() + " " + R.string.patient_inner_text_record + ")");
+        title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecords().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));
 
         String description_text = problem.getDescription();
-        if(description.length()<30){
-            description.setText(description_text);
+        if(description_text.length()<30){
+            description.setText(getContext().getText(R.string.patient_page_description) + description_text.substring(0));
         } else {
-            description.setText(problem.getDescription().substring(0, 30) + "...");
+            description.setText(getContext().getText(R.string.patient_page_description)+ problem.getDescription().substring(0, 40) + "...");
         }
 
         return view;

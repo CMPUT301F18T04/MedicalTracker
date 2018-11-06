@@ -71,7 +71,7 @@ public class User
     }
 
     public String getBirthdayString(){
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        DateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
         if(birthday!=null)
             return format.format(birthday);
         return "";
@@ -120,6 +120,5 @@ public class User
     public void setAddress(String address) {
         this.address = address;
     }
-
 
 }

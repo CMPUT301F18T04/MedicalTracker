@@ -27,7 +27,7 @@ public class ElasticSearchController
 {
     private static JestClient client = null;
     private static String USER_TYPE = "user";
-    private static String INDEX_NAME = "cmput301f18t04";
+    private static String INDEX_NAME = "cmput301f18t04test";
     private static String IS_DOCTOR = "isDoctor";
 
     public static JestClient getClient()
@@ -98,36 +98,14 @@ public class ElasticSearchController
             User user = users[0];
             String userName = user.getUserName();
 
-            // Build the search query
-            String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"query_string\" : {\n" +
-                    "            \"query\" : \"(userName:" + userName + " AND _type:" + USER_TYPE + ")\" \n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
+            // Update the index with the unique userName
+            Index userNameIndex = new Index.Builder(user).index(INDEX_NAME).type(USER_TYPE).id(userName).build();
 
-            DeleteByQuery deleteByQuery = new DeleteByQuery.Builder(query)
-                    .addIndex(INDEX_NAME)
-                    .addType(USER_TYPE)
-                    .build();
-
-            // Re-add the User
-            Index userNameIndex = new Index.Builder(user).index(INDEX_NAME).type(USER_TYPE).build();
-            // If searched, then return object, otherwise return null
             try {
-                // Execute the delete action
-                JestResult jestResult = client.execute(deleteByQuery);
-                if(jestResult.isSucceeded()){
-                    Log.d("Succeed", "Deleted!");
-                    // Execute the add action
-                    DocumentResult result = client.execute(userNameIndex);
-                    if(result.isSucceeded()){
-                        Log.d("Succeed", "Re-added it!");
-                    }
-                }
-                else{
-                    Log.d("Succeed", "Nothing Found!");
+                // Execute the add action
+                DocumentResult result = client.execute(userNameIndex);
+                if(result.isSucceeded()) {
+                    Log.d("Succeed", "Updated it!");
                 }
             } catch (IOException e) {
                 Log.d("Succeed", "Failed!");
@@ -274,12 +252,14 @@ public class ElasticSearchController
 
             // If the userName is unique, then sign up
             if(!duplicated){
-                Index userNameIndex = new Index.Builder(user).index(INDEX_NAME).type(USER_TYPE).build();
+                Index userNameIndex = new Index.Builder(user).index(INDEX_NAME).type(USER_TYPE).id(user.getUserName()).build();
                 try
                 {
                     DocumentResult result = client.execute(userNameIndex);
-                    if(result.isSucceeded())
+                    if(result.isSucceeded()){
                         Log.d("Succeed", "Succeed!");
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -295,6 +275,7 @@ public class ElasticSearchController
         if(client==null)
         {
             DroidClientConfig config = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/").build();
+
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);
             client = factory.getObject();

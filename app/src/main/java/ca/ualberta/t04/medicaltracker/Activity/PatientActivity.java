@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
-import ca.ualberta.t04.medicaltracker.ProblemAdapter;
+import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -36,7 +37,8 @@ public class PatientActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(R.string.patient_page_title);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,19 +58,39 @@ public class PatientActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolBarListener(toolbar);
+        //setToolBarListener(toolbar);
 
-        initListView();
+        initProblemListView();
     }
 
-    private void initListView(){
+    // Init list view of patients
+    private void initProblemListView(){
         ListView listView = findViewById(R.id.main_page_list_view);
-        ArrayList<Problem> problems = DataController.getPatient().getProblems();
-        ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
+        final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
+        final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //DataController.setCurrentProblem(problems.get(position));
+                Intent intent = new Intent(PatientActivity.this, RecordHistoryActivity.class);
+                intent.putExtra("index", position);
+                startActivity(intent);
+            }
+        });
+
+        DataController.getPatient().getProblemList().addListener(new Listener() {
+            @Override
+            public void update() {
+                adapter.notifyDataSetChanged();
+                ElasticSearchController.updateUser(DataController.getPatient());
+            }
+        });
     }
 
     // Used to set OnMenuItemClickListener to ToolBar
+    /*
     private void setToolBarListener(Toolbar toolbar)
     {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -84,6 +106,7 @@ public class PatientActivity extends AppCompatActivity
             }
         });
     }
+    */
 
     public void onStart()
     {
@@ -114,6 +137,7 @@ public class PatientActivity extends AppCompatActivity
                     ElasticSearchController.updateUser(DataController.getUser());
                 }
             });
+
         }
     }
 
@@ -145,7 +169,11 @@ public class PatientActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
+            Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
+            startActivity(intent);
             return true;
+        } else if (id == R.id.action_search){
+            Toast.makeText(PatientActivity.this, "Search.", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

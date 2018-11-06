@@ -1,22 +1,23 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import java.util.concurrent.ExecutionException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
+import ca.ualberta.t04.medicaltracker.Util;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -61,9 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
         RadioButton radio_male = findViewById(R.id.register_male);
         RadioButton radio_female = findViewById(R.id.register_female);
 
-        if(radio_male.isChecked() && !radio_female.isChecked()){
+        if(radio_male.isChecked()){
             isMale = true;
-        } else {
+        } else if(radio_female.isChecked()) {
             isMale = false;
         }
 
@@ -100,20 +101,29 @@ public class RegisterActivity extends AppCompatActivity {
 
     // If optional information is input by user, then add them to the user's information
     private void addInformationToUser(User user, String email, String birthday, String phoneNumber, Boolean isMale){
+        // Add email to user's information
         if(!email.equals("")){
             user.setEmail(email);
         }
 
-        /*
-        if(!birthday.equals("")){
-            user.setBirthday(birthday);
+        // Add birthday to user's information
+        Date birthdayDate = null;
+        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        try {
+            birthdayDate = format.parse(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        */
+        if(birthdayDate != null){
+            user.setBirthday(birthdayDate);
+        }
 
+        // Add phoneNumber to user's information
         if(!phoneNumber.equals("")){
             user.setPhoneNumber(phoneNumber);
         }
 
+        // Add sex to user's information
         if(isMale!=null){
             user.setMale(isMale);
         }

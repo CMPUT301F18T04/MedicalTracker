@@ -7,4 +7,5 @@
     <color name="text_color">#efecec</color>
     <color name="button_press_color">#FF539C9C</color>
     <color name="app_background">#f3e1d6</color>
+    <color name="list_view_background">#e5d2c5</color>
 </resources>

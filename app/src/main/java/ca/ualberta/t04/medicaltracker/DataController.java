@@ -5,6 +5,7 @@ import java.util.Date;
 public class DataController
 {
     private static User user;
+    private static Problem currentProblem;
 
     public static User getUser() {
         return user;
@@ -29,5 +30,13 @@ public class DataController
 
     public static Doctor getDoctor(){
         return (Doctor) user;
+    }
+
+    public static void setCurrentProblem(Problem problem){
+        currentProblem = problem;
+    }
+
+    public static Problem getCurrentProblem(){
+        return currentProblem;
     }
 }
