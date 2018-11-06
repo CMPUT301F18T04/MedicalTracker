@@ -3,6 +3,7 @@ package ca.ualberta.t04.medicaltracker;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -19,13 +20,13 @@ public class PatientUnitTest {
         assertTrue("The user should be a patient", patient.isDoctor().equals(false));
 
         //addProblem, removeProblem, getProblems tests
-        Problem problem = new Problem("Dermatophytosis","Skin rash, itch");
-        Problem problem1 = new Problem("Urticaria","Extremely itch");
-        patient.addProblem(problem);
-        assertEquals(patient.getProblems().get(0),problem);
-        patient.addProblem(problem1);
-        patient.removeProblem(problem);
-        assertNotEquals(patient.getProblems().get(0),problem);
+        Problem problem = new Problem("Dermatophytosis",new Date(), "Skin rash, itch");
+        Problem problem1 = new Problem("Urticaria",new Date(),"Extremely itch");
+        patient.getProblemList().addProblem(problem);
+        assertEquals(patient.getProblemList().getProblems().get(0),problem);
+        patient.getProblemList().addProblem(problem1);
+        patient.getProblemList().removeProblem(problem);
+        assertNotEquals(patient.getProblemList().getProblems().get(0),problem);
 
         //addDoctor, removeDoctor, getDoctors
         Doctor doctor = new Doctor("Doctor","12345");

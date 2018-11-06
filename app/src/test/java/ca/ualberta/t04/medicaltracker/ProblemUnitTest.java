@@ -33,17 +33,17 @@ public class ProblemUnitTest {
         //addRecord,getRecord and remove Record test
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        Location location = new Location("dummyprovider");
+        Location location = null;
         ArrayList<Image> bodyImage = new ArrayList<>();
         Record record = new Record("ProblemTest", date, "This is Unit Test For Problem",bodyImage,location);
         Record record1 = new Record("ProblemTest1", date, "This is Unit Test For Problem1",bodyImage,location);
 
-        problem.addRecord(record);
-        problem.addRecord(record1);
+        problem.getRecordList().addRecord(record);
+        problem.getRecordList().addRecord(record1);
 
-        assertEquals(record,problem.getRecords().get(0));
-        problem.removeRecord(record);
-        assertNotEquals(record,problem.getRecords().get(0));
+        assertEquals(record,problem.getRecordList().getRecords().get(0));
+        problem.getRecordList().removeRecord(record);
+        assertNotEquals(record,problem.getRecordList().getRecords().get(0));
 
         //setTime and getTime test
         Date time = calendar.getTime();
