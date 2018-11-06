@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Add birthday to user's information
         Date birthdayDate = null;
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
         try {
             birthdayDate = format.parse(birthday);
         } catch (ParseException e) {

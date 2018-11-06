@@ -71,7 +71,7 @@ public class User
     }
 
     public String getBirthdayString(){
-        DateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        DateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
         if(birthday!=null)
             return format.format(birthday);
         return "";

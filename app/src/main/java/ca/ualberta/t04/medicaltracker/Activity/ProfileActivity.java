@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void edit(View view){
         // get new birthday
         EditText birthday = findViewById(R.id.profile_birthday);
-        DateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        DateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
         Date newBirthday = null;
         try {
             newBirthday = format.parse(birthday.getText().toString());

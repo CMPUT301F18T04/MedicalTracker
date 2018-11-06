@@ -37,7 +37,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         Date dateStart = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
         try {
             dateStart = format.parse(record_date.getText().toString());
         } catch (ParseException e) {

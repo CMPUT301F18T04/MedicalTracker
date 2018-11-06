@@ -37,7 +37,7 @@ public class AddProblemActivity extends AppCompatActivity {
         Date dateStart = new Date();
 
         // if the date that the user inputs is not correct, then use the default date
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMATE, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
         try {
             dateStart = format.parse(problem_date.getText().toString());
         } catch (ParseException e) {
