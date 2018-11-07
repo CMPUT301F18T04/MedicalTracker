@@ -1,7 +1,5 @@
 package ca.ualberta.t04.medicaltracker;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -72,7 +70,6 @@ public class ProblemList
             listeners = new HashMap<>();
         for (Listener listener:listeners.values()){
             listener.update();
-            Log.d("Succeed", "Listener");
         }
     }
 }

@@ -12,7 +12,7 @@ public class ProblemListUnitTest
     @Test
     public void problemListTest(){
         ProblemList problemList = new ProblemList();
-        problemList.addListener(new Listener() {
+        problemList.addListener("1", new Listener() {
             @Override
             public void update() {
                 System.out.println("The message is sent by listeners.");

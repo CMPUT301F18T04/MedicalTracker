@@ -11,7 +11,7 @@ public class RecordListUnitTest
     @Test
     public void recordListTest(){
         RecordList recordList = new RecordList();
-        recordList.addListener(new Listener() {
+        recordList.addListener("1", new Listener() {
             @Override
             public void update() {
                 System.out.println("The message is sent by recordList listeners.");
