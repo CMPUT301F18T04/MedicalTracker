@@ -1,21 +1,13 @@
 package ca.ualberta.t04.medicaltracker;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import io.searchbox.indices.DeleteIndex;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -30,5 +22,10 @@ public class InstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("ca.ualberta.t04.medicaltracker", appContext.getPackageName());
+    }
+
+    @Test
+    public void deleteUser(){
+        ElasticSearchController.deleteUser("test");
     }
 }

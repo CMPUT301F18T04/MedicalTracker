@@ -18,9 +18,11 @@ public class Doctor extends User
 
     public void addPatient(Patient patient) {
         patients.add(patient);
+        notifyAllListeners();
     }
 
     public void removePatient(Patient patient){
         patients.remove(patient);
+        notifyAllListeners();
     }
 }

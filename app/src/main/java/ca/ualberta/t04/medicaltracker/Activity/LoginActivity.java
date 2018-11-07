@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "UserName does not match the password!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public void register(View view)

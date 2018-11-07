@@ -22,7 +22,7 @@ public class RecordUnitTest {
         //Constructor test
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        Location location = new Location("dummyprovider");
+        Location location = null;
         ArrayList<Image> bodyImage = new ArrayList<>();
         Record record = new Record("RecordTest", date, "This is Unit Test For Record",bodyImage,location);
 
@@ -33,7 +33,7 @@ public class RecordUnitTest {
         assertEquals(record.getLocation(),location);
 
         //setLocation and getLocation test
-        Location testLocation = new Location("Test");
+        Location testLocation = null;
         record.setLocation(testLocation);
         assertEquals(testLocation,record.getLocation());
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import ca.ualberta.t04.medicaltracker.Activity.ImageAdapter;
+import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class SlideShowActivity extends AppCompatActivity {

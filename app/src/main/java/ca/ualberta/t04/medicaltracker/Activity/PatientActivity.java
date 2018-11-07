@@ -3,9 +3,8 @@ package ca.ualberta.t04.medicaltracker.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.DataController;
 import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -31,7 +37,8 @@ public class PatientActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(R.string.patient_page_title);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,25 +58,55 @@ public class PatientActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolBarListener(toolbar);
+        //setToolBarListener(toolbar);
+
+        initProblemListView();
+    }
+
+    // Init list view of patients
+    private void initProblemListView(){
+        ListView listView = findViewById(R.id.main_page_list_view);
+        final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
+        final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //DataController.setCurrentProblem(problems.get(position));
+                Intent intent = new Intent(PatientActivity.this, RecordHistoryActivity.class);
+                intent.putExtra("index", position);
+                startActivity(intent);
+            }
+        });
+
+        DataController.getPatient().getProblemList().addListener("ProblemListener1", new Listener() {
+            @Override
+            public void update() {
+                adapter.notifyDataSetChanged();
+                ElasticSearchController.updateUser(DataController.getPatient());
+            }
+        });
     }
 
     // Used to set OnMenuItemClickListener to ToolBar
+    /*
     private void setToolBarListener(Toolbar toolbar)
     {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item)
             {
-                if(item.getItemId() == R.id.action_settings)
+                if(item.getItemId() == R.id.action_add)
                 {
-                    Intent intent = new Intent(PatientActivity.this, SlideShowActivity.class);
+                    Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
                     startActivity(intent);
                 }
                 return false;
             }
         });
     }
+    */
 
     public void onStart()
     {
@@ -100,6 +137,7 @@ public class PatientActivity extends AppCompatActivity
                     ElasticSearchController.updateUser(DataController.getUser());
                 }
             });
+
         }
     }
 
@@ -130,8 +168,12 @@ public class PatientActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add) {
+            Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
+            startActivity(intent);
             return true;
+        } else if (id == R.id.action_search){
+            Toast.makeText(PatientActivity.this, "Search.", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -145,7 +187,8 @@ public class PatientActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile)
         {
-            Toast.makeText(PatientActivity.this, "You clicked profile.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) {
