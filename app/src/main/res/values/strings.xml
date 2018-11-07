@@ -19,11 +19,23 @@
     <string name="title_activity_main">MainActivity</string>
     <!-- end for Main Page -->
 
+    <!-- String for Add Patient Page -->
+    <string name="add_patient_title">Search a patient</string>
+    <string name="add_patient_tip">Please enter a patient\'s name:</string>
+    <string name="add_patient_button_search">Search</string>
+    <string name="add_patient_button_add">Add</string>
+    <string name="add_patient_detail">This patient has %d problem(s)</string>
+    <!-- end for Add Patient Page -->
+
     <!-- String for Patient Page -->
     <string name="patient_page_title">Problems</string>
     <string name="patient_page_description">Description: </string>
     <string name="patient_inner_text_record">records</string>
     <!-- end for Patient Page -->
+
+    <!-- String for Doctor Page -->
+    <string name="doctor_page_title">Your Patients</string>
+    <!-- end for Doctor Page -->
 
     <!-- String for Record History Page -->
     <string name="record_history_description">Description: </string>
