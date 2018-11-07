@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.DataController;
-import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
@@ -40,11 +39,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         listView.setAdapter(adapter);
 
-        problem.getRecordList().addListener(new Listener() {
+        problem.getRecordList().addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
                 adapter.notifyDataSetChanged();
-                ElasticSearchController.updateUser(DataController.getUser());
+                // We don't need it anymore, since we only need to update user once.
+                //ElasticSearchController.updateUser(DataController.getUser());
                 DataController.getPatient().getProblemList().notifyAllListener();
             }
         });

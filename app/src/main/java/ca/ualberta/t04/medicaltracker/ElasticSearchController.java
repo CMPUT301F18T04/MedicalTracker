@@ -27,7 +27,7 @@ public class ElasticSearchController
 {
     private static JestClient client = null;
     private static String USER_TYPE = "user";
-    private static String INDEX_NAME = "cmput301f18t04test";
+    private static String INDEX_NAME = Util.INDEX_NAME;
     private static String IS_DOCTOR = "isDoctor";
 
     public static JestClient getClient()
@@ -37,6 +37,7 @@ public class ElasticSearchController
         return client;
     }
 
+    // Delete the whole index of ElasticSearch
     public static void deleteIndex(String indexName){
         try {
             client.execute(new Delete.Builder(INDEX_NAME).build());

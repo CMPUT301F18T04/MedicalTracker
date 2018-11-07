@@ -80,7 +80,7 @@ public class PatientActivity extends AppCompatActivity
             }
         });
 
-        DataController.getPatient().getProblemList().addListener(new Listener() {
+        DataController.getPatient().getProblemList().addListener("ProblemListener1", new Listener() {
             @Override
             public void update() {
                 adapter.notifyDataSetChanged();

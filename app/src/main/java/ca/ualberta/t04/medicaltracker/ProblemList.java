@@ -1,12 +1,15 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class ProblemList
 {
     private ArrayList<Problem> problems;
-    private transient ArrayList<Listener> listeners = new ArrayList<>();
+    private transient HashMap<String, Listener> listeners = new HashMap<>();
 
     public ProblemList(){
         problems = new ArrayList<>();
@@ -57,17 +60,19 @@ public class ProblemList
         }
     }
 
-    public void addListener(Listener listener){
+    public void addListener(String key, Listener listener){
         if(listeners==null)
-            listeners = new ArrayList<>();
-        listeners.add(listener);
+            listeners = new HashMap<>();
+        if(!listeners.containsKey(key))
+            listeners.put(key, listener);
     }
 
     public void notifyAllListener() {
         if(listeners==null)
-            listeners = new ArrayList<>();
-        for (Listener listener:listeners){
+            listeners = new HashMap<>();
+        for (Listener listener:listeners.values()){
             listener.update();
+            Log.d("Succeed", "Listener");
         }
     }
 }

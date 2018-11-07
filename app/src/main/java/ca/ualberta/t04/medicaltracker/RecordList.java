@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class RecordList
 {
     private ArrayList<Record> records;
-    private transient ArrayList<Listener> listeners = new ArrayList<>();
+    private transient HashMap<String, Listener> listeners = new HashMap<>();
 
     public RecordList(){
         records = new ArrayList<>();
@@ -97,16 +97,17 @@ public class RecordList
         notifyAllListener();
     }
 
-    public void addListener(Listener listener){
+    public void addListener(String key, Listener listener){
         if(listeners==null)
-            listeners = new ArrayList<>();
-        listeners.add(listener);
+            listeners = new HashMap<>();
+        if(!listeners.containsKey(key))
+            listeners.put(key, listener);
     }
 
     public void notifyAllListener() {
         if(listeners==null)
-            listeners = new ArrayList<>();
-        for (Listener listener:listeners){
+            listeners = new HashMap<>();
+        for (Listener listener:listeners.values()){
             listener.update();
         }
     }

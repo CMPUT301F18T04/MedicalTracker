@@ -24,4 +24,8 @@ public class InstrumentedTest {
         assertEquals("ca.ualberta.t04.medicaltracker", appContext.getPackageName());
     }
 
+    @Test
+    public void deleteUser(){
+        ElasticSearchController.deleteUser("test");
+    }
 }
