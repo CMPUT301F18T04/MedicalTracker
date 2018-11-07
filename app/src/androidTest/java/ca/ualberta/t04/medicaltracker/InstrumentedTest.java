@@ -26,6 +26,6 @@ public class InstrumentedTest {
 
     @Test
     public void deleteUser(){
-        ElasticSearchController.deleteUser("test");
+        ElasticSearchController.deleteUser("test ab");
     }
 }

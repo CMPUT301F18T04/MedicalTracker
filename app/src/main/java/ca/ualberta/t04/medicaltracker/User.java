@@ -2,15 +2,15 @@ package ca.ualberta.t04.medicaltracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class User
 {
     private String userName;
     private String name;
-    private transient ArrayList<Listener> listeners = new ArrayList<>();
+    private transient HashMap<String, Listener> listeners = new HashMap<>();
     private Boolean isDoctor;
     private Date birthday;
     private String email;
@@ -45,18 +45,19 @@ public class User
         notifyAllListeners();
     }
 
-    public void addListener(Listener listener)
+    public void addListener(String key, Listener listener)
     {
         if(listeners==null)
-            listeners = new ArrayList<>();
-        listeners.add(listener);
+            listeners = new HashMap<>();
+        if(!listeners.containsKey(key))
+            listeners.put(key, listener);
     }
 
     public void notifyAllListeners()
     {
         if(listeners==null)
-            listeners = new ArrayList<>();
-        for(Listener listener:listeners)
+            listeners = new HashMap<>();
+        for(Listener listener:listeners.values())
         {
             listener.update();
         }

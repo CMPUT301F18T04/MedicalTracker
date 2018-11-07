@@ -14,9 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import ca.ualberta.t04.medicaltracker.AddPatientActivity;
 import ca.ualberta.t04.medicaltracker.DataController;
+import ca.ualberta.t04.medicaltracker.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.R;
 
@@ -27,10 +28,17 @@ public class DoctorActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
+
+        initPage();
+        //setToolBarListener(toolbar);
+    }
+
+    private void initPage(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(getString(R.string.doctor_page_title));
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,9 +58,9 @@ public class DoctorActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolBarListener(toolbar);
     }
 
+    /*
     // Used to set OnMenuItemClickListener to ToolBar
     private void setToolBarListener(Toolbar toolbar)
     {
@@ -69,6 +77,7 @@ public class DoctorActivity extends AppCompatActivity
             }
         });
     }
+    */
 
     public void onStart()
     {
@@ -92,10 +101,11 @@ public class DoctorActivity extends AppCompatActivity
 
             userDisplayName.setText(DataController.getUser().getName());
 
-            DataController.getUser().addListener(new Listener() {
+            DataController.getUser().addListener("DoctorListener1", new Listener() {
                 @Override
                 public void update() {
                     userDisplayName.setText(DataController.getUser().getName());
+                    ElasticSearchController.updateUser(DataController.getUser());
                 }
             });
         }
@@ -129,6 +139,8 @@ public class DoctorActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
+            Intent intent = new Intent(DoctorActivity.this, AddPatientActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -143,7 +155,8 @@ public class DoctorActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile)
         {
-            Toast.makeText(DoctorActivity.this, "You clicked profile.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DoctorActivity.this, ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(DoctorActivity.this, SettingActivity.class);
             startActivity(intent);

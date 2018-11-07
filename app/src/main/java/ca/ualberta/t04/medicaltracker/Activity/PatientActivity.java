@@ -130,7 +130,7 @@ public class PatientActivity extends AppCompatActivity
 
             userDisplayName.setText(DataController.getUser().getName());
 
-            DataController.getUser().addListener(new Listener() {
+            DataController.getUser().addListener("PatientListener1", new Listener() {
                 @Override
                 public void update() {
                     userDisplayName.setText(DataController.getUser().getName());

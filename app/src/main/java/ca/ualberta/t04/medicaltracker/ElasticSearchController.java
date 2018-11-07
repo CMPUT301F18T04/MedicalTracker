@@ -8,8 +8,8 @@ import com.google.gson.JsonParser;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import io.searchbox.client.JestClient;
@@ -67,6 +67,18 @@ public class ElasticSearchController
     // Used to update user
     public static void updateUser(User user){
         new ElasticSearchController.UpdateUserTask().execute(user);
+    }
+
+    public static ArrayList<Patient> fuzzySearchPatient(String userName){
+        ArrayList<Patient> patients = new ArrayList<>();
+        try {
+            patients = new ElasticSearchController.FuzzySearchPatientTask().execute(userName).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return patients;
     }
 
     // Used to search user
@@ -153,6 +165,59 @@ public class ElasticSearchController
                 e.printStackTrace();
             }
             return null;
+        }
+    }
+
+    private static class FuzzySearchPatientTask extends AsyncTask<String, Void, ArrayList<Patient>>
+    {
+        @Override
+        protected ArrayList<Patient> doInBackground(String... userNames) {
+            setClient();
+
+            String userName = userNames[0];
+
+            // Build the search query
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"filtered\" : {\n" +
+                    "            \"query\" : {\n" +
+                    "                \"wildcard\" : {\n" +
+                    "                    \"userName\" : \"*"+ userName + "*\"\n" +
+                    "                }\n" +
+                    "            },\n" +
+                    "            \"filter\" : {\n" +
+                    "                \"term\" : { \"isDoctor\" : \"false\" }\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+
+            Log.d("Succeed", query);
+            Search search = new Search.Builder(query)
+                    // multiple index or types can be added.
+                    .addIndex(INDEX_NAME)
+                    .addType(USER_TYPE)
+                    .build();
+
+            // If searched, then return object, otherwise return null
+            try {
+                SearchResult searchResult = client.execute(search);
+                if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
+                    Log.d("Succeed", String.valueOf(searchResult.getSourceAsStringList().size()));
+                    Log.d("Succeed", searchResult.getSourceAsStringList().get(0));
+
+                    // JsonParser is used to convert source string to JsonObject
+                    ArrayList<Patient> patients = new ArrayList<>(searchResult.getSourceAsObjectList(Patient.class));
+                    return patients;
+                }
+                else{
+                    Log.d("Succeed", "Nothing Found!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return new ArrayList<>();
         }
     }
 

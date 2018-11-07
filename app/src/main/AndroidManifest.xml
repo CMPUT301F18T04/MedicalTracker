@@ -42,7 +42,8 @@
         <activity android:name=".Activity.GalleryActivity" />
         <activity android:name=".Activity.DoctorViewActivity" />
         <activity android:name=".Activity.AddProblemActivity" />
-        <activity android:name=".InformationActivity"></activity>
+        <activity android:name=".InformationActivity" />
+        <activity android:name=".AddPatientActivity"></activity>
     </application>
 
 </manifest>
