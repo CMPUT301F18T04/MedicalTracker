@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ca.ualberta.t04.medicaltracker.DataController;
-import ca.ualberta.t04.medicaltracker.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;

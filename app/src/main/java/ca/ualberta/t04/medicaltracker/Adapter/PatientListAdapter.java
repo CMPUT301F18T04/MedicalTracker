@@ -14,23 +14,25 @@ import java.util.List;
 import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 
-public class PatientAdapter extends ArrayAdapter {
+public class PatientListAdapter extends ArrayAdapter {
 
     private int recourseId;
+    private List<Patient> patients;
 
-    public PatientAdapter(@NonNull Context context, int resource, @NonNull List<Patient> patients) {
+    public PatientListAdapter(@NonNull Context context, int resource, @NonNull List<Patient> patients) {
         super(context, resource, patients);
         recourseId = resource;
+        this.patients = patients;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Patient patient = (Patient) getItem(position);
+        final Patient patient = (Patient) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(recourseId, null);
 
-        TextView userName = view.findViewById(R.id.search_patient_username);
-        TextView detail = view.findViewById(R.id.search_patient_detail);
+        TextView userName = view.findViewById(R.id.patient_username);
+        TextView detail = view.findViewById(R.id.patient_detail);
 
         userName.setText(patient.getUserName());
         String detail_text = getContext().getString(R.string.add_patient_detail);

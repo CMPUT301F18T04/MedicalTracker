@@ -1,8 +1,12 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.User;
 
 /*
     The activity needs a userName for a specific user.
