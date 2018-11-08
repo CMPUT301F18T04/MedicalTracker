@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -26,6 +28,6 @@ public class InstrumentedTest {
 
     @Test
     public void deleteUser(){
-        ElasticSearchController.deleteUser("test ab");
+        ElasticSearchController.deleteUser("doctor");
     }
 }
