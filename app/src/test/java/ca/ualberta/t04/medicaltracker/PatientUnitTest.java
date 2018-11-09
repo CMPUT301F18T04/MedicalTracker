@@ -2,7 +2,6 @@ package ca.ualberta.t04.medicaltracker;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -32,10 +31,10 @@ public class PatientUnitTest {
         Doctor doctor = new Doctor("Doctor","12345");
         Doctor doctor1 = new Doctor("Doctor1","1234");
         patient.addDoctor(doctor);
-        assertEquals(patient.getDoctors().get(0),doctor);
+        assertEquals(patient.getDoctorsUserNames().get(0),doctor.getUserName());
         patient.addDoctor(doctor1);
         patient.removeDoctor(doctor);
-        assertNotEquals(patient.getDoctors().get(0),doctor);
+        assertNotEquals(patient.getDoctorsUserNames().get(0),doctor.getUserName());
     }
 
 }

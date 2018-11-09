@@ -158,6 +158,10 @@ public class DoctorActivity extends AppCompatActivity
             Intent intent = new Intent(DoctorActivity.this, AddPatientActivity.class);
             startActivity(intent);
             return true;
+        } else if(id == R.id.action_search){
+            Intent intent = new Intent(DoctorActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

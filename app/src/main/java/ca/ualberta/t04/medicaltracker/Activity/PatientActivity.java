@@ -20,11 +20,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
-import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -138,6 +138,13 @@ public class PatientActivity extends AppCompatActivity
                 }
             });
 
+            ArrayList<String> notifyDoctors = DataController.getPatient().getNotifyDoctors();
+            if(notifyDoctors!=null && notifyDoctors.size()>0){
+                for(String doctorUserName:notifyDoctors){
+                    Toast.makeText(PatientActivity.this, "Doctor " + doctorUserName + " has added you in his/her patients list.", Toast.LENGTH_SHORT).show();
+                }
+                DataController.getPatient().clearNotifyDoctors();
+            }
         }
     }
 

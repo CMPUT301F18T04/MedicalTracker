@@ -20,9 +20,9 @@ public class DoctorUnitTest {
         Patient patient = new Patient("Patient","1234");
         Patient patient1 = new Patient("Patient1","123");
         doctor.addPatient(patient);
-        assertEquals(doctor.getPatients().get(0),patient);
+        assertEquals(doctor.getPatientsUserNames().get(0),patient.getUserName());
         doctor.addPatient(patient1);
         doctor.removePatient(patient);
-        assertNotEquals(doctor.getPatients().get(0),patient);
+        assertNotEquals(doctor.getPatientsUserNames().get(0),patient.getUserName());
     }
 }
