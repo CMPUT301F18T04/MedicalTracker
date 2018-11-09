@@ -24,12 +24,14 @@ public class AddRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
 
+        // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, "An error occurs.", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // Used to add a record for a problem
     public void addRecord(View view){
         EditText record_title = findViewById(R.id.add_record_title);
         EditText record_date = findViewById(R.id.add_record_date);
@@ -44,6 +46,7 @@ public class AddRecordActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), null, null);
 
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 
@@ -49,6 +50,9 @@ public class SearchPatientAdapter extends ArrayAdapter {
                 DataController.getDoctor().addPatient(patient);
                 patients.remove(patient);
                 notifyDataSetChanged();
+
+                patient.addDoctor(DataController.getDoctor());
+                ElasticSearchController.updateUser(patient);
             }
         });
 

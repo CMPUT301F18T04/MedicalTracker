@@ -34,13 +34,6 @@ public class ElasticSearchController
     private static String INDEX_NAME = Util.INDEX_NAME;
     private static String IS_DOCTOR = "isDoctor";
 
-    public static JestClient getClient()
-    {
-        if(client==null)
-            setClient();
-        return client;
-    }
-
     // Delete the whole index of ElasticSearch
     public static void deleteIndex(String indexName){
         try {
@@ -50,7 +43,7 @@ public class ElasticSearchController
         }
     }
 
-    // Used to sign up user
+    // Used to sign up a user
     public static Boolean signUp(User user){
         Boolean done = false;
         try {
@@ -63,20 +56,21 @@ public class ElasticSearchController
         return done;
     }
 
-    // Used to delete user
+    // Used to delete a user with an exact username
     public static void deleteUser(String userName){
         new ElasticSearchController.DeleteUserTask().execute(userName);
     }
 
-    // Used to update user
+    // Used to update a user
     public static void updateUser(User user){
         new ElasticSearchController.UpdateUserTask().execute(user);
     }
 
-    public static ArrayList<Patient> fuzzySearchPatient(String userName){
+    // Used to search users whose username contains keyword
+    public static ArrayList<Patient> fuzzySearchPatient(String userNameKeyWord){
         ArrayList<Patient> patients = new ArrayList<>();
         try {
-            patients = new ElasticSearchController.FuzzySearchPatientTask().execute(userName).get();
+            patients = new ElasticSearchController.FuzzySearchPatientTask().execute(userNameKeyWord).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -85,7 +79,7 @@ public class ElasticSearchController
         return patients;
     }
 
-    // Used to search user
+    // Used to search a user with an exact username
     public static User searchUser(String userName){
         try {
             User user = new ElasticSearchController.SearchUserTask().execute(userName).get();

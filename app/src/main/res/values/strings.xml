@@ -121,4 +121,10 @@
     <!-- String for information Page -->
     <string name="information_username">UserName:</string>
     <!-- end for information Page -->
+
+    <!-- String for Search Page -->
+    <string name="search_tip">Please enter the keywords:</string>
+    <string name="search_query_hint">Search problems or records</string>
+    <string name="search_button_search">Search</string>
+    <!-- end for Search Page -->
 </resources>

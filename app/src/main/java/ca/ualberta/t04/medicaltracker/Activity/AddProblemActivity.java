@@ -27,6 +27,7 @@ public class AddProblemActivity extends AppCompatActivity {
         problem_title.requestFocus();
     }
 
+    // Used to add a problem
     public void addProblem(View view){
         // get title, date and description
         EditText problem_title = findViewById(R.id.add_problem_title);

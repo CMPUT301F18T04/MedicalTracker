@@ -42,7 +42,7 @@ public class ProblemAdapter extends ArrayAdapter {
         date.setText(format.format(problem.getTime()));
 
         String description_text = problem.getDescription();
-        if(description_text.length()<30){
+        if(description_text.length()<40){
             description.setText(getContext().getText(R.string.patient_page_description) + description_text.substring(0));
         } else {
             description.setText(getContext().getText(R.string.patient_page_description)+ problem.getDescription().substring(0, 40) + "...");
