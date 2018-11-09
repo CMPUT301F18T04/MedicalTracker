@@ -25,6 +25,7 @@ public class AddPatientActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.add_patient_title));
     }
 
+    // Used to search patients
     public void searchPatient(View view){
         EditText editText = findViewById(R.id.add_patient_username);
         if(editText.getText().toString().equals("")){

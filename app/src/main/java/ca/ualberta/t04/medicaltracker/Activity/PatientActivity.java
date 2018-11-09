@@ -58,8 +58,6 @@ public class PatientActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //setToolBarListener(toolbar);
-
         initProblemListView();
     }
 
@@ -88,25 +86,6 @@ public class PatientActivity extends AppCompatActivity
             }
         });
     }
-
-    // Used to set OnMenuItemClickListener to ToolBar
-    /*
-    private void setToolBarListener(Toolbar toolbar)
-    {
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-                if(item.getItemId() == R.id.action_add)
-                {
-                    Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
-    }
-    */
 
     public void onStart()
     {

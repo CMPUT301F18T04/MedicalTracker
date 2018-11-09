@@ -7,6 +7,7 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 public class Patient extends User
 {
     private ProblemList problemList = null;
+    // We only save doctors' username in database, because in this way, we can reduce the complex of the data
     private ArrayList<String> doctorsUserNames;
     private transient ArrayList<Doctor> doctors = null;
     private ArrayList<String> notifyDoctors;
@@ -23,6 +24,7 @@ public class Patient extends User
             notifyDoctors = new ArrayList<>();
     }
 
+    // Used to keep all doctors' information newest
     private ArrayList<Doctor> updateDoctor(ArrayList<String> doctorsUserNames){
         if(doctorsUserNames==null)
             return new ArrayList<>();

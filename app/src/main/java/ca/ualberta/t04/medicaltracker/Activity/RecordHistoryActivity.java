@@ -33,6 +33,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         initListView(DataController.getPatient().getProblemList().getProblem(problem_index));
     }
 
+    // init the problem list view
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
         ArrayList<Record> records = problem.getRecordList().getRecords();

@@ -76,6 +76,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    // Used to search problems or records for a specific keyword
     private ArrayList<Object[]> search(String keyword, SearchType searchType){
         ArrayList<Object[]> result = new ArrayList<>();
 
