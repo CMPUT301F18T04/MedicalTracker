@@ -34,7 +34,6 @@ public class DoctorActivity extends AppCompatActivity
         setContentView(R.layout.activity_doctor);
 
         initPage();
-        //setToolBarListener(toolbar);
     }
 
     private void initPage(){
@@ -75,25 +74,6 @@ public class DoctorActivity extends AppCompatActivity
             }
         });
     }
-
-    /*
-    // Used to set OnMenuItemClickListener to ToolBar
-    private void setToolBarListener(Toolbar toolbar)
-    {
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-                if(item.getItemId() == R.id.action_add)
-                {
-                    Intent intent = new Intent(DoctorActivity.this, SlideShowActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
-    }
-    */
 
     public void onStart()
     {
@@ -156,6 +136,10 @@ public class DoctorActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
             Intent intent = new Intent(DoctorActivity.this, AddPatientActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(id == R.id.action_search){
+            Intent intent = new Intent(DoctorActivity.this, SearchActivity.class);
             startActivity(intent);
             return true;
         }

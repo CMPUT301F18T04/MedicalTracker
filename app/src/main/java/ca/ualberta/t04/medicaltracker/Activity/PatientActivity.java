@@ -20,11 +20,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
-import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -58,8 +58,6 @@ public class PatientActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //setToolBarListener(toolbar);
-
         initProblemListView();
     }
 
@@ -88,25 +86,6 @@ public class PatientActivity extends AppCompatActivity
             }
         });
     }
-
-    // Used to set OnMenuItemClickListener to ToolBar
-    /*
-    private void setToolBarListener(Toolbar toolbar)
-    {
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-                if(item.getItemId() == R.id.action_add)
-                {
-                    Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
-                    startActivity(intent);
-                }
-                return false;
-            }
-        });
-    }
-    */
 
     public void onStart()
     {
@@ -138,6 +117,13 @@ public class PatientActivity extends AppCompatActivity
                 }
             });
 
+            ArrayList<String> notifyDoctors = DataController.getPatient().getNotifyDoctors();
+            if(notifyDoctors!=null && notifyDoctors.size()>0){
+                for(String doctorUserName:notifyDoctors){
+                    Toast.makeText(PatientActivity.this, "Doctor " + doctorUserName + " has added you in his/her patients list.", Toast.LENGTH_SHORT).show();
+                }
+                DataController.getPatient().clearNotifyDoctors();
+            }
         }
     }
 

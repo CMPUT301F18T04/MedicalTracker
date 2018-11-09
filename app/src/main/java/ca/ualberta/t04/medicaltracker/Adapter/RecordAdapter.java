@@ -42,7 +42,7 @@ public class RecordAdapter extends ArrayAdapter {
         date.setText(format.format(record.getDateStart()));
 
         String description_text = record.getDescription();
-        if(description_text.length()<30){
+        if(description_text.length()<40){
             description.setText(getContext().getText(R.string.record_history_description) + description_text.substring(0));
         } else {
             description.setText(getContext().getText(R.string.record_history_description) + record.getDescription().substring(0, 40) + "...");
