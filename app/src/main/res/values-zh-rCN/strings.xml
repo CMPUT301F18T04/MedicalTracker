@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">医疗追踪器</string>
+    <string name="app_name">医疗追踪者</string>
+    <!-- Login screen -->
     <string name="login_text_username">用户名：</string>
     <string name="login_text_password">密码：</string>
     <string name="login_button_login">登录</string>
     <string name="login_button_register">注册</string>
-    <string name="title_activity_main">医疗信息</string>
-    <string name="nav_header_title">用户名</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">病人或医生</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">设置</string>
-    <string name="nav_item_profile">个人信息</string>
-    <string name="nav_item_gallery">图册</string>
-    <string name="nav_item_doctor">医生</string>
-    <string name="nav_item_other">其他</string>
+
+    <!-- Register page -->
+    <string name="register_password_confirm">请再输入一次密码</string>
+    <string name="register_email">邮箱</string>
+    <string name="register_birthday">出生日期</string>
+    <string name="register_phone">电话号码</string>
+    <string name="register_sex">性别</string>
+    <string name="register_identity">身份</string>
+
+    <!-- Slide bar and title for patient-->
+    <string name="nav_header_patient">患者</string>
+    <string name="patient_problems">病历</string>
+    <string name="nav_item_profile">个人资料</string>
+    <string name="nav_item_gallery">相册</string>
+    <string name="nav_item_doctor">主治医生</string>
     <string name="nav_item_setting">设置</string>
-    <string name="nav_item_logout">登出</string>
+    <string name="nav_item_about">关于</string>
+    <string name="nav_item_logout">注销</string>
+
+    <!-- Title for doctor-->
+    <string name="nav_header_doctor">医生</string>
+    <string name="doctor_patiens">你的患者</string>
 </resources>

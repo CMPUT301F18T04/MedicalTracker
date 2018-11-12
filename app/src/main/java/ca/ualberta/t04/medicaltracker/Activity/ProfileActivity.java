@@ -2,6 +2,8 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -92,14 +94,33 @@ public class ProfileActivity extends AppCompatActivity {
 
         // get new phone
         EditText phone = findViewById(R.id.profile_phone);
+        String phoneNumber = phone.getText().toString();
+
+        // Check phone number validation
+        if(!phoneNumber.equals("")){
+            if(!PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
+                Toast.makeText(ProfileActivity.this,"Phone number is not valid!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
         // get new email
         EditText email = findViewById(R.id.profile_email);
 
+        // Check email validation
+        String Email=email.getText().toString();
+        if(!Email.equals("")){
+            if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                Toast.makeText(ProfileActivity.this,"Email is not valid!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         // get new address
         EditText address = findViewById(R.id.profile_address);
+        String Address = address.getText().toString();
 
-        DataController.updateProfile(newBirthday, isMale, phone.getText().toString(), email.getText().toString(), address.getText().toString());
+        DataController.updateProfile(newBirthday, isMale, phoneNumber, Email, Address);
 
         Toast.makeText(ProfileActivity.this, "Your profile has been updated!", Toast.LENGTH_SHORT).show();
         finish();

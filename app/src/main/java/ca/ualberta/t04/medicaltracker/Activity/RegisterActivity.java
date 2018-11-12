@@ -1,16 +1,25 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
@@ -35,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         Boolean isDoctor = false;
         Boolean isMale = null;
 
+
         // Get all edit texts
         EditText editText_username = findViewById(R.id.register_username);
         EditText editText_password = findViewById(R.id.register_password);
@@ -47,6 +57,40 @@ public class RegisterActivity extends AppCompatActivity {
         String userName = editText_username.getText().toString();
         String password = editText_password.getText().toString();
 
+        // Check if username is empty
+        if(userName.equals("")){
+            Toast.makeText(RegisterActivity.this,"Username can not be empty!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if username is too short or too long
+        if(userName.length()<4 || userName.length() > 15){
+            Toast.makeText(RegisterActivity.this,"Username should between 4-15 characters",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if username contains invalid characters
+        if(isValid(userName)){
+            Toast.makeText(RegisterActivity.this,"Username contains invalid characters!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Check if password is empty
+        if(password.equals("")){
+            Toast.makeText(RegisterActivity.this,"Password can not be empty!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if password is too short or too long
+        if(password.length() < 6 || password.length() > 20){
+            Toast.makeText(RegisterActivity.this,"Password should between 6-20 characters!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // check if password contains invalid characters
+        if(isValid(password)){
+            Toast.makeText(RegisterActivity.this,"Password contains invalid characters!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         // Check if password is matched confirmed password
         if(!password.equals(editText_confirmed_password.getText().toString())){
             Toast.makeText(RegisterActivity.this, "Password does not match confirmed password!", Toast.LENGTH_SHORT).show();
@@ -62,6 +106,21 @@ public class RegisterActivity extends AppCompatActivity {
         RadioButton radio_male = findViewById(R.id.register_male);
         RadioButton radio_female = findViewById(R.id.register_female);
 
+        // Check the validation of phone number if it is not empty
+        if(!phoneNumber.equals("")){
+            if(!PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
+                Toast.makeText(RegisterActivity.this,"Phone number is not valid!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        // Check the validation of email address if it is not empty{
+        if(!email.equals("")){
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(RegisterActivity.this,"Email is not valid!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
         if(radio_male.isChecked()){
             isMale = true;
         } else if(radio_female.isChecked()) {
@@ -96,6 +155,40 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Succeed to Sign Up", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+    }
+
+    public void setBirthday(View view){
+
+        int Year, Month, Day ;
+
+        final Calendar c = Calendar.getInstance();
+        Year = c.get(Calendar.YEAR);
+        Month = c.get(Calendar.MONTH);
+        Day = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        EditText birthday = findViewById(R.id.register_birthday);
+                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                    }
+                }, Year, Month, Day);
+        datePickerDialog.show();
+    }
+
+    private boolean isValid(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
 
     }
 

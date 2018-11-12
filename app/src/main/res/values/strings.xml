@@ -72,7 +72,7 @@
     <!-- String for About Page -->
     <string name="about_title">About:</string>
     <string name="about_text_description">The application is designed and developed by organization "CMPUT301F18T4".</string>
-    <string name="about_text_developer">Developer:</string>
+    <string name="about_text_developer">Developer:(In no particular order)</string>
     <!-- end for About Page -->
 
     <!-- String for Register Page -->
@@ -99,7 +99,7 @@
     <string name="profile_tel">Tel:</string>
     <string name="profile_email">Email:</string>
     <string name="profile_address">Address:</string>
-    <string name="profile_button_edit">Edit</string>
+    <string name="profile_button_edit">Save</string>
     <!-- end for Profile Page -->
 
     <!-- String for Add Problem Page -->
@@ -126,5 +126,6 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+    <string name="register_button_birthday">Set birthday</string>
     <!-- end for Search Page -->
 </resources>
