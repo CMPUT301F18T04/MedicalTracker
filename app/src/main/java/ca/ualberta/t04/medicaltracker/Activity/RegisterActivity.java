@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void signUp(View view) throws ParseException {
+    public void signUp(View view){
         Boolean isDoctor = false;
         Boolean isMale = null;
 
@@ -134,15 +134,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check the validation of birthday
-        if(!editText_birthday.equals("")) {
-            Date current_date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
-            Date newBirthday= format.parse(birthday);
-            if(current_date.before(newBirthday)){
-                Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
+        //if(!editText_birthday.equals("")) {
+        //    Date current_date = new Date();
+        //    SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        //    Date newBirthday= format.parse(birthday);
+        //    if(current_date.before(newBirthday)){
+        //        Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+        //        return;
+        //    }
+        //}
 
         // Check the user's role
         RadioButton radio_doctor = findViewById(R.id.register_doctor);
