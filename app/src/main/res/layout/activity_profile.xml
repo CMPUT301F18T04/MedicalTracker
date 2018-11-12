@@ -233,6 +233,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:focusable="false"
+        android:clickable="true"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"

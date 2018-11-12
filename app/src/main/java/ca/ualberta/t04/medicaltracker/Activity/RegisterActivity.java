@@ -37,10 +37,16 @@ public class RegisterActivity extends AppCompatActivity {
 
         EditText editText_username = findViewById(R.id.register_username);
         editText_username.requestFocus();
+
+        EditText birthday = findViewById(R.id.register_birthday);
+        birthday.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBirthday(v);
+            }
+        });
     }
 
-    public void signUp(View view)
-    {
+    public void signUp(View view) throws ParseException {
         Boolean isDoctor = false;
         Boolean isMale = null;
 
@@ -125,6 +131,17 @@ public class RegisterActivity extends AppCompatActivity {
             isMale = true;
         } else if(radio_female.isChecked()) {
             isMale = false;
+        }
+
+        // Check the validation of birthday
+        if(!editText_birthday.equals("")) {
+            Date current_date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+            Date newBirthday= format.parse(birthday);
+            if(current_date.before(newBirthday)){
+                Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         // Check the user's role

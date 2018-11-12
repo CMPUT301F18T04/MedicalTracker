@@ -1,10 +1,12 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -26,6 +29,13 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        EditText birthday = findViewById(R.id.profile_birthday);
+        birthday.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBirthday(v);
+            }
+        });
 
         initPage();
     }
@@ -83,6 +93,15 @@ public class ProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // Check birthday validation
+        if(!newBirthday.equals("")) {
+            Date current_date = new Date();
+            if(current_date.before(newBirthday)){
+                Toast.makeText(ProfileActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         // get new sex
         RadioButton male = findViewById(R.id.profile_male);
         RadioButton female = findViewById(R.id.profile_female);
@@ -124,5 +143,28 @@ public class ProfileActivity extends AppCompatActivity {
 
         Toast.makeText(ProfileActivity.this, "Your profile has been updated!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+
+    public void setBirthday(View view){
+
+        int Year, Month, Day ;
+
+        final Calendar c = Calendar.getInstance();
+        Year = c.get(Calendar.YEAR);
+        Month = c.get(Calendar.MONTH);
+        Day = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        EditText birthday = findViewById(R.id.profile_birthday);
+                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                    }
+                }, Year, Month, Day);
+        datePickerDialog.show();
     }
 }
