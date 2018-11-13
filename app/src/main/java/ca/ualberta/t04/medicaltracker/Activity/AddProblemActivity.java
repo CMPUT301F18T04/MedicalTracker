@@ -1,13 +1,20 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -17,21 +24,49 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util;
 
 public class AddProblemActivity extends AppCompatActivity {
+    private DatePickerDialog.OnDateSetListener problemDateSetListener;
+    private TextView problem_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
-
+        problem_date = findViewById(R.id.add_problem_date);
         EditText problem_title = findViewById(R.id.add_problem_title);
+        problemSetDate();
         problem_title.requestFocus();
+    }
+
+    public void problemSetDate(){
+        problem_date.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.Theme_Holo_Dialog_MinWidth,
+                        problemDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        problemDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = year + "-" + month + "-" + day;
+                problem_date.setText(date);
+            }
+        };
     }
 
     // Used to add a problem
     public void addProblem(View view){
         // get title, date and description
         EditText problem_title = findViewById(R.id.add_problem_title);
-        EditText problem_date = findViewById(R.id.add_problem_date);
         EditText problem_description = findViewById(R.id.add_problem_description);
 
         // init date is now
