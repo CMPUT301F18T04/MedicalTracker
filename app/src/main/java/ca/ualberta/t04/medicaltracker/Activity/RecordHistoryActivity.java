@@ -61,7 +61,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                 final int index = position;
                 AlertDialog.Builder a_builder = new AlertDialog.Builder(RecordHistoryActivity.this);
                 a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Record temp = records.get(index);
@@ -71,7 +71,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                                 Toast.makeText(RecordHistoryActivity.this, "A record has been deleted", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();

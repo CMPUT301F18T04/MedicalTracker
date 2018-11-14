@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -179,16 +181,30 @@ public class PatientActivity extends AppCompatActivity
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
+        final int index = info.position;
         int id = item.getItemId();
 
         if (id == R.id.option_edit){
             Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.option_delete){
-
-            Problem problem = DataController.getPatient().getProblemList().getProblem(index);
-            DataController.getPatient().getProblemList().removeProblem(problem);
-            Toast.makeText(this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder a_builder = new AlertDialog.Builder(PatientActivity.this);
+            a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Problem problem = DataController.getPatient().getProblemList().getProblem(index);
+                            DataController.getPatient().getProblemList().removeProblem(problem);
+                            Toast.makeText(PatientActivity.this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+            AlertDialog alert = a_builder.create();
+            alert.show();
         }
         return super.onContextItemSelected(item);
     }
