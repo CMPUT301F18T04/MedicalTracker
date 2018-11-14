@@ -185,6 +185,7 @@ public class PatientActivity extends AppCompatActivity
         if (id == R.id.option_edit){
             Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.option_delete){
+
             Problem problem = DataController.getPatient().getProblemList().getProblem(index);
             DataController.getPatient().getProblemList().removeProblem(problem);
             Toast.makeText(this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
