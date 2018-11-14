@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -67,6 +69,7 @@ public class PatientActivity extends AppCompatActivity
         final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
         final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
         listView.setAdapter(adapter);
+        registerForContextMenu(listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -163,6 +166,30 @@ public class PatientActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.problem_long_click_selection, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+        int id = item.getItemId();
+
+        if (id == R.id.option_edit){
+            Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.option_delete){
+            Problem problem = DataController.getPatient().getProblemList().getProblem(index);
+            DataController.getPatient().getProblemList().removeProblem(problem);
+            Toast.makeText(this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
+        }
+        return super.onContextItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
