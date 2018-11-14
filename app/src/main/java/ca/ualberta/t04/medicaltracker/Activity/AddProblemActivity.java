@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
