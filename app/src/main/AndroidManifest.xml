@@ -44,7 +44,10 @@
         <activity android:name=".Activity.AddProblemActivity" />
         <activity android:name=".Activity.InformationActivity" />
         <activity android:name=".Activity.AddPatientActivity" />
-        <activity android:name=".Activity.SearchActivity"></activity>
+        <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.DoctorRecordDetailActivity" />
+        <activity android:name=".Activity.DoctorCommentDetailActivity" />
+        <activity android:name=".Activity.DoctorAddCommentActivity"></activity>
     </application>
 
 </manifest>

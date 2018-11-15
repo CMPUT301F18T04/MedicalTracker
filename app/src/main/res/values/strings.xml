@@ -127,4 +127,27 @@
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
     <!-- end for Search Page -->
+
+    <!-- String for doctor record detail || record detail page -->
+    <string name="doctor_record_detail_title">Record Detail</string>
+    <string name="edit_doctor_record_detail">Edit Record Detail</string>
+    <string name="record_title">Title:</string>
+    <string name="record_date">Date Start:</string>
+    <string name="record_description">Description:</string>
+    <string name="doctor_comment">Doctor Comment:</string>
+    <string name="comment_button">Comment</string>
+    <string name="save_button">Save</string>
+    <!-- end for doctor record detail || record detail page -->
+
+    <!-- String for Detailed Comments page -->
+    <string name="doctor_comment_detail_title">Detailed Comments</string>
+    <!-- end for Detailed Comments page -->
+
+    <!-- String for doctor add comments page -->
+    <string name="doctor_comment_title">Add Comment</string>
+    <string name="confirm_button">Confirm</string>
+    <!-- end for doctor add comments page -->
+
+
+
 </resources>
