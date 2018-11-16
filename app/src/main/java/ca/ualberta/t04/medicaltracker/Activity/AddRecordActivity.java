@@ -1,13 +1,22 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,10 +29,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
@@ -31,7 +42,7 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
 
-public class AddRecordActivity extends AppCompatActivity {
+public class AddRecordActivity extends AppCompatActivity implements LocationListener {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private int problem_index;
@@ -39,7 +50,11 @@ public class AddRecordActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
     private TextView record_date;
     private TextView record_time;
-    private ImageView mImageView;
+    private EditText record_location;
+    private ImageView imageView;
+    private LocationManager locationManager;
+    private Geocoder geocoder;
+    private List<Address> addresses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +62,24 @@ public class AddRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_record);
         record_date = findViewById(R.id.add_record_date);
         record_time = findViewById(R.id.add_record_time);
-        ImageButton image_button = (ImageButton) findViewById(R.id.imageButton);
-        mImageView = (ImageView) findViewById(R.id.add_record_photo_display);
+        record_location = findViewById(R.id.add_record_location);
+        ImageButton image_button = findViewById(R.id.imageButton);
+        imageView = findViewById(R.id.add_record_photo_display);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         recordSetDate();
         recordSetTime();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        onLocationChanged(location);
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
         if(problem_index==-1){
@@ -118,9 +147,40 @@ public class AddRecordActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
+            Bitmap image_bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(image_bitmap);
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            String address_line = addresses.get(0).getAddressLine(0);
+            record_location.setText(address_line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 
     // Used to add a record for a problem
@@ -146,4 +206,5 @@ public class AddRecordActivity extends AppCompatActivity {
         Toast.makeText(AddRecordActivity.this, "Added a new record.", Toast.LENGTH_SHORT).show();
         finish();
     }
+
 }
