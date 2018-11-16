@@ -25,8 +25,8 @@
 
     <EditText
         android:id="@+id/add_record_description"
-        android:layout_width="362dp"
-        android:layout_height="106dp"
+        android:layout_width="359dp"
+        android:layout_height="84dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -149,7 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_record_description"
-        app:layout_constraintVertical_bias="0.84" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -160,12 +160,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/ic_menu_camera"
+        android:onClick="dispatchTakePictureIntent"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/add_record_description" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/add_record_photo_pager"
@@ -176,11 +175,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_record_description" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/add_record_date"
@@ -207,4 +204,29 @@
         android:hint="Pick a time"
         app:layout_constraintStart_toEndOf="@+id/add_record_date"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/record_detail_location_text"
+        app:layout_constraintBottom_toTopOf="@+id/add_record_photo_pager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_record_description" />
+
+    <ImageView
+        android:id="@+id/add_record_photo_display"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="360dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_gallery" />
+
 </android.support.constraint.ConstraintLayout>

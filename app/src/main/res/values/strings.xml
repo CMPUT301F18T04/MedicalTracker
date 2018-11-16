@@ -126,5 +126,6 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+    <string name="record_detail_location_text">Location:</string>
     <!-- end for Search Page -->
 </resources>

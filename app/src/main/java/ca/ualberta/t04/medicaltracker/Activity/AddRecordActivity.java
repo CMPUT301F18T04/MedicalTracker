@@ -2,13 +2,20 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,17 +33,22 @@ import ca.ualberta.t04.medicaltracker.Util;
 
 public class AddRecordActivity extends AppCompatActivity {
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private int problem_index;
     private DatePickerDialog.OnDateSetListener recordDateSetListener;
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
     private TextView record_date;
     private TextView record_time;
+    private ImageView mImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
         record_date = findViewById(R.id.add_record_date);
         record_time = findViewById(R.id.add_record_time);
+        ImageButton image_button = (ImageButton) findViewById(R.id.imageButton);
+        mImageView = (ImageView) findViewById(R.id.add_record_photo_display);
         recordSetDate();
         recordSetTime();
         // Get the index of the problem list
@@ -70,7 +82,6 @@ public class AddRecordActivity extends AppCompatActivity {
                 record_date.setText(date);
             }
         };
-
     }
 
     public void recordSetTime(){
@@ -96,6 +107,22 @@ public class AddRecordActivity extends AppCompatActivity {
         };
     }
 
+    public void dispatchTakePictureIntent(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
     // Used to add a record for a problem
     public void addRecord(View view){
         EditText record_title = findViewById(R.id.add_record_title);
@@ -103,9 +130,10 @@ public class AddRecordActivity extends AppCompatActivity {
 
         Date dateStart = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(Util.TIME_FORMAT, Locale.getDefault());
         try {
-            dateStart = format.parse(record_date.getText().toString());
+            String tempTime = record_date.getText().toString()+"T"+record_time.getText().toString();
+            dateStart = format.parse(tempTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
