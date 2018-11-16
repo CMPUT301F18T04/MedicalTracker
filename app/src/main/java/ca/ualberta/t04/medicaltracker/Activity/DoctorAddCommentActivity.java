@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Doctor;
@@ -33,6 +34,8 @@ public class DoctorAddCommentActivity extends AppCompatActivity {
                 /**
                  * need to set comment for a particular record under this doctor
                  */
+
+                Toast.makeText(DoctorAddCommentActivity.this, "New comment added to this record", Toast.LENGTH_SHORT).show();
             }
         });
 

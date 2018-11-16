@@ -10,11 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,12 +33,21 @@ import ca.ualberta.t04.medicaltracker.R;
 public class DoctorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public ArrayList<Patient> patients;
+    public PatientListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        ListView patientListView = findViewById(R.id.main_page_list_view);
+        ArrayList<Patient> patients = DataController.getDoctor().getPatients();
+        PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
+        patientListView.setAdapter(adapter);
+
         initPage();
+
     }
 
     private void initPage(){
@@ -65,6 +79,12 @@ public class DoctorActivity extends AppCompatActivity
         final ArrayList<Patient> patients = DataController.getDoctor().getPatients();
         final PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
         patientListView.setAdapter(adapter);
+
+
+        /*initialize the context menu for each item in list_view*/
+        registerForContextMenu(patientListView);
+
+
         DataController.getDoctor().addListener("UpdateListView", new Listener() {
             @Override
             public void update() {
@@ -73,6 +93,43 @@ public class DoctorActivity extends AppCompatActivity
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position;
+        switch(item.getItemId()){
+
+            /* when delete option is clicked */
+            case R.id.delete:
+
+                /**
+                 * need to implement delete patient
+                 */
+
+                Toast.makeText(getApplicationContext(),"Patient deleted",Toast.LENGTH_SHORT).show();
+                return true;
+
+            /* the view detail option is clicked */
+            case R.id.detail:
+                Intent intent = new Intent(DoctorActivity.this, DoctorProblemListActivity.class);
+                intent.putExtra("index", position);
+                startActivity(intent);
+
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     public void onStart()

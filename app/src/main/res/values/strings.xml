@@ -148,6 +148,13 @@
     <string name="confirm_button">Confirm</string>
     <!-- end for doctor add comments page -->
 
+    <!-- String for doctor problem list page -->
+    <string name="doctor_problem_list_title">Problems</string>
+    <!-- end for doctor problem list page -->
+
+    <!-- String for doctor record list page -->
+    <string name="doctor_record_list_title">Records</string>
+    <!-- end for doctor record list page -->
 
 
 </resources>
