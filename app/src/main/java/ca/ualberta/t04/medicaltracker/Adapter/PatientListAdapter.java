@@ -41,4 +41,5 @@ public class PatientListAdapter extends ArrayAdapter {
 
         return view;
     }
+
 }

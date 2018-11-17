@@ -1,5 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Controller;
 
+import android.widget.TextView;
+
 import java.util.Date;
 
 import ca.ualberta.t04.medicaltracker.Doctor;
@@ -9,6 +11,7 @@ import ca.ualberta.t04.medicaltracker.User;
 public class DataController
 {
     private static User user;
+
 
     public static User getUser() {
         return user;
