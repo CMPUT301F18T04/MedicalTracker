@@ -67,6 +67,14 @@
 
     <!-- String for Setting Page -->
     <string name="title_activity_settings">Settings</string>
+    <string name="title_nickname">NickName</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_language">Change Language</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirmed_password">Confirmed Password</string>
+    <string name="save_password">Save</string>
+
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
@@ -127,5 +135,7 @@
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
     <string name="register_button_birthday">Set birthday</string>
+    <string name="title_activity_password">PasswordActivity</string>
+    <string name="title_activity_language">LanguageActivity</string>
     <!-- end for Search Page -->
 </resources>
