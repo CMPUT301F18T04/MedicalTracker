@@ -52,4 +52,16 @@
     <string name="about_title">私たちについて:</string>
     <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有.</string>
     <string name="about_text_developer">開発者:(特定の順序で)</string>
+
+    <!-- String for Setting Page -->
+    <string name="title_nickname">あだ名:</string>
+    <string name="change_password">パスワードの変更:</string>
+    <string name="change_language">言語の変更:</string>
+    <!-- end for Setting Page -->
+
+    <!-- String for Change Password Page -->
+    <string name="old_password">元のパスワード:</string>
+    <string name="new_password">新規パスワード:</string>
+    <string name="confirmed_password">パスワードの確認:</string>
+    <string name="save_password">保存:</string>
 </resources>
