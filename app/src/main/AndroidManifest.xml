@@ -48,7 +48,15 @@
         <activity android:name=".Activity.AddProblemActivity" />
         <activity android:name=".Activity.InformationActivity" />
         <activity android:name=".Activity.AddPatientActivity" />
-        <activity android:name=".Activity.SearchActivity"></activity>
+        <activity android:name=".Activity.SearchActivity" />
+        <activity
+            android:name=".Activity.PasswordActivity"
+            android:label="@string/title_activity_password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.LanguageActivity"
+            android:label="@string/title_activity_language"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

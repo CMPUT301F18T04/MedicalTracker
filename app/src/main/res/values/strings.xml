@@ -66,17 +66,28 @@
     <!-- String for Menu -->
     <string name="action_add">Add</string>
     <string name="action_search">Search</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="doctor_page_menu_item_detail">View Detail</string>
+    <string name="doctor_page_menu_item_delete">Delete</string>
     <!-- end for Menu -->
 
 
     <!-- String for Setting Page -->
     <string name="title_activity_settings">Settings</string>
+    <string name="title_nickname">NickName</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_language">Change Language</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirmed_password">Confirmed Password</string>
+    <string name="save_password">Save</string>
+
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
     <string name="about_title">About:</string>
     <string name="about_text_description">The application is designed and developed by organization "CMPUT301F18T4".</string>
-    <string name="about_text_developer">Developer:</string>
+    <string name="about_text_developer">Developer:(In no particular order)</string>
     <!-- end for About Page -->
 
     <!-- String for Register Page -->
@@ -103,7 +114,7 @@
     <string name="profile_tel">Tel:</string>
     <string name="profile_email">Email:</string>
     <string name="profile_address">Address:</string>
-    <string name="profile_button_edit">Edit</string>
+    <string name="profile_button_edit">Save</string>
     <!-- end for Profile Page -->
 
     <!-- String for Add Problem Page -->
@@ -131,5 +142,8 @@
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
     <string name="record_detail_location_text">Location:</string>
+    <string name="register_button_birthday">Set birthday</string>
+    <string name="title_activity_password">PasswordActivity</string>
+    <string name="title_activity_language">LanguageActivity</string>
     <!-- end for Search Page -->
 </resources>
