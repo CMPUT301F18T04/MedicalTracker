@@ -53,6 +53,13 @@ public class User
             listeners.put(key, listener);
     }
 
+    public void removeListener(String key){
+        if(listeners==null)
+            listeners = new HashMap<>();
+        if(listeners.containsKey(key))
+            listeners.remove(key);
+    }
+
     public void notifyAllListeners()
     {
         if(listeners==null)
