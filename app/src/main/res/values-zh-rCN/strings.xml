@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">医疗追踪者</string>
+    <string name="developer_PeterMa">马竞元</string>
+    <string name="developer_DevinDai">戴文</string>
+    <string name="developer_HumphreyLu">陆中豪</string>
+    <string name="developer_LexiLi">李昕阳</string>
+    <string name="developer_AnnabelleZhang">张巧燕</string>
+    <string name="developer_YuanWang">王源</string>
     <!-- Login screen -->
     <string name="login_text_username">用户名：</string>
     <string name="login_text_password">密码：</string>
@@ -35,12 +41,12 @@
 
     <!-- Title for doctor-->
     <string name="nav_header_doctor">医生</string>
-    <string name="doctor_page_title">你的患者</string>
+    <string name="doctor_page_title">您的患者</string>
     <string name="nav_header_subtitle_patient">患者</string>
     <string name="nav_header_subtitle_doctor">医生</string>
 
     <!-- String for Profile Page -->
-    <string name="profile_title">你的资料:</string>
+    <string name="profile_title">您的资料:</string>
     <string name="profile_username">用户名:</string>
     <string name="profile_birthday">出生日期:</string>
     <string name="profile_sex">性别:</string>
