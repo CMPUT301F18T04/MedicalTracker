@@ -6,7 +6,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
@@ -16,12 +15,12 @@ import ca.ualberta.t04.medicaltracker.User;
     UserName is sent by intent. The key of the intent data is "username".
  */
 public class InformationActivity extends AppCompatActivity {
-    TextView information_email;
+    TextView informationEmail;
     RadioGroup radioGroup;
-    RadioButton register_male, register_female;
-    TextView information_TeleNo;
-    TextView information_address;
-
+    RadioButton registerMale, registerFemale;
+    TextView informationTelNo;
+    TextView informationAddress;
+    TextView informationDisplayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,40 +28,49 @@ public class InformationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_infomation);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        information_email = (TextView) findViewById(R.id.information_email);
-        information_TeleNo = (TextView) findViewById(R.id.information_TeleNo);
-        information_address = (TextView) findViewById(R.id.information_address);
-
+        informationEmail = (TextView) findViewById(R.id.information_email);
+        informationTelNo = (TextView) findViewById(R.id.information_TeleNo);
+        informationAddress = (TextView) findViewById(R.id.information_address);
+        informationDisplayName = findViewById(R.id.information_displayName);
 
         String userName = getIntent().getStringExtra("username");
 
         User user = ElasticSearchController.searchUser(userName);
+        getSupportActionBar().setTitle(user.getName());
         initPage(user);
     }
-
-
-
 
     private void initPage(User user){
         TextView userName = findViewById(R.id.information_username);
         userName.setText(user.getUserName());
-        user = DataController.getUser();
+
+        if(user.getName()!=null){
+            informationDisplayName.setText(user.getName());
+        } else {
+            informationDisplayName.setText("");
+        }
         if(user.getEmail() != null) {
-            information_email.setText(user.getEmail());
+            informationEmail.setText(user.getEmail());
+        } else {
+            informationEmail.setText("");
         }
         if(user.getAddress() != null) {
-            information_address.setText(user.getAddress());
+            informationAddress.setText(user.getAddress());
+        } else {
+            informationAddress.setText("");
         }
         if(user.getPhoneNumber() != null) {
-            information_TeleNo.setText(user.getPhoneNumber());
+            informationTelNo.setText(user.getPhoneNumber());
+        } else {
+            informationTelNo.setText("");
         }
         if(user.getMale()!= null){
-            register_male = (RadioButton) findViewById(R.id.register_male);
-            register_female = (RadioButton) findViewById(R.id.register_female);
+            registerMale = (RadioButton) findViewById(R.id.register_male);
+            registerFemale = (RadioButton) findViewById(R.id.register_female);
             if(user.getMale())
-                register_male.setChecked(true);
+                registerMale.setChecked(true);
             else if(!user.getMale())
-                register_female.setChecked(true);
+                registerFemale.setChecked(true);
         }
 
     }
