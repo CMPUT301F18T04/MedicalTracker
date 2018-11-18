@@ -35,7 +35,8 @@
     <!-- Title for doctor-->
     <string name="nav_header_doctor">醫生</string>
     <string name="doctor_page_title">你的病人</string>
-    <string name="nav_header_subtitle">病人 or 医生</string>
+    <string name="nav_header_subtitle_patient">患者</string>
+    <string name="nav_header_subtitle_doctor">医生</string>
 
     <!-- String for Profile Page -->
     <string name="profile_title">你的資料:</string>
@@ -55,6 +56,7 @@
 
     <!-- String for Setting Page -->
     <string name="title_nickname">昵稱:</string>
+    <string name="apply_change">應用</string>
     <string name="change_password">更改密碼:</string>
     <string name="change_language">更改語言:</string>
     <!-- end for Setting Page -->
@@ -63,6 +65,6 @@
     <string name="old_password">舊密碼:</string>
     <string name="new_password">新密碼:</string>
     <string name="confirmed_password">確認密碼:</string>
-    <string name="save_password">保存:</string>
+    <string name="save_password">保存</string>
     <!-- end for Change Password Page -->
 </resources>

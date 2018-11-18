@@ -23,6 +23,7 @@
     <string name="register_button_sign_up">注册</string>
 
     <!-- Slide bar and title for patient-->
+
     <string name="nav_header_patient">患者</string>
     <string name="patient_page_title">病历</string>
     <string name="nav_item_profile">个人资料</string>
@@ -35,7 +36,8 @@
     <!-- Title for doctor-->
     <string name="nav_header_doctor">医生</string>
     <string name="doctor_page_title">你的患者</string>
-    <string name="nav_header_subtitle">病人 or 医生</string>
+    <string name="nav_header_subtitle_patient">患者</string>
+    <string name="nav_header_subtitle_doctor">医生</string>
 
     <!-- String for Profile Page -->
     <string name="profile_title">你的资料:</string>
@@ -56,6 +58,7 @@
 
     <!-- String for Setting Page -->
     <string name="title_nickname">昵称:</string>
+    <string name="apply_change">应用</string>
     <string name="change_password">更改密码:</string>
     <string name="change_language">更改语言:</string>
     <!-- end for Setting Page -->
@@ -64,6 +67,6 @@
     <string name="old_password">旧密码:</string>
     <string name="new_password">新密码:</string>
     <string name="confirmed_password">确认密码:</string>
-    <string name="save_password">保存:</string>
+    <string name="save_password">保存</string>
     <!-- end for Change Password Page -->
 </resources>

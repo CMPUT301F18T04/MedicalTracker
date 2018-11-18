@@ -92,10 +92,8 @@ public class DoctorActivity extends AppCompatActivity
             final TextView userDisplayName = headerView.findViewById(R.id.nav_bar_username);
 
             TextView userRole = headerView.findViewById(R.id.nav_bar_role);
-            if(DataController.getUser().isDoctor())
-                userRole.setText("Doctor");
-            else
-                userRole.setText("Patient");
+
+            userRole.setText(getText(R.string.nav_header_subtitle_doctor));
 
             userDisplayName.setText(DataController.getUser().getName());
 

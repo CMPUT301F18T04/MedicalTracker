@@ -50,7 +50,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">UserName</string>
-    <string name="nav_header_subtitle">Patient or Doctor</string>
+    <string name="nav_header_subtitle_patient">Patient</string>
+    <string name="nav_header_subtitle_doctor">Doctor</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_gallery">Gallery</string>
@@ -79,6 +80,7 @@
     <string name="change_language">Change Language</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
+    <string name="apply_change">Apply</string>
     <string name="confirmed_password">Confirmed Password</string>
     <string name="save_password">Save</string>
 
