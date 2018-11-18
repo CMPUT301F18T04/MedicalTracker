@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         // Check birthday validation
-        if(!newBirthday.equals("")) {
+        if(newBirthday != null && !newBirthday.equals("")) {
             Date current_date = new Date();
             if(current_date.before(newBirthday)){
                 Toast.makeText(ProfileActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();

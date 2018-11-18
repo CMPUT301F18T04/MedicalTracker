@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,6 +49,8 @@ public class DoctorActivity extends AppCompatActivity
 
     private int currentPage = 0;
     private Patient currentPatient = null;
+    private int problemIndex = -1;
+    private int patientIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,15 +107,6 @@ public class DoctorActivity extends AppCompatActivity
             }
         });
         refreshPatientListView();
-    }
-
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_menu, menu);
     }
 
     public void onStart()
@@ -183,6 +177,7 @@ public class DoctorActivity extends AppCompatActivity
                 currentPatient = patients.get(position);
                 refreshProblemListView(currentPatient.getProblemList());
                 currentPage ++;
+                patientIndex = position;
             }
         });
 
@@ -230,6 +225,7 @@ public class DoctorActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 refreshRecordListView(problems.get(position).getRecordList());
                 currentPage ++;
+                problemIndex = position;
             }
         });
     }
@@ -242,7 +238,15 @@ public class DoctorActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Open record detail page here
+                try{
+                    Intent intent = new Intent(DoctorActivity.this, DoctorRecordDetailActivity.class);
+                    intent.putExtra("problem_index", problemIndex);
+                    intent.putExtra("patient_index", patientIndex);
+                    intent.putExtra("record_index", position);
+                    startActivity(intent);
+                } catch (NullPointerException e){
+                    Log.d("Error", "Problem/record/patient does not exist!");
+                }
             }
         });
     }
