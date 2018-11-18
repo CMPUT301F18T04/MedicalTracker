@@ -107,7 +107,7 @@
     <!-- end for Profile Page -->
 
     <!-- String for Add Problem Page -->
-    <string name="add_problem_title">Add A Problem:</string>
+    <string name="add_problem_title">Add A Problem</string>
     <string name="add_problem_problem_title">Problem Title:</string>
     <string name="add_problem_problem_date">Date Start:</string>
     <string name="add_problem_problem_description">Brief Description:</string>
@@ -115,7 +115,7 @@
     <!-- end for Add Problem Page -->
 
     <!-- String for Add Record Page -->
-    <string name="add_record_title">Add A Record:</string>
+    <string name="add_record_title">Add A Record</string>
     <string name="add_record_record_title">Record Title:</string>
     <string name="add_record_record_date">Date Start:</string>
     <string name="add_record_record_description">Brief Description:</string>
