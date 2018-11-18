@@ -154,18 +154,14 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     @Override
     public void onLocationChanged(Location location) {
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
         geocoder = new Geocoder(this, Locale.getDefault());
-
         try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             String address_line = addresses.get(0).getAddressLine(0);
             record_location.setText(address_line);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
