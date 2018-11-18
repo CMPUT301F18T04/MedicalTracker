@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,5 +30,15 @@ public class SettingActivity extends AppCompatActivity {
         else
             Toast.makeText(SettingActivity.this, "Your name cannot be empty!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    public void changePassword(View view){
+        Intent password = new Intent(SettingActivity.this,PasswordActivity.class);
+        startActivity(password);
+    }
+
+    public void changeLanguage(View view){
+        Intent language = new Intent(SettingActivity.this,LanguageActivity.class);
+        startActivity(language);
     }
 }

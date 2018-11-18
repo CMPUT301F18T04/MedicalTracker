@@ -133,6 +133,8 @@
         android:ems="10"
         android:inputType="date"
         android:textSize="14sp"
+        android:focusable="false"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toEndOf="@+id/textView19"
