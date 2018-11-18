@@ -135,6 +135,11 @@
 
     <!-- String for information Page -->
     <string name="information_username">UserName:</string>
+    <string name="information_sex">Sex:</string>
+    <string name="information_email">Email:</string>
+    <string name="information_TeleNo">TelephoneNo:</string>
+    <string name="information_address">Address:</string>
+    <string name="information_name">DisplayName:</string>
     <!-- end for information Page -->
 
     <!-- String for Search Page -->
