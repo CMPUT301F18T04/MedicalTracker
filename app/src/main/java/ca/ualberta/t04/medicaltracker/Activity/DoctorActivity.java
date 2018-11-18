@@ -10,11 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+
+import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -38,14 +42,25 @@ import ca.ualberta.t04.medicaltracker.RecordList;
 public class DoctorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    public ArrayList<Patient> patients;
+    public PatientListAdapter adapter;
+
     private int currentPage = 0;
     private Patient currentPatient = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        ListView patientListView = findViewById(R.id.main_page_list_view);
+        ArrayList<Patient> patients = DataController.getDoctor().getPatients();
+        PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
+        patientListView.setAdapter(adapter);
+
         initPage();
+
     }
 
     private void initPage(){
@@ -74,7 +89,30 @@ public class DoctorActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        ListView patientListView = findViewById(R.id.main_page_list_view);
+        final ArrayList<Patient> patients = DataController.getDoctor().getPatients();
+        final PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
+        patientListView.setAdapter(adapter);
+
+
+        DataController.getDoctor().addListener("UpdateListView", new Listener() {
+            @Override
+            public void update() {
+                patients.clear();
+                patients.addAll(DataController.getDoctor().getPatients());
+                adapter.notifyDataSetChanged();
+            }
+        });
         refreshPatientListView();
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
     }
 
     public void onStart()

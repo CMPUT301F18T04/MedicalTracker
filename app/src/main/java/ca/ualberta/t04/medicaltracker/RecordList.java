@@ -69,6 +69,11 @@ public class RecordList
         notifyAllListener();
     }
 
+    public void addComment(Record record, Doctor doctor, String comment){
+        record.addComment(doctor, comment);
+        notifyAllListener();
+    }
+
     public void setComments(Record record, HashMap<Doctor, ArrayList<String>> comments) {
         if(records.contains(record)){
             record.setComments(comments);

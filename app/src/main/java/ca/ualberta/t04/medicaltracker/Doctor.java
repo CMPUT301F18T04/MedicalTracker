@@ -23,7 +23,7 @@ public class Doctor extends User
         return patients;
     }
 
-    // Used to keep all patients' information newest
+    // Used to keep all patients' information up-to-date
     private ArrayList<Patient> updatePatient(ArrayList<String> patientsUserNames){
         if(patientsUserNames==null)
             return new ArrayList<>();

@@ -71,7 +71,21 @@ public class Record
     }
 
     public HashMap<Doctor, ArrayList<String>> getComments() {
+        if(comments == null){
+            comments = new HashMap<>();
+        }
         return comments;
+    }
+
+    public void addComment(Doctor doctor, String comment){
+        if(getComments().containsKey(doctor)){
+            getComments().get(doctor).add(comment);
+        }
+        else{
+            ArrayList<String> newComments = new ArrayList<>();
+            newComments.add(comment);
+            getComments().put(doctor, newComments);
+        }
     }
 
     public void setComments(HashMap<Doctor, ArrayList<String>> comments) {

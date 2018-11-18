@@ -45,6 +45,18 @@ public class RecordHistoryActivity extends AppCompatActivity {
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         listView.setAdapter(adapter);
 
+        // added in the record list item click
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
+                int pos = i;
+                intent.putExtra("p_index", problem_index);
+                intent.putExtra("r_index", pos);
+                startActivity(intent);
+            }
+        });
+
         problem.getRecordList().addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
