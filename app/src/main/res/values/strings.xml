@@ -42,6 +42,10 @@
     <string name="record_history_title">Records</string>
     <!-- end for Record History Page -->
 
+    <!-- String for Doctor View Page -->
+    <string name="doctor_view_page_title">Your Doctors </string>
+    <!-- end for Doctor View Page -->
+
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

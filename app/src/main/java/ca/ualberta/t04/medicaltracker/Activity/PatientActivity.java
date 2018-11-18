@@ -164,7 +164,9 @@ public class PatientActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         } else if (id == R.id.action_search){
-            Toast.makeText(PatientActivity.this, "Search.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -223,6 +225,8 @@ public class PatientActivity extends AppCompatActivity
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) {
             Toast.makeText(PatientActivity.this, "You clicked doctor.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, DoctorViewActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(PatientActivity.this, SettingActivity.class);
             startActivity(intent);

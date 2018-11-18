@@ -106,7 +106,9 @@ public class RecordHistoryActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_search){
-            Toast.makeText(RecordHistoryActivity.this, "Search.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RecordHistoryActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
