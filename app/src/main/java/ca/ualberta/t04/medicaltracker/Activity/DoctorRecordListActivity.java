@@ -9,7 +9,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
@@ -32,9 +31,9 @@ public class DoctorRecordListActivity extends AppCompatActivity {
 
     }
 
-    private void initDoctorRecordList(int position, final int problemPosition){
+    private void initDoctorRecordList(final int patientPosition, final int problemPosition){
         ListView recordListView = findViewById(R.id.doctor_record_list_list_view);
-        ArrayList<Record> records = DataController.getDoctor().getPatients().get(position).getProblemList().getProblem(problemPosition).getRecordList().getRecords();
+        ArrayList<Record> records = DataController.getDoctor().getPatients().get(patientPosition).getProblemList().getProblem(problemPosition).getRecordList().getRecords();
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         recordListView.setAdapter(adapter);
 
@@ -47,12 +46,12 @@ public class DoctorRecordListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //DataController.setCurrentProblem(problems.get(position));
                 Intent intent = new Intent(DoctorRecordListActivity.this, DoctorRecordDetailActivity.class);
-                intent.putExtra("patient_index", position);
+                intent.putExtra("patient_index", patientPosition);
                 intent.putExtra("problem_index", problemPosition);
+                intent.putExtra("record_index", position);
                 startActivity(intent);
             }
         });
-
 
     }
 }

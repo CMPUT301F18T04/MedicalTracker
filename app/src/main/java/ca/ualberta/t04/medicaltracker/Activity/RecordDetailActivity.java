@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 
@@ -35,6 +36,7 @@ public class RecordDetailActivity extends AppCompatActivity {
     //public static ArrayList<String> commentList;
     //public static ArrayAdapter<Doctor> adapter;
     public static ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,17 +82,18 @@ public class RecordDetailActivity extends AppCompatActivity {
         });
 
 
-        //InitCommentListView(index, r_pos);
-        InitCommentListView();
+        InitCommentListView(index, r_pos);
+        //InitCommentListView();
 
     }
 
 
-    public void InitCommentListView() {
+    private void InitCommentListView(int i, int j) {
         ListView commentListView = findViewById(R.id.CommentListView);
         // get the comments as a hash map
-        //final HashMap dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
+        final HashMap dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
 
+        /*
         final HashMap<String, ArrayList<String>> dComment = new HashMap<>();
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Hello");
@@ -105,27 +108,33 @@ public class RecordDetailActivity extends AppCompatActivity {
         arrayList1.add("Hello");
         arrayList1.add("World.");
         dComment.put("ff",arrayList1);
-
+*/
 
         System.out.println(dComment);
 
 
         // get all the doctor names in an array
-        Set<String> doctor = dComment.keySet();
-        final List<String> doctorList = new ArrayList<>(doctor);
-        Collections.sort(doctorList, String.CASE_INSENSITIVE_ORDER);
+        Set<Doctor> doctor = dComment.keySet();
+        final ArrayList<Doctor> doctorList = new ArrayList<>(doctor);
+
+        ArrayList<String> doctorNameList = new ArrayList<>();
+        for(int x = 0; x < doctorList.size(); x++){
+            doctorNameList.add(doctorList.get(x).getName());
+        }
+        //Collections.sort(doctorNameList, String.CASE_INSENSITIVE_ORDER);
 
         System.out.println(doctorList);
 
-        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, doctorList);
+        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, doctorNameList);
         commentListView.setAdapter(adapter);
 
         commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Intent intent = new Intent(RecordDetailActivity.this, DoctorCommentDetailActivity.class);
                 intent.putExtra("hash_map", dComment);
-                intent.putExtra("position",i);
+                intent.putExtra("doctorKey", doctorList.get(pos).getName());
+                intent.putExtra("position",pos);
                 startActivity(intent);
             }
         });

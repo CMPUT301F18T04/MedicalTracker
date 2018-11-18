@@ -19,6 +19,8 @@ import ca.ualberta.t04.medicaltracker.R;
  * and test again
  */
 
+//https://stackoverflow.com/questions/17313495/how-to-display-multiline-from-array-list-in-single-textview
+
 public class DoctorCommentDetailActivity extends AppCompatActivity {
 
     @Override
@@ -31,24 +33,30 @@ public class DoctorCommentDetailActivity extends AppCompatActivity {
         TextView commentDetail = findViewById(R.id.dCommentDetailTextView);
 
         Intent mIntent = getIntent();
-        //HashMap<Doctor, ArrayList<String>> commentHashMap = (HashMap<Doctor, ArrayList<String>>) mIntent.getSerializableExtra("hash_map");
-        HashMap<String, ArrayList<String>> commentHashMap = (HashMap<String, ArrayList<String>>) mIntent.getSerializableExtra("hash_map");
+        HashMap<Doctor, ArrayList<String>> commentHashMap = (HashMap<Doctor, ArrayList<String>>) mIntent.getSerializableExtra("hash_map");
+        //HashMap<String, ArrayList<String>> commentHashMap = (HashMap<String, ArrayList<String>>) mIntent.getSerializableExtra("hash_map");
         //String doctorName = mIntent.getStringExtra("doctorKey");
-        int index = mIntent.getIntExtra("position", 0);
+        int index = mIntent.getIntExtra("position", -1);
 
-        //List<Doctor> doctorList = new ArrayList<>(commentHashMap.keySet());
-        List<String> doctorList = new ArrayList<>(commentHashMap.keySet());
+        ArrayList<Doctor> doctorList = new ArrayList<>(commentHashMap.keySet());
+        //List<String> doctorList = new ArrayList<>(commentHashMap.keySet());
 
-        Collections.sort(doctorList, String.CASE_INSENSITIVE_ORDER);
-        List<String> value = new ArrayList<>(commentHashMap.get(doctorList.get(index)));
+        ArrayList<String> doctorNameList = new ArrayList<>();
+        for(int x = 0; x < doctorList.size(); x++){
+            doctorNameList.add(doctorList.get(x).getName());
+        }
+
+        //Collections.sort(doctorNameList, String.CASE_INSENSITIVE_ORDER);
+        ArrayList<String> values = new ArrayList<>(commentHashMap.get(doctorList.get(index)));
+
 
         StringBuilder builder = new StringBuilder();
-        for (String comment : value) {
+        for (String comment : values) {
             builder.append("-" + comment + "\n");
         }
 
         commentDetail.setText(builder.toString());
 
-        //https://stackoverflow.com/questions/17313495/how-to-display-multiline-from-array-list-in-single-textview
+
     }
 }

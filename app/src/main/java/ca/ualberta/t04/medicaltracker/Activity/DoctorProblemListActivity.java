@@ -27,7 +27,6 @@ public class DoctorProblemListActivity extends AppCompatActivity {
 
         int patientIndex = getIntent().getIntExtra("index", -1);
 
-
         InitDoctorProblemList(patientIndex);
 
     }
@@ -45,15 +44,12 @@ public class DoctorProblemListActivity extends AppCompatActivity {
         problemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //DataController.setCurrentProblem(problems.get(position));
                 Intent intent = new Intent(DoctorProblemListActivity.this, DoctorRecordListActivity.class);
                 intent.putExtra("patient_index", patientPosition);
                 intent.putExtra("problem_index", position);
                 startActivity(intent);
             }
         });
-
-
 
     }
 }

@@ -134,7 +134,7 @@
     <string name="record_title">Title:</string>
     <string name="record_date">Date Start:</string>
     <string name="record_description">Description:</string>
-    <string name="doctor_comment">Doctor Comment:</string>
+    <string name="doctor_comment">Comments by other doctors:</string>
     <string name="comment_button">Comment</string>
     <string name="save_button">Save</string>
     <!-- end for doctor record detail || record detail page -->

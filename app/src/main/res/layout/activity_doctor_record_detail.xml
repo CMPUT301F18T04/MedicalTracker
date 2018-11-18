@@ -11,9 +11,9 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
@@ -26,30 +26,32 @@
         android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/textView42"
         app:layout_constraintEnd_toStartOf="@+id/dRecordDetailDate"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.741" />
 
     <TextView
         android:id="@+id/dRecordDetailDate"
-        android:layout_width="70dp"
-        android:layout_height="24dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="169dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/dRecordDetailDescription"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dRecordDetailDescription"
         android:layout_width="348dp"
-        android:layout_height="33dp"
+        android:layout_height="46dp"
         android:scrollbars="vertical"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/textView41"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -58,14 +60,14 @@
 
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="126dp"
-        android:layout_height="20dp"
+        android:layout_width="277dp"
+        android:layout_height="29dp"
         android:layout_marginTop="8dp"
         android:text="@string/doctor_comment"
         android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/CommentListView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dRecordDetailDescription" />
 
@@ -100,7 +102,7 @@
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dRecordDetailDate"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView43"
@@ -110,16 +112,17 @@
         android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/dRecordDetailDate"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/doctorRecordTitle"
         android:layout_width="62dp"
         android:layout_height="22dp"
         android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/dRecordDetailDate"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.234"
