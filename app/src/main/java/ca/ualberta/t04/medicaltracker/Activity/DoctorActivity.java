@@ -16,25 +16,38 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.PatientListAdapter;
+import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
+import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Record;
+import ca.ualberta.t04.medicaltracker.RecordList;
 
 public class DoctorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
     public ArrayList<Patient> patients;
     public PatientListAdapter adapter;
+
+    private int currentPage = 0;
+    private Patient currentPatient = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +74,8 @@ public class DoctorActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                refreshPatientListView();
+                Snackbar.make(view, "Refresh completed", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -81,10 +95,6 @@ public class DoctorActivity extends AppCompatActivity
         patientListView.setAdapter(adapter);
 
 
-        /*initialize the context menu for each item in list_view*/
-        registerForContextMenu(patientListView);
-
-
         DataController.getDoctor().addListener("UpdateListView", new Listener() {
             @Override
             public void update() {
@@ -93,6 +103,7 @@ public class DoctorActivity extends AppCompatActivity
                 adapter.notifyDataSetChanged();
             }
         });
+        refreshPatientListView();
     }
 
 
@@ -102,34 +113,6 @@ public class DoctorActivity extends AppCompatActivity
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.context_menu, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int position = info.position;
-        switch(item.getItemId()){
-
-            /* when delete option is clicked */
-            case R.id.delete:
-
-                /**
-                 * need to implement delete patient
-                 */
-
-                Toast.makeText(getApplicationContext(),"Patient deleted",Toast.LENGTH_SHORT).show();
-                return true;
-
-            /* the view detail option is clicked */
-            case R.id.detail:
-                Intent intent = new Intent(DoctorActivity.this, DoctorProblemListActivity.class);
-                intent.putExtra("index", position);
-                startActivity(intent);
-
-
-            default:
-                return super.onContextItemSelected(item);
-        }
     }
 
     public void onStart()
@@ -147,10 +130,8 @@ public class DoctorActivity extends AppCompatActivity
             final TextView userDisplayName = headerView.findViewById(R.id.nav_bar_username);
 
             TextView userRole = headerView.findViewById(R.id.nav_bar_role);
-            if(DataController.getUser().isDoctor())
-                userRole.setText("Doctor");
-            else
-                userRole.setText("Patient");
+
+            userRole.setText(getText(R.string.nav_header_subtitle_doctor));
 
             userDisplayName.setText(DataController.getUser().getName());
 
@@ -169,10 +150,101 @@ public class DoctorActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if(currentPage>0){
+            if(currentPage==1){
+                refreshPatientListView();
+            } else if(currentPage==2){
+                refreshProblemListView(currentPatient.getProblemList());
+            }
+            currentPage --;
         } else {
             super.onBackPressed();
-
         }
+    }
+
+    private void refreshPatientListView(){
+        ListView listView = findViewById(R.id.main_page_list_view);
+        final ArrayList<Patient> patients = DataController.getDoctor().getPatients();
+        final PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
+        listView.setAdapter(adapter);
+        DataController.getDoctor().removeListener("UpdateListView");
+        DataController.getDoctor().addListener("UpdateListView", new Listener() {
+            @Override
+            public void update() {
+                patients.clear();
+                patients.addAll(DataController.getDoctor().getPatients());
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentPatient = patients.get(position);
+                refreshProblemListView(currentPatient.getProblemList());
+                currentPage ++;
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if(currentPage==0){
+                    Patient patient = patients.get(position);
+                    initMenu(view, patient);
+                }
+                return false;
+            }
+        });
+    }
+
+    private void initMenu(View view, final Patient patient){
+        PopupMenu popupMenu = new PopupMenu(DoctorActivity.this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.doctor_page_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.doctor_page_menu_detail){
+                    Intent intent = new Intent(DoctorActivity.this, InformationActivity.class);
+                    intent.putExtra("username", patient.getUserName());
+                    startActivity(intent);
+                } else if(item.getItemId()==R.id.doctor_page_menu_delete){
+                    DataController.getDoctor().removePatient(patient);
+                    Toast.makeText(DoctorActivity.this, "Succeed to delete it.", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void refreshProblemListView(ProblemList problemList){
+        ListView listView = findViewById(R.id.main_page_list_view);
+        final ArrayList<Problem> problems = problemList.getProblems();
+        final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                refreshRecordListView(problems.get(position).getRecordList());
+                currentPage ++;
+            }
+        });
+    }
+
+    private void refreshRecordListView(RecordList recordList){
+        ListView listView = findViewById(R.id.main_page_list_view);
+        final ArrayList<Record> records = recordList.getRecords();
+        final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Open record detail page here
+            }
+        });
     }
 
     @Override

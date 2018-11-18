@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">医療トラッカー</string>
+    <!-- Login screen -->
+    <string name="login_text_username">ユーザー名：</string>
+    <string name="login_text_password">パスワード：</string>
+    <string name="login_button_login">ログイン</string>
+    <string name="login_button_register">登録</string>
+
+    <!-- Register page -->
+    <string name="register_text_username">ユーザー名：</string>
+    <string name="register_text_password">パスワード:</string>
+    <string name="register_text_confirmed_password">パスワードの確認：</string>
+    <string name="register_text_email">メール：</string>
+    <string name="register_text_birthday">誕生日：</string>
+    <string name="register_text_phone">電話：</string>
+    <string name="register_text_sex">性别：</string>
+    <string name="register_text_male">男性</string>
+    <string name="register_text_female">女性</string>
+    <string name="register_text_i_am">おれは：</string>
+    <string name="register_text_patient">患者さん</string>
+    <string name="register_text_doctor">先生</string>
+    <string name="register_button_sign_up">登録完了</string>
+
+    <!-- Slide bar and title for patient-->
+    <string name="nav_header_patient">患者さん</string>
+    <string name="patient_page_title">医療記録</string>
+    <string name="nav_item_profile">個人データ</string>
+    <string name="nav_item_gallery">アルバム</string>
+    <string name="nav_item_doctor">先生</string>
+    <string name="nav_item_setting">設定</string>
+    <string name="nav_item_about">私たちについて</string>
+    <string name="nav_item_logout">ログアウト</string>
+
+    <!-- Title for doctor-->
+    <string name="nav_header_doctor">先生</string>
+    <string name="doctor_page_title">あなたの患者</string>
+    <string name="nav_header_subtitle_patient">患者</string>
+    <string name="nav_header_subtitle_doctor">先生</string>
+
+    <!-- String for Profile Page -->
+    <string name="profile_title">あなたの情報。:</string>
+    <string name="profile_username">ユーザー名:</string>
+    <string name="profile_birthday">誕生日:</string>
+    <string name="profile_sex">性别:</string>
+    <string name="profile_tel">連絡先情報:</string>
+    <string name="profile_email">メール:</string>
+    <string name="profile_address">住所:</string>
+    <string name="profile_button_edit">保存</string>
+    <!-- end for Profile Page -->
+
+    <!-- String for About Page -->
+    <string name="about_title">私たちについて:</string>
+    <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有.</string>
+    <string name="about_text_developer">開発者:(特定の順序で)</string>
+
+    <!-- String for Setting Page -->
+    <string name="title_nickname">あだ名:</string>
+    <string name="apply_change">適用</string>
+    <string name="change_password">パスワードの変更:</string>
+    <string name="change_language">言語の変更:</string>
+    <!-- end for Setting Page -->
+
+    <!-- String for Change Password Page -->
+    <string name="old_password">元のパスワード:</string>
+    <string name="new_password">新規パスワード:</string>
+    <string name="confirmed_password">パスワードの確認:</string>
+    <string name="save_password">保存</string>
+</resources>

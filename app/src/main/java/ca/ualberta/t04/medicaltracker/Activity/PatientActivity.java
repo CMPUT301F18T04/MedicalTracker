@@ -1,15 +1,17 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 
 public class PatientActivity extends AppCompatActivity
@@ -41,6 +44,8 @@ public class PatientActivity extends AppCompatActivity
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
+        /*
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +53,7 @@ public class PatientActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,6 +73,7 @@ public class PatientActivity extends AppCompatActivity
         final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
         final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
         listView.setAdapter(adapter);
+        registerForContextMenu(listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -102,10 +109,8 @@ public class PatientActivity extends AppCompatActivity
             final TextView userDisplayName = headerView.findViewById(R.id.nav_bar_username);
 
             TextView userRole = headerView.findViewById(R.id.nav_bar_role);
-            if(DataController.getUser().isDoctor())
-                userRole.setText("Doctor");
-            else
-                userRole.setText("Patient");
+
+            userRole.setText(getText(R.string.nav_header_subtitle_patient));
 
             userDisplayName.setText(DataController.getUser().getName());
 
@@ -142,7 +147,6 @@ public class PatientActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
@@ -159,10 +163,51 @@ public class PatientActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         } else if (id == R.id.action_search){
-            Toast.makeText(PatientActivity.this, "Search.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.problem_long_click_selection, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final int index = info.position;
+        int id = item.getItemId();
+
+        if (id == R.id.option_edit){
+            Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.option_delete){
+            AlertDialog.Builder a_builder = new AlertDialog.Builder(PatientActivity.this);
+            a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Problem problem = DataController.getPatient().getProblemList().getProblem(index);
+                            DataController.getPatient().getProblemList().removeProblem(problem);
+                            Toast.makeText(PatientActivity.this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+            AlertDialog alert = a_builder.create();
+            alert.show();
+        }
+        return super.onContextItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -179,6 +224,8 @@ public class PatientActivity extends AppCompatActivity
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) {
             Toast.makeText(PatientActivity.this, "You clicked doctor.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, DoctorViewActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(PatientActivity.this, SettingActivity.class);
             startActivity(intent);

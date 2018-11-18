@@ -2,10 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.ualberta.t04.medicaltracker">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -45,9 +49,20 @@
         <activity android:name=".Activity.InformationActivity" />
         <activity android:name=".Activity.AddPatientActivity" />
         <activity android:name=".Activity.SearchActivity" />
+
         <activity android:name=".Activity.DoctorRecordDetailActivity" />
         <activity android:name=".Activity.DoctorCommentDetailActivity" />
         <activity android:name=".Activity.DoctorAddCommentActivity" />
+
+        <activity
+            android:name=".Activity.PasswordActivity"
+            android:label="@string/title_activity_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activity.LanguageActivity"
+            android:label="@string/title_activity_language"
+            android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>

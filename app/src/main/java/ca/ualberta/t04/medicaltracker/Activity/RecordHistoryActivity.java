@@ -1,8 +1,11 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +41,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
     // init the problem list view
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
-        ArrayList<Record> records = problem.getRecordList().getRecords();
+        final ArrayList<Record> records = problem.getRecordList().getRecords();
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         listView.setAdapter(adapter);
 
@@ -61,6 +64,34 @@ public class RecordHistoryActivity extends AppCompatActivity {
                 // We don't need it anymore, since we only need to update user once.
                 //ElasticSearchController.updateUser(DataController.getUser());
                 DataController.getPatient().getProblemList().notifyAllListener();
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final int index = position;
+                AlertDialog.Builder a_builder = new AlertDialog.Builder(RecordHistoryActivity.this);
+                a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Record temp = records.get(index);
+                                records.remove(temp);
+                                DataController.getPatient().getProblemList().notifyAllListener();
+                                adapter.notifyDataSetChanged();
+                                Toast.makeText(RecordHistoryActivity.this, "A record has been deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                AlertDialog alert = a_builder.create();
+                alert.show();
+                return false;
             }
         });
     }
@@ -87,9 +118,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_search){
-            Toast.makeText(RecordHistoryActivity.this, "Search.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RecordHistoryActivity.this, SearchActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

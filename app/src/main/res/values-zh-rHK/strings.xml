@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">醫療追蹤者</string>
+    <!-- Login screen -->
+    <string name="login_text_username">用戶名：</string>
+    <string name="login_text_password">密碼：</string>
+    <string name="login_button_login">登錄</string>
+    <string name="login_button_register">註冊</string>
+
+    <!-- Register page -->
+    <string name="register_text_username">用戶名：</string>
+    <string name="register_text_password">密碼:</string>
+    <string name="register_text_confirmed_password">請再輸入一次密碼：</string>
+    <string name="register_text_email">郵箱：</string>
+    <string name="register_text_birthday">出生日期：</string>
+    <string name="register_text_phone">聯繫方式：</string>
+    <string name="register_text_sex">性別：</string>
+    <string name="register_text_male">男</string>
+    <string name="register_text_female">女</string>
+    <string name="register_text_i_am">我是：</string>
+    <string name="register_text_patient">病人</string>
+    <string name="register_text_doctor">醫生</string>
+    <string name="register_button_sign_up">註冊</string>
+
+    <!-- Slide bar and title for patient-->
+    <string name="nav_header_patient">患者</string>
+    <string name="patient_page_title">病歷</string>
+    <string name="nav_item_profile">個人資料</string>
+    <string name="nav_item_gallery">相冊</string>
+    <string name="nav_item_doctor">主治醫生</string>
+    <string name="nav_item_setting">設置</string>
+    <string name="nav_item_about">關於</string>
+    <string name="nav_item_logout">註銷</string>
+
+    <!-- Title for doctor-->
+    <string name="nav_header_doctor">醫生</string>
+    <string name="doctor_page_title">你的病人</string>
+    <string name="nav_header_subtitle_patient">患者</string>
+    <string name="nav_header_subtitle_doctor">医生</string>
+
+    <!-- String for Profile Page -->
+    <string name="profile_title">你的資料:</string>
+    <string name="profile_username">用戶名:</string>
+    <string name="profile_birthday">出生日期:</string>
+    <string name="profile_sex">性別:</string>
+    <string name="profile_tel">聯繫方式:</string>
+    <string name="profile_email">郵箱:</string>
+    <string name="profile_address">地址:</string>
+    <string name="profile_button_edit">保存</string>
+    <!-- end for Profile Page -->
+
+    <!-- String for About Page -->
+    <string name="about_title">關於我們:</string>
+    <string name="about_text_description">此程序最終解釋權歸"CMPUT301F18T4"所有.</string>
+    <string name="about_text_developer">開發人員:(排名不分先後)</string>
+
+    <!-- String for Setting Page -->
+    <string name="title_nickname">昵稱:</string>
+    <string name="apply_change">應用</string>
+    <string name="change_password">更改密碼:</string>
+    <string name="change_language">更改語言:</string>
+    <!-- end for Setting Page -->
+
+    <!-- String for Change Password Page -->
+    <string name="old_password">舊密碼:</string>
+    <string name="new_password">新密碼:</string>
+    <string name="confirmed_password">確認密碼:</string>
+    <string name="save_password">保存</string>
+    <!-- end for Change Password Page -->
+</resources>
