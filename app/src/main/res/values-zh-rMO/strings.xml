@@ -65,6 +65,6 @@
     <string name="old_password">舊密碼:</string>
     <string name="new_password">新密碼:</string>
     <string name="confirmed_password">確認密碼:</string>
-    <string name="save_password">保存:</string>
+    <string name="save_password">保存</string>
     <!-- end for Change Password Page -->
 </resources>
