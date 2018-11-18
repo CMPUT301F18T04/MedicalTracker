@@ -56,6 +56,7 @@
 
     <!-- String for Setting Page -->
     <string name="title_nickname">あだ名:</string>
+    <string name="apply_change">適用</string>
     <string name="change_password">パスワードの変更:</string>
     <string name="change_language">言語の変更:</string>
     <!-- end for Setting Page -->

@@ -56,6 +56,7 @@
 
     <!-- String for Setting Page -->
     <string name="title_nickname">昵稱:</string>
+    <string name="apply_change">應用</string>
     <string name="change_password">更改密碼:</string>
     <string name="change_language">更改語言:</string>
     <!-- end for Setting Page -->
