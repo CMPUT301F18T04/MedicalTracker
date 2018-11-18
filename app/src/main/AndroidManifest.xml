@@ -48,11 +48,11 @@
         <activity
             android:name=".Activity.PasswordActivity"
             android:label="@string/title_activity_password"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activity.LanguageActivity"
             android:label="@string/title_activity_language"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

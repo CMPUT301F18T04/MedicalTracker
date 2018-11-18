@@ -23,6 +23,7 @@
     <string name="register_button_sign_up">注册</string>
 
     <!-- Slide bar and title for patient-->
+
     <string name="nav_header_patient">患者</string>
     <string name="patient_page_title">病历</string>
     <string name="nav_item_profile">个人资料</string>
@@ -35,7 +36,8 @@
     <!-- Title for doctor-->
     <string name="nav_header_doctor">医生</string>
     <string name="doctor_page_title">你的患者</string>
-    <string name="nav_header_subtitle">病人 or 医生</string>
+    <string name="nav_header_subtitle_patient">患者</string>
+    <string name="nav_header_subtitle_doctor">医生</string>
 
     <!-- String for Profile Page -->
     <string name="profile_title">你的资料:</string>
