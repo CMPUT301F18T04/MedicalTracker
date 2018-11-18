@@ -48,8 +48,6 @@
         <activity android:name=".Activity.DoctorRecordDetailActivity" />
         <activity android:name=".Activity.DoctorCommentDetailActivity" />
         <activity android:name=".Activity.DoctorAddCommentActivity" />
-        <activity android:name=".Activity.DoctorProblemListActivity" />
-        <activity android:name=".Activity.DoctorRecordListActivity"></activity>
     </application>
 
 </manifest>

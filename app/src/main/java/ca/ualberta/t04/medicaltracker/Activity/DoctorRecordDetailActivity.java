@@ -67,26 +67,9 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     private void InitDoctorCommentListView(int i, int j){
         ListView commentListView = findViewById(R.id.CommentListView);
 
+        // should use the the commented out version , but right now the app crashes so the new hash map is a place holder
         //final HashMap<Doctor, ArrayList<String>> dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
         final HashMap<Doctor, ArrayList<String>> dComment = new HashMap<>();
-
-
-        /*
-        final HashMap<String, ArrayList<String>> dComment = new HashMap<>();
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Hello");
-        arrayList.add("World.");
-        dComment.put("dd",arrayList);
-
-        arrayList.add("hey");
-        arrayList.add("whattup");
-        dComment.put("dd",arrayList);
-
-        ArrayList<String> arrayList1 = new ArrayList<>();
-        arrayList1.add("Hello");
-        arrayList1.add("World.");
-        dComment.put("ff",arrayList1);
-*/
 
 
         // get all the doctor names in an array
@@ -97,7 +80,6 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         for(int x = 0; x < doctorList.size(); x++){
             doctorNameList.add(doctorList.get(x).getName());
         }
-        //Collections.sort(doctorList, String.CASE_INSENSITIVE_ORDER);
 
         adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, doctorNameList);
         commentListView.setAdapter(adapter);

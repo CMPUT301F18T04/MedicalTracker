@@ -55,35 +55,6 @@ public class DoctorAddCommentActivity extends AppCompatActivity {
 
 
 
-                /*
-                // if the set key set from this hash map does not contain the key
-                if(!comment.keySet().contains(DataController.getDoctor())) {
-                    // initialize a string array
-                    ArrayList<String> commentList = new ArrayList<>();
-                    // add the current comment to the array
-                    commentList.add(addComment.getText().toString());
-                    // put this key value pair into the hash map
-                    comment.put(DataController.getDoctor(), commentList);
-                    // pass it into the method setComment
-                    DataController.getDoctor().getPatients().get(patientPos).getProblemList().getProblem(problemPos).getRecordList().getRecord(recordPos).setComments(comment);
-
-                    System.out.println(comment);
-                    System.out.println(DataController.getDoctor().getPatients().get(patientPos).getProblemList().getProblem(problemPos).getRecordList().getRecord(recordPos).getComments());
-                }
-                //  if the key set already has the key
-                else if(comment.keySet().contains(DataController.getDoctor())){
-                    //get the array corresponding to the key and add the current comment
-                    comment.get(DataController.getDoctor()).add(addComment.getText().toString());
-                    // pass updated hash map into the method setComment
-                    DataController.getDoctor().getPatients().get(patientPos).getProblemList().getProblem(problemPos).getRecordList().getRecord(recordPos).setComments(comment);
-
-                    System.out.println(DataController.getDoctor().getPatients().get(patientPos).getProblemList().getProblem(problemPos).getRecordList().getRecord(recordPos).getComments());
-
-                }
-                */
-
-
-
                 Toast.makeText(DoctorAddCommentActivity.this, "New comment added to this record", Toast.LENGTH_SHORT).show();
 
 

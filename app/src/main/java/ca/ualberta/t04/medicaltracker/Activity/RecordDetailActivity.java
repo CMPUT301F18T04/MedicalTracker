@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
@@ -33,8 +31,6 @@ import ca.ualberta.t04.medicaltracker.R;
 
 public class RecordDetailActivity extends AppCompatActivity {
 
-    //public static ArrayList<String> commentList;
-    //public static ArrayAdapter<Doctor> adapter;
     public static ArrayAdapter<String> adapter;
 
     @Override
@@ -67,12 +63,10 @@ public class RecordDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 problem.getRecordList().getRecord(r_pos).setTitle(title.getText().toString());
-                //problem.getRecordList().getRecord(r_pos).setDateStart(convertedDate = dateFormat.parse(date.getText().toString()));
+
                 problem.getRecordList().getRecord(r_pos).setDescription(description.getText().toString());
 
-
                 problem.getRecordList().setTitle(problem.getRecordList().getRecord(r_pos), title.getText().toString());
-                //problem.getRecordList().getRecord(r_pos).setDateStart(convertedDate = dateFormat.parse(date.getText().toString()));
 
 
                 problem.getRecordList().setDescription(problem.getRecordList().getRecord(r_pos), description.getText().toString());
@@ -93,22 +87,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         // get the comments as a hash map
         final HashMap dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
 
-        /*
-        final HashMap<String, ArrayList<String>> dComment = new HashMap<>();
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Hello");
-        arrayList.add("World.");
-        dComment.put("dd",arrayList);
-
-        arrayList.add("hey");
-        arrayList.add("whattup");
-        dComment.put("dd",arrayList);
-
-        ArrayList<String> arrayList1 = new ArrayList<>();
-        arrayList1.add("Hello");
-        arrayList1.add("World.");
-        dComment.put("ff",arrayList1);
-*/
 
         System.out.println(dComment);
 
