@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">醫療追蹤者</string>
+    <string name="developer_PeterMa">马竞元</string>
+    <string name="developer_DevinDai">戴文</string>
+    <string name="developer_HumphreyLu">陆中豪</string>
+    <string name="developer_LexiLi">李昕阳</string>
+    <string name="developer_AnnabelleZhang">张巧燕</string>
+    <string name="developer_YuanWang">王源</string>
+
     <!-- Login screen -->
     <string name="login_text_username">用戶名：</string>
     <string name="login_text_password">密碼：</string>
