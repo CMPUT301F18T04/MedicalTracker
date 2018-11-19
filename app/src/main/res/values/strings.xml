@@ -30,7 +30,7 @@
     <!-- String for Patient Page -->
     <string name="patient_page_title">Problems</string>
     <string name="patient_page_description">Description: </string>
-    <string name="patient_inner_text_record">records</string>
+    <string name="patient_inner_text_record">Records</string>
     <!-- end for Patient Page -->
 
     <!-- String for Doctor Page -->
@@ -169,10 +169,9 @@
     <string name="doctor_comment_detail_title">Detailed Comments</string>
     <!-- end for Detailed Comments page -->
 
-    <!-- String for doctor add comments page -->
-    <string name="doctor_comment_title">Add Comment</string>
-    <string name="confirm_button">Confirm</string>
-    <!-- end for doctor add comments page -->
+    <!-- String for pop up comments page -->
+    <string name="doctor_comment_title">Add a new comment</string>
+    <!-- end for pop up comments page -->
 
     <!-- String for doctor problem list page -->
     <string name="doctor_problem_list_title">Problems</string>
@@ -181,6 +180,8 @@
     <!-- String for doctor record list page -->
     <string name="doctor_record_list_title">Records</string>
     <!-- end for doctor record list page -->
+
+
 
 
 </resources>

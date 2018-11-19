@@ -9,15 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.Date;
-
-import ca.ualberta.t04.medicaltracker.Doctor;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.RecordList;
-import io.searchbox.core.Doc;
+/**
+ * This class displays a pop up window for the doctor to add a comment
+ */
 
 public class CommentPopup {
     private Context context;
@@ -35,11 +29,11 @@ public class CommentPopup {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.activity_doctor_add_comment, null);
 
-        final EditText editComment = (EditText) promptView.findViewById(R.id.addCommentEditText);
+        final EditText editComment = promptView.findViewById(R.id.addCommentEditText);
 
         final AlertDialog ad = new AlertDialog.Builder(context)
                 .setView(promptView)
-                .setTitle("Add a new comment")
+                .setTitle(R.string.doctor_comment_title)
                 .setPositiveButton(android.R.string.ok, null)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();

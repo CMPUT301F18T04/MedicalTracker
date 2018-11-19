@@ -51,7 +51,6 @@
         <activity android:name=".Activity.SearchActivity" />
 
         <activity android:name=".Activity.DoctorRecordDetailActivity" />
-        <activity android:name=".Activity.DoctorCommentDetailActivity" />
 
         <activity
             android:name=".Activity.PasswordActivity"
