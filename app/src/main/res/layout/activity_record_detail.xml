@@ -39,26 +39,10 @@
         android:ems="10"
         android:hint="@string/record_title"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/dateEditText"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.301"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/dateEditText"
-        android:layout_width="166dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/record_date"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionEditText"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCommentEditText" />
 
     <EditText
         android:id="@+id/descriptionEditText"
@@ -78,14 +62,14 @@
 
     <TextView
         android:id="@+id/textView34"
-        android:layout_width="wrap_content"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/doctor_comment"
         android:textAppearance="@android:style/TextAppearance.Holo"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
 
@@ -99,5 +83,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CommentListView"
         app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:text="TextView"
+        android:textAppearance="@android:style/TextAppearance.Holo"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionEditText"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCommentEditText" />
 
 </android.support.constraint.ConstraintLayout>

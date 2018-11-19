@@ -60,21 +60,21 @@
 
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="277dp"
+        android:layout_width="357dp"
         android:layout_height="29dp"
         android:layout_marginTop="8dp"
         android:text="@string/doctor_comment"
         android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintBottom_toTopOf="@+id/CommentListView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dRecordDetailDescription" />
 
     <ListView
         android:id="@+id/CommentListView"
         android:layout_width="368dp"
-        android:layout_height="223dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/doctorCommentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

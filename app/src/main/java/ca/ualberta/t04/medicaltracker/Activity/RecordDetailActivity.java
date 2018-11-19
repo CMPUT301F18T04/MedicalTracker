@@ -4,35 +4,23 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Doctor;
-import ca.ualberta.t04.medicaltracker.Listener;
-import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.RecordList;
-
-
-/**
- * data transfer tested with string instead of doctor and everything works
- * editing saves and works good
- * need to change the hashmap type to doctor after finishing the setcomment functionality of a doctor
- * and test again
- */
 
 public class RecordDetailActivity extends AppCompatActivity {
 
@@ -50,7 +38,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         final int recordIndex = mIntent.getIntExtra("r_index",-1);
 
         final EditText title = findViewById(R.id.addCommentEditText);
-        final EditText date = findViewById(R.id.dateEditText);
+        final TextView date = findViewById(R.id.dateTextView);
         final EditText description = findViewById(R.id.descriptionEditText);
 
         Button saveButton = findViewById(R.id.saveButton);
@@ -74,8 +62,8 @@ public class RecordDetailActivity extends AppCompatActivity {
 
                 problem.getRecordList().setTitle(problem.getRecordList().getRecord(recordIndex), title.getText().toString());
 
-
                 problem.getRecordList().setDescription(problem.getRecordList().getRecord(recordIndex), description.getText().toString());
+
                 Toast.makeText(RecordDetailActivity.this, "New edits saved", Toast.LENGTH_SHORT).show();
 
             }
@@ -101,10 +89,13 @@ public class RecordDetailActivity extends AppCompatActivity {
 
     private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
         final ArrayList<String> comments = new ArrayList<>();
+        String doctorUserName;
         for(int i=0; i<doctorList.size(); i++ ){
-            String doctorUserName = doctorList.get(i);
-            String comment = doctorUserName + ": " + dComment.get(doctorUserName);
-            comments.add(comment);
+            for(int j= 0; j<dComment.get(doctorList.get(i)).size(); j++) {
+                doctorUserName = doctorList.get(i);
+                String comment = doctorUserName + ": " + dComment.get(doctorUserName).get(j);
+                comments.add(comment);
+            }
         }
         return comments;
     }
