@@ -9,15 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.Date;
-
-import ca.ualberta.t04.medicaltracker.Doctor;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.RecordList;
-import io.searchbox.core.Doc;
+/**
+ * This class displays a pop up window for the doctor to add a comment
+ */
 
 public class CommentPopup {
     private Context context;
