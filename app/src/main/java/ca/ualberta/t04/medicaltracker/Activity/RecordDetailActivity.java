@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,7 +38,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         final int recordIndex = mIntent.getIntExtra("r_index",-1);
 
         final EditText title = findViewById(R.id.addCommentEditText);
-        final EditText date = findViewById(R.id.dateEditText);
+        final TextView date = findViewById(R.id.dateTextView);
         final EditText description = findViewById(R.id.descriptionEditText);
 
         Button saveButton = findViewById(R.id.saveButton);
@@ -88,10 +89,13 @@ public class RecordDetailActivity extends AppCompatActivity {
 
     private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
         final ArrayList<String> comments = new ArrayList<>();
+        String doctorUserName;
         for(int i=0; i<doctorList.size(); i++ ){
-            String doctorUserName = doctorList.get(i);
-            String comment = doctorUserName + ": " + dComment.get(doctorUserName);
-            comments.add(comment);
+            for(int j= 0; j<dComment.get(doctorList.get(i)).size(); j++) {
+                doctorUserName = doctorList.get(i);
+                String comment = doctorUserName + ": " + dComment.get(doctorUserName).get(j);
+                comments.add(comment);
+            }
         }
         return comments;
     }

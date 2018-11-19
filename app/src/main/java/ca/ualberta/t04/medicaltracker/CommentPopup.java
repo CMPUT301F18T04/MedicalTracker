@@ -29,11 +29,11 @@ public class CommentPopup {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.activity_doctor_add_comment, null);
 
-        final EditText editComment = (EditText) promptView.findViewById(R.id.addCommentEditText);
+        final EditText editComment = promptView.findViewById(R.id.addCommentEditText);
 
         final AlertDialog ad = new AlertDialog.Builder(context)
                 .setView(promptView)
-                .setTitle("Add a new comment")
+                .setTitle(R.string.doctor_comment_title)
                 .setPositiveButton(android.R.string.ok, null)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
