@@ -28,6 +28,19 @@ public class DoctorViewActivity extends AppCompatActivity {
         initPage();
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        doctorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(DoctorViewActivity.this, InformationActivity.class);
+                intent.putExtra("username", DataController.getPatient().getDoctors().get(i).getUserName());
+                startActivity(intent);
+            }
+        });
+    }
 
     private void initPage(){
 
