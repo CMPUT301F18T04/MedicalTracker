@@ -80,29 +80,53 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<Object[]> search(String keyword, SearchType searchType){
         ArrayList<Object[]> result = new ArrayList<>();
 
-        if(searchType.equals(SearchType.Problem)){
-            for(Patient patient: DataController.getDoctor().getPatients()){
-                for(Problem problem:patient.getProblemList().getProblems()){
-                    if(problem.getTitle().contains(keyword) || problem.getDescription().contains(keyword)){
+        if (DataController.getUser().isDoctor() == true) {
+            if (searchType.equals(SearchType.Problem)) {
+                for (Patient patient : DataController.getDoctor().getPatients()) {
+                    for (Problem problem : patient.getProblemList().getProblems()) {
+                        if (problem.getTitle().contains(keyword) || problem.getDescription().contains(keyword)) {
+                            Object[] searchedProblem = new Object[2];
+                            searchedProblem[0] = patient.getUserName();
+                            searchedProblem[1] = problem;
+                            result.add(searchedProblem);
+                        }
+                    }
+                }
+            } else if (searchType.equals(SearchType.Record)) {
+                for (Patient patient : DataController.getDoctor().getPatients()) {
+                    for (Problem problem : patient.getProblemList().getProblems()) {
+                        for (Record record : problem.getRecordList().getRecords()) {
+                            if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
+                                Object[] searchedRecord = new Object[2];
+                                searchedRecord[0] = patient.getUserName();
+                                searchedRecord[1] = record;
+                                result.add(searchedRecord);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }else if (DataController.getUser().isDoctor() == false) {
+            if (searchType.equals(SearchType.Problem)) {
+                for (Problem problem : DataController.getPatient().getProblemList().getProblems()) {
+                    if (problem.getTitle().contains(keyword) || problem.getDescription().contains(keyword)) {
                         Object[] searchedProblem = new Object[2];
-                        searchedProblem[0] = patient.getUserName();
+                        searchedProblem[0] = DataController.getPatient().getUserName();
                         searchedProblem[1] = problem;
                         result.add(searchedProblem);
                     }
                 }
-            }
-        } else if(searchType.equals(SearchType.Record)){
-            for(Patient patient: DataController.getDoctor().getPatients()){
-                for(Problem problem:patient.getProblemList().getProblems()){
-                    for(Record record:problem.getRecordList().getRecords()){
-                        if(record.getTitle().contains(keyword) || record.getDescription().contains(keyword)){
+            } else if (searchType.equals(SearchType.Record)) {
+                for (Problem problem : DataController.getPatient().getProblemList().getProblems()) {
+                    for (Record record : problem.getRecordList().getRecords()) {
+                        if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
                             Object[] searchedRecord = new Object[2];
-                            searchedRecord[0] = patient.getUserName();
+                            searchedRecord[0] = DataController.getPatient().getUserName();
                             searchedRecord[1] = record;
                             result.add(searchedRecord);
                         }
                     }
-
                 }
             }
         }
