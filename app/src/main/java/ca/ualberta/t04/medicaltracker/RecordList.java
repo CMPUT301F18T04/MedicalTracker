@@ -74,7 +74,7 @@ public class RecordList
         notifyAllListener();
     }
 
-    public void setComments(Record record, HashMap<Doctor, ArrayList<String>> comments) {
+    public void setComments(Record record, HashMap<String, ArrayList<String>> comments) {
         if(records.contains(record)){
             record.setComments(comments);
         }

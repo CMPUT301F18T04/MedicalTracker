@@ -17,9 +17,14 @@ import java.util.HashMap;
 import java.util.Set;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Doctor;
+import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Record;
+import ca.ualberta.t04.medicaltracker.RecordList;
 
 
 /**
@@ -41,8 +46,8 @@ public class RecordDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.edit_doctor_record_detail);
 
         Intent mIntent = getIntent();
-        final int index = mIntent.getIntExtra("p_index", -1);
-        final int r_pos = mIntent.getIntExtra("r_index",-1);
+        final int problemIndex = mIntent.getIntExtra("p_index", -1);
+        final int recordIndex = mIntent.getIntExtra("r_index",-1);
 
         final EditText title = findViewById(R.id.addCommentEditText);
         final EditText date = findViewById(R.id.dateEditText);
@@ -50,77 +55,59 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.saveButton);
 
-        final Problem problem = DataController.getPatient().getProblemList().getProblem(index);
-
+        final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
+        RecordList recordList = problem.getRecordList();
+        Record record = recordList.getRecord(recordIndex);
 
         // set the information
-        title.setText(problem.getRecordList().getRecord(r_pos).getTitle());
-        date.setText(problem.getRecordList().getRecord(r_pos).getDateStart().toString());
-        description.setText(problem.getRecordList().getRecord(r_pos).getDescription());
+        title.setText(record.getTitle());
+        date.setText(record.getDateStart().toString());
+        description.setText(record.getDescription());
 
         // when save button is pressed, new changes for a record get saved
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                problem.getRecordList().getRecord(r_pos).setTitle(title.getText().toString());
+                problem.getRecordList().getRecord(recordIndex).setTitle(title.getText().toString());
 
-                problem.getRecordList().getRecord(r_pos).setDescription(description.getText().toString());
+                problem.getRecordList().getRecord(recordIndex).setDescription(description.getText().toString());
 
-                problem.getRecordList().setTitle(problem.getRecordList().getRecord(r_pos), title.getText().toString());
+                problem.getRecordList().setTitle(problem.getRecordList().getRecord(recordIndex), title.getText().toString());
 
 
-                problem.getRecordList().setDescription(problem.getRecordList().getRecord(r_pos), description.getText().toString());
+                problem.getRecordList().setDescription(problem.getRecordList().getRecord(recordIndex), description.getText().toString());
                 Toast.makeText(RecordDetailActivity.this, "New edits saved", Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
-        InitCommentListView(index, r_pos);
-        //InitCommentListView();
-
+        InitCommentListView(record);
     }
 
 
-    private void InitCommentListView(int i, int j) {
+    private void InitCommentListView(Record record){
         ListView commentListView = findViewById(R.id.CommentListView);
-        // get the comments as a hash map
-        final HashMap dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
 
-
-        System.out.println(dComment);
-
+        final HashMap<String, ArrayList<String>> dComment = record.getComments();
 
         // get all the doctor names in an array
-        Set<Doctor> doctor = dComment.keySet();
-        final ArrayList<Doctor> doctorList = new ArrayList<>(doctor);
+        final ArrayList<String> doctorList = new ArrayList<>(dComment.keySet());
+        final ArrayList<String> comments = getComment(dComment, doctorList);
 
-        ArrayList<String> doctorNameList = new ArrayList<>();
-        for(int x = 0; x < doctorList.size(); x++){
-            doctorNameList.add(doctorList.get(x).getName());
-        }
-        //Collections.sort(doctorNameList, String.CASE_INSENSITIVE_ORDER);
-
-        System.out.println(doctorList);
-
-        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, doctorNameList);
+        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, comments);
         commentListView.setAdapter(adapter);
-
-        commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent intent = new Intent(RecordDetailActivity.this, DoctorCommentDetailActivity.class);
-                intent.putExtra("hash_map", dComment);
-                intent.putExtra("doctorKey", doctorList.get(pos).getName());
-                intent.putExtra("position",pos);
-                startActivity(intent);
-            }
-        });
-
-
-        //https://stackoverflow.com/questions/18680542/how-to-get-the-arraylist-from-the-hashmap-in-java
     }
 
+    private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
+        final ArrayList<String> comments = new ArrayList<>();
+        for(int i=0; i<doctorList.size(); i++ ){
+            String doctorUserName = doctorList.get(i);
+            String comment = doctorUserName + ": " + dComment.get(doctorUserName);
+            comments.add(comment);
+        }
+        return comments;
+    }
 
 
 }

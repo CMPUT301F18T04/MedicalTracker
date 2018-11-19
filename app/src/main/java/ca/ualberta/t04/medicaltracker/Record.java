@@ -18,7 +18,7 @@ public class Record
     private transient ArrayList<Image> bodyLocationImage;
 
 
-    private HashMap<Doctor, ArrayList<String>> comments;
+    private HashMap<String, ArrayList<String>> comments;
     private Location location;
     private transient ArrayList<Listener> listeners = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class Record
         this.bodyLocationImage.remove(bodyLocationImage);
     }
 
-    public HashMap<Doctor, ArrayList<String>> getComments() {
+    public HashMap<String, ArrayList<String>> getComments() {
         if(comments == null){
             comments = new HashMap<>();
         }
@@ -78,17 +78,17 @@ public class Record
     }
 
     public void addComment(Doctor doctor, String comment){
-        if(getComments().containsKey(doctor)){
-            getComments().get(doctor).add(comment);
+        if(getComments().containsKey(doctor.getUserName())){
+            getComments().get(doctor.getUserName()).add(comment);
         }
         else{
             ArrayList<String> newComments = new ArrayList<>();
             newComments.add(comment);
-            getComments().put(doctor, newComments);
+            getComments().put(doctor.getUserName(), newComments);
         }
     }
 
-    public void setComments(HashMap<Doctor, ArrayList<String>> comments) {
+    public void setComments(HashMap<String, ArrayList<String>> comments) {
         this.comments = comments;
     }
 

@@ -36,6 +36,7 @@ public class ElasticSearchController
 
     // Delete the whole index of ElasticSearch
     public static void deleteIndex(String indexName){
+        setClient();
         try {
             client.execute(new Delete.Builder(INDEX_NAME).build());
         } catch (IOException e) {

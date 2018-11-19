@@ -1,25 +1,25 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
+import ca.ualberta.t04.medicaltracker.CommentPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Doctor;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
+import ca.ualberta.t04.medicaltracker.RecordList;
 
 public class DoctorRecordDetailActivity extends AppCompatActivity {
 
@@ -42,60 +42,58 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final int patientIndex = getIntent().getIntExtra("patient_index", -1);
         final int recordIndex = getIntent().getIntExtra("record_index", -1);
 
+        Patient patient = DataController.getDoctor().getPatients().get(patientIndex);
+        Problem problem = patient.getProblemList().getProblem(problemIndex);
+        final RecordList recordList = problem.getRecordList();
+        final Record record = recordList.getRecord(recordIndex);
 
-        title.setText(DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problemIndex).getRecordList().getRecord(recordIndex).getTitle());
-        date.setText(DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problemIndex).getRecordList().getRecord(recordIndex).getDateStart().toString());
-        description.setText(DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problemIndex).getRecordList().getRecord(recordIndex).getDescription());
 
+        title.setText(record.getTitle());
+        date.setText(record.getDateStart().toString());
+        description.setText(record.getDescription());
 
-        InitDoctorCommentListView(problemIndex, recordIndex);
-
+        InitDoctorCommentListView(recordList, record, patient);
 
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DoctorRecordDetailActivity.this, DoctorAddCommentActivity.class);
-                intent.putExtra("problem_index", problemIndex);
-                intent.putExtra("patient_index", patientIndex);
-                intent.putExtra("record_index", recordIndex);
-                startActivity(intent);
+                CommentPopup commentPopup = new CommentPopup(DoctorRecordDetailActivity.this, recordList, record, DataController.getDoctor());
+                commentPopup.addComment();
             }
         });
 
     }
 
-    private void InitDoctorCommentListView(int i, int j){
+    private void InitDoctorCommentListView(RecordList recordList, Record record, final Patient patient){
         ListView commentListView = findViewById(R.id.CommentListView);
 
-        // should use the the commented out version , but right now the app crashes so the new hash map is a place holder
-        //final HashMap<Doctor, ArrayList<String>> dComment = DataController.getPatient().getProblemList().getProblem(i).getRecordList().getRecord(j).getComments();
-        final HashMap<Doctor, ArrayList<String>> dComment = new HashMap<>();
-
+        final HashMap<String, ArrayList<String>> dComment = record.getComments();
 
         // get all the doctor names in an array
-        Set<Doctor> doctor = dComment.keySet();
-        final ArrayList<Doctor> doctorList = new ArrayList<>(doctor);
+        final ArrayList<String> doctorList = new ArrayList<>(dComment.keySet());
+        final ArrayList<String> comments = getComment(dComment, doctorList);
 
-        ArrayList<String> doctorNameList = new ArrayList<>();
-        for(int x = 0; x < doctorList.size(); x++){
-            doctorNameList.add(doctorList.get(x).getName());
-        }
-
-        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, doctorNameList);
+        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, comments);
         commentListView.setAdapter(adapter);
 
-        commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        recordList.addListener("ListenToComment", new Listener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(DoctorRecordDetailActivity.this, DoctorCommentDetailActivity.class);
-                intent.putExtra("hash_map", dComment);
-                intent.putExtra("position",i);
-                startActivity(intent);
+            public void update() {
+                comments.clear();
+                comments.addAll(getComment(dComment, doctorList));
+                adapter.notifyDataSetChanged();
+                ElasticSearchController.updateUser(patient);
             }
         });
-
-
     }
 
-
+    private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
+        final ArrayList<String> comments = new ArrayList<>();
+        for(int i=0; i<doctorList.size(); i++ ){
+            String doctorUserName = doctorList.get(i);
+            String comment = doctorUserName + ": " + dComment.get(doctorUserName);
+            comments.add(comment);
+        }
+        return comments;
+    }
 }
