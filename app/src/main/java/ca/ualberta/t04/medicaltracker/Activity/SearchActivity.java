@@ -213,9 +213,9 @@ public class SearchActivity extends AppCompatActivity {
                 for (Problem problem : problems) {
                     if (problem.getTitle().contains(keyword) || problem.getDescription().contains(keyword)) {
                         Object[] searchedProblem = new Object[4];
-                        searchedProblem[0] = DataController.getPatient().getUserName();
+                        searchedProblem[0] = patient.getUserName();
                         searchedProblem[1] = problem;
-                        searchedProblem[2] = patients.indexOf(patient);
+                        searchedProblem[2] = -1;
                         searchedProblem[3] = problems.indexOf(problem);
                         result.add(searchedProblem);
                     }
@@ -229,7 +229,7 @@ public class SearchActivity extends AppCompatActivity {
                             Object[] searchedRecord = new Object[5];
                             searchedRecord[0] = patient.getUserName();
                             searchedRecord[1] = record;
-                            searchedRecord[2] = patients.indexOf(patient);
+                            searchedRecord[2] = -1;
                             searchedRecord[3] = problems.indexOf(problem);
                             searchedRecord[4] = records.indexOf(record);
                             result.add(searchedRecord);
