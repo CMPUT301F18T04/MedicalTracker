@@ -25,6 +25,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.PatientListAdapter;
@@ -93,6 +95,7 @@ public class DoctorActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ListView patientListView = findViewById(R.id.main_page_list_view);
+
         final ArrayList<Patient> patients = DataController.getDoctor().getPatients();
         final PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
         patientListView.setAdapter(adapter);
@@ -140,6 +143,33 @@ public class DoctorActivity extends AppCompatActivity
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.doctor_page_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final int index = info.position;
+        int id = item.getItemId();
+
+        Patient patient = DataController.getDoctor().getPatients().get(index);
+
+        if(id==R.id.doctor_page_menu_detail){
+            Intent intent = new Intent(DoctorActivity.this, InformationActivity.class);
+            intent.putExtra("username", patient.getUserName());
+            startActivity(intent);
+        } else if(id==R.id.doctor_page_menu_delete){
+            DataController.getDoctor().removePatient(patient);
+            Toast.makeText(DoctorActivity.this, "Succeed to delete it.", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -181,6 +211,9 @@ public class DoctorActivity extends AppCompatActivity
             }
         });
 
+        registerForContextMenu(listView);
+
+        /*
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -191,8 +224,10 @@ public class DoctorActivity extends AppCompatActivity
                 return false;
             }
         });
+        */
     }
 
+    /*
     private void initMenu(View view, final Patient patient){
         PopupMenu popupMenu = new PopupMenu(DoctorActivity.this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -214,6 +249,7 @@ public class DoctorActivity extends AppCompatActivity
         });
         popupMenu.show();
     }
+    */
 
     private void refreshProblemListView(ProblemList problemList){
         ListView listView = findViewById(R.id.main_page_list_view);
@@ -228,6 +264,7 @@ public class DoctorActivity extends AppCompatActivity
                 problemIndex = position;
             }
         });
+        unregisterForContextMenu(listView);
     }
 
     private void refreshRecordListView(RecordList recordList){
@@ -249,6 +286,7 @@ public class DoctorActivity extends AppCompatActivity
                 }
             }
         });
+        unregisterForContextMenu(listView);
     }
 
     @Override
