@@ -22,7 +22,8 @@ public class DataController
     }
 
     // Only used to update a user's profile
-    public static void updateProfile(Date birthday, Boolean isMale, String phoneNumber, String email, String address){
+    public static void updateProfile(String nickname,Date birthday, Boolean isMale, String phoneNumber, String email, String address){
+        getUser().setName(nickname);
         getUser().setBirthday(birthday);
         getUser().setMale(isMale);
         getUser().setPhoneNumber(phoneNumber);

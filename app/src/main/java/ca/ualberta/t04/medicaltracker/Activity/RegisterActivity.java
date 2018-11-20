@@ -118,6 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this,R.string.register_toast8,Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            if(phoneNumber.length() < 5 || phoneNumber.length() > 15){
+                Toast.makeText(RegisterActivity.this,"Phone number should between 5-15 digits!",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         // Check the validation of email address if it is not empty{
@@ -134,15 +139,19 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check the validation of birthday
-        //if(!editText_birthday.equals("")) {
-        //    Date current_date = new Date();
-        //    SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
-        //    Date newBirthday= format.parse(birthday);
-        //    if(current_date.before(newBirthday)){
-        //        Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
-        //        return;
-        //    }
-        //}
+        if(!editText_birthday.equals("")) {
+            Date current_date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+            try {
+                Date newBirthday = format.parse(birthday);
+                if(current_date.before(newBirthday)){
+                    Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }catch(ParseException e) {
+                Date newBirthday = new Date();
+            }
+        }
 
         // Check the user's role
         RadioButton radio_doctor = findViewById(R.id.register_doctor);

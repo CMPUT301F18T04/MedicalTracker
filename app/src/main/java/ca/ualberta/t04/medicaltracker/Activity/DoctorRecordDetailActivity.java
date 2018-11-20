@@ -48,7 +48,14 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final int patientIndex = getIntent().getIntExtra("patient_index", -1);
         final int recordIndex = getIntent().getIntExtra("record_index", -1);
 
-        Patient patient = DataController.getDoctor().getPatients().get(patientIndex);
+        Patient patient;
+
+        if(patientIndex==-1){
+            patient = DataController.getPatient();
+        }
+        else{
+            patient = DataController.getDoctor().getPatients().get(patientIndex);
+        }
         Problem problem = patient.getProblemList().getProblem(problemIndex);
         final RecordList recordList = problem.getRecordList();
         final Record record = recordList.getRecord(recordIndex);
@@ -60,15 +67,19 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
         InitDoctorCommentListView(recordList, record, patient);
 
-        // when the comment button is clicked, the comment pop up will appear for commenting
-        commentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CommentPopup commentPopup = new CommentPopup(DoctorRecordDetailActivity.this, recordList, record, DataController.getDoctor());
-                commentPopup.addComment();
-            }
-        });
 
+        // when the comment button is clicked, the comment pop up will appear for commenting
+        if(patientIndex==-1){
+            commentButton.setVisibility(View.GONE);
+        } else {
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CommentPopup commentPopup = new CommentPopup(DoctorRecordDetailActivity.this, recordList, record, DataController.getDoctor());
+                    commentPopup.addComment();
+                }
+            });
+        }
     }
 
     // Setting up the Doctor comment list view

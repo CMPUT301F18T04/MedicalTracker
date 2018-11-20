@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +46,10 @@ public class ProfileActivity extends AppCompatActivity {
         // get username
         TextView username = findViewById(R.id.profile_username);
         username.setText(DataController.getUser().getUserName());
+
+        // get Nickname
+        TextView nickname = findViewById(R.id.nick_name);
+        nickname.setText(DataController.getUser().getName());
 
         // get birthday
         EditText birthday = findViewById(R.id.profile_birthday);
@@ -83,6 +89,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void edit(View view){
+
+        // get new nickname
+        TextView nickname = findViewById(R.id.nick_name);
+        String newNickName = nickname.getText().toString();
+
         // get new birthday
         EditText birthday = findViewById(R.id.profile_birthday);
         DateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
@@ -121,6 +132,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(ProfileActivity.this,R.string.profile_toast2,Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            if(phoneNumber.length() < 5 || phoneNumber.length() > 15){
+                Toast.makeText(ProfileActivity.this,"Phone number should between 5-15 digits!",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         // get new email
@@ -139,7 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
         EditText address = findViewById(R.id.profile_address);
         String Address = address.getText().toString();
 
-        DataController.updateProfile(newBirthday, isMale, phoneNumber, Email, Address);
+        DataController.updateProfile(newNickName,newBirthday, isMale, phoneNumber, Email, Address);
 
         Toast.makeText(ProfileActivity.this, R.string.profile_toast4, Toast.LENGTH_SHORT).show();
         finish();
