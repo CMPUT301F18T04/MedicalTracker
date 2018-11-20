@@ -100,7 +100,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                         });
                 AlertDialog alert = a_builder.create();
                 alert.show();
-                return false;
+                return true;
             }
         });
     }
