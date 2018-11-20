@@ -70,6 +70,11 @@ public class AddProblemActivity extends AppCompatActivity {
         EditText problem_title = findViewById(R.id.add_problem_title);
         EditText problem_description = findViewById(R.id.add_problem_description);
 
+        if(problem_title.getText().toString().equals("") || problem_description.getText().toString().equals("")){
+            Toast.makeText(AddProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // init date is now
         Date dateStart = new Date();
 

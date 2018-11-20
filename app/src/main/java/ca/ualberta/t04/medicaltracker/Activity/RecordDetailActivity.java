@@ -34,8 +34,8 @@ public class RecordDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.edit_doctor_record_detail);
 
         Intent mIntent = getIntent();
-        final int problemIndex = mIntent.getIntExtra("p_index", -1);
-        final int recordIndex = mIntent.getIntExtra("r_index",-1);
+        final int problemIndex = mIntent.getIntExtra("problem_index", -1);
+        final int recordIndex = mIntent.getIntExtra("record_index",-1);
 
         final EditText title = findViewById(R.id.addCommentEditText);
         final TextView date = findViewById(R.id.dateTextView);
@@ -66,6 +66,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
                 Toast.makeText(RecordDetailActivity.this, "New edits saved", Toast.LENGTH_SHORT).show();
 
+                finish();
             }
         });
 

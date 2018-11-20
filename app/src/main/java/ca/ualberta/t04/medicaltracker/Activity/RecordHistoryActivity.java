@@ -51,8 +51,8 @@ public class RecordHistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
                 int pos = i;
-                intent.putExtra("p_index", problem_index);
-                intent.putExtra("r_index", pos);
+                intent.putExtra("problem_index", problem_index);
+                intent.putExtra("record_index", pos);
                 startActivity(intent);
             }
         });
@@ -100,7 +100,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
+        menu.removeItem(R.id.action_search);
         return true;
     }
 
@@ -115,10 +115,6 @@ public class RecordHistoryActivity extends AppCompatActivity {
         if (id == R.id.action_add) {
             Intent intent = new Intent(RecordHistoryActivity.this, AddRecordActivity.class);
             intent.putExtra("index", problem_index);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_search){
-            Intent intent = new Intent(RecordHistoryActivity.this, SearchActivity.class);
             startActivity(intent);
             return true;
         }

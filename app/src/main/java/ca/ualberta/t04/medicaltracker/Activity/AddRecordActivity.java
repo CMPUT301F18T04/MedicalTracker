@@ -154,6 +154,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     @Override
     public void onLocationChanged(Location location) {
+        if(location==null){
+            record_location.setText("");
+            return;
+        }
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -187,6 +191,11 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     public void addRecord(View view){
         EditText record_title = findViewById(R.id.add_record_title);
         EditText record_description = findViewById(R.id.add_record_description);
+
+        if(record_title.getText().toString().equals("") || record_description.getText().toString().equals("")){
+            Toast.makeText(AddRecordActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Date dateStart = new Date();
 
