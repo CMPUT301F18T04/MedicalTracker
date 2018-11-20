@@ -42,8 +42,12 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
 
+// This class has the layout of activity_add_record.xml
+// This class is used for adding a new record
+// This class implements LocationListener which is used for get the current location
 public class AddRecordActivity extends AppCompatActivity implements LocationListener {
 
+    // initialize
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private int problem_index;
     private DatePickerDialog.OnDateSetListener recordDateSetListener;
@@ -56,6 +60,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private Geocoder geocoder;
     private List<Address> addresses;
 
+    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +92,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     }
 
+    // recordSetDate method is used for set a date using DatePickerDialog
     public void recordSetDate(){
         record_date.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -103,6 +109,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             }
         });
 
+        // recordDateSetListener gets the result of the DatePickerDialog
+        // TextView record_date will be set with the date the user picked
+        // date format: year + "-" + month + "-" + day
         recordDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -113,6 +122,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         };
     }
 
+    // recordSetTime method is used for set a time using TimePickerDialog
     public void recordSetTime(){
         record_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +137,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
                 timePickerDialog.show();
             }
         });
+
+        // recordTimeSetListener gets the result of the TimePickerDialog
+        // TextView record_time will be set with the time the user picked
+        // time format: hour + ":" + minute
         recordTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
@@ -136,6 +150,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         };
     }
 
+    // Method dispatchTakePictureIntent starts the activity of launch the camera of the phone
     public void dispatchTakePictureIntent(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -143,6 +158,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     }
 
+    // This method will be called automatically after startActivityForResult
+    // This method returns the result of the activity
+    // in this case, the result of taking a  photo is a picture
+    // The picture the user just taken will be displayed in a imageView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -152,6 +171,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     }
 
+    // This method get the current address of the user
+    // The address got will be displayed in the TextView record_location
+    // This method will be called when the location has changed.
     @Override
     public void onLocationChanged(Location location) {
         if(location==null){
@@ -164,7 +186,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            String address_line = addresses.get(0).getAddressLine(0);
+            String address_line = addresses.get(0).getAddressLine(0); // the full address is stored in the variable address_line
             record_location.setText(address_line);
         } catch (IOException e) {
             e.printStackTrace();
@@ -172,16 +194,23 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     }
 
+    // This method will be called when the provider status changes.
+    // This method is called when a provider is unable to fetch a location or
+    // if the provider has recently become available after a period of unavailability.
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
 
     }
 
+    // Called when the provider is enabled by the user
     @Override
     public void onProviderEnabled(String s) {
 
     }
 
+    // Called when the provider is disabled by the user.
+    // If requestLocationUpdates is called on an already disabled provider,
+    // this method is called immediately.
     @Override
     public void onProviderDisabled(String s) {
 
@@ -192,6 +221,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         EditText record_title = findViewById(R.id.add_record_title);
         EditText record_description = findViewById(R.id.add_record_description);
 
+        // check if the title and description are both filled
         if(record_title.getText().toString().equals("") || record_description.getText().toString().equals("")){
             Toast.makeText(AddRecordActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
