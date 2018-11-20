@@ -114,6 +114,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
             Intent intent = new Intent(RecordHistoryActivity.this, AddRecordActivity.class);
+
             intent.putExtra("index", problem_index);
             startActivity(intent);
             return true;

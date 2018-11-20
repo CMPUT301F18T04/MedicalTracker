@@ -66,7 +66,7 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         assertTrue(solo.waitForActivity("SettingActivity"));
 
         // Click change password button
-        solo.clickOnButton(0);
+        solo.clickOnView(solo.getView(R.id.setting_change_password));
 
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PasswordActivity"));

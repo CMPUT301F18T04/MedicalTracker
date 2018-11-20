@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -68,6 +69,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         recordSetDate();
         recordSetTime();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -76,12 +78,14 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+
+        } else{
+            Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+            onLocationChanged(location);
         }
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
+
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
