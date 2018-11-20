@@ -1,8 +1,6 @@
 package ca.ualberta.t04.medicaltracker;
 
-import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,8 +11,6 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
-import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -22,10 +18,10 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
-public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private Solo solo;
 
-    public SettingActivityTest() {
+    public DoctorViewTest() {
         super(LoginActivity.class);
     }
 
@@ -39,7 +35,7 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         solo.finishOpenedActivities();
     }
 
-    public void testSettingPasswordChange() throws Throwable {
+    public void testDoctorView() throws Throwable {
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
@@ -53,27 +49,11 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
         //drawerLayout.openDrawer(Gravity.LEFT);
         solo.pressMenuItem(0);
-        solo.clickOnMenuItem("Setting");
+        solo.clickOnMenuItem("Doctor");
 
         // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("SettingActivity"));
+        assertTrue(solo.waitForActivity("DoctorViewActivity"));
 
-        // Click change password button
-        solo.clickOnButton("Change Password");
-
-        // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("PasswordActivity"));
-
-        // File in old password,new password, confirm password
-        String userName = DataController.getUser().getUserName();
-        User user = ElasticSearchController.searchUser(userName);
-        String correctPassword = user.getPassword();
-
-        solo.enterText((EditText) solo.getView(R.id.old_password),correctPassword);
-        solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
-        solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
-
-        solo.clickOnButton("Save");
         solo.getCurrentActivity().finish();
 
     }
