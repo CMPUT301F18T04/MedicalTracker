@@ -23,7 +23,7 @@
     <string name="password_toast3">Password should between 6\-20 characters!</string>
     <string name="password_toast4">Password contains invalid characters!</string>
     <string name="password_toast5">Password does not match confirmed password!</string>
-    <string name="password_toast6">New password cannot be same ith old one!</string>
+    <string name="password_toast6">New password cannot be same with old one!</string>
     <string name="password_toast7">Your password has been updated!</string>
     <!-- end for password activity -->
 
