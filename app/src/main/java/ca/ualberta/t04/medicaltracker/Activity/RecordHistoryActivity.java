@@ -84,11 +84,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
                 a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onClick(DialogInterface dialogInterface, int i) { // YES is clicked, delete the record
                                 Record temp = records.get(index);
                                 records.remove(temp);
                                 DataController.getPatient().getProblemList().notifyAllListener();
                                 adapter.notifyDataSetChanged();
+                                // make notification for user
                                 Toast.makeText(RecordHistoryActivity.this, R.string.record_history_toast1, Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -99,7 +100,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                             }
                         });
                 AlertDialog alert = a_builder.create();
-                alert.show();
+                alert.show(); // show the alert
                 return true;
             }
         });

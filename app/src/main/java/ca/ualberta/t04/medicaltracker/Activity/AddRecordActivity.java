@@ -71,8 +71,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         ImageButton image_button = findViewById(R.id.imageButton);
         imageView = findViewById(R.id.add_record_photo_display);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        recordSetDate();
-        recordSetTime();
+        recordSetDate(); // call recordSetDate
+        recordSetTime(); // call recordSetTime
+        // ask permission
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -83,8 +84,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        // get the current location
         Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
+        onLocationChanged(location); // call onLocationChanged
+
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
         if(problem_index==-1){
@@ -97,7 +100,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         record_date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Calendar cal = Calendar.getInstance();
+                Calendar cal = Calendar.getInstance(); // use calendar
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
