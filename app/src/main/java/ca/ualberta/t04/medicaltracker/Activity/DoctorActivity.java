@@ -207,7 +207,7 @@ public class DoctorActivity extends AppCompatActivity
                     startActivity(intent);
                 } else if(item.getItemId()==R.id.doctor_page_menu_delete){
                     DataController.getDoctor().removePatient(patient);
-                    Toast.makeText(DoctorActivity.this, "Succeed to delete it.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DoctorActivity.this, R.string.doctor_page_toast, Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }

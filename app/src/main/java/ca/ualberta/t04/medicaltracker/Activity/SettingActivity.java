@@ -28,7 +28,7 @@ public class SettingActivity extends AppCompatActivity {
         if(!newName.equals(""))
             DataController.getUser().setName(newName);
         else
-            Toast.makeText(SettingActivity.this, "Your name cannot be empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingActivity.this, R.string.setting_toast1, Toast.LENGTH_SHORT).show();
         finish();
     }
 

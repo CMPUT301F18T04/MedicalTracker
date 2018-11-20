@@ -125,7 +125,7 @@ public class PatientActivity extends AppCompatActivity
             ArrayList<String> notifyDoctors = DataController.getPatient().getNotifyDoctors();
             if(notifyDoctors!=null && notifyDoctors.size()>0){
                 for(String doctorUserName:notifyDoctors){
-                    Toast.makeText(PatientActivity.this, "Doctor " + doctorUserName + " has added you in his/her patients list.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PatientActivity.this, R.string.patient_toast11 + doctorUserName + R.string.patient_toast12, Toast.LENGTH_SHORT).show();
                 }
                 DataController.getPatient().clearNotifyDoctors();
             }
@@ -195,7 +195,7 @@ public class PatientActivity extends AppCompatActivity
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Problem problem = DataController.getPatient().getProblemList().getProblem(index);
                             DataController.getPatient().getProblemList().removeProblem(problem);
-                            Toast.makeText(PatientActivity.this, "A problem has been deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PatientActivity.this, R.string.patient_toast2, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

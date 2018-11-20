@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         EditText username_text = findViewById(R.id.login_username);
         EditText password_text = findViewById(R.id.login_password);
         if(username_text.getText().toString().equals("") || password_text.getText().toString().equals("")){
-            Toast.makeText(this, "UserName or Password cannot be empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_toast1, Toast.LENGTH_SHORT).show();
             return;
         }
         String userName = username_text.getText().toString();
@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
             }
             finish();
         } else if(user==null) {
-            Toast.makeText(this, "UserName does not exist!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_toast2, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "UserName does not match the password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_toast3, Toast.LENGTH_SHORT).show();
         }
     }
 

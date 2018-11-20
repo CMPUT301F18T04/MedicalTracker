@@ -65,41 +65,41 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Check if username is empty
         if(userName.equals("")){
-            Toast.makeText(RegisterActivity.this,"Username can not be empty!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast1,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if username is too short or too long
         if(userName.length()<4 || userName.length() > 15){
-            Toast.makeText(RegisterActivity.this,"Username should between 4-15 characters",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast2,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if username contains invalid characters
         if(isValid(userName)){
-            Toast.makeText(RegisterActivity.this,"Username contains invalid characters!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast3,Toast.LENGTH_SHORT).show();
             return;
         }
         // Check if password is empty
         if(password.equals("")){
-            Toast.makeText(RegisterActivity.this,"Password can not be empty!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast4,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if password is too short or too long
         if(password.length() < 6 || password.length() > 20){
-            Toast.makeText(RegisterActivity.this,"Password should between 6-20 characters!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast5,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // check if password contains invalid characters
         if(isValid(password)){
-            Toast.makeText(RegisterActivity.this,"Password contains invalid characters!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,R.string.register_toast6,Toast.LENGTH_SHORT).show();
             return;
         }
         // Check if password is matched confirmed password
         if(!password.equals(editText_confirmed_password.getText().toString())){
-            Toast.makeText(RegisterActivity.this, "Password does not match confirmed password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.register_toast7, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Check the validation of phone number if it is not empty
         if(!phoneNumber.equals("")){
             if(!PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
-                Toast.makeText(RegisterActivity.this,"Phone number is not valid!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this,R.string.register_toast8,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Check the validation of email address if it is not empty{
         if(!email.equals("")){
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Toast.makeText(RegisterActivity.this,"Email is not valid!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this,R.string.register_toast9,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -167,9 +167,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if(!done)
-            Toast.makeText(RegisterActivity.this, "Duplicated UserName", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.register_toast10, Toast.LENGTH_SHORT).show();
         else{
-            Toast.makeText(RegisterActivity.this, "Succeed to Sign Up", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, R.string.register_toast11, Toast.LENGTH_SHORT).show();
             finish();
         }
 

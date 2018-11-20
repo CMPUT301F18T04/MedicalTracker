@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(newBirthday != null && !newBirthday.equals("")) {
             Date current_date = new Date();
             if(current_date.before(newBirthday)){
-                Toast.makeText(ProfileActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this,R.string.profile_toast1,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -118,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
         // Check phone number validation
         if(!phoneNumber.equals("")){
             if(!PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
-                Toast.makeText(ProfileActivity.this,"Phone number is not valid!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this,R.string.profile_toast2,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -130,7 +130,7 @@ public class ProfileActivity extends AppCompatActivity {
         String Email=email.getText().toString();
         if(!Email.equals("")){
             if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
-                Toast.makeText(ProfileActivity.this,"Email is not valid!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this,R.string.profile_toast3,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -141,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         DataController.updateProfile(newBirthday, isMale, phoneNumber, Email, Address);
 
-        Toast.makeText(ProfileActivity.this, "Your profile has been updated!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ProfileActivity.this, R.string.profile_toast4, Toast.LENGTH_SHORT).show();
         finish();
     }
 

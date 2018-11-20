@@ -80,7 +80,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                                 records.remove(temp);
                                 DataController.getPatient().getProblemList().notifyAllListener();
                                 adapter.notifyDataSetChanged();
-                                Toast.makeText(RecordHistoryActivity.this, "A record has been deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RecordHistoryActivity.this, R.string.record_history_toast1, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
