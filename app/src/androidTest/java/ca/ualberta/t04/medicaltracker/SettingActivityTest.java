@@ -43,7 +43,7 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
@@ -77,11 +77,21 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         String correctPassword = user.getPassword();
 
         solo.enterText((EditText) solo.getView(R.id.old_password),correctPassword);
-        solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
-        solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
+        solo.enterText((EditText) solo.getView(R.id.new_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.confirm_password),"123456");
 
         solo.clickOnButton("Save");
-        solo.getCurrentActivity().finish();
+
+        // IF "same" occurs, means the new password is same with original one
+        if(solo.waitForText("same")){
+            solo.clearEditText(1);
+            solo.clearEditText(2);
+            solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
+            solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
+            solo.clickOnButton("Save");
+        }
+
+        solo.goBack();
 
         solo.clickOnButton("Change Password");
 

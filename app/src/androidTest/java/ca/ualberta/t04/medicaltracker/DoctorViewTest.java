@@ -1,6 +1,8 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -39,7 +41,7 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
@@ -47,7 +49,6 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
             solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
             solo.clickOnButton("Login");
         }
-
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
@@ -61,7 +62,7 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("DoctorViewActivity"));
 
-        solo.getCurrentActivity().finish();
+        solo.goBack();
 
     }
 

@@ -1,6 +1,8 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Gravity;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
@@ -36,7 +38,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
@@ -44,7 +46,6 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
             solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
             solo.clickOnButton("Login");
         }
-
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
@@ -52,6 +53,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
         //drawerLayout.openDrawer(Gravity.LEFT);
         solo.clickOnImageButton(0);
+
         //solo.pressMenuItem(0);
         solo.clickOnMenuItem("About");
 
