@@ -229,6 +229,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         Date dateStart = new Date();
 
+        // if the date that the user inputs is not correct, then use the default date
         SimpleDateFormat format = new SimpleDateFormat(Util.TIME_FORMAT, Locale.getDefault());
         try {
             String tempTime = record_date.getText().toString()+"T"+record_time.getText().toString();
@@ -239,9 +240,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), null, null);
-
+        // use dataController to notify the change of record
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
 
+        // notification message
         Toast.makeText(AddRecordActivity.this, R.string.add_record_toast2, Toast.LENGTH_SHORT).show();
         finish();
     }

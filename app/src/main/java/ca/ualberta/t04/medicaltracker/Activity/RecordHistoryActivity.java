@@ -22,23 +22,25 @@ import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 
+// This class has the layout of activity_record_history.xml
+// This class is used for the record list
 public class RecordHistoryActivity extends AppCompatActivity {
 
+    // initialize
     private int problem_index;
+
+    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_history);
 
-        getSupportActionBar().setTitle(R.string.record_history_title);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        getSupportActionBar().setTitle(R.string.record_history_title); // set title
         problem_index = getIntent().getIntExtra("index", -1);
-
-        initListView(DataController.getPatient().getProblemList().getProblem(problem_index));
+        initListView(DataController.getPatient().getProblemList().getProblem(problem_index)); // call iniTListView
     }
 
-    // init the problem list view
+    // init the record list view
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
         final ArrayList<Record> records = problem.getRecordList().getRecords();
@@ -57,6 +59,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
             }
         });
 
+        // add listener to the record list
         problem.getRecordList().addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
@@ -67,6 +70,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
             }
         });
 
+        // setOnItemLongClickListener
+        // When you long click an item in the record list, you have an option to delete the record
+        // when long click one of the elements in the listView, there will be an alert dialog pop up
+        // and ask you if you want to delete the record
+        // you can click YES to delete the record
+        // or cancel to cancel the alert dialog
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,6 +113,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         return true;
     }
 
+    // when the add button is clicked, another activity comes up
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
