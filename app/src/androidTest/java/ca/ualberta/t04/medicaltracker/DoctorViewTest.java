@@ -42,13 +42,20 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
         solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
         solo.clickOnButton("Login");
 
+        if(solo.waitForText("match")){
+            solo.clearEditText((EditText) solo.getView(R.id.login_password));
+            solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
+            solo.clickOnButton("Login");
+        }
+
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
         // Open slide Bar
         //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
         //drawerLayout.openDrawer(Gravity.LEFT);
-        solo.pressMenuItem(0);
+        solo.clickOnImageButton(0);
+        //solo.pressMenuItem(0);
         solo.clickOnMenuItem("Doctor");
 
         // Check if the app opens the correct page
