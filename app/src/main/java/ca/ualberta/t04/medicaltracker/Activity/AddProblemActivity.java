@@ -24,6 +24,10 @@ import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This activity is for adding a problem for a patient user
+ */
+
 public class AddProblemActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener problemDateSetListener;
     private TextView problem_date;

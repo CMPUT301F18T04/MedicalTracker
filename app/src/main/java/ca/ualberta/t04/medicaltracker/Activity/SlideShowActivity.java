@@ -9,6 +9,10 @@ import android.widget.TextView;
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity is for displaying all the photos in a slideshow format
+ */
+
 public class SlideShowActivity extends AppCompatActivity {
 
     @Override

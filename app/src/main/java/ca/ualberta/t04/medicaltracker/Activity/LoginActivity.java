@@ -14,6 +14,10 @@ import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
 
+/*
+  This activity is for logging in
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override

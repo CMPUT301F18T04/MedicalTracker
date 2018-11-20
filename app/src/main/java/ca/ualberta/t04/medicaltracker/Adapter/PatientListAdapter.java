@@ -14,6 +14,10 @@ import java.util.List;
 import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This class represents a custom adapter for displaying patient list
+ */
+
 public class PatientListAdapter extends ArrayAdapter {
 
     private int recourseId;
@@ -25,6 +29,7 @@ public class PatientListAdapter extends ArrayAdapter {
         this.patients = patients;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

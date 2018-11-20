@@ -28,6 +28,10 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This activity is for registering a general user
+ */
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override

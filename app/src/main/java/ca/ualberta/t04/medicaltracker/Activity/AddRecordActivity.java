@@ -42,6 +42,10 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This activity is for adding a record to a problem for a patient user
+ */
+
 public class AddRecordActivity extends AppCompatActivity implements LocationListener {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;

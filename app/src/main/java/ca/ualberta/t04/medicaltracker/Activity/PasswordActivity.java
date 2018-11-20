@@ -17,6 +17,10 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.User;
 
+/*
+  This activity is for changing the password for a general user
+ */
+
 public class PasswordActivity extends AppCompatActivity {
 
     private EditText oldPassword;

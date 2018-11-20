@@ -20,6 +20,10 @@ import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.SearchType;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+ This class represents a custom adapter for search results
+ */
+
 public class SearchResultAdapter extends ArrayAdapter {
 
     private int recourseId;
@@ -31,6 +35,7 @@ public class SearchResultAdapter extends ArrayAdapter {
         this.searchType = searchType;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

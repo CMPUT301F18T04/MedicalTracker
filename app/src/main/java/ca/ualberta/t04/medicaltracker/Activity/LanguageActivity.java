@@ -10,6 +10,12 @@ import android.view.View;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity displays the language choosing options
+
+  Will be implemented in part 5
+ */
+
 public class LanguageActivity extends AppCompatActivity {
 
     @Override
