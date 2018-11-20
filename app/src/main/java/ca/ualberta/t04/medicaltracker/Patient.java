@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 
+/**
+ * This class contains all attributes and functionality for a patient user of the application
+ * Extended from User class
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 04
+ * @see User
+ * @since 1.0
+ */
+
 public class Patient extends User
 {
     private ProblemList problemList = null;
@@ -24,7 +34,11 @@ public class Patient extends User
             notifyDoctors = new ArrayList<>();
     }
 
-    // Used to keep all doctors' information newest
+    /**
+     * Used to keep all doctors' information the newest
+     * @param doctorsUserNames ArrayList<String>
+     * @return ArrayList<Doctor> updatedDoctors
+     */
     private ArrayList<Doctor> updateDoctor(ArrayList<String> doctorsUserNames){
         if(doctorsUserNames==null)
             return new ArrayList<>();
@@ -35,19 +49,35 @@ public class Patient extends User
         return updatedDoctors;
     }
 
+    /**
+     * Gets the problem list of the patient
+     * @return ProblemList problemList
+     */
     public ProblemList getProblemList() {
         return problemList;
     }
 
+    /**
+     * Gets the Doctor list of the patient
+     * @return ArrayList<Doctor> doctors
+     */
     public ArrayList<Doctor> getDoctors() {
         doctors = updateDoctor(doctorsUserNames);
         return doctors;
     }
 
+    /**
+     * Gets the doctors' username list
+     * @return ArrayList<String> doctorsUserNames
+     */
     public ArrayList<String> getDoctorsUserNames() {
         return doctorsUserNames;
     }
 
+    /**
+     * Adds a doctor for the patient
+     * @param doctor Doctor
+     */
     public void addDoctor(Doctor doctor) {
         if(doctorsUserNames==null)
             doctorsUserNames = new ArrayList<>();
@@ -60,6 +90,10 @@ public class Patient extends User
         }
     }
 
+    /**
+     * Removes a doctor from the patient
+     * @param doctor Doctor
+     */
     public void removeDoctor(Doctor doctor) {
         if(doctorsUserNames.contains(doctor.getUserName())){
             doctorsUserNames.remove(doctor.getUserName());
@@ -68,10 +102,17 @@ public class Patient extends User
         }
     }
 
+    /**
+     * Gets the notify doctor list
+     * @return ArrayList<String> notifyDoctors
+     */
     public ArrayList<String> getNotifyDoctors() {
         return notifyDoctors;
     }
 
+    /**
+     * Clears the notify doctor list
+     */
     public void clearNotifyDoctors(){
         notifyDoctors.clear();
         notifyAllListeners();

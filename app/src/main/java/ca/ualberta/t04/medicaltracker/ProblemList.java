@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * This class contains all attributes and functionality for problem list
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 04 1.0
+ * @since 1.0
+ */
+
 public class ProblemList
 {
     private ArrayList<Problem> problems;
@@ -21,16 +29,29 @@ public class ProblemList
         return problems.get(index);
     }
 
+    /**
+     * Adds a problem to the problem list
+     * @param problem Problem
+     */
     public void addProblem(Problem problem){
         problems.add(problem);
         notifyAllListener();
     }
 
+    /**
+     * removes a problem form the problem list
+     * @param problem Problem
+     */
     public void removeProblem(Problem problem){
         problems.remove(problem);
         notifyAllListener();
     }
 
+    /**
+     * Sets the title of a problem in the list
+     * @param problem Problem
+     * @param newTitle String
+     */
     public void setTitle(Problem problem, String newTitle){
         if(problems.contains(problem)){
             problem.setTitle(newTitle);
@@ -38,6 +59,11 @@ public class ProblemList
         notifyAllListener();
     }
 
+    /**
+     * Sets the description of a problem in the list
+     * @param problem Problem
+     * @param newDescription String
+     */
     public void setDescription(Problem problem, String newDescription){
         if(problems.contains(problem)){
             problem.setDescription(newDescription);
@@ -45,6 +71,12 @@ public class ProblemList
         notifyAllListener();
     }
 
+
+    /**
+     * Sets the date of a problem in the list
+     * @param problem Problem
+     * @param newDate Date
+     */
     public void setDateStart(Problem problem, Date newDate){
         if(problems.contains(problem)){
             problem.setTime(newDate);
@@ -52,12 +84,22 @@ public class ProblemList
         notifyAllListener();
     }
 
+    /**
+     * Adds a record to a problem in the list
+     * @param problem Problem
+     * @param record Record
+     */
     public void addRecord(Problem problem, Record record){
         if(problems.contains(problem)){
             problem.getRecordList().addRecord(record);
         }
     }
 
+    /**
+     * Adds listeners
+     * @param key String,
+     * @param listener Listener
+     */
     public void addListener(String key, Listener listener){
         if(listeners==null)
             listeners = new HashMap<>();
@@ -65,6 +107,9 @@ public class ProblemList
             listeners.put(key, listener);
     }
 
+    /**
+     * notifies all the listeners
+     */
     public void notifyAllListener() {
         if(listeners==null)
             listeners = new HashMap<>();
