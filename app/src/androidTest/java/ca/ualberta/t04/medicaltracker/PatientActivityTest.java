@@ -125,7 +125,9 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("RecordDetailActivity"));
 
+        solo.clearEditText((EditText) solo.getView(R.id.addCommentEditText));
         solo.enterText((EditText) solo.getView(R.id.addCommentEditText), "testRecord2");
+        solo.clearEditText((EditText) solo.getView(R.id.descriptionEditText));
         solo.enterText((EditText) solo.getView(R.id.descriptionEditText), "test2");
 
         solo.clickOnButton("Save");
@@ -170,17 +172,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
         solo.goBackToActivity("PatientActivity");
 
         solo.clickInList(0);
-        // Delete the record
-        solo.clickLongInList(0);
-        solo.clickOnButton("YES");
-        assertTrue(solo.waitForText("deleted"));
-        solo.goBack();
 
-        // Delete the problem
-        solo.clickLongInList(0);
-        solo.clickOnMenuItem("Delete");
-        solo.clickOnButton("YES");
-        assertTrue(solo.waitForText("deleted"));
     }
 
 }

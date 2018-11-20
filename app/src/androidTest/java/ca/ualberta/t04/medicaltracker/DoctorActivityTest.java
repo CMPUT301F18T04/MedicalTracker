@@ -113,12 +113,6 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.goBack();
         solo.goBack();
 
-        solo.clickLongInList(4);
-
-        solo.clickOnMenuItem("Delete");
-
-        assertTrue(solo.waitForText("Succeed"));
-
         solo.clickOnView(solo.getView(R.id.fab));
 
         assertTrue(solo.waitForText("Refresh"));
