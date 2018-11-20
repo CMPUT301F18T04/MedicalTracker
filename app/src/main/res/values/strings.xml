@@ -11,6 +11,7 @@
     <string name="login_text_username">UserName:</string>
     <string name="login_text_password">Password:</string>
     <string name="login_button_login">Login</string>
+    <string name="login_button_register">Register</string>
     <string name="login_toast1">UserName or Password cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
