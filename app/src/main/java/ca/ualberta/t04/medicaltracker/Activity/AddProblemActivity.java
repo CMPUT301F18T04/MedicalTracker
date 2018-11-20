@@ -28,10 +28,14 @@ import ca.ualberta.t04.medicaltracker.Util;
   This activity is for adding a problem for a patient user
  */
 
+// This class has the layout of activity_add_problem.xml
+// This class is used for adding a new problem
 public class AddProblemActivity extends AppCompatActivity {
+    // initialize
     private DatePickerDialog.OnDateSetListener problemDateSetListener;
     private TextView problem_date;
 
+    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class AddProblemActivity extends AppCompatActivity {
         problem_title.requestFocus();
     }
 
+    // problemSetDate method is used for set a date using DatePickerDialog
     public void problemSetDate(){
         problem_date.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -58,6 +63,9 @@ public class AddProblemActivity extends AppCompatActivity {
             }
         });
 
+        // problemDateSetListener gets the result of the DatePickerDialog
+        // TextView problem_date will be set with the date the user picked
+        // date format: year + "-" + month + "-" + day
         problemDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -74,6 +82,7 @@ public class AddProblemActivity extends AppCompatActivity {
         EditText problem_title = findViewById(R.id.add_problem_title);
         EditText problem_description = findViewById(R.id.add_problem_description);
 
+        // check if the title and description are both filled
         if(problem_title.getText().toString().equals("") || problem_description.getText().toString().equals("")){
             Toast.makeText(AddProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
@@ -93,8 +102,10 @@ public class AddProblemActivity extends AppCompatActivity {
         // create a new problem
         Problem problem = new Problem(problem_title.getText().toString(), dateStart, problem_description.getText().toString());
 
+        // use dataController to notify the change of problem
         DataController.getPatient().getProblemList().addProblem(problem);
 
+        // notification message
         Toast.makeText(AddProblemActivity.this, R.string.add_problem_toast, Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -26,9 +26,14 @@ import ca.ualberta.t04.medicaltracker.Record;
   This activity is for displaying the record history list for a patient user
  */
 
+// This class has the layout of activity_record_history.xml
+// This class is used for the record list
 public class RecordHistoryActivity extends AppCompatActivity {
 
+    // initialize
     private int problem_index;
+
+    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
             }
         });
 
+        // add listener to the record list
         problem.getRecordList().addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
@@ -71,6 +77,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
             }
         });
 
+        // setOnItemLongClickListener
+        // When you long click an item in the record list, you have an option to delete the record
+        // when long click one of the elements in the listView, there will be an alert dialog pop up
+        // and ask you if you want to delete the record
+        // you can click YES to delete the record
+        // or cancel to cancel the alert dialog
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +96,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                                 records.remove(temp);
                                 DataController.getPatient().getProblemList().notifyAllListener();
                                 adapter.notifyDataSetChanged();
+                                // make notification for user
                                 Toast.makeText(RecordHistoryActivity.this, R.string.record_history_toast1, Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -94,7 +107,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                             }
                         });
                 AlertDialog alert = a_builder.create();
-                alert.show();
+                alert.show(); // show the alert
                 return true;
             }
         });
@@ -108,6 +121,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         return true;
     }
 
+    // when the add button is clicked, another activity comes up
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

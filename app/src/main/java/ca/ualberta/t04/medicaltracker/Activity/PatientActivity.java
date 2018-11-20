@@ -35,6 +35,8 @@ import ca.ualberta.t04.medicaltracker.R;
   This activity is for the main page of a patient user
  */
 
+// This class has the layout of activity_patient.xml
+// This class contains the problem list
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -80,6 +82,7 @@ public class PatientActivity extends AppCompatActivity
         listView.setAdapter(adapter);
         registerForContextMenu(listView);
 
+        // when you click one of the element in the listView, another activity will come up
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,6 +94,7 @@ public class PatientActivity extends AppCompatActivity
             }
         });
 
+        // notify the change
         DataController.getPatient().getProblemList().addListener("ProblemListener1", new Listener() {
             @Override
             public void update() {
@@ -100,6 +104,7 @@ public class PatientActivity extends AppCompatActivity
         });
     }
 
+    // Method onStart
     public void onStart()
     {
         super.onStart();
@@ -138,6 +143,7 @@ public class PatientActivity extends AppCompatActivity
         }
     }
 
+    // Method onBackPressed
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -156,6 +162,9 @@ public class PatientActivity extends AppCompatActivity
         return true;
     }
 
+    // Method onOptionsItemSelected
+    // when add button is clicked, AddProblemActivity will come up
+    // when search button is clicked, SearchActivity will come up
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -164,11 +173,11 @@ public class PatientActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add) {
+        if (id == R.id.action_add) { // add button is clicked
             Intent intent = new Intent(PatientActivity.this, AddProblemActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_search){
+        } else if (id == R.id.action_search){ // search button is clicked
             Intent intent = new Intent(PatientActivity.this, SearchActivity.class);
             startActivity(intent);
             return true;
@@ -177,6 +186,8 @@ public class PatientActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // Method onCreateContextMenu
+    // get connected with the problem_long_click_selection menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -184,6 +195,9 @@ public class PatientActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.problem_long_click_selection, menu);
     }
 
+    // Method onContextItemSelected
+    // There are two options for user when user long click one of the problems
+    // Two options: edit / delete
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
@@ -191,20 +205,22 @@ public class PatientActivity extends AppCompatActivity
         final int index = info.position;
         int id = item.getItemId();
 
-        if (id == R.id.option_edit){
+        if (id == R.id.option_edit){ // when edit is clicked, a notification is pop up
+            // still need to fill out this part
+            // start another activity of editing problem
             Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.option_delete){
+        } else if (id == R.id.option_delete){ // when delete is clicked, an alert dialog is pop up
             AlertDialog.Builder a_builder = new AlertDialog.Builder(PatientActivity.this);
-            a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false) // ask you if you want to delete the problem you just clicked
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() { // you can choose YES to delete the problem
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                        public void onClick(DialogInterface dialogInterface, int i) { // notify the DataController that a problem is deleted
                             Problem problem = DataController.getPatient().getProblemList().getProblem(index);
                             DataController.getPatient().getProblemList().removeProblem(problem);
-                            Toast.makeText(PatientActivity.this, getString(R.string.patient_toast2), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PatientActivity.this, getString(R.string.patient_toast2), Toast.LENGTH_SHORT).show(); // notify the user a problem is deleted
                         }
                     })
-                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() { // you can choose CANCEL if you do not want to delete the problem you just clicked
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
@@ -216,30 +232,32 @@ public class PatientActivity extends AppCompatActivity
         return super.onContextItemSelected(item);
     }
 
+    // Called when a button in the navigation is clicked
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile)
+        if (id == R.id.nav_profile) // if the button profile is clicked, ProfileActivity will come up
         {
             Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_gallery) {  // if the button gallary is clicked, GalleryActivity will come up
+            // need to fill in the GalleryActivity
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_doctor) {
+        } else if (id == R.id.nav_doctor) { // if the button doctor is clicked, DoctorViewActivity will come up
             Intent intent = new Intent(PatientActivity.this, DoctorViewActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_setting) {
+        } else if (id == R.id.nav_setting) { // if the button setting is clicked, SettingActivity will come up
             Intent intent = new Intent(PatientActivity.this, SettingActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_logout) {
-            DataController.setUser(null);
+        } else if (id == R.id.nav_logout) { // if the button setting is clicked, LoginActivity will come up
+            DataController.setUser(null); // notify the DataController to set the user as null
             Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        } else if(id == R.id.nav_about) {
+        } else if(id == R.id.nav_about) { // if the button about is clicked, AboutActivity will come up
             Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
             startActivity(intent);
         }
