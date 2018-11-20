@@ -82,9 +82,9 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         solo.clickOnButton("Save");
 
-        solo.goBack();
+        solo.goBackToActivity("SettingActivity");
 
-        solo.clickOnButton(0);
+        solo.clickOnView(solo.getView(R.id.setting_change_password));
 
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PasswordActivity"));
