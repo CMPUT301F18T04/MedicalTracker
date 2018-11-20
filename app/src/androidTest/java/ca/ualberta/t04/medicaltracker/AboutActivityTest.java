@@ -38,7 +38,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
