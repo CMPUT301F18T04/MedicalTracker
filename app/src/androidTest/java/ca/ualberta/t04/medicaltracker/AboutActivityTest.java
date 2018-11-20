@@ -41,26 +41,50 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
         solo.clickOnButton("Login");
 
-        // IF "match" occurs, means the username and password does not match, just use
-        if(solo.waitForText("not")){
-            solo.clearEditText(1);
-            solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+        if(solo.waitForText("match")){
+            solo.clearEditText((EditText) solo.getView(R.id.login_password));
+            solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
             solo.clickOnButton("Login");
         }
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
         // Open slide Bar
-        solo.sleep(2000);
-        DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
-        drawerLayout.openDrawer(Gravity.LEFT);
+        //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
+        //drawerLayout.openDrawer(Gravity.LEFT);
+        solo.clickOnImageButton(0);
+
         //solo.pressMenuItem(0);
         solo.clickOnMenuItem("About");
 
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("AboutActivity"));
 
-        solo.goBack();
+        solo.goBackToActivity("PatientActivity");
+
+        solo.clickOnImageButton(0);
+
+        solo.clickOnMenuItem("Profile");
+
+        solo.clearEditText((EditText) solo.getView(R.id.nick_name));
+        solo.enterText((EditText) solo.getView(R.id.nick_name), "test");
+
+        solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.profile_button_save));
+
+        solo.clickOnImageButton(0);
+        assertTrue(solo.waitForText("test"));
+
+        solo.clickOnImageButton(0);
+
+        solo.clickOnMenuItem("Profile");
+
+        solo.clearEditText((EditText) solo.getView(R.id.nick_name));
+        solo.enterText((EditText) solo.getView(R.id.nick_name), "intent");
+
+        solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.profile_button_save));
+
+        solo.clickOnImageButton(0);
+        assertTrue(solo.waitForText("intent"));
     }
 
 }

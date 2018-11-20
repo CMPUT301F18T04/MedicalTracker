@@ -30,8 +30,8 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.finishOpenedActivities();
     }
 
-    public void testDoctorRegisterAndLogin() throws Throwable{
-        //Clike the button register to sign up first
+    public void testDoctorPage() throws Throwable{
+        //Click the button register to sign up first
         solo.clickOnButton("Register");
 
         // Check if the app opens the correct page
@@ -49,7 +49,7 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.clickOnView(solo.getView(R.id.register_button_signup));
 
         //If the text "Duplicated" occurs, then it means the account is already existed, then
-        //the robot will use the account of doctor fro log in
+        //the robot will use the account of doctor to log in
         if (solo.waitForText("Duplicated")){
             solo.getCurrentActivity().finish();
         }
@@ -110,7 +110,17 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         assertTrue(solo.waitForText("p1"));
 
         solo.goBackToActivity("DoctorActivity");
+        solo.goBack();
+        solo.goBack();
 
+        solo.clickLongInList(4);
 
+        solo.clickOnMenuItem("Delete");
+
+        assertTrue(solo.waitForText("Succeed"));
+
+        solo.clickOnView(solo.getView(R.id.fab));
+
+        assertTrue(solo.waitForText("Refresh"));
     }
 }

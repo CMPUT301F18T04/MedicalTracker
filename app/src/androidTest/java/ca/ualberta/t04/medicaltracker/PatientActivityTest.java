@@ -55,7 +55,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
         solo.finishOpenedActivities();
     }
 
-    public void testPatientRegisterAndLogin() throws Throwable {
+    public void testPatientPage() throws Throwable {
         // Click the button register to sign up first
         solo.clickOnButton("Register");
 

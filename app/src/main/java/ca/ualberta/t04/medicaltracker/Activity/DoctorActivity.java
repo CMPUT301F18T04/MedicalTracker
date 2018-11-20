@@ -59,11 +59,12 @@ public class DoctorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        /*
         ListView patientListView = findViewById(R.id.main_page_list_view);
         ArrayList<Patient> patients = DataController.getDoctor().getPatients();
         PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
         patientListView.setAdapter(adapter);
-
+          */
         initPage();
 
     }
@@ -94,21 +95,6 @@ public class DoctorActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView patientListView = findViewById(R.id.main_page_list_view);
-
-        final ArrayList<Patient> patients = DataController.getDoctor().getPatients();
-        final PatientListAdapter adapter = new PatientListAdapter(this, R.layout.patient_list, patients);
-        patientListView.setAdapter(adapter);
-
-
-        DataController.getDoctor().addListener("UpdateListView", new Listener() {
-            @Override
-            public void update() {
-                patients.clear();
-                patients.addAll(DataController.getDoctor().getPatients());
-                adapter.notifyDataSetChanged();
-            }
-        });
         refreshPatientListView();
     }
 
@@ -152,10 +138,12 @@ public class DoctorActivity extends AppCompatActivity
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ListView listView = findViewById(R.id.main_page_list_view);
+
         final int index = info.position;
         int id = item.getItemId();
 
-        Patient patient = DataController.getDoctor().getPatients().get(index);
+        Patient patient = (Patient) listView.getAdapter().getItem(index);
 
         if(id==R.id.doctor_page_menu_detail){
             Intent intent = new Intent(DoctorActivity.this, InformationActivity.class);
@@ -163,7 +151,7 @@ public class DoctorActivity extends AppCompatActivity
             startActivity(intent);
         } else if(id==R.id.doctor_page_menu_delete){
             DataController.getDoctor().removePatient(patient);
-            Toast.makeText(DoctorActivity.this, "Succeed to delete it.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DoctorActivity.this, "Succeeded to delete it.", Toast.LENGTH_SHORT).show();
         }
 
         return super.onContextItemSelected(item);
