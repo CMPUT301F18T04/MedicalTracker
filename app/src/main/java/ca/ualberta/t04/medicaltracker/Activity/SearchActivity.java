@@ -117,7 +117,11 @@ public class SearchActivity extends AppCompatActivity {
                 if(object instanceof Problem){
                     refreshRecordListView(((Problem) object).getRecordList(), objects);
                 } else if (object instanceof Record){
-                    Intent intent = new Intent(SearchActivity.this, DoctorRecordDetailActivity.class);
+                    Intent intent;
+                    if(DataController.getUser().isDoctor())
+                        intent = new Intent(SearchActivity.this, DoctorRecordDetailActivity.class);
+                    else
+                        intent = new Intent(SearchActivity.this, RecordDetailActivity.class);
                     intent.putExtra("problem_index", (Integer) objects[3]);
                     intent.putExtra("patient_index", (Integer) objects[2]);
                     intent.putExtra("record_index", (Integer) objects[4]);
@@ -153,7 +157,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try{
-                    Intent intent = new Intent(SearchActivity.this, DoctorRecordDetailActivity.class);
+                    Intent intent;
+                    if(DataController.getUser().isDoctor())
+                        intent = new Intent(SearchActivity.this, DoctorRecordDetailActivity.class);
+                    else
+                        intent = new Intent(SearchActivity.this, RecordDetailActivity.class);
                     intent.putExtra("problem_index", (Integer) data[3]);
                     intent.putExtra("patient_index", (Integer) data[2]);
                     intent.putExtra("record_index", position);
