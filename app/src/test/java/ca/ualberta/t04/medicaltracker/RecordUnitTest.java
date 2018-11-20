@@ -43,8 +43,8 @@ public class RecordUnitTest {
         comments.add("Test1");
         comments.add("Test2");
         Doctor doctor = new Doctor("Doctor1","12345678");
-        HashMap<Doctor, ArrayList<String>> doctorComments = new HashMap<>();
-        doctorComments.put(doctor,comments);
+        HashMap<String, ArrayList<String>> doctorComments = new HashMap<>();
+        doctorComments.put(doctor.getUserName(),comments);
         record.setComments(doctorComments);
         assertEquals(record.getComments(),doctorComments);
 
