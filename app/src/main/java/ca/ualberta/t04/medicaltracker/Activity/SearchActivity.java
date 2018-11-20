@@ -76,7 +76,7 @@ public class SearchActivity extends AppCompatActivity {
                 // Object[] -> (userName, Problem/Record)
                 result = search(searchView.getQuery().toString(), searchType);
                 if(result.size()==0){
-                    Toast.makeText(SearchActivity.this, "No results responds.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, R.string.search_toast1, Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 refreshSearchResultListView(result);

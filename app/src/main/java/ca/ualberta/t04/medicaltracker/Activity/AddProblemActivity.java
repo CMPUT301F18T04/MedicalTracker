@@ -91,7 +91,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
         DataController.getPatient().getProblemList().addProblem(problem);
 
-        Toast.makeText(AddProblemActivity.this, "Added a new problem.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddProblemActivity.this, R.string.add_problem_toast, Toast.LENGTH_SHORT).show();
         finish();
     }
 }

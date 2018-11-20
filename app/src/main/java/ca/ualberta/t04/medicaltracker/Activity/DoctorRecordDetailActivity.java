@@ -21,6 +21,10 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.RecordList;
 
+/**
+ * This class is for displaying the information of a record and commenting for a doctor user
+ */
+
 public class DoctorRecordDetailActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
@@ -29,6 +33,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_record_detail);
+
+        // Initialize all the variables used
 
         getSupportActionBar().setTitle(R.string.doctor_record_detail_title);
 
@@ -62,9 +68,9 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
                 commentPopup.addComment();
             }
         });
-
     }
 
+    // Setting up the Doctor comment list view
     private void InitDoctorCommentListView(RecordList recordList, Record record, final Patient patient){
         ListView commentListView = findViewById(R.id.CommentListView);
 
@@ -88,6 +94,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         });
     }
 
+
+    // Formatting the list for the commentListView and return it
     private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
         final ArrayList<String> comments = new ArrayList<>();
         String doctorUserName;

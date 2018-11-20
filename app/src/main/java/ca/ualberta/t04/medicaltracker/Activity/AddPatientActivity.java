@@ -29,7 +29,7 @@ public class AddPatientActivity extends AppCompatActivity {
     public void searchPatient(View view){
         EditText editText = findViewById(R.id.add_patient_username);
         if(editText.getText().toString().equals("")){
-            Toast.makeText(AddPatientActivity.this, "The patient's name cannot be empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPatientActivity.this, R.string.add_patient_toast1, Toast.LENGTH_SHORT).show();
             return;
         }
         String userName = editText.getText().toString();
@@ -37,7 +37,7 @@ public class AddPatientActivity extends AppCompatActivity {
         ArrayList<Patient> patients = removeExistedPatient(ElasticSearchController.fuzzySearchPatient(userName));
 
         if(patients.size()==0){
-            Toast.makeText(AddPatientActivity.this, "Cannot find any patients who has this username!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPatientActivity.this, R.string.add_patient_toast2, Toast.LENGTH_SHORT).show();
             return;
         }
         ListView patient_list = findViewById(R.id.add_patient_list_view);

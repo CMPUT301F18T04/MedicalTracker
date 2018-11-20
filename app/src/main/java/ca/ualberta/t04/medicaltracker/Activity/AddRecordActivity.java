@@ -83,7 +83,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
         if(problem_index==-1){
-            Toast.makeText(AddRecordActivity.this, "An error occurs.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -212,7 +212,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
 
-        Toast.makeText(AddRecordActivity.this, "Added a new record.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddRecordActivity.this, R.string.add_record_toast2, Toast.LENGTH_SHORT).show();
         finish();
     }
 
