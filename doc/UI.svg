@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="2059.2913mm"
+   height="1998.3899mm"
+   viewBox="0 0 2059.2913 1998.3899"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -35,8 +35,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.12374369"
-     inkscape:cx="928.691"
-     inkscape:cy="291.49019"
+     inkscape:cx="2401.0552"
+     inkscape:cy="5971.5976"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -60,7 +60,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(389.56302,198.5281)">
     <image
        y="-62.738838"
        x="-237.23676"
@@ -318,12 +319,12 @@
          sodipodi:role="line">to login, </tspan><tspan
          id="tspan8059"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-35.253456"
+         y="-35.253452"
          x="-344.26343"
          sodipodi:role="line">then goto</tspan><tspan
          id="tspan8061"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-14.086791"
+         y="-14.086787"
          x="-344.26343"
          sodipodi:role="line">Main Page</tspan></text>
     <path
@@ -344,7 +345,7 @@
          sodipodi:role="line">Tap here </tspan><tspan
          id="tspan7805-5"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-14.101495"
+         y="-14.101497"
          x="-72.980751"
          sodipodi:role="line">to register</tspan></text>
     <text
@@ -896,7 +897,7 @@
        inkscape:connector-curvature="0"
        id="path7770-24-9-1"
        d="m 266.35269,1167.1423 -67.6564,72.8718"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.964;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.96399999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-39-4-4"
        y="1137.856"
@@ -1089,7 +1090,7 @@
          sodipodi:role="line"
          id="tspan6647-4">open the </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-120.2685"
+         y="-120.26851"
          x="305.18744"
          sodipodi:role="line"
          id="tspan6649-6">Search Page</tspan></text>
@@ -1134,7 +1135,7 @@
        inkscape:connector-curvature="0"
        id="path7770-24-9-1-9-8-0"
        d="M -28.338197,1586.4893 -101.3196,1534.8824"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.943;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.94300002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-39-4-4-6-2-0"
        y="1616.8385"
@@ -1256,6 +1257,6 @@
        inkscape:connector-curvature="0"
        id="path7770-24-8"
        d="M 670.40314,715.6953 638.416,755.90962"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.89;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.88999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>
