@@ -43,16 +43,24 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
         solo.clickOnButton("Login");
+
+        // IF "match" occurs, means the username and password does not match, just use
+        if(solo.waitForText("not")){
+            solo.clearEditText(1);
+            solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+            solo.clickOnButton("Login");
+        }
 
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
         // Open slide Bar
-        //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
-        //drawerLayout.openDrawer(Gravity.LEFT);
-        solo.pressMenuItem(0);
+        solo.sleep(2000);
+        DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
+        drawerLayout.openDrawer(Gravity.LEFT);
+        //solo.pressMenuItem(0);
         solo.clickOnMenuItem("Setting");
 
         // Check if the app opens the correct page
@@ -70,11 +78,21 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         String correctPassword = user.getPassword();
 
         solo.enterText((EditText) solo.getView(R.id.old_password),correctPassword);
-        solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
-        solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
+        solo.enterText((EditText) solo.getView(R.id.new_password),"123456");
+        solo.enterText((EditText) solo.getView(R.id.confirm_password),"123456");
 
         solo.clickOnButton("Save");
-        solo.getCurrentActivity().finish();
+
+        // IF "same" occurs, means the new password is same with original one
+        if(solo.waitForText("same")){
+            solo.clearEditText(1);
+            solo.clearEditText(2);
+            solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
+            solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
+            solo.clickOnButton("Save");
+        }
+
+        solo.goBack();
 
     }
 
