@@ -14,10 +14,14 @@ import android.widget.Toast;
  */
 
 public class CommentPopup {
+
+    // Initialize everything
+
     private Context context;
     private RecordList recordList;
     private Record record;
     private Doctor doctor;
+
     public CommentPopup(Context context, RecordList recordList, Record record, Doctor doctor) {
         this.context = context;
         this.recordList = recordList;
@@ -25,6 +29,7 @@ public class CommentPopup {
         this.doctor = doctor;
     }
 
+    // The method that shows the alert dialogue for commenting
     public void addComment() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.activity_doctor_add_comment, null);
@@ -48,7 +53,7 @@ public class CommentPopup {
                     public void onClick(View v) {
                         recordList.addComment(record, doctor, editComment.getText().toString());
                         ad.dismiss();
-                        Toast.makeText(context,"Successfully added a new comment",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,R.string.comment_toast1,Toast.LENGTH_SHORT).show();
                     }
                 });
             }

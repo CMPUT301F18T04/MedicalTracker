@@ -43,40 +43,40 @@ public class PasswordActivity extends AppCompatActivity {
 
         // Check if old password is correct
         if(!passwordBefore.equals(user.getPassword())){
-            Toast.makeText(PasswordActivity.this,"Old password is not correct!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this,R.string.password_toast1,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if password is empty
         if(passwordNew.equals("")){
-            Toast.makeText(PasswordActivity.this,"Password can not be empty!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this,R.string.password_toast2,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if password is too short or too long
         if(passwordNew.length() < 6 || passwordNew.length() > 20){
-            Toast.makeText(PasswordActivity.this,"Password should between 6-20 characters!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this,R.string.password_toast3,Toast.LENGTH_SHORT).show();
             return;
         }
 
         // check if password contains invalid characters
         if(isValid(passwordNew)){
-            Toast.makeText(PasswordActivity.this,"Password contains invalid characters!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this,R.string.password_toast4,Toast.LENGTH_SHORT).show();
             return;
         }
         // Check if password is matched confirmed password
         if(!passwordNew.equals(passwordConfirm)){
-            Toast.makeText(PasswordActivity.this, "Password does not match confirmed password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this, R.string.password_toast5, Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Check if new password is same with old password
         if(passwordNew.equals(passwordBefore)){
-            Toast.makeText(PasswordActivity.this, "New password cannot be same ith old one!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordActivity.this, R.string.password_toast6, Toast.LENGTH_SHORT).show();
             return;
         }
         DataController.updatePassword(passwordNew);
-        Toast.makeText(PasswordActivity.this, "Your password has been updated!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PasswordActivity.this, R.string.password_toast7, Toast.LENGTH_SHORT).show();
         finish();
 
     }
