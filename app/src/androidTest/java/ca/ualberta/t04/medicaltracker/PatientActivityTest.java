@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker;
 
 import android.content.Context;
+import android.support.design.widget.NavigationView;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.view.GravityCompat;
@@ -80,6 +81,10 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         // Let the robot press the second button in the menu.
         // The first one is the search button
+        solo.pressMenuItem(0);
+
+        solo.clickOnMenuItem("Setting");
+
         solo.pressMenuItem(2);
 
         assertTrue(solo.waitForActivity("AddProblemActivity"));
