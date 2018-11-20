@@ -16,8 +16,10 @@ import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*This activity diaplays all doctors of a certain patient.*/
 public class DoctorViewActivity extends AppCompatActivity {
     public ListView doctorListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class DoctorViewActivity extends AppCompatActivity {
         });
     }
 
+    //Set the adapter for doctors listview and add listener.
     private void initPage(){
 
         TextView doctorViewTitle = findViewById(R.id.doctor_view_title);
