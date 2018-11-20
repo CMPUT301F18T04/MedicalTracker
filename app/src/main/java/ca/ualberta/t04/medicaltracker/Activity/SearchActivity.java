@@ -32,6 +32,10 @@ import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.RecordList;
 import ca.ualberta.t04.medicaltracker.SearchType;
 
+/*
+  This activity is for searching based on a keyword
+ */
+
 public class SearchActivity extends AppCompatActivity {
 
     private SearchType searchType = SearchType.Problem;

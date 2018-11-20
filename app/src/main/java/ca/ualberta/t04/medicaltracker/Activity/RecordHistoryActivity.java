@@ -22,6 +22,10 @@ import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 
+/*
+  This activity is for displaying the record history list for a patient user
+ */
+
 public class RecordHistoryActivity extends AppCompatActivity {
 
     private int problem_index;

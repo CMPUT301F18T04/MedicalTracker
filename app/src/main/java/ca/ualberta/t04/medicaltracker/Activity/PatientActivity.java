@@ -30,6 +30,10 @@ import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity is for the main page of a patient user
+ */
+
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

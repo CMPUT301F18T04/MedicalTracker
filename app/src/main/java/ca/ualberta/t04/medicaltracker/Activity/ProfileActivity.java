@@ -25,6 +25,10 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This activity is for displaying the profile detail of a general user
+ */
+
 public class ProfileActivity extends AppCompatActivity {
 
     @Override
