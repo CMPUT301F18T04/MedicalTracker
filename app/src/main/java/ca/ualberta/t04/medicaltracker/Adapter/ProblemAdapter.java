@@ -17,6 +17,9 @@ import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This class represents a custom adapter for displaying problems
+ */
 public class ProblemAdapter extends ArrayAdapter {
 
     private int recourseId;
@@ -26,6 +29,7 @@ public class ProblemAdapter extends ArrayAdapter {
         recourseId = resource;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

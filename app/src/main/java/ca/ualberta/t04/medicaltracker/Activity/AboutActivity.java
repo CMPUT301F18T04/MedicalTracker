@@ -7,6 +7,10 @@ import android.widget.ListView;
 
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity displays the information on the development of the application
+ */
+
 public class AboutActivity extends AppCompatActivity {
 
     @Override

@@ -42,6 +42,10 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.RecordList;
 
+/*
+  This activity is for the main page of a doctor user
+ */
+
 public class DoctorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

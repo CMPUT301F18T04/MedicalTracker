@@ -15,6 +15,10 @@ import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This class represents a custom adapter for displaying the doctor list
+ */
+
 public class DoctorListAdapter extends ArrayAdapter{
     private int resourceId;
     private List<Doctor> doctors;
@@ -25,6 +29,7 @@ public class DoctorListAdapter extends ArrayAdapter{
         this.doctors = doctors;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

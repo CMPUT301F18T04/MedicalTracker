@@ -10,6 +10,10 @@ import android.widget.Toast;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity is for the setting of the App
+ */
+
 public class SettingActivity extends AppCompatActivity {
 
     @Override

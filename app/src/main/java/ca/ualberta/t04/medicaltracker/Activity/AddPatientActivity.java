@@ -15,6 +15,10 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity is for adding a patient for a doctor user
+ */
+
 public class AddPatientActivity extends AppCompatActivity {
 
     @Override

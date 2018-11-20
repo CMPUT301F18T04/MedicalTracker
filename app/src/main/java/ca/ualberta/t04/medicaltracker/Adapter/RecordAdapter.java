@@ -17,6 +17,10 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
 
+/*
+  This class represents a custom adapter for displaying records
+ */
+
 public class RecordAdapter extends ArrayAdapter {
 
     private int recourseId;
@@ -26,6 +30,7 @@ public class RecordAdapter extends ArrayAdapter {
         recourseId = resource;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

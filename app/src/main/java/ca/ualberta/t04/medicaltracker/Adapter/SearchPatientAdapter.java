@@ -17,6 +17,9 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Patient;
 import ca.ualberta.t04.medicaltracker.R;
+/*
+  This class represents a custom adapter for search patient results
+ */
 
 public class SearchPatientAdapter extends ArrayAdapter {
 
@@ -29,6 +32,7 @@ public class SearchPatientAdapter extends ArrayAdapter {
         this.patients = patients;
     }
 
+    // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

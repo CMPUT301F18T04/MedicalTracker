@@ -6,6 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+/*
+   This class represents a custom image adapter
+ */
+
 public class ImageAdapter extends android.support.v4.view.PagerAdapter {
 
     private Context mContext;
@@ -15,11 +19,13 @@ public class ImageAdapter extends android.support.v4.view.PagerAdapter {
         this.imageID = imageID;
     }
 
+    // returns the number of images
     @Override
     public int getCount() {
         return imageID.length;
     }
 
+    // returns a boolean
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;

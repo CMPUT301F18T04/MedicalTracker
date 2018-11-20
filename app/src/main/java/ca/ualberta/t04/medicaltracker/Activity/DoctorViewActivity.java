@@ -16,7 +16,8 @@ import ca.ualberta.t04.medicaltracker.Doctor;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.R;
 
-/*This activity diaplays all doctors of a certain patient.*/
+/*This activity displays all doctors of a certain patient.*/
+
 public class DoctorViewActivity extends AppCompatActivity {
     public ListView doctorListView;
 

@@ -5,6 +5,12 @@ import android.os.Bundle;
 
 import ca.ualberta.t04.medicaltracker.R;
 
+/*
+  This activity is for displaying the uploaded photos of a patient user
+
+  Currently not completed
+ */
+
 public class GalleryActivity extends AppCompatActivity {
 
     @Override
