@@ -19,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://raw.github.com/embarkmobile/zxing-android-minimal/mvn-repo/maven-repository/" }
     }
 }
 

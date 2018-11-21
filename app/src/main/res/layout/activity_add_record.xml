@@ -228,6 +228,7 @@
         android:layout_marginLeft="148dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="362dp"
+        android:onClick="viewImages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu_gallery" />

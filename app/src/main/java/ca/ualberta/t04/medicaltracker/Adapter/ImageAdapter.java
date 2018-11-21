@@ -1,10 +1,13 @@
 package ca.ualberta.t04.medicaltracker.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 /*
    This class represents a custom image adapter
@@ -13,16 +16,16 @@ import android.widget.ImageView;
 public class ImageAdapter extends android.support.v4.view.PagerAdapter {
 
     private Context mContext;
-    private int[] imageID;
-    public ImageAdapter(Context context, int[] imageID) {
+    private ArrayList<Bitmap> bitmaps;
+    public ImageAdapter(Context context, ArrayList<Bitmap> bitmaps) {
         this.mContext = context;
-        this.imageID = imageID;
+        this.bitmaps = bitmaps;
     }
 
     // returns the number of images
     @Override
     public int getCount() {
-        return imageID.length;
+        return bitmaps.size();
     }
 
     // returns a boolean
@@ -36,7 +39,8 @@ public class ImageAdapter extends android.support.v4.view.PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ImageView imageView = new ImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageResource(imageID[position]);
+
+        imageView.setImageBitmap(bitmaps.get(position));
         container.addView(imageView, 0);
         return imageView;
     }

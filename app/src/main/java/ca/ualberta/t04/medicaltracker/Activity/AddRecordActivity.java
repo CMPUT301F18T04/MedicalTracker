@@ -30,9 +30,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +67,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private LocationManager locationManager;
     private Geocoder geocoder;
     private List<Address> addresses;
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     // onCreate method
     @Override
@@ -179,6 +183,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             Bundle extras = data.getExtras();
             Bitmap image_bitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(image_bitmap);
+            bitmaps.add(image_bitmap);
         }
     }
 
@@ -260,4 +265,13 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         finish();
     }
 
+    public void viewImages(View view){
+        if(bitmaps.isEmpty()){
+            Toast.makeText(this, "No photos!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, SlideShowActivity.class);
+        intent.putExtra("image", new Gson().toJson(bitmaps));
+        startActivity(intent);
+    }
 }

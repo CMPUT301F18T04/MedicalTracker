@@ -21,6 +21,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.WriterException;
+import com.google.zxing.client.android.CaptureActivity;
+
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
@@ -29,6 +32,7 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.ProblemList;
+import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
 
 /*
@@ -40,6 +44,7 @@ import ca.ualberta.t04.medicaltracker.R;
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private int REQUEST_QR_CODE = 999;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,12 +183,27 @@ public class PatientActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         } else if (id == R.id.action_search){ // search button is clicked
-            Intent intent = new Intent(PatientActivity.this, SearchActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(PatientActivity.this, CaptureActivity.class);
+
+            startActivityForResult(intent, REQUEST_QR_CODE);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_QR_CODE && resultCode == RESULT_OK){
+            if(data!=null){
+                String userName = data.getStringExtra("SCAN_RESULT");
+                Intent intent = new Intent(PatientActivity.this, InformationActivity.class);
+                intent.putExtra("username", userName);
+                startActivity(intent);
+            }
+        }
     }
 
     // Method onCreateContextMenu
@@ -260,6 +280,13 @@ public class PatientActivity extends AppCompatActivity
         } else if(id == R.id.nav_about) { // if the button about is clicked, AboutActivity will come up
             Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
             startActivity(intent);
+        } else if(id == R.id.nav_qr_code){
+            QRCodePopup qrCodePopup = new QRCodePopup(this, DataController.getPatient().getUserName());
+            try {
+                qrCodePopup.showQRCode();
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

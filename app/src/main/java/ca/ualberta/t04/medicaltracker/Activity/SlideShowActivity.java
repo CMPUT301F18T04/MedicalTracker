@@ -1,10 +1,16 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.graphics.Bitmap;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.R;
@@ -27,10 +33,12 @@ public class SlideShowActivity extends AppCompatActivity {
 
         // Set adapter to ViewPager
         ViewPager viewPager = findViewById(R.id.viewPager);
-        int[] resourceId = {R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground};
+
+        ArrayList<Bitmap> bitmaps = new Gson().fromJson(getIntent().getStringExtra("image"), ArrayList.class);
+
         final String[] descriptions = {"background", "foreground"};
 
-        ImageAdapter imageAdapter = new ImageAdapter(this, resourceId);
+        ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 
         final TextView textView = findViewById(R.id.image_description);
