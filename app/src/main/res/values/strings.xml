@@ -28,7 +28,6 @@
     <!-- end for password activity -->
 
 
-
     <!-- String for Main Page -->
     <string name="title_activity_main">MainActivity</string>
     <!-- end for Main Page -->
@@ -55,6 +54,8 @@
     <!-- String for Doctor Page -->
     <string name="doctor_page_title">Your Patients</string>
     <string name="doctor_page_toast">Successfully deleted</string>
+    <string name="doctor_page_toast2">Added a patient</string>
+    <string name="doctor_page_toast3">The patient is already in your list</string>
     <!-- end for Doctor Page -->
 
     <!-- String for Record History Page -->
@@ -224,8 +225,6 @@
     <!-- String for doctor record list page -->
     <string name="doctor_record_list_title">Records</string>
     <!-- end for doctor record list page -->
-
-
 
 
 </resources>
