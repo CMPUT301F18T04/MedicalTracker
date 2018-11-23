@@ -5,9 +5,10 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -63,7 +64,8 @@
             android:name=".Activity.LanguageActivity"
             android:label="@string/title_activity_language"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.ScanActivity"></activity>
+        <activity android:name=".Activity.ScanActivity" />
+        <activity android:name=".Activity.MarkImageActivity"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@
     <string name="login_text_password">Password:</string>
     <string name="login_button_login">Login</string>
     <string name="login_button_register">Register</string>
-    <string name="login_toast1">UserName or Password cannot be empty!</string>
+    <string name="login_toast1">UserName cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
     <!-- end for Login Page -->
@@ -225,6 +225,10 @@
     <!-- String for doctor record list page -->
     <string name="doctor_record_list_title">Records</string>
     <!-- end for doctor record list page -->
+
+    <!-- String for slide show page -->
+    <string name="slide_show_button">Delete</string>
+    <!-- end for slide show page -->
 
 
 </resources>

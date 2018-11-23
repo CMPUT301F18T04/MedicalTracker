@@ -1,8 +1,11 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,22 +18,19 @@ import java.util.HashMap;
  * @since 1.0
  */
 
-public class Record
+public class Record implements Serializable
 {
     private String title;
     private Date dateStart;
     private String description;
 
     // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
-    private transient ArrayList<Image> normalImages;
-    private transient ArrayList<Image> bodyLocationImage;
-
+    private ArrayList<Bitmap> bodyLocationImage;
 
     private HashMap<String, ArrayList<String>> comments;
     private Location location;
-    private transient ArrayList<Listener> listeners = new ArrayList<>();
 
-    public Record(String title, Date dateStart, String description, ArrayList<Image> bodyLocationImage, Location location)
+    public Record(String title, Date dateStart, String description, ArrayList<Bitmap> bodyLocationImage, Location location)
     {
         this.title = title;
         this.dateStart = dateStart;
@@ -39,7 +39,6 @@ public class Record
         this.location = location;
 
         comments = new HashMap<>();
-        normalImages = new ArrayList<>();
     }
 
     /**
@@ -94,7 +93,10 @@ public class Record
      * Gets the body location image of a record
      * @return ArrayList<Image> bodyLocationImage
      */
-    public ArrayList<Image> getBodyLocationImage() {
+    public ArrayList<Bitmap> getBodyLocationImage() {
+        if(bodyLocationImage==null){
+            bodyLocationImage = new ArrayList<>();
+        }
         return bodyLocationImage;
     }
 
@@ -102,7 +104,10 @@ public class Record
      * Adds a body location image of a record
      * @param bodyLocationImage Image
      */
-    public void addBodyLocationImage(Image bodyLocationImage) {
+    public void addBodyLocationImage(Bitmap bodyLocationImage) {
+        if(this.bodyLocationImage==null){
+            this.bodyLocationImage = new ArrayList<>();
+        }
         this.bodyLocationImage.add(bodyLocationImage);
     }
 
@@ -110,7 +115,7 @@ public class Record
      * removes a body location image of a record
      * @param bodyLocationImage Image
      */
-    public void removeBodyLocationImage(Image bodyLocationImage) {
+    public void removeBodyLocationImage(Bitmap bodyLocationImage) {
         this.bodyLocationImage.remove(bodyLocationImage);
     }
 
@@ -163,50 +168,5 @@ public class Record
      */
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    /**
-     * Gets the list of camera photo of a record
-     * @return ArrayList<Image> normalImage
-     */
-    public ArrayList<Image> getNormalImages() {
-        return normalImages;
-    }
-
-    /**
-     * Adds a camera photo to a record
-     * @param normalImages Image
-     */
-    public void addNormalImages(Image normalImages) {
-        this.normalImages.add(normalImages);
-    }
-
-    /**
-     * Removes a camera photo of a record
-     * @param normalImages Image
-     */
-    public void removeNormalImages(Image normalImages) {
-        this.normalImages.remove(normalImages);
-    }
-
-    /**
-     * Adds a listener
-     * @param listener Listener
-     */
-    public void addListener(Listener listener){
-        if(listeners==null)
-            listeners = new ArrayList<>();
-        listeners.add(listener);
-    }
-
-    /**
-     * Notifies all the listeners
-     */
-    public void notifyAllListener() {
-        if(listeners==null)
-            listeners = new ArrayList<>();
-        for (Listener listener:listeners){
-            listener.update();
-        }
     }
 }
