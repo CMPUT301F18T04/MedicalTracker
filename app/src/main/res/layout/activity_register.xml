@@ -8,40 +8,6 @@
     tools:context=".Activity.RegisterActivity">
 
     <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/register_confirmed_password"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/register_password"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,32 +24,20 @@
         app:layout_constraintStart_toEndOf="@+id/radioGroup2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
-        android:text="*"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/register_password"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="165dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="184dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:checkedButton="@+id/register_patient"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/register_button_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
@@ -104,15 +58,17 @@
         android:id="@+id/register_phone"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="phone"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/register_birthday" />
 
@@ -120,17 +76,19 @@
         android:id="@+id/register_birthday"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
         android:inputType="date"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_phone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
@@ -142,57 +100,27 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         android:text="@string/register_text_email"
+        app:layout_constraintBaseline_toBaselineOf="@+id/register_email"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/register_email"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_birthday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/register_confirmed_password" />
-
-    <EditText
-        android:id="@+id/register_confirmed_password"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/register_password" />
-
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/register_username" />
 
@@ -200,61 +128,35 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
         android:text="@string/register_text_username"
+        app:layout_constraintBaseline_toBaselineOf="@+id/register_username"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/register_text_password"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:singleLine="false"
-        android:text="@string/register_text_confirmed_password"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/register_username"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        app:layout_constraintBottom_toTopOf="@+id/register_email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.558" />
 
     <TextView
         android:id="@+id/textView19"
@@ -264,11 +166,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:text="@string/register_text_birthday"
+        app:layout_constraintBaseline_toBaselineOf="@+id/register_birthday"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView20"
@@ -278,11 +180,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         android:text="@string/register_text_phone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/register_phone"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView21"
@@ -292,23 +193,27 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="65dp"
         android:text="@string/register_text_sex"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintVertical_bias="0.222" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="165dp"
         android:layout_height="32dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/register_phone">
 
@@ -334,14 +239,16 @@
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="42dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="272dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="56dp"
         android:text="@string/register_text_i_am"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />

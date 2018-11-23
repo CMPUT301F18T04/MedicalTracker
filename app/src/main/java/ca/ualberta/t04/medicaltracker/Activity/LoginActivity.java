@@ -30,15 +30,14 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view)
     {
         EditText username_text = findViewById(R.id.login_username);
-        EditText password_text = findViewById(R.id.login_password);
-        if(username_text.getText().toString().equals("") || password_text.getText().toString().equals("")){
+        if(username_text.getText().toString().equals("")){
             Toast.makeText(this, R.string.login_toast1, Toast.LENGTH_SHORT).show();
             return;
         }
         String userName = username_text.getText().toString();
         User user = ElasticSearchController.searchUser(userName);
 
-        if(user!=null && password_text.getText().toString().equals(user.getPassword())){
+        if(user!=null){
             if(user.isDoctor()){
                 Doctor doctor = (Doctor) user;
                 DataController.setUser(doctor);
@@ -54,8 +53,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         } else if(user==null) {
             Toast.makeText(this, R.string.login_toast2, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, R.string.login_toast3, Toast.LENGTH_SHORT).show();
         }
     }
 

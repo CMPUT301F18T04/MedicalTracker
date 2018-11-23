@@ -32,10 +32,6 @@ public class DataController
         getUser().notifyAllListeners();
     }
 
-    public static void updatePassword(String password) {
-        getUser().setPassword(password);
-        getUser().notifyAllListeners();
-    }
     public static Patient getPatient(){
         return (Patient) user;
     }

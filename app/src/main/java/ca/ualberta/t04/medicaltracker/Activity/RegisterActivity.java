@@ -57,15 +57,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Get all edit texts
         EditText editText_username = findViewById(R.id.register_username);
-        EditText editText_password = findViewById(R.id.register_password);
-        EditText editText_confirmed_password = findViewById(R.id.register_confirmed_password);
         EditText editText_email = findViewById(R.id.register_email);
         EditText editText_birthday = findViewById(R.id.register_birthday);
         EditText editText_phone = findViewById(R.id.register_phone);
 
         // Get userName and password
         String userName = editText_username.getText().toString();
-        String password = editText_password.getText().toString();
 
         // Check if username is empty
         if(userName.equals("")){
@@ -82,28 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Check if username contains invalid characters
         if(isValid(userName)){
             Toast.makeText(RegisterActivity.this,R.string.register_toast3,Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // Check if password is empty
-        if(password.equals("")){
-            Toast.makeText(RegisterActivity.this,R.string.register_toast4,Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Check if password is too short or too long
-        if(password.length() < 6 || password.length() > 20){
-            Toast.makeText(RegisterActivity.this,R.string.register_toast5,Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // check if password contains invalid characters
-        if(isValid(password)){
-            Toast.makeText(RegisterActivity.this,R.string.register_toast6,Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // Check if password is matched confirmed password
-        if(!password.equals(editText_confirmed_password.getText().toString())){
-            Toast.makeText(RegisterActivity.this, R.string.register_toast7, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -167,13 +142,13 @@ public class RegisterActivity extends AppCompatActivity {
         // Try to sign up by using elastic search
         Boolean done;
         if(isDoctor) {
-            Doctor doctor = new Doctor(userName, password);
+            Doctor doctor = new Doctor(userName);
             doctor.setName(userName);
             addInformationToUser(doctor, email, birthday, phoneNumber, isMale);
             // If succeed to sign up, then return true
             done = ElasticSearchController.signUp(doctor);
         } else {
-            Patient patient = new Patient(userName, password);
+            Patient patient = new Patient(userName);
             patient.setName(userName);
             addInformationToUser(patient, email, birthday, phoneNumber, isMale);
             done = ElasticSearchController.signUp(patient);
