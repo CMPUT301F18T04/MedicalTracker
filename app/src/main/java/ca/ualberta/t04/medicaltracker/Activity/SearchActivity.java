@@ -2,8 +2,6 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,22 +12,18 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
-import ca.ualberta.t04.medicaltracker.Adapter.PatientListAdapter;
-import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
+import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorRecordDetailActivity;
+import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.Adapter.SearchResultAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Listener;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.Problem;
-import ca.ualberta.t04.medicaltracker.ProblemList;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.RecordList;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.SearchType;
 
 /*

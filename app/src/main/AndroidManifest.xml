@@ -34,11 +34,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.PatientActivity"
+            android:name=".Activity.Patient.PatientActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.DoctorActivity"
+            android:name=".Activity.Doctor.DoctorActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.SlideShowActivity" />
@@ -46,16 +46,16 @@
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.AddRecordActivity" />
-        <activity android:name=".Activity.RecordHistoryActivity" />
-        <activity android:name=".Activity.RecordDetailActivity" />
-        <activity android:name=".Activity.GalleryActivity" />
-        <activity android:name=".Activity.DoctorViewActivity" />
-        <activity android:name=".Activity.AddProblemActivity" />
+        <activity android:name=".Activity.Patient.AddRecordActivity" />
+        <activity android:name=".Activity.Patient.RecordHistoryActivity" />
+        <activity android:name=".Activity.Patient.RecordDetailActivity" />
+        <activity android:name=".Activity.Patient.GalleryActivity" />
+        <activity android:name=".Activity.Patient.DoctorViewActivity" />
+        <activity android:name=".Activity.Patient.AddProblemActivity" />
         <activity android:name=".Activity.InformationActivity" />
-        <activity android:name=".Activity.AddPatientActivity" />
+        <activity android:name=".Activity.Doctor.AddPatientActivity" />
         <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.DoctorRecordDetailActivity" />
+        <activity android:name=".Activity.Doctor.DoctorRecordDetailActivity" />
         <activity
             android:name=".Activity.PasswordActivity"
             android:label="@string/title_activity_password"
@@ -64,8 +64,8 @@
             android:name=".Activity.LanguageActivity"
             android:label="@string/title_activity_language"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.ScanActivity" />
-        <activity android:name=".Activity.MarkImageActivity"></activity>
+        <activity android:name=".Activity.Doctor.ScanActivity" />
+        <activity android:name=".Activity.Patient.MarkImageActivity"></activity>
     </application>
 
 </manifest>

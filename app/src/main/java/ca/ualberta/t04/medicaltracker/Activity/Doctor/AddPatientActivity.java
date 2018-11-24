@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker.Activity;
+package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import ca.ualberta.t04.medicaltracker.Adapter.SearchPatientAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 
 /*

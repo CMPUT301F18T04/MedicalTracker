@@ -1,12 +1,10 @@
 package ca.ualberta.t04.medicaltracker.Controller;
 
-import android.widget.TextView;
-
 import java.util.Date;
 
-import ca.ualberta.t04.medicaltracker.Doctor;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.User;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.User;
 
 public class DataController
 {

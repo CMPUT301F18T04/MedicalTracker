@@ -6,6 +6,9 @@ import android.media.Image;
 import org.junit.Test;
 import java.util.*;
 
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+
 import static org.junit.Assert.*;
 
 /**

@@ -2,19 +2,13 @@ package ca.ualberta.t04.medicaltracker;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.encoder.QRCode;
-
-import java.util.concurrent.ExecutionException;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
+import ca.ualberta.t04.medicaltracker.Util.QRCodeUtil;
 
 /**
  * This class displays a pop up window for the doctor to add a comment
@@ -26,7 +20,7 @@ public class QRCodePopup {
 
     private Context context;
     private String userName;
-    private static int QR_CODE_HEIGHT = Util.QR_CODE_HEIGHT;
+    private static int QR_CODE_HEIGHT = CommonUtil.QR_CODE_HEIGHT;
 
     public QRCodePopup(Context context, String userName) {
         this.context = context;

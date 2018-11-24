@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.PatientActivity"
+    tools:context=".Activity.Patient.PatientActivity"
     tools:showIn="@layout/app_bar_share">
 
     <ListView

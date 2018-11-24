@@ -1,13 +1,11 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,12 +19,12 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ca.ualberta.t04.medicaltracker.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.User;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Model.User;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
   This activity is for registering a general user
@@ -145,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Check the validation of birthday
         if(!editText_birthday.equals("")) {
             Date current_date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+            SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
             try {
                 Date newBirthday = format.parse(birthday);
                 if(current_date.before(newBirthday)){
@@ -231,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Add birthday to user's information
         Date birthdayDate = null;
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
             birthdayDate = format.parse(birthday);
         } catch (ParseException e) {

@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 
+import ca.ualberta.t04.medicaltracker.Model.User;
+
 import static org.junit.Assert.*;
 
 /**

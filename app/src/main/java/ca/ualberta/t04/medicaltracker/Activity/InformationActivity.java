@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.User;
+import ca.ualberta.t04.medicaltracker.Model.User;
 
 /*
     The activity needs a userName for a specific user.

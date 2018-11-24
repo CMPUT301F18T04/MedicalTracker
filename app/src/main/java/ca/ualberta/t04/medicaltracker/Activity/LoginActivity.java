@@ -1,25 +1,21 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorActivity;
+import ca.ualberta.t04.medicaltracker.Activity.Patient.PatientActivity;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.User;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Model.User;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
   This activity is for logging in
@@ -86,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private Boolean isNewDevice(User user){
-        deviceId = Util.getIMEI();
+        deviceId = CommonUtil.getIMEI();
         if(user.getDeviceId().equals("")){
             return false;
         }

@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
+
 /**
  * This class displays a pop up window for the doctor to add a comment
  */

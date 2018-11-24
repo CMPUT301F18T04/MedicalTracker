@@ -2,32 +2,18 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
-import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.Util;
-import id.zelory.compressor.Compressor;
 
 /*
   This activity is for displaying all the photos in a slideshow format

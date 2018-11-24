@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import ca.ualberta.t04.medicaltracker.Doctor;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.User;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.User;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
@@ -31,7 +31,7 @@ public class ElasticSearchController
 {
     private static JestClient client = null;
     private static String USER_TYPE = "user";
-    private static String INDEX_NAME = Util.INDEX_NAME;
+    private static String INDEX_NAME = CommonUtil.INDEX_NAME;
     private static String IS_DOCTOR = "isDoctor";
 
     // Delete the whole index of ElasticSearch

@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.R;
 
 /*
