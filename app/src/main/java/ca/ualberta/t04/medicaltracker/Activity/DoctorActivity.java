@@ -41,6 +41,7 @@ import ca.ualberta.t04.medicaltracker.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.RecordList;
+import ca.ualberta.t04.medicaltracker.User;
 
 /*
   This activity is for the main page of a doctor user
@@ -298,16 +299,38 @@ public class DoctorActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
-            Intent intent = new Intent(DoctorActivity.this, AddPatientActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(DoctorActivity.this, ScanActivity.class);
+            startActivityForResult(intent, 0);
             return true;
         } else if(id == R.id.action_search){
             Intent intent = new Intent(DoctorActivity.this, SearchActivity.class);
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode==RESULT_OK){
+            if(data!=null){
+                String userName = data.getStringExtra("result");
+                if(DataController.getDoctor().getPatientsUserNames().contains(userName)){
+                    Toast.makeText(this, R.string.doctor_page_toast3, Toast.LENGTH_SHORT).show();
+                } else {
+                    User user = ElasticSearchController.searchUser(userName);
+
+                    if(user!=null && !user.isDoctor()){
+                        Patient patient = (Patient) user;
+                        DataController.getDoctor().addPatient(patient);
+                        patient.addDoctor(DataController.getDoctor());
+                        ElasticSearchController.updateUser(patient);
+                        Toast.makeText(this, R.string.doctor_page_toast2, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -12,7 +12,7 @@
     <string name="login_text_password">Password:</string>
     <string name="login_button_login">Login</string>
     <string name="login_button_register">Register</string>
-    <string name="login_toast1">UserName or Password cannot be empty!</string>
+    <string name="login_toast1">UserName cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
     <!-- end for Login Page -->
@@ -26,7 +26,6 @@
     <string name="password_toast6">New password cannot be same with old one!</string>
     <string name="password_toast7">Your password has been updated!</string>
     <!-- end for password activity -->
-
 
 
     <!-- String for Main Page -->
@@ -55,6 +54,8 @@
     <!-- String for Doctor Page -->
     <string name="doctor_page_title">Your Patients</string>
     <string name="doctor_page_toast">Successfully deleted</string>
+    <string name="doctor_page_toast2">Added a patient</string>
+    <string name="doctor_page_toast3">The patient is already in your list</string>
     <!-- end for Doctor Page -->
 
     <!-- String for Record History Page -->
@@ -81,6 +82,8 @@
     <string name="nav_item_setting">Setting</string>
     <string name="nav_item_logout">Logout</string>
     <string name="nav_item_about">About</string>
+    <string name="nav_item_qr_code">QR Code</string>
+
     <!-- end for Navigation Drawer -->
 
 
@@ -223,7 +226,9 @@
     <string name="doctor_record_list_title">Records</string>
     <!-- end for doctor record list page -->
 
-
+    <!-- String for slide show page -->
+    <string name="slide_show_button">Delete</string>
+    <!-- end for slide show page -->
 
 
 </resources>

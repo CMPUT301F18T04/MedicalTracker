@@ -21,7 +21,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.WriterException;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
@@ -29,6 +32,7 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Problem;
 import ca.ualberta.t04.medicaltracker.ProblemList;
+import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
 
 /*
@@ -260,6 +264,10 @@ public class PatientActivity extends AppCompatActivity
         } else if(id == R.id.nav_about) { // if the button about is clicked, AboutActivity will come up
             Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
             startActivity(intent);
+        } else if(id == R.id.nav_qr_code){
+            QRCodePopup qrCodePopup = new QRCodePopup(this, DataController.getPatient().getUserName());
+
+            qrCodePopup.showQRCode();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

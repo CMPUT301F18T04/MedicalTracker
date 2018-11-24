@@ -2,6 +2,7 @@ package ca.ualberta.t04.medicaltracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -26,12 +27,15 @@ public class User
     private String phoneNumber;
     private String password;
     private String address;
+    private String deviceId;
 
     public User(String userName, String password, Boolean isDoctor)
     {
         this.userName = userName;
         this.isDoctor = isDoctor;
         this.password = password;
+
+        deviceId = null;
     }
 
     /**
@@ -221,4 +225,13 @@ public class User
         this.address = address;
     }
 
+    public String getDeviceId() {
+        if(deviceId==null)
+            return "";
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 }

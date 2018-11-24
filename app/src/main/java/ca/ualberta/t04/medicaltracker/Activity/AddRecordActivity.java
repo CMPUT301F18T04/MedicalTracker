@@ -6,17 +6,26 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,15 +39,22 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
@@ -54,6 +70,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     // initialize
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_UPDATE_DATA = 2;
+    static final int REQUEST_MARK_IMAGE = 3;
     private int problem_index;
     private DatePickerDialog.OnDateSetListener recordDateSetListener;
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
@@ -64,6 +82,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private LocationManager locationManager;
     private Geocoder geocoder;
     private List<Address> addresses;
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     // onCreate method
     @Override
@@ -81,15 +100,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         // ask permission
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-        } else{
+            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // get the current location
             Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
             onLocationChanged(location); // call onLocationChanged
@@ -100,6 +113,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
+
     }
 
     // recordSetDate method is used for set a date using DatePickerDialog
@@ -163,11 +177,41 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     // Method dispatchTakePictureIntent starts the activity of launch the camera of the phone
     public void dispatchTakePictureIntent(View view) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        if (ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED ||  ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);}
+        else{
+
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
         }
     }
+
+    /*
+    private File createImageFile()
+    {
+        // External sdcard location
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "MedicalTracker");
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Toast.makeText(this, "Unable to save image file!", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                + "IMG_" + timeStamp + ".jpg");
+
+        return mediaFile;
+    }
+    */
 
     // This method will be called automatically after startActivityForResult
     // This method returns the result of the activity
@@ -177,8 +221,37 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap image_bitmap = (Bitmap) extras.get("data");
-            imageView.setImageBitmap(image_bitmap);
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(bitmap);
+
+            Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+
+            /*
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            Log.d("Succeed", String.valueOf(baos.toByteArray().length));
+
+            Uri uri = data.getData();
+
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+                Log.d("Succeed", path);
+            }
+            */
+            Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
+
+            intent.putExtra("image", bitmap);
+            startActivityForResult(intent, REQUEST_MARK_IMAGE);
+
+
+        }
+        else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
+            bitmaps = BitmapHolder.getBitmaps();
+        } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
+            Bitmap bitmap = data.getParcelableExtra("data");
+            bitmaps.add(bitmap);
         }
     }
 
@@ -249,6 +322,18 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             e.printStackTrace();
         }
 
+        /*
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (String path:paths){
+            try {
+                bitmaps.add(ImageUtil.compressImageFile(this, path));
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error occurs!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        */
+
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), null, null);
 
@@ -260,4 +345,35 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         finish();
     }
 
+    public void viewImages(View view){
+        if(bitmaps.isEmpty()){
+            Toast.makeText(this, "No photos!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, SlideShowActivity.class);
+        /*
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        ArrayList<byte[]> bytesBitmaps = new ArrayList<>();
+        for (Bitmap bitmap:bitmaps){
+            byte[] bytesBitmap = convertBitmapToBytes(bitmap, byteArrayOutputStream);
+            bytesBitmaps.add(bytesBitmap);
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("image", bytesBitmaps);
+        intent.putExtras(bundle);
+        */
+        BitmapHolder.setBitmaps(bitmaps);
+
+        startActivityForResult(intent, REQUEST_UPDATE_DATA);
+    }
+
+    private byte[] convertToBytes(Bitmap bitmap) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        byteArrayOutputStream.close();
+        return bytes;
+    }
 }

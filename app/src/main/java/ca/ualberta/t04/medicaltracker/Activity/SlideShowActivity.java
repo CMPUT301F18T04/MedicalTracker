@@ -1,13 +1,33 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
+import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Record;
+import ca.ualberta.t04.medicaltracker.Util;
+import id.zelory.compressor.Compressor;
 
 /*
   This activity is for displaying all the photos in a slideshow format
@@ -15,6 +35,7 @@ import ca.ualberta.t04.medicaltracker.R;
 
 public class SlideShowActivity extends AppCompatActivity {
 
+    private int currentIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +47,14 @@ public class SlideShowActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // Set adapter to ViewPager
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        int[] resourceId = {R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground};
-        final String[] descriptions = {"background", "foreground"};
+        final ViewPager viewPager = findViewById(R.id.viewPager);
 
-        ImageAdapter imageAdapter = new ImageAdapter(this, resourceId);
+        final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
+
+
+        final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 
-        final TextView textView = findViewById(R.id.image_description);
-        textView.setText(descriptions[0]);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -43,7 +63,7 @@ public class SlideShowActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                updateImageDescription(textView, descriptions[position]);
+                currentIndex = position;
             }
 
             @Override
@@ -51,11 +71,27 @@ public class SlideShowActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Button delete = findViewById(R.id.slide_show_button_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bitmaps.remove(currentIndex);
+                returnResult();
+                if(bitmaps.isEmpty()){
+                    finish();
+                }
+
+                viewPager.removeViewAt(currentIndex);
+                imageAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
-    private void updateImageDescription(TextView textView, String content)
-    {
-        textView.setText(content);
-    }
+    public void returnResult() {
+        Intent intent = new Intent();
 
+        setResult(RESULT_OK, intent);
+    }
 }

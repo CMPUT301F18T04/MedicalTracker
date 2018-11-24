@@ -1,7 +1,7 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
 import android.location.Location;
-import android.media.Image;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,9 +100,9 @@ public class RecordList
      * @param record Record
      * @param bodyLocationImage Image
      */
-    public void addBodyLocationImage(Record record, Image bodyLocationImage) {
+    public void addBodyLocationImage(Record record, Bitmap bodyLocationImage) {
         if(records.contains(record)){
-            record.addBodyLocationImage(bodyLocationImage);
+            record.addImage(bodyLocationImage);
         }
         notifyAllListener();
     }
@@ -112,9 +112,9 @@ public class RecordList
      * @param record Record
      * @param bodyLocationImage Image
      */
-    public void removeBodyLocationImage(Record record, Image bodyLocationImage) {
+    public void removeBodyLocationImage(Record record, Bitmap bodyLocationImage) {
         if(records.contains(record)){
-            record.removeBodyLocationImage(bodyLocationImage);
+            record.removeImage(bodyLocationImage);
         }
         notifyAllListener();
     }
@@ -150,30 +150,6 @@ public class RecordList
     public void setLocation(Record record, Location location) {
         if(records.contains(record)){
             record.setLocation(location);
-        }
-        notifyAllListener();
-    }
-
-    /**
-     * Adds a camera photo to a record
-     * @param record Record
-     * @param normalImages Image
-     */
-    public void addNormalImages(Record record, Image normalImages) {
-        if(records.contains(record)){
-            record.addNormalImages(normalImages);
-        }
-        notifyAllListener();
-    }
-
-    /**
-     * Removes a camera photo to a record
-     * @param record Record
-     * @param normalImages Image
-     */
-    public void removeNormalImages(Record record, Image normalImages) {
-        if(records.contains(record)){
-            record.removeNormalImages(normalImages);
         }
         notifyAllListener();
     }

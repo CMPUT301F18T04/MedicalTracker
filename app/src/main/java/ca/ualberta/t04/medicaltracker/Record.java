@@ -1,8 +1,14 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.media.Image;
+import android.util.Base64;
+import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,24 +28,28 @@ public class Record
     private String description;
 
     // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
-    private transient ArrayList<Image> normalImages;
-    private transient ArrayList<Image> bodyLocationImage;
-
+    private ArrayList<String> images;
 
     private HashMap<String, ArrayList<String>> comments;
     private Location location;
-    private transient ArrayList<Listener> listeners = new ArrayList<>();
 
-    public Record(String title, Date dateStart, String description, ArrayList<Image> bodyLocationImage, Location location)
+    public Record(String title, Date dateStart, String description, ArrayList<Bitmap> images, Location location)
     {
         this.title = title;
         this.dateStart = dateStart;
         this.description = description;
-        this.bodyLocationImage = bodyLocationImage;
+        this.images = new ArrayList<>();
+        for(Bitmap bitmap:images){
+            String string = ImageUtil.convertBitmapToString(bitmap);
+            if(string.length()<65536){
+                this.images.add(string);
+            } else {
+                Log.d("Succeed", "Too long" + String.valueOf(string.length()));
+            }
+        }
         this.location = location;
 
         comments = new HashMap<>();
-        normalImages = new ArrayList<>();
     }
 
     /**
@@ -94,24 +104,47 @@ public class Record
      * Gets the body location image of a record
      * @return ArrayList<Image> bodyLocationImage
      */
-    public ArrayList<Image> getBodyLocationImage() {
-        return bodyLocationImage;
+    public ArrayList<Bitmap> getImages() {
+        if(images==null){
+            images = new ArrayList<>();
+        }
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for(String str:images){
+            bitmaps.add(ImageUtil.convertStringToBitmap(str));
+        }
+        return bitmaps;
     }
+
+
 
     /**
      * Adds a body location image of a record
-     * @param bodyLocationImage Image
+     * @param image Image
      */
-    public void addBodyLocationImage(Image bodyLocationImage) {
-        this.bodyLocationImage.add(bodyLocationImage);
+    public void addImage(Bitmap image) {
+        if(this.images==null){
+            this.images = new ArrayList<>();
+        }
+        String string = ImageUtil.convertBitmapToString(image);
+        if(string.length()<65536){
+            this.images.add(string);
+        } else {
+            Log.d("Succeed", "Too long");
+        }
     }
 
     /**
      * removes a body location image of a record
-     * @param bodyLocationImage Image
+     * @param image Image
      */
-    public void removeBodyLocationImage(Image bodyLocationImage) {
-        this.bodyLocationImage.remove(bodyLocationImage);
+    public void removeImage(Bitmap image) {
+        if(this.images==null){
+            this.images = new ArrayList<>();
+        }
+        String string = ImageUtil.convertBitmapToString(image);
+        if(this.images.contains(string)){
+            this.images.remove(string);
+        }
     }
 
     /**
@@ -163,50 +196,5 @@ public class Record
      */
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    /**
-     * Gets the list of camera photo of a record
-     * @return ArrayList<Image> normalImage
-     */
-    public ArrayList<Image> getNormalImages() {
-        return normalImages;
-    }
-
-    /**
-     * Adds a camera photo to a record
-     * @param normalImages Image
-     */
-    public void addNormalImages(Image normalImages) {
-        this.normalImages.add(normalImages);
-    }
-
-    /**
-     * Removes a camera photo of a record
-     * @param normalImages Image
-     */
-    public void removeNormalImages(Image normalImages) {
-        this.normalImages.remove(normalImages);
-    }
-
-    /**
-     * Adds a listener
-     * @param listener Listener
-     */
-    public void addListener(Listener listener){
-        if(listeners==null)
-            listeners = new ArrayList<>();
-        listeners.add(listener);
-    }
-
-    /**
-     * Notifies all the listeners
-     */
-    public void notifyAllListener() {
-        if(listeners==null)
-            listeners = new ArrayList<>();
-        for (Listener listener:listeners){
-            listener.update();
-        }
     }
 }

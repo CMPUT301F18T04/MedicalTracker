@@ -27,6 +27,7 @@ public class InstrumentedTest {
     }
 
     /*
+    @Test
     public void deleteUser(){
         ElasticSearchController.deleteIndex(Util.INDEX_NAME);
     }
