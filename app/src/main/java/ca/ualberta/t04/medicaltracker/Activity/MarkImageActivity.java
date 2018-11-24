@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
+import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util;
 
@@ -25,25 +27,14 @@ public class MarkImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_image);
 
-        String path = getIntent().getStringExtra("image");
+        Bitmap bitmap = getIntent().getParcelableExtra("image");
 
-        Bitmap bitmap;
-        try {
-            bitmap = Util.compressImageFile(this, path);
+        ImageView imageView = findViewById(R.id.mark_image_view);
+        imageView.setImageBitmap(bitmap);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            String fileName = System.currentTimeMillis()+".jpg";
-
-            Util.saveImage(bitmap, fileName);
-            String photoPath = Environment.getExternalStorageDirectory() + "/MedicalTracker/photo/" + fileName;
-            Log.d("Succeed", photoPath);
-
-            bitmap.recycle();
-            bitmap = Util.compressImageFile(this, photoPath);
-
-            ImageView imageView = findViewById(R.id.mark_image_view);
-            imageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Intent intent = new Intent();
+        intent.putExtra("data", bitmap);
+        setResult(RESULT_OK, intent);
     }
 }

@@ -24,6 +24,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import id.zelory.compressor.Compressor;
@@ -43,7 +45,7 @@ public class Util {
     public static String TIME_FORMAT = "yyyy-MM-dd'T'HH:mm";//With specific time.
     public static String INDEX_NAME = "cmput301f18t04p5test";
     public static int QR_CODE_HEIGHT = 500;
-    private static String PHOTO_DIRECTORY = Environment.getExternalStorageDirectory() + "/MedicalTracker/photo/";
+
 
     // Idea comes from https://blog.csdn.net/a360940265a/article/details/79907844
     public static String getIMEI() {
@@ -76,36 +78,27 @@ public class Util {
         return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
     }
 
-    public static Bitmap compressImageFile(Context context, String path) throws IOException {
-        File file = new File(path);
-        return new Compressor(context).compressToBitmap(file);
-    }
 
-    public static Bitmap compressImageFile(Context context, String userName, String fileName) throws IOException {
-        File file = new File(PHOTO_DIRECTORY, fileName);
-        Log.d("Succeed", file.getAbsolutePath());
-        return new Compressor(context).compressToBitmap(file);
-    }
 
-    public static File saveImage(Bitmap bmp, String fileName) {
-        File photoDir = new File(PHOTO_DIRECTORY);
-        if (!photoDir.exists()) {
-            if(!photoDir.mkdir()){
-                Log.d("Succeed", "Error!");
+
+
+    public static List<File> getFileList(String strPath) {
+        ArrayList<File> fileList = new ArrayList<>();
+        File dir = new File(strPath);
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                String fileName = files[i].getName();
+                if (fileName.endsWith("jpg")) {
+                    String strFileName = files[i].getAbsolutePath();
+                    Log.d("Succeed","---" + strFileName);
+                    fileList.add(files[i]);
+                } else {
+                    continue;
+                }
             }
-        }
-        File file = new File(photoDir, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
 
+        }
+        return fileList;
+    }
 }

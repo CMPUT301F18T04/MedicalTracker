@@ -2,7 +2,6 @@ package ca.ualberta.t04.medicaltracker;
 
 import android.graphics.Bitmap;
 import android.location.Location;
-import android.media.Image;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -103,7 +102,7 @@ public class RecordList
      */
     public void addBodyLocationImage(Record record, Bitmap bodyLocationImage) {
         if(records.contains(record)){
-            record.addBodyLocationImage(bodyLocationImage);
+            record.addImage(bodyLocationImage);
         }
         notifyAllListener();
     }
@@ -115,7 +114,7 @@ public class RecordList
      */
     public void removeBodyLocationImage(Record record, Bitmap bodyLocationImage) {
         if(records.contains(record)){
-            record.removeBodyLocationImage(bodyLocationImage);
+            record.removeImage(bodyLocationImage);
         }
         notifyAllListener();
     }

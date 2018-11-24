@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
+import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
@@ -34,7 +36,6 @@ import id.zelory.compressor.Compressor;
 public class SlideShowActivity extends AppCompatActivity {
 
     private int currentIndex;
-    private ArrayList<String> paths;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,31 +49,8 @@ public class SlideShowActivity extends AppCompatActivity {
         // Set adapter to ViewPager
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
-        /*
-        Bundle bundle = getIntent().getExtras();
+        final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
 
-        ArrayList byteBitmaps = bundle.getParcelableArrayList("image");
-
-        ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        for(Object object:byteBitmaps){
-            byte[] bytes = (byte[]) object;
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            bitmaps.add(bitmap);
-        }
-        */
-        final ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        paths = getIntent().getStringArrayListExtra("image");
-
-        for(String path:paths){
-            try {
-                Bitmap bitmap = Util.compressImageFile(this, path);
-                bitmaps.add(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
@@ -100,7 +78,6 @@ public class SlideShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 bitmaps.remove(currentIndex);
-                paths.remove(currentIndex);
                 returnResult();
                 if(bitmaps.isEmpty()){
                     finish();
@@ -114,7 +91,7 @@ public class SlideShowActivity extends AppCompatActivity {
 
     public void returnResult() {
         Intent intent = new Intent();
-        intent.putStringArrayListExtra("data", paths);
+
         setResult(RESULT_OK, intent);
     }
 }

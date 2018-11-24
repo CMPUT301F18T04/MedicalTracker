@@ -29,7 +29,7 @@ public class RecordUnitTest {
         assertTrue("Title should be 'RecordTest'", record.getTitle().equals("RecordTest"));
         assertTrue("Description should be 'This is Unit Test For Record'", record.getDescription().equals("This is Unit Test For Record"));
         assertEquals(record.getDateStart(),date);
-        assertEquals(record.getBodyLocationImage(),bodyImage);
+        assertEquals(record.getImages(),bodyImage);
         assertEquals(record.getLocation(),location);
 
         //setLocation and getLocation test
@@ -69,13 +69,13 @@ public class RecordUnitTest {
         bodyImage.add(testImage1);
         bodyImage.add(testImage2);
 
-        record.addBodyLocationImage(testImage1);
-        record.addBodyLocationImage(testImage2);
+        record.addImage(testImage1);
+        record.addImage(testImage2);
 
-        assertEquals(bodyImage,record.getBodyLocationImage());
+        assertEquals(bodyImage,record.getImages());
 
-        record.removeBodyLocationImage(testImage1);
-        assertEquals(bodyImage,record.getBodyLocationImage());
+        record.removeImage(testImage1);
+        assertEquals(bodyImage,record.getImages());
     }
 
 }

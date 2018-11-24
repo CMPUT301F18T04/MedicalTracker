@@ -52,7 +52,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.ImageUtil;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Record;
 import ca.ualberta.t04.medicaltracker.Util;
@@ -69,6 +71,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     // initialize
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_UPDATE_DATA = 2;
+    static final int REQUEST_MARK_IMAGE = 3;
     private int problem_index;
     private DatePickerDialog.OnDateSetListener recordDateSetListener;
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
@@ -79,7 +82,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private LocationManager locationManager;
     private Geocoder geocoder;
     private List<Address> addresses;
-    private ArrayList<String> paths = new ArrayList<>();
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     // onCreate method
     @Override
@@ -111,7 +114,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
 
-        //bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_camera));
     }
 
     // recordSetDate method is used for set a date using DatePickerDialog
@@ -208,7 +210,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
                 + "IMG_" + timeStamp + ".jpg");
 
         return mediaFile;
-
     }
     */
 
@@ -220,26 +221,37 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap image_bitmap = (Bitmap) extras.get("data");
-            imageView.setImageBitmap(image_bitmap);
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(bitmap);
 
+            Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+
+            /*
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            Log.d("Succeed", String.valueOf(baos.toByteArray().length));
 
             Uri uri = data.getData();
 
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+
             if(cursor!=null && cursor.moveToFirst()){
                 String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
                 Log.d("Succeed", path);
-                paths.add(path);
-
-                Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
-
-                intent.putExtra("image", path);
-                startActivity(intent);
             }
+            */
+            Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
+
+            intent.putExtra("image", bitmap);
+            startActivityForResult(intent, REQUEST_MARK_IMAGE);
+
+
         }
-        else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK){
-            paths = data.getStringArrayListExtra("data");
+        else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
+            bitmaps = BitmapHolder.getBitmaps();
+        } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
+            Bitmap bitmap = data.getParcelableExtra("data");
+            bitmaps.add(bitmap);
         }
     }
 
@@ -310,15 +322,17 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             e.printStackTrace();
         }
 
+        /*
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
         for (String path:paths){
             try {
-                bitmaps.add(Util.compressImageFile(this, path));
+                bitmaps.add(ImageUtil.compressImageFile(this, path));
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Error occurs!", Toast.LENGTH_SHORT).show();
             }
         }
+        */
 
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null);
@@ -332,7 +346,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     }
 
     public void viewImages(View view){
-        if(paths.isEmpty()){
+        if(bitmaps.isEmpty()){
             Toast.makeText(this, "No photos!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -350,8 +364,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         bundle.putSerializable("image", bytesBitmaps);
         intent.putExtras(bundle);
         */
-
-        intent.putStringArrayListExtra("image", paths);
+        BitmapHolder.setBitmaps(bitmaps);
 
         startActivityForResult(intent, REQUEST_UPDATE_DATA);
     }

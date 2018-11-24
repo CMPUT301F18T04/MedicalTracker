@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.media.Image;
+import android.util.Base64;
+import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,24 +21,32 @@ import java.util.HashMap;
  * @since 1.0
  */
 
-public class Record implements Serializable
+public class Record
 {
     private String title;
     private Date dateStart;
     private String description;
 
     // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
-    private ArrayList<Bitmap> bodyLocationImage;
+    private ArrayList<String> images;
 
     private HashMap<String, ArrayList<String>> comments;
     private Location location;
 
-    public Record(String title, Date dateStart, String description, ArrayList<Bitmap> bodyLocationImage, Location location)
+    public Record(String title, Date dateStart, String description, ArrayList<Bitmap> images, Location location)
     {
         this.title = title;
         this.dateStart = dateStart;
         this.description = description;
-        this.bodyLocationImage = bodyLocationImage;
+        this.images = new ArrayList<>();
+        for(Bitmap bitmap:images){
+            String string = ImageUtil.convertBitmapToString(bitmap);
+            if(string.length()<65536){
+                this.images.add(string);
+            } else {
+                Log.d("Succeed", "Too long" + String.valueOf(string.length()));
+            }
+        }
         this.location = location;
 
         comments = new HashMap<>();
@@ -93,30 +104,47 @@ public class Record implements Serializable
      * Gets the body location image of a record
      * @return ArrayList<Image> bodyLocationImage
      */
-    public ArrayList<Bitmap> getBodyLocationImage() {
-        if(bodyLocationImage==null){
-            bodyLocationImage = new ArrayList<>();
+    public ArrayList<Bitmap> getImages() {
+        if(images==null){
+            images = new ArrayList<>();
         }
-        return bodyLocationImage;
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for(String str:images){
+            bitmaps.add(ImageUtil.convertStringToBitmap(str));
+        }
+        return bitmaps;
     }
+
+
 
     /**
      * Adds a body location image of a record
-     * @param bodyLocationImage Image
+     * @param image Image
      */
-    public void addBodyLocationImage(Bitmap bodyLocationImage) {
-        if(this.bodyLocationImage==null){
-            this.bodyLocationImage = new ArrayList<>();
+    public void addImage(Bitmap image) {
+        if(this.images==null){
+            this.images = new ArrayList<>();
         }
-        this.bodyLocationImage.add(bodyLocationImage);
+        String string = ImageUtil.convertBitmapToString(image);
+        if(string.length()<65536){
+            this.images.add(string);
+        } else {
+            Log.d("Succeed", "Too long");
+        }
     }
 
     /**
      * removes a body location image of a record
-     * @param bodyLocationImage Image
+     * @param image Image
      */
-    public void removeBodyLocationImage(Bitmap bodyLocationImage) {
-        this.bodyLocationImage.remove(bodyLocationImage);
+    public void removeImage(Bitmap image) {
+        if(this.images==null){
+            this.images = new ArrayList<>();
+        }
+        String string = ImageUtil.convertBitmapToString(image);
+        if(this.images.contains(string)){
+            this.images.remove(string);
+        }
     }
 
     /**
