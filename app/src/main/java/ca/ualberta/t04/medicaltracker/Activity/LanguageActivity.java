@@ -24,4 +24,5 @@ public class LanguageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_language);
 
     }
+
 }
