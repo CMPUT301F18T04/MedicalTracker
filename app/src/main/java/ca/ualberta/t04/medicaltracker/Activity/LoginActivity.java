@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view) {
         EditText username_text = findViewById(R.id.login_username);
-        EditText password_text = findViewById(R.id.login_password);
+
         if (username_text.getText().toString().equals("")) {
             Toast.makeText(this, R.string.login_toast1, Toast.LENGTH_SHORT).show();
             return;
@@ -74,10 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             finish();
-        } else if(user==null) {
-            Toast.makeText(this, R.string.login_toast2, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, R.string.login_toast3, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_toast2, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -89,6 +87,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private Boolean isNewDevice(User user){
         deviceId = Util.getIMEI();
+        if(user.getDeviceId().equals("")){
+            return false;
+        }
         if(!user.getDeviceId().equals(deviceId)){
             return true;
         }

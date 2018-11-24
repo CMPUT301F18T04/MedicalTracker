@@ -335,7 +335,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         */
 
         // create a new record
-        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null);
+        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), null, null);
 
         // use dataController to notify the change of record
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
