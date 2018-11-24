@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:gravity="center"
-    tools:context=".Activity.ScanActivity">
+    tools:context=".Activity.Doctor.ScanActivity">
 
 </LinearLayout>

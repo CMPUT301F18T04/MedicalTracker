@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker.Activity;
+package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,11 +15,11 @@ import ca.ualberta.t04.medicaltracker.CommentPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
-import ca.ualberta.t04.medicaltracker.Patient;
-import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.RecordList;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 
 /**
  * This class is for displaying the information of a record and commenting for a doctor user

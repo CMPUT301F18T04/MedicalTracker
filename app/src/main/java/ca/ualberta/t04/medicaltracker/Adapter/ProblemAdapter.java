@@ -13,9 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
   This class represents a custom adapter for displaying problems
@@ -40,7 +40,7 @@ public class ProblemAdapter extends ArrayAdapter {
         TextView date = view.findViewById(R.id.problem_list_date);
         TextView description = view.findViewById(R.id.problem_list_description);
 
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
 
         title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecords().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));

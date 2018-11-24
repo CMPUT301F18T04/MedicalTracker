@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
-import ca.ualberta.t04.medicaltracker.Activity.PatientActivity;
 
 public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginActivity>{
     private Solo solo;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
-    tools:context=".Activity.RecordHistoryActivity">
+    tools:context=".Activity.Patient.RecordHistoryActivity">
 
     <ListView
         android:id="@+id/problem_list_list_view"

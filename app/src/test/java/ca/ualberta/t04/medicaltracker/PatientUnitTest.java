@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;

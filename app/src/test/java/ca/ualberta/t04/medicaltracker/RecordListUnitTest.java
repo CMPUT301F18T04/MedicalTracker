@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
+
 import static junit.framework.TestCase.assertTrue;
 
 public class RecordListUnitTest

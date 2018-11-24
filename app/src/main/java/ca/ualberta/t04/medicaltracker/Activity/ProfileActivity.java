@@ -12,8 +12,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +21,7 @@ import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
   This activity is for displaying the profile detail of a general user
@@ -100,7 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // get new birthday
         EditText birthday = findViewById(R.id.profile_birthday);
-        DateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        DateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         Date newBirthday = null;
         try {
             newBirthday = format.parse(birthday.getText().toString());

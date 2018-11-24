@@ -6,6 +6,9 @@ import android.media.Image;
 import org.junit.Test;
 import java.util.*;
 
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+
 import static org.junit.Assert.*;
 
 /**
@@ -29,7 +32,7 @@ public class RecordUnitTest {
         assertTrue("Title should be 'RecordTest'", record.getTitle().equals("RecordTest"));
         assertTrue("Description should be 'This is Unit Test For Record'", record.getDescription().equals("This is Unit Test For Record"));
         assertEquals(record.getDateStart(),date);
-        assertEquals(record.getImages(),bodyImage);
+        assertEquals(record.getPhotos(),bodyImage);
         assertEquals(record.getLocation(),location);
 
         //setLocation and getLocation test
@@ -72,10 +75,10 @@ public class RecordUnitTest {
         record.addImage(testImage1);
         record.addImage(testImage2);
 
-        assertEquals(bodyImage,record.getImages());
+        assertEquals(bodyImage,record.getPhotos());
 
         record.removeImage(testImage1);
-        assertEquals(bodyImage,record.getImages());
+        assertEquals(bodyImage,record.getPhotos());
     }
 
 }

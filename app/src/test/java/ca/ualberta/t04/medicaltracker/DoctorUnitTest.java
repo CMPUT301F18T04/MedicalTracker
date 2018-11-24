@@ -2,6 +2,9 @@ package ca.ualberta.t04.medicaltracker;
 
 import org.junit.Test;
 
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
+import ca.ualberta.t04.medicaltracker.Model.Patient;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;

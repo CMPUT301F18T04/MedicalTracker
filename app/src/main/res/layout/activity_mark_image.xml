@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
-    tools:context=".Activity.MarkImageActivity">
+    tools:context=".Activity.Patient.MarkImageActivity">
 
     <ImageView
         android:id="@+id/mark_image_view"

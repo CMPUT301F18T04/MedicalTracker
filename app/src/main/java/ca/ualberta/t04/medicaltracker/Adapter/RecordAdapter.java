@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
   This class represents a custom adapter for displaying records
@@ -41,7 +41,7 @@ public class RecordAdapter extends ArrayAdapter {
         TextView date = view.findViewById(R.id.record_list_date);
         TextView description = view.findViewById(R.id.record_list_description);
 
-        SimpleDateFormat format = new SimpleDateFormat(Util.TIME_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.TIME_FORMAT, Locale.getDefault());
 
         title.setText(record.getTitle());
         date.setText(format.format(record.getDateStart()));

@@ -1,4 +1,4 @@
-package ca.ualberta.t04.medicaltracker;
+package ca.ualberta.t04.medicaltracker.Util;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

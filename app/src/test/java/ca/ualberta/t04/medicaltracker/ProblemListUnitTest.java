@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.util.Date;
 
 
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.ProblemList;
+
 import static junit.framework.TestCase.assertTrue;
 
 public class ProblemListUnitTest

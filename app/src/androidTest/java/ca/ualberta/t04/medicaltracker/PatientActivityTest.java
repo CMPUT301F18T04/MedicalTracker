@@ -1,34 +1,16 @@
 package ca.ualberta.t04.medicaltracker;
 
-import android.content.Context;
-import android.support.design.widget.NavigationView;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.robotium.solo.Solo;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
-
-import ca.ualberta.t04.medicaltracker.Activity.DoctorActivity;
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
-import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 
 import static org.junit.Assert.assertEquals;
 

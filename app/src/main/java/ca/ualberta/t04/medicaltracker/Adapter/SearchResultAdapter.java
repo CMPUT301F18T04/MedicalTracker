@@ -14,11 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import ca.ualberta.t04.medicaltracker.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
-import ca.ualberta.t04.medicaltracker.Record;
+import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.SearchType;
-import ca.ualberta.t04.medicaltracker.Util;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 /*
  This class represents a custom adapter for search results
@@ -55,7 +55,7 @@ public class SearchResultAdapter extends ArrayAdapter {
     }
 
     private void fillData(TextView username, TextView title, TextView date, TextView description, ImageView imageView, Object[] object){
-        SimpleDateFormat format = new SimpleDateFormat(Util.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         String userName = (String) object[0];
         username.setText(userName);
         if(searchType.equals(SearchType.Problem)){
