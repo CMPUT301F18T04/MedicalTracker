@@ -73,7 +73,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     }
 
     // Setting up the Doctor comment list view
-    private void InitDoctorCommentListView(RecordList recordList, Record record, final Patient patient){
+    private void InitDoctorCommentListView(RecordList recordList, final Record record, final Patient patient){
         ListView commentListView = findViewById(R.id.CommentListView);
 
         final HashMap<String, ArrayList<String>> dComment = record.getComments();
@@ -89,6 +89,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             @Override
             public void update() {
                 comments.clear();
+                doctorList.clear();
+                doctorList.addAll(record.getComments().keySet());
                 comments.addAll(getComment(dComment, doctorList));
                 adapter.notifyDataSetChanged();
                 ElasticSearchController.updateUser(patient);

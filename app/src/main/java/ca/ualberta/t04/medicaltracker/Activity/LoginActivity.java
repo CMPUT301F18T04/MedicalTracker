@@ -16,6 +16,7 @@ import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.User;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 /*
   This activity is for logging in
@@ -32,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
+        if(!NetworkUtil.isNetworkConnected(this)){
+            Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         EditText username_text = findViewById(R.id.login_username);
 
         if (username_text.getText().toString().equals("")) {
