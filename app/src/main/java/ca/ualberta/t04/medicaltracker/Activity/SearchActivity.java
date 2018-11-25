@@ -2,14 +2,19 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,6 +23,8 @@ import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorRecordDetailActivity
 import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.Adapter.SearchResultAdapter;
+import ca.ualberta.t04.medicaltracker.BodyLocation;
+import ca.ualberta.t04.medicaltracker.BodyLocationPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
@@ -33,38 +40,24 @@ import ca.ualberta.t04.medicaltracker.SearchType;
 public class SearchActivity extends AppCompatActivity {
 
     private SearchType searchType = SearchType.Problem;
+    private SearchType locationType = SearchType.NoLocation;
+    private BodyLocation bodyLocation = null;
     private int currentPage = 0;
+    private TextView locationInfo;
 
     private ArrayList<Object[]> result = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        locationInfo = findViewById(R.id.search_location_info);
 
         initPage();
     }
 
     private void initPage(){
-        // init the spinner
-        final String[] types = new String[]{SearchType.Problem.name(), SearchType.Record.name()};
-
-        Spinner spinner = findViewById(R.id.search_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                searchType = SearchType.valueOf(types[position]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        initSearchSpinner();
+        initLocationSpinner();
 
         // init the search view
         final SearchView searchView = findViewById(R.id.search_searchView);
@@ -88,13 +81,151 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    private void initInformationTextView(final TextView textView){
+        Button button = findViewById(R.id.search_button_choose_location);
+        if(locationType.equals(SearchType.BodyLocation)){
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initPopupWindow();
+                }
+            });
+        }
+    }
+
+    private void initPopupWindow(){
+        LayoutInflater layoutInflater = LayoutInflater.from(SearchActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.body_location_popup, null);
+
+        Button head = promptView.findViewById(R.id.body_location_head);
+        Button leftArm = promptView.findViewById(R.id.body_location_left_arm);
+        Button rightArm = promptView.findViewById(R.id.body_location_right_arm);
+        Button torso = promptView.findViewById(R.id.body_location_torso);
+        Button leftLeg = promptView.findViewById(R.id.body_location_left_leg);
+        Button rightLeg = promptView.findViewById(R.id.body_location_right_leg);
+
+        final AlertDialog ad = new AlertDialog.Builder(SearchActivity.this)
+                .setView(promptView)
+                .create();
+
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.Head, ad);
+            }
+        });
+
+        leftArm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.LeftArm, ad);
+            }
+        });
+
+        rightArm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.RightArm, ad);
+            }
+        });
+
+        torso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.Torso, ad);
+            }
+        });
+
+        leftLeg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.LeftLeg, ad);
+            }
+        });
+
+        rightLeg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignBodyLocation(BodyLocation.RightLeg, ad);
+            }
+        });
+        ad.show();
+    }
+
+    private void assignBodyLocation(BodyLocation bodyLocation, AlertDialog ad){
+        this.bodyLocation = bodyLocation;
+        locationInfo.setText(bodyLocation.name());
+        ad.dismiss();
+    }
+
+    // init the first spinner
+    private void initSearchSpinner(){
+        final String[] types = new String[]{SearchType.Problem.name(), SearchType.Record.name()};
+
+        Spinner spinner = findViewById(R.id.search_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                searchType = SearchType.valueOf(types[position]);
+                if(searchType.equals(SearchType.Problem)){
+                    Spinner locationSpinner = findViewById(R.id.search_spinner2);
+                    locationSpinner.setSelection(0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    // init the second spinner
+    private void initLocationSpinner(){
+        final String[] locationTypes = new String[]{SearchType.NoLocation.name(), SearchType.GeoLocation.name(), SearchType.BodyLocation.name()};
+        Spinner locationSpinner = findViewById(R.id.search_spinner2);
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationTypes);
+        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(locationAdapter);
+
+        locationSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                locationType = SearchType.valueOf(locationTypes[position]);
+
+                Button button = findViewById(R.id.search_button_choose_location);
+                if(!locationType.equals(SearchType.NoLocation)){
+                    locationInfo.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
+                    locationInfo.setText("");
+                    initInformationTextView(locationInfo);
+                    Spinner searchSpinner = findViewById(R.id.search_spinner);
+                    searchSpinner.setSelection(1);
+                    bodyLocation = null;
+                } else {
+                    locationInfo.setVisibility(View.GONE);
+                    button.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         if(currentPage>0){
             if(currentPage==1){
                 refreshSearchResultListView(result);
             }
-
             currentPage --;
         } else {
             super.onBackPressed();
@@ -176,7 +307,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<Object[]> search(String keyword, SearchType searchType){
         ArrayList<Object[]> result = new ArrayList<>();
       
-        if (DataController.getUser().isDoctor() == true) {
+        if (DataController.getUser().isDoctor()) {
             ArrayList<Patient> patients = DataController.getDoctor().getPatients();
             if (searchType.equals(SearchType.Problem)) {
                 for (Patient patient : patients) {
@@ -199,20 +330,30 @@ public class SearchActivity extends AppCompatActivity {
                         ArrayList<Record> records = problem.getRecordList().getRecords();
                         for (Record record : records) {
                             if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
-                                Object[] searchedRecord = new Object[5];
-                                searchedRecord[0] = patient.getUserName();
-                                searchedRecord[1] = record;
-                                searchedRecord[2] = patients.indexOf(patient);
-                                searchedRecord[3] = problems.indexOf(problem);
-                                searchedRecord[4] = records.indexOf(record);
-                                result.add(searchedRecord);
+                                if(bodyLocation!=null && record.getBodyLocation().equals(bodyLocation)){
+                                    Object[] searchedRecord = new Object[5];
+                                    searchedRecord[0] = patient.getUserName();
+                                    searchedRecord[1] = record;
+                                    searchedRecord[2] = patients.indexOf(patient);
+                                    searchedRecord[3] = problems.indexOf(problem);
+                                    searchedRecord[4] = records.indexOf(record);
+                                    result.add(searchedRecord);
+                                } else if(bodyLocation==null){
+                                    Object[] searchedRecord = new Object[5];
+                                    searchedRecord[0] = patient.getUserName();
+                                    searchedRecord[1] = record;
+                                    searchedRecord[2] = patients.indexOf(patient);
+                                    searchedRecord[3] = problems.indexOf(problem);
+                                    searchedRecord[4] = records.indexOf(record);
+                                    result.add(searchedRecord);
+                                }
                             }
                         }
 
                     }
                 }
             }
-        }else if (DataController.getUser().isDoctor() == false) {
+        }else {
             Patient patient = DataController.getPatient();
             if (searchType.equals(SearchType.Problem)) {
                 ArrayList<Problem> problems = patient.getProblemList().getProblems();
@@ -232,13 +373,23 @@ public class SearchActivity extends AppCompatActivity {
                     ArrayList<Record> records = problem.getRecordList().getRecords();
                     for (Record record : records) {
                         if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
-                            Object[] searchedRecord = new Object[5];
-                            searchedRecord[0] = patient.getUserName();
-                            searchedRecord[1] = record;
-                            searchedRecord[2] = -1;
-                            searchedRecord[3] = problems.indexOf(problem);
-                            searchedRecord[4] = records.indexOf(record);
-                            result.add(searchedRecord);
+                            if(bodyLocation!=null && record.getBodyLocation().equals(bodyLocation)){
+                                Object[] searchedRecord = new Object[5];
+                                searchedRecord[0] = patient.getUserName();
+                                searchedRecord[1] = record;
+                                searchedRecord[2] = -1;
+                                searchedRecord[3] = problems.indexOf(problem);
+                                searchedRecord[4] = records.indexOf(record);
+                                result.add(searchedRecord);
+                            } else if(bodyLocation==null){
+                                Object[] searchedRecord = new Object[5];
+                                searchedRecord[0] = patient.getUserName();
+                                searchedRecord[1] = record;
+                                searchedRecord[2] = -1;
+                                searchedRecord[3] = problems.indexOf(problem);
+                                searchedRecord[4] = records.indexOf(record);
+                                result.add(searchedRecord);
+                            }
                         }
                     }
                 }

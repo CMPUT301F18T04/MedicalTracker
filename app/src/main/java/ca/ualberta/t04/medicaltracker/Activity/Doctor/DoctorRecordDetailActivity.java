@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final TextView title = findViewById(R.id.doctorRecordTitle);
         final TextView date = findViewById(R.id.dRecordDetailDate);
         final TextView description = findViewById(R.id.dRecordDetailDescription);
+        ImageView imageView = findViewById(R.id.imageView3);
 
         Button commentButton = findViewById(R.id.doctorCommentButton);
 
@@ -54,7 +56,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final RecordList recordList = problem.getRecordList();
         final Record record = recordList.getRecord(recordIndex);
 
-
+        imageView.setImageBitmap(record.getPhotos().get(0));
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
         description.setText(record.getDescription());

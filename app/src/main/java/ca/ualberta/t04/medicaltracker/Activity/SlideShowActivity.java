@@ -69,7 +69,6 @@ public class SlideShowActivity extends AppCompatActivity {
                     finish();
                 }
 
-                viewPager.removeViewAt(currentIndex);
                 imageAdapter.notifyDataSetChanged();
             }
         });

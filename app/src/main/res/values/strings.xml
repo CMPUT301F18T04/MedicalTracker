@@ -176,6 +176,7 @@
     <string name="add_record_button_add">Add</string>
     <string name="add_record_toast">An error occurs</string>
     <string name="add_record_toast2">Added a new record</string>
+    <string name="add_record_toast3">You can\'t add more photos!</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -191,6 +192,9 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">Choose Location</string>
+
     <string name="record_detail_location_text">Location:</string>
     <string name="register_button_birthday">Set birthday</string>
     <string name="title_activity_password">PasswordActivity</string>

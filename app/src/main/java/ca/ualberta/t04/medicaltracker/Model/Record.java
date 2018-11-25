@@ -38,14 +38,17 @@ public class Record
         this.dateStart = dateStart;
         this.description = description;
         this.photos = new ArrayList<>();
-        for(Bitmap bitmap:bitmaps){
-            String string = ImageUtil.convertBitmapToString(bitmap);
-            if(string.length()<65536){
-                this.photos.add(string);
-            } else {
-                Log.d("Succeed", "Too long" + String.valueOf(string.length()));
+        if(bitmaps!=null){
+            for(Bitmap bitmap:bitmaps){
+                String string = ImageUtil.convertBitmapToString(bitmap);
+                if(string.length()<65536){
+                    this.photos.add(string);
+                } else {
+                    Log.d("Succeed", "Too long" + String.valueOf(string.length()));
+                }
             }
         }
+
         this.location = location;
         this.bodyLocation = bodyLocation;
 

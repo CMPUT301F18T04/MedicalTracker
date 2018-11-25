@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -171,10 +172,14 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);}
         else{
-
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            if(bitmaps.size()<10){
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+            else {
+                Toast.makeText(AddRecordActivity.this, getString(R.string.add_record_toast3), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -239,7 +244,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
             bitmaps = BitmapHolder.getBitmaps();
             if(bitmaps.isEmpty()){
-                imageView.setImageBitmap(null);
+                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_gallery));
             } else {
                 imageView.setImageBitmap(bitmaps.get(0));
             }
@@ -329,7 +334,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         */
 
         // create a new record
-        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), null, null, null);
+        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null, null);
 
         // use dataController to notify the change of record
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
