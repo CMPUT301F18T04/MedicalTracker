@@ -9,23 +9,12 @@
 
     <!-- String for Login Page -->
     <string name="login_text_username">UserName:</string>
-    <string name="login_text_password">Password:</string>
     <string name="login_button_login">Login</string>
     <string name="login_button_register">Register</string>
     <string name="login_toast1">UserName cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
     <!-- end for Login Page -->
-
-    <!-- String for password activity -->
-    <string name="password_toast1">Old password is not correct!</string>
-    <string name="password_toast2">Password can not be empty!</string>
-    <string name="password_toast3">Password should between 6\-20 characters!</string>
-    <string name="password_toast4">Password contains invalid characters!</string>
-    <string name="password_toast5">Password does not match confirmed password!</string>
-    <string name="password_toast6">New password cannot be same with old one!</string>
-    <string name="password_toast7">Your password has been updated!</string>
-    <!-- end for password activity -->
 
 
     <!-- String for Main Page -->
@@ -99,15 +88,8 @@
     <!-- String for Setting Page -->
     <string name="title_activity_settings">Settings</string>
     <string name="title_nickname">NickName:</string>
-    <string name="change_password">Change Password</string>
     <string name="change_language">Change Language</string>
-    <string name="old_password">Old Password</string>
-    <string name="new_password">New Password</string>
-    <string name="apply_change">Apply</string>
-    <string name="confirmed_password">Confirmed Password</string>
-    <string name="save_password">Save</string>
-    <string name="setting_toast1">Your name cannot be empty!</string>
-
+    <string name="language_change_toast">You already updated the language</string>
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
@@ -118,8 +100,6 @@
 
     <!-- String for Register Page -->
     <string name="register_text_username">UserName:</string>
-    <string name="register_text_password">Password:</string>
-    <string name="register_text_confirmed_password">Confirmed Password:</string>
     <string name="register_text_email">Email:</string>
     <string name="register_text_birthday">Birthday:</string>
     <string name="register_text_sex">Sex:</string>
@@ -133,10 +113,6 @@
     <string name="register_toast1">Username can not be empty!</string>
     <string name="register_toast2">Username should between 4\-15 characters</string>
     <string name="register_toast3">Username contains invalid characters!</string>
-    <string name="register_toast4">Password can not be empty!</string>
-    <string name="register_toast5">Password should between 6\-20 characters!</string>
-    <string name="register_toast6">Password contains invalid characters!</string>
-    <string name="register_toast7">Password does not match confirmed password!</string>
     <string name="register_toast8">Phone number is not valid!</string>
     <string name="register_toast9">Email is not valid!</string>
     <string name="register_toast10">Duplicated UserName</string>
@@ -193,7 +169,6 @@
     <string name="search_button_search">Search</string>
     <string name="record_detail_location_text">Location:</string>
     <string name="register_button_birthday">Set birthday</string>
-    <string name="title_activity_password">PasswordActivity</string>
     <string name="title_activity_language">LanguageActivity</string>
     <string name="search_toast1">No results found</string>
     <!-- end for Search Page -->

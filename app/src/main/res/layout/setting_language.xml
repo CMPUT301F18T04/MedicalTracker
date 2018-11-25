@@ -34,6 +34,7 @@
         android:layout_marginTop="8dp"
         android:gravity="end"
         android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
