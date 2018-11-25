@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 DataController.setUser(doctor);
 
                 if(isNewDevice(user)){
-                    Toast.makeText(this, "You logged in a new device", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
                     user.setDeviceId(deviceId);
                     ElasticSearchController.updateUser(user);
                 }
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 DataController.setUser(patient);
 
                 if(isNewDevice(user)){
-                    Toast.makeText(this, "You logged in a new device", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
                     user.setDeviceId(deviceId);
                     ElasticSearchController.updateUser(user);
                 }

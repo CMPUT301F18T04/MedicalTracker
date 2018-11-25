@@ -33,12 +33,12 @@ public class LanguageActivity extends AppCompatActivity {
 
         languageData = new ArrayList<>();
 
-        languageData.add(new Language(R.drawable.china,"Chinese"));
-        languageData.add(new Language(R.drawable.canada,"Canadian English"));
-        languageData.add(new Language(R.drawable.france,"French"));
-        languageData.add(new Language(R.drawable.japan,"Japanese"));
-        languageData.add(new Language(R.drawable.hk,"Traditional Chinese(HK)"));
-        languageData.add(new Language(R.drawable.macao,"Traditional Chinese(Macao)"));
+        languageData.add(new Language(R.drawable.china,getString(R.string.Chinese)));
+        languageData.add(new Language(R.drawable.canada,getString(R.string.English)));
+        languageData.add(new Language(R.drawable.france,getString(R.string.French)));
+        languageData.add(new Language(R.drawable.japan,getString(R.string.Japanese)));
+        languageData.add(new Language(R.drawable.hk,getString(R.string.HK)));
+        languageData.add(new Language(R.drawable.macao,getString(R.string.Macao)));
 
 
         final ListView listView = findViewById(R.id.CountryList);
@@ -50,27 +50,21 @@ public class LanguageActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if(position == 0){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to Chinese",Toast.LENGTH_SHORT).show();
                     setLocale("zh","CN");
                 }
                 if(position == 1){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to English",Toast.LENGTH_SHORT).show();
                     setLocale("en","CA");
                 }
                 if(position == 2){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to French",Toast.LENGTH_SHORT).show();
                     setLocale("fr","CA");
                 }
                 if(position == 3){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to Japanese",Toast.LENGTH_SHORT).show();
                     setLocale("ja","JP");
                 }
                 if(position == 4){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to Traditional Chinese",Toast.LENGTH_SHORT).show();
                     setLocale("zh","HK");
                 }
                 if(position == 5){
-                    Toast.makeText(getApplicationContext(),"You have changed the language to Traditional Chinese",Toast.LENGTH_SHORT).show();
                     setLocale("zh","MO");
                 }
             }
@@ -85,9 +79,10 @@ public class LanguageActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, LanguageActivity.class);
+        Intent refresh = new Intent(this, LoginActivity.class);
         startActivity(refresh);
         finish();
+        Toast.makeText(getApplicationContext(),R.string.language_change_toast,Toast.LENGTH_SHORT).show();
     }
 
 

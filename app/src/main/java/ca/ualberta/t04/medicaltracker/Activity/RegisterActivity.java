@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             if(phoneNumber.length() < 5 || phoneNumber.length() > 15){
-                Toast.makeText(RegisterActivity.this,"Phone number should between 5-15 digits!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this,R.string.register_toast12,Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 Date newBirthday = format.parse(birthday);
                 if(current_date.before(newBirthday)){
-                    Toast.makeText(RegisterActivity.this,"Your birthday should beyond current date!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,R.string.register_toast13,Toast.LENGTH_SHORT).show();
                     return;
                 }
             }catch(ParseException e) {

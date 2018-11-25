@@ -14,6 +14,7 @@
     <string name="login_toast1">UserName cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
+    <string name="login_toast4">"You logged in a new device"</string>
     <!-- end for Login Page -->
 
 
@@ -89,7 +90,12 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_nickname">NickName:</string>
     <string name="change_language">Change Language</string>
-    <string name="language_change_toast">You already updated the language</string>
+    <string name="Chinese">Chinese</string>
+    <string name="Japanese">Japanese</string>
+    <string name="French">French</string>
+    <string name="English">Canadian English</string>
+    <string name="HK">Traditional Chinese(HK)</string>
+    <string name="Macao">Traditional Chinese(Macao)</string>
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
@@ -117,6 +123,8 @@
     <string name="register_toast9">Email is not valid!</string>
     <string name="register_toast10">Duplicated UserName</string>
     <string name="register_toast11">Succeeded to Sign Up</string>
+    <string name="register_toast12">Phone number should between 5\-15 digits!</string>
+    <string name="register_toast13">Your birthday should beyond current date!</string>
     <!-- end for Register Page -->
 
     <!-- String for Profile Page -->
