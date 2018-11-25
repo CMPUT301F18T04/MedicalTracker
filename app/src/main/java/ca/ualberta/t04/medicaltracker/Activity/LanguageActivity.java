@@ -6,7 +6,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import java.util.Locale;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import ca.ualberta.t04.medicaltracker.Adapter.LanguageAdapter;
@@ -45,10 +49,45 @@ public class LanguageActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),R.string.language_change_toast,Toast.LENGTH_SHORT).show();
+                if(position == 0){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to Chinese",Toast.LENGTH_SHORT).show();
+                    setLocale("zh","CN");
+                }
+                if(position == 1){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to English",Toast.LENGTH_SHORT).show();
+                    setLocale("en","CA");
+                }
+                if(position == 2){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to French",Toast.LENGTH_SHORT).show();
+                    setLocale("fr","CA");
+                }
+                if(position == 3){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to Japanese",Toast.LENGTH_SHORT).show();
+                    setLocale("ja","JP");
+                }
+                if(position == 4){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to Traditional Chinese",Toast.LENGTH_SHORT).show();
+                    setLocale("zh","HK");
+                }
+                if(position == 5){
+                    Toast.makeText(getApplicationContext(),"You have changed the language to Traditional Chinese",Toast.LENGTH_SHORT).show();
+                    setLocale("zh","MO");
+                }
             }
         });
 
+    }
+
+    public void setLocale(String lang,String district) {
+        Locale myLocale = new Locale(lang,district);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, LanguageActivity.class);
+        startActivity(refresh);
+        finish();
     }
 
 

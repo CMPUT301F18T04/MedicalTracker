@@ -23,6 +23,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:configChanges="locale|orientation"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.LoginActivity"
@@ -57,11 +58,8 @@
         <activity android:name=".Activity.SearchActivity" />
         <activity android:name=".Activity.Doctor.DoctorRecordDetailActivity" />
         <activity
-            android:name=".Activity.PasswordActivity"
-            android:label="@string/title_activity_password"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".Activity.LanguageActivity"
+            android:configChanges="locale|orientation"
             android:label="@string/title_activity_language"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.Doctor.ScanActivity" />
