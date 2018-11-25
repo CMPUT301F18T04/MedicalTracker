@@ -17,6 +17,30 @@
     <string name="login_toast4">"You logged in a new device"</string>
     <!-- end for Login Page -->
 
+    <!-- String for Register Page -->
+    <string name="register_text_username">UserName:</string>
+    <string name="register_text_password">Password:</string>
+    <string name="register_text_confirmed_password">Confirmed Password:</string>
+    <string name="register_text_email">Email:</string>
+    <string name="register_text_birthday">Birthday:</string>
+    <string name="register_text_sex">Sex:</string>
+    <string name="register_text_phone">Phone:</string>
+    <string name="register_text_i_am">I am:</string>
+    <string name="register_text_male">Male</string>
+    <string name="register_text_female">Female</string>
+    <string name="register_text_patient">Patient</string>
+    <string name="register_text_doctor">Doctor</string>
+    <string name="register_button_sign_up">Sign up</string>
+    <string name="register_toast1">Username can not be empty!</string>
+    <string name="register_toast2">Username should between 4\-15 characters</string>
+    <string name="register_toast3">Username contains invalid characters!</string>
+    <string name="register_toast8">Phone number is not valid!</string>
+    <string name="register_toast9">Email is not valid!</string>
+    <string name="register_toast10">Duplicated UserName</string>
+    <string name="register_toast11">Succeeded to Sign Up</string>
+    <string name="register_toast12">The phone number should between 5\-16 digits!</string>
+    <string name="register_toast13">Your birthday should beyond current time!</string>
+    <!-- end for Register Page -->
 
     <!-- String for Main Page -->
     <string name="title_activity_main">MainActivity</string>
@@ -96,6 +120,7 @@
     <string name="English">Canadian English</string>
     <string name="HK">Traditional Chinese(HK)</string>
     <string name="Macao">Traditional Chinese(Macao)</string>
+    <string name="language_change_toast">Please re-login to apply the changing</string>
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
@@ -104,28 +129,7 @@
     <string name="about_text_developer">Developer:(In no particular order)</string>
     <!-- end for About Page -->
 
-    <!-- String for Register Page -->
-    <string name="register_text_username">UserName:</string>
-    <string name="register_text_email">Email:</string>
-    <string name="register_text_birthday">Birthday:</string>
-    <string name="register_text_sex">Sex:</string>
-    <string name="register_text_phone">Phone:</string>
-    <string name="register_text_i_am">I am:</string>
-    <string name="register_text_male">Male</string>
-    <string name="register_text_female">Female</string>
-    <string name="register_text_patient">Patient</string>
-    <string name="register_text_doctor">Doctor</string>
-    <string name="register_button_sign_up">Sign up</string>
-    <string name="register_toast1">Username can not be empty!</string>
-    <string name="register_toast2">Username should between 4\-15 characters</string>
-    <string name="register_toast3">Username contains invalid characters!</string>
-    <string name="register_toast8">Phone number is not valid!</string>
-    <string name="register_toast9">Email is not valid!</string>
-    <string name="register_toast10">Duplicated UserName</string>
-    <string name="register_toast11">Succeeded to Sign Up</string>
-    <string name="register_toast12">Phone number should between 5\-15 digits!</string>
-    <string name="register_toast13">Your birthday should beyond current date!</string>
-    <!-- end for Register Page -->
+
 
     <!-- String for Profile Page -->
     <string name="profile_title">Your Profile:</string>
