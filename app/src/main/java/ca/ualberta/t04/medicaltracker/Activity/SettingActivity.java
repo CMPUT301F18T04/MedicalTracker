@@ -22,11 +22,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
     }
 
-    public void changePassword(View view){
-        Intent password = new Intent(SettingActivity.this,PasswordActivity.class);
-        startActivity(password);
-    }
-
     public void changeLanguage(View view){
         Intent language = new Intent(SettingActivity.this,LanguageActivity.class);
         startActivity(language);

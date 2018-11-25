@@ -22,8 +22,8 @@ public class Patient extends User
     private transient ArrayList<Doctor> doctors = null;
     private ArrayList<String> notifyDoctors;
 
-    public Patient(String userName, String password) {
-        super(userName, password, false);
+    public Patient(String userName) {
+        super(userName, false);
         if(problemList==null)
             problemList = new ProblemList();
         if(doctors==null)

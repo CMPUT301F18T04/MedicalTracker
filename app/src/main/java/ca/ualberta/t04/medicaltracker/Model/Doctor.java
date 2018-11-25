@@ -20,8 +20,8 @@ public class Doctor extends User
     private ArrayList<String> patientsUserNames;
     private transient ArrayList<Patient> patients;
 
-    public Doctor(String userName, String password) {
-        super(userName, password, true);
+    public Doctor(String userName) {
+        super(userName, true);
         if(patients == null)
             patients = new ArrayList<>();
         if(patientsUserNames == null)

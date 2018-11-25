@@ -27,15 +27,13 @@ public class User
     private String email;
     private Boolean isMale;
     private String phoneNumber;
-    private String password;
     private String address;
     private String deviceId;
 
-    public User(String userName, String password, Boolean isDoctor)
+    public User(String userName, Boolean isDoctor)
     {
         this.userName = userName;
         this.isDoctor = isDoctor;
-        this.password = password;
 
         deviceId = null;
     }
@@ -193,22 +191,6 @@ public class User
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    /**
-     * Gets the password of a user
-     * @return String password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets the password of a user
-     * @param password String
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
