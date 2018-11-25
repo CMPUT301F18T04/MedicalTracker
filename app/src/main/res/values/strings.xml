@@ -234,5 +234,7 @@
     <string name="slide_show_button">Delete</string>
     <!-- end for slide show page -->
 
-
+    <!-- Common String -->
+    <string name="common_string_no_network">Cannot connect to network!</string>
+    <!-- end for Common String -->
 </resources>

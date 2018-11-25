@@ -1,7 +1,11 @@
 package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -34,6 +38,7 @@ import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 /*
   This activity is for the main page of a patient user
@@ -44,6 +49,8 @@ import ca.ualberta.t04.medicaltracker.R;
 public class PatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private boolean offline = false;
+    private BroadcastReceiver connectionReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,22 @@ public class PatientActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         initProblemListView();
+
+        connectionReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(NetworkUtil.isNetworkConnected(context) && offline){
+                    ElasticSearchController.updateUser(DataController.getPatient());
+                    Toast.makeText(context, "Network connected, your data has been updated", Toast.LENGTH_SHORT).show();
+                    offline = false;
+                } else if(!NetworkUtil.isNetworkConnected(context)){
+                    offline = true;
+                }
+            }
+        };
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(connectionReceiver, intentFilter);
     }
 
     // Init list view of patients
@@ -245,12 +268,20 @@ public class PatientActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) // if the button profile is clicked, ProfileActivity will come up
         {
+            if(!NetworkUtil.isNetworkConnected(this)){
+                Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
+                return true;
+            }
             Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {  // if the button gallary is clicked, GalleryActivity will come up
             // need to fill in the GalleryActivity
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) { // if the button doctor is clicked, DoctorViewActivity will come up
+            if(!NetworkUtil.isNetworkConnected(this)){
+                Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
+                return true;
+            }
             Intent intent = new Intent(PatientActivity.this, DoctorViewActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_setting) { // if the button setting is clicked, SettingActivity will come up
@@ -260,6 +291,7 @@ public class PatientActivity extends AppCompatActivity
             DataController.setUser(null); // notify the DataController to set the user as null
             Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
+            unregisterReceiver(connectionReceiver);
             finish();
         } else if(id == R.id.nav_about) { // if the button about is clicked, AboutActivity will come up
             Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
