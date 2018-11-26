@@ -76,13 +76,11 @@ public class LoginActivity extends AppCompatActivity {
             }
             String language = user.getLanguage();
             String district = user.getDistrict();
-            System.out.print(language);
-            System.out.println(district);
-            if(language.equals("") && district.equals("")){
-                setLocale("en","CA");
-            }
-            else{
+
+            try{
                 setLocale(language,district);
+            }catch(Exception e){
+                setLocale("en","CA");
             }
             finish();
         } else {
