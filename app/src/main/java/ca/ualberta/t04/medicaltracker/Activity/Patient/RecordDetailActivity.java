@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
@@ -50,8 +51,8 @@ public class RecordDetailActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.saveButton);
 
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
-        RecordList recordList = problem.getRecordList();
-        Record record = recordList.getRecord(recordIndex);
+        final RecordList recordList = problem.getRecordList();
+        final Record record = recordList.getRecord(recordIndex);
 
         // set the information
         title.setText(record.getTitle());
@@ -62,13 +63,11 @@ public class RecordDetailActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                problem.getRecordList().getRecord(recordIndex).setTitle(title.getText().toString());
+                recordList.setTitle(record, title.getText().toString());
 
-                problem.getRecordList().getRecord(recordIndex).setDescription(description.getText().toString());
+                recordList.setDescription(record, description.getText().toString());
 
-                problem.getRecordList().setTitle(problem.getRecordList().getRecord(recordIndex), title.getText().toString());
-
-                problem.getRecordList().setDescription(problem.getRecordList().getRecord(recordIndex), description.getText().toString());
+                ElasticSearchController.updateRecord(record);
 
                 Toast.makeText(RecordDetailActivity.this, "New edits saved", Toast.LENGTH_SHORT).show();
 

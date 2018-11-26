@@ -48,6 +48,7 @@ import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 /*
   This activity is for adding a record to a problem for a patient user
@@ -90,9 +91,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         // ask permission
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // get the current location
             Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
             onLocationChanged(location); // call onLocationChanged
@@ -335,7 +336,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null, null);
-
+        // if no network, then add the record in the offline record and wait for reconnecting
+        if(!NetworkUtil.isNetworkConnected(this)){
+            DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addOfflineRecord(record);
+        }
         // use dataController to notify the change of record
         DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
 

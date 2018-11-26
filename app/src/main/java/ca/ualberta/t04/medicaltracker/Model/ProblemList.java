@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 
 /**
@@ -16,6 +17,7 @@ import ca.ualberta.t04.medicaltracker.Listener;
 
 public class ProblemList
 {
+    private int currentId = 1;
     private ArrayList<Problem> problems;
     private transient HashMap<String, Listener> listeners = new HashMap<>();
 
@@ -36,8 +38,11 @@ public class ProblemList
      * @param problem Problem
      */
     public void addProblem(Problem problem){
+        String problemId = "problem" + this.currentId;
         problems.add(problem);
+        problem.setProblemId(problemId);
         notifyAllListener();
+        this.currentId += 1;
     }
 
     /**
@@ -46,6 +51,7 @@ public class ProblemList
      */
     public void removeProblem(Problem problem){
         problems.remove(problem);
+        ElasticSearchController.deleteRecordList(problem.getRecordList().getRecordIds());
         notifyAllListener();
     }
 

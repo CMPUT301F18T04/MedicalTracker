@@ -60,7 +60,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
         }
 
         solo.enterText((EditText) solo.getView(R.id.login_username), "patient");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "123456");
+
         solo.clickOnButton("Login");
 
         assertTrue(solo.waitForActivity("PatientActivity"));

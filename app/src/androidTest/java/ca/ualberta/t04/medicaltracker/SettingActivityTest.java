@@ -37,12 +37,10 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
-            solo.clearEditText((EditText) solo.getView(R.id.login_password));
-            solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
             solo.clickOnButton("Login");
         }
 
@@ -59,41 +57,6 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("SettingActivity"));
 
-        // Click change password button
-        solo.clickOnView(solo.getView(R.id.setting_change_password));
-
-        // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("PasswordActivity"));
-
-        // File in old password,new password, confirm password
-        String userName = DataController.getUser().getUserName();
-        User user = ElasticSearchController.searchUser(userName);
-        String correctPassword = user.getPassword();
-
-        solo.enterText((EditText) solo.getView(R.id.old_password),correctPassword);
-        solo.enterText((EditText) solo.getView(R.id.new_password),"12345678");
-        solo.enterText((EditText) solo.getView(R.id.confirm_password),"12345678");
-
-        solo.clickOnButton("Save");
-
-        solo.goBackToActivity("SettingActivity");
-
-        solo.clickOnView(solo.getView(R.id.setting_change_password));
-
-        // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("PasswordActivity"));
-
-        // File in old password,new password, confirm password
-        userName = DataController.getUser().getUserName();
-        user = ElasticSearchController.searchUser(userName);
-        correctPassword = user.getPassword();
-
-        solo.enterText((EditText) solo.getView(R.id.old_password),correctPassword);
-        solo.enterText((EditText) solo.getView(R.id.new_password),"123456");
-        solo.enterText((EditText) solo.getView(R.id.confirm_password),"123456");
-
-        solo.clickOnButton("Save");
-        solo.getCurrentActivity().finish();
     }
 
 }

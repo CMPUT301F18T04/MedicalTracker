@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class Problem
 {
+    private String problemId;
     private RecordList recordList = null;
     private String title;
     private String description;
@@ -83,4 +84,12 @@ public class Problem
     }
 
 
+    public String getProblemId() {
+        return problemId;
+    }
+
+    public void setProblemId(String problemId) {
+        this.problemId = problemId;
+        recordList.setProblemId(problemId);
+    }
 }

@@ -36,6 +36,8 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
@@ -89,6 +91,13 @@ public class PatientActivity extends AppCompatActivity
             public void onReceive(Context context, Intent intent) {
                 if(NetworkUtil.isNetworkConnected(context) && offline){
                     ElasticSearchController.updateUser(DataController.getPatient());
+                    for(Problem problem:DataController.getPatient().getProblemList().getProblems()){
+                        RecordList recordList = problem.getRecordList();
+                        ArrayList<Record> records = recordList.getOfflineRecords();
+                        for(Record record:records){
+                            ElasticSearchController.createRecord(record);
+                        }
+                    }
                     Toast.makeText(context, "Network connected, your data has been updated", Toast.LENGTH_SHORT).show();
                     offline = false;
                 } else if(!NetworkUtil.isNetworkConnected(context)){
@@ -291,7 +300,6 @@ public class PatientActivity extends AppCompatActivity
             DataController.setUser(null); // notify the DataController to set the user as null
             Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
-            unregisterReceiver(connectionReceiver);
             finish();
         } else if(id == R.id.nav_about) { // if the button about is clicked, AboutActivity will come up
             Intent intent = new Intent(PatientActivity.this, AboutActivity.class);
@@ -305,5 +313,12 @@ public class PatientActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(connectionReceiver!=null)
+            unregisterReceiver(connectionReceiver);
     }
 }

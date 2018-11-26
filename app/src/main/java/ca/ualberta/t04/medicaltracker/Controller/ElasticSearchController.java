@@ -10,17 +10,24 @@ import com.searchly.jestdroid.JestClientFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.User;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Bulk;
+import io.searchbox.core.BulkResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
@@ -31,6 +38,7 @@ public class ElasticSearchController
 {
     private static JestClient client = null;
     private static String USER_TYPE = "user";
+    private static String RECORD_TYPE = "record";
     private static String INDEX_NAME = CommonUtil.INDEX_NAME;
     private static String IS_DOCTOR = "isDoctor";
 
@@ -333,6 +341,241 @@ public class ElasticSearchController
             else
                 return false;
         }
+    }
+
+    private static class UpdateRecordTask extends AsyncTask<Record, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Record... records) {
+            setClient();
+
+            Record record = records[0];
+            String recordId = record.getRecordId();
+
+            // Update the index with the unique userName
+            Index userNameIndex = new Index.Builder(record).index(INDEX_NAME).type(RECORD_TYPE).id(recordId).build();
+
+            try {
+                // Execute the add action
+                DocumentResult result = client.execute(userNameIndex);
+                if(result.isSucceeded()) {
+                    Log.d("Succeed", "Updated Record!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+                return null;
+            }
+            return null;
+        }
+    }
+
+    private static class CreateRecordTask extends AsyncTask<Record, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Record... records) {
+            setClient();
+            Record record = records[0];
+            Index recordIndex = new Index.Builder(record).index(INDEX_NAME).type(RECORD_TYPE).id(record.getRecordId()).build();
+
+            try
+            {
+                DocumentResult result = client.execute(recordIndex);
+                if(result.isSucceeded()){
+                    Log.d("Succeed", "Succeed to create a record!");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private static class SearchRecordTask extends AsyncTask<String, Void, Record>
+    {
+        @Override
+        protected Record doInBackground(String... recordIds) {
+            setClient();
+
+            String recordId = recordIds[0];
+
+            Get get = new Get.Builder(INDEX_NAME, recordId).type(RECORD_TYPE).build();
+
+            // If searched, then return object, otherwise return null
+            try {
+                DocumentResult result = client.execute(get);
+                Record record = result.getSourceAsObject(Record.class);
+                return record;
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private static class SearchRecordListTask extends AsyncTask<String, Void, ArrayList<Record>>
+    {
+        @Override
+        protected ArrayList<Record> doInBackground(String... recordIds) {
+            setClient();
+
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"values\" : [%s]\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+
+            StringBuilder ids = new StringBuilder();
+
+            for(int i=0; i<recordIds.length; i++){
+                ids.append("\"").append(recordIds[i]).append("\"");
+                if(i+1!=recordIds.length){
+                    ids.append(",");
+                }
+            }
+
+            query = query.replace("%s", ids);
+
+            Log.d("Succeed", query);
+
+            Search search = new Search.Builder(query)
+                    // multiple index or types can be added.
+                    .addIndex(INDEX_NAME)
+                    .addType(RECORD_TYPE)
+                    .build();
+
+            // If searched, then return object, otherwise return null
+            try {
+                SearchResult searchResult = client.execute(search);
+                if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
+                    Log.d("Succeed", String.valueOf(searchResult.getSourceAsStringList().size()));
+                    Log.d("Succeed", searchResult.getSourceAsStringList().get(0));
+
+                    // JsonParser is used to convert source string to JsonObject
+                    ArrayList<Record> records = new ArrayList<>(searchResult.getSourceAsObjectList(Record.class));
+                    return records;
+                }
+                else{
+                    Log.d("Succeed", "Nothing Found!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public static class DeleteRecordListTask extends AsyncTask<String, Void, Void>{
+        @Override
+        protected Void doInBackground(String... recordIds) {
+            setClient();
+
+            ArrayList<Delete> deletes = new ArrayList<>();
+
+            for(String recordId:recordIds){
+                Delete delete = new Delete.Builder(recordId)
+                        .index(INDEX_NAME)
+                        .type(RECORD_TYPE)
+                        .build();
+                deletes.add(delete);
+            }
+
+            Bulk bulk = new Bulk.Builder()
+                    .defaultType(INDEX_NAME)
+                    .defaultType(RECORD_TYPE)
+                    .addAction(deletes)
+                    .build();
+
+            try {
+                BulkResult bulkResult = client.execute(bulk);
+                if(bulkResult.isSucceeded()){
+                    Log.d("Succeed", "Deleted many records");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public static class DeleteRecordTask extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... recordIds) {
+            setClient();
+
+            String recordId = recordIds[0];
+
+            Delete delete = new Delete.Builder(recordId)
+                    .index(INDEX_NAME)
+                    .type(RECORD_TYPE)
+                    .build();
+
+            try {
+                JestResult jestResult = client.execute(delete);
+                if(jestResult.isSucceeded()){
+                    Log.d("Succeed", "Deleted!");
+                }
+                else{
+                    Log.d("Succeed", "Nothing Found!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public static Record searchRecord(String recordId){
+        try {
+            return new SearchRecordTask().execute(recordId).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void createRecord(Record record){
+        new UpdateRecordTask().execute(record);
+    }
+
+    public static void updateRecord(Record record){
+        new UpdateRecordTask().execute(record);
+    }
+
+    public static void deleteRecord(String recordId){
+        new DeleteRecordTask().execute(recordId);
+    }
+
+    public static void deleteRecordList(ArrayList<String> recordIds){
+        if(recordIds==null){
+            return;
+        }
+        new DeleteRecordListTask().execute((String[]) recordIds.toArray(new String[recordIds.size()]));
+    }
+
+    public static ArrayList<Record> searchRecordList(ArrayList<String> recordIds){
+        ArrayList<Record> records = null;
+        if(recordIds==null)
+            return new ArrayList<>();
+        try {
+            records = new SearchRecordListTask().execute((String[]) recordIds.toArray(new String[recordIds.size()])).get();
+            if(records==null)
+                records = new ArrayList<>();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return records;
     }
 
     public static void setClient()
