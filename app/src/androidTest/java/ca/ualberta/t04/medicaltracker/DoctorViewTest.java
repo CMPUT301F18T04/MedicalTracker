@@ -41,12 +41,10 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
-        solo.enterText((EditText) solo.getView(R.id.login_password),"123456");
+
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
-            solo.clearEditText((EditText) solo.getView(R.id.login_password));
-            solo.enterText((EditText) solo.getView(R.id.login_password),"12345678");
             solo.clickOnButton("Login");
         }
         // Check if the app opens the correct page

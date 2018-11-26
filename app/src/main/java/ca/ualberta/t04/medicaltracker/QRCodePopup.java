@@ -2,10 +2,13 @@ package ca.ualberta.t04.medicaltracker;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+
+import java.util.concurrent.ExecutionException;
 
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import ca.ualberta.t04.medicaltracker.Util.QRCodeUtil;
@@ -38,9 +41,26 @@ public class QRCodePopup {
                 .setView(promptView)
                 .create();
 
-        Bitmap bitmap = QRCodeUtil.createQRCodeBitmap(userName, QR_CODE_HEIGHT, QR_CODE_HEIGHT);
+        Bitmap bitmap = null;
+        try {
+            bitmap = new CreateQRCode().execute(userName).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         qr_code.setImageBitmap(bitmap);
 
         ad.show();
+    }
+
+    private static class CreateQRCode extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... userNames) {
+            String userName = userNames[0];
+
+            return QRCodeUtil.createQRCodeBitmap(userName, QR_CODE_HEIGHT, QR_CODE_HEIGHT);
+        }
     }
 }

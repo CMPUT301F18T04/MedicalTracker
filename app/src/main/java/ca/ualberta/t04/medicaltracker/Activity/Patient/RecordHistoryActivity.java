@@ -18,6 +18,7 @@ import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 
@@ -49,26 +50,29 @@ public class RecordHistoryActivity extends AppCompatActivity {
     // init the problem list view
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
-        final ArrayList<Record> records = problem.getRecordList().getRecords();
+        final RecordList recordList = problem.getRecordList();
+        final ArrayList<Record> records = recordList.getRecords();
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         listView.setAdapter(adapter);
 
         // added in the record list item click
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Record record = records.get(position);
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
-                int pos = i;
+                recordList.updateRecord(position, record.getRecordId());
                 intent.putExtra("problem_index", problem_index);
-                intent.putExtra("record_index", pos);
+                intent.putExtra("record_index", position);
                 startActivity(intent);
             }
         });
 
         // add listener to the record list
-        problem.getRecordList().addListener("RecordListener1", new Listener() {
+        recordList.addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
+
                 adapter.notifyDataSetChanged();
                 // We don't need it anymore, since we only need to update user once.
                 //ElasticSearchController.updateUser(DataController.getUser());
@@ -92,7 +96,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Record temp = records.get(index);
-                                records.remove(temp);
+                                recordList.removeRecord(temp);
                                 DataController.getPatient().getProblemList().notifyAllListener();
                                 adapter.notifyDataSetChanged();
                                 // make notification for user

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 /**
  * This class contains all attributes and functionality for record list
@@ -19,11 +22,16 @@ import ca.ualberta.t04.medicaltracker.Listener;
 
 public class RecordList
 {
-    private ArrayList<Record> records;
+    private int currentId = 1;
+    private String problemId;
+    private ArrayList<String> recordIds;
+    private transient ArrayList<Record> records;
     private transient HashMap<String, Listener> listeners = new HashMap<>();
+    private transient ArrayList<Record> offlineRecords;
 
     public RecordList(){
         records = new ArrayList<>();
+        recordIds = new ArrayList<>();
     }
 
     /**
@@ -31,7 +39,13 @@ public class RecordList
      * @param record Record
      */
     public void addRecord(Record record) {
+        String recordId = DataController.getUser().getUserName() + problemId + String.valueOf(currentId);
+        record.setRecordId(recordId);
+        record.setProblemId(problemId);
         this.records.add(record);
+        addRecordId(recordId);
+        currentId += 1;
+        ElasticSearchController.createRecord(record);
         notifyAllListener();
     }
 
@@ -41,6 +55,9 @@ public class RecordList
      */
     public void removeRecord(Record record) {
         this.records.remove(record);
+        String recordId = record.getRecordId();
+        removeRecordId(recordId);
+        ElasticSearchController.deleteRecord(recordId);
         notifyAllListener();
     }
 
@@ -49,7 +66,16 @@ public class RecordList
      * @return ArrayList<Record> records
      */
     public ArrayList<Record> getRecords() {
+        if(records==null || records.size()==0){
+            records = ElasticSearchController.searchRecordList(recordIds);
+        }
         return records;
+    }
+
+    public void updateRecord(int index, String recordId){
+        Record record = ElasticSearchController.searchRecord(recordId);
+        if(record!=null)
+            records.set(index, record);
     }
 
     /**
@@ -58,7 +84,7 @@ public class RecordList
      * @return Record
      */
     public Record getRecord(int index){
-        return records.get(index);
+        return getRecords().get(index);
     }
 
     /**
@@ -129,6 +155,7 @@ public class RecordList
      */
     public void addComment(Record record, Doctor doctor, String comment){
         record.addComment(doctor, comment);
+        ElasticSearchController.updateRecord(record);
         notifyAllListener();
     }
 
@@ -176,5 +203,42 @@ public class RecordList
         for (Listener listener:listeners.values()){
             listener.update();
         }
+    }
+
+    public ArrayList<String> getRecordIds() {
+        if(recordIds == null){
+            return new ArrayList<>();
+        }
+        return recordIds;
+    }
+
+    private void addRecordId(String recordId) {
+        getRecordIds().add(recordId);
+    }
+
+    private void removeRecordId(String recordId){
+        if(getRecordIds().contains(recordId)){
+            getRecordIds().remove(recordId);
+        }
+    }
+
+    public String getProblemId() {
+        return problemId;
+    }
+
+    public void setProblemId(String problemId) {
+        this.problemId = problemId;
+    }
+
+    public ArrayList<Record> getOfflineRecords() {
+        if(offlineRecords==null)
+            offlineRecords = new ArrayList<>();
+        return offlineRecords;
+    }
+
+    public void addOfflineRecord(Record record) {
+        if(offlineRecords==null)
+            offlineRecords = new ArrayList<>();
+        offlineRecords.add(record);
     }
 }

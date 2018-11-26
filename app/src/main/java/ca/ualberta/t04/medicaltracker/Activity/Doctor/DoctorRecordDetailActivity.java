@@ -56,7 +56,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final RecordList recordList = problem.getRecordList();
         final Record record = recordList.getRecord(recordIndex);
 
-        imageView.setImageBitmap(record.getPhotos().get(0));
+        if(!record.getPhotos().isEmpty())
+            imageView.setImageBitmap(record.getPhotos().get(0));
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
         description.setText(record.getDescription());

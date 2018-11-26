@@ -24,6 +24,8 @@ public class Record
     private String title;
     private Date dateStart;
     private String description;
+    private String recordId;
+    private String problemId;
 
     // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
     private ArrayList<String> photos;
@@ -207,5 +209,21 @@ public class Record
 
     public void setBodyLocation(BodyLocation bodyLocation) {
         this.bodyLocation = bodyLocation;
+    }
+
+    public String getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
+
+    public String getProblemId() {
+        return problemId;
+    }
+
+    public void setProblemId(String problemId) {
+        this.problemId = problemId;
     }
 }

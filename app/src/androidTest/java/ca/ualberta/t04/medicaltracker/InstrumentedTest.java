@@ -6,8 +6,10 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.helpers.Util;
 
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +31,7 @@ public class InstrumentedTest {
     /*
     @Test
     public void deleteUser(){
-        ElasticSearchController.deleteIndex(Util.INDEX_NAME);
+        ElasticSearchController.deleteIndex(CommonUtil.INDEX_NAME);
     }
     */
 }
