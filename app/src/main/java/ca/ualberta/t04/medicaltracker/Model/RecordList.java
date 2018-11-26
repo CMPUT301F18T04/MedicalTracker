@@ -74,7 +74,8 @@ public class RecordList
 
     public void updateRecord(int index, String recordId){
         Record record = ElasticSearchController.searchRecord(recordId);
-        records.set(index, record);
+        if(record!=null)
+            records.set(index, record);
     }
 
     /**
