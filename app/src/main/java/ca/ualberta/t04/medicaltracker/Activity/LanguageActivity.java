@@ -17,6 +17,7 @@ import java.util.List;
 import ca.ualberta.t04.medicaltracker.Adapter.LanguageAdapter;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Language;
+import ca.ualberta.t04.medicaltracker.Model.User;
 import ca.ualberta.t04.medicaltracker.R;
 
 

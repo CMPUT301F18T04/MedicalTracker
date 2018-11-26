@@ -221,13 +221,9 @@ public class User
         this.deviceId = deviceId;
     }
 
-    public void setLanguage(String lang){
-        this.language=lang;
-    }
+    public void setLanguage(String lang){ this.language=lang; }
 
-    public void setDistrict(String district){
-        this.district=district;
-    }
+    public void setDistrict(String district){ this.district=district; }
 
     public String getLanguage(){
         return language;
