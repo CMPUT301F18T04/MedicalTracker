@@ -30,6 +30,12 @@ public class DataController
         getUser().notifyAllListeners();
     }
 
+    // Update user's language preference
+    public static void updateLanguage(String lang, String district){
+        getUser().setLanguage(lang);
+        getUser().setDistrict(district);
+    }
+
     public static Patient getPatient(){
         return (Patient) user;
     }

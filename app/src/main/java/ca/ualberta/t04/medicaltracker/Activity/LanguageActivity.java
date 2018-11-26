@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,14 +15,10 @@ import android.util.DisplayMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import ca.ualberta.t04.medicaltracker.Adapter.LanguageAdapter;
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Language;
 import ca.ualberta.t04.medicaltracker.R;
 
-/*
-  This activity displays the language choosing options
-
-  Will be implemented in part 5
- */
 
 public class LanguageActivity extends AppCompatActivity {
 
@@ -73,6 +70,7 @@ public class LanguageActivity extends AppCompatActivity {
     }
 
     public void setLocale(String lang,String district) {
+        DataController.updateLanguage(lang,district);
         Locale myLocale = new Locale(lang,district);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -82,7 +80,7 @@ public class LanguageActivity extends AppCompatActivity {
         Intent refresh = new Intent(this, LoginActivity.class);
         startActivity(refresh);
         finish();
-        Toast.makeText(getApplicationContext(),R.string.language_change_toast,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),R.string.language_change_toast,Toast.LENGTH_LONG).show();
     }
 
 
