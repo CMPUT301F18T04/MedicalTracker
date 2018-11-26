@@ -17,9 +17,8 @@ public class PatientUnitTest {
     public void patient_test(){
 
         //Constructor test
-        Patient patient = new Patient("Test","123");
+        Patient patient = new Patient("Test");
         assertTrue("UserName should be 'Test'", patient.getUserName().equals("Test"));
-        assertTrue("password should be '123'", patient.getPassword().equals("123"));
         assertTrue("The user should be a patient", patient.isDoctor().equals(false));
 
         //addProblem, removeProblem, getProblems tests
@@ -32,8 +31,8 @@ public class PatientUnitTest {
         assertNotEquals(patient.getProblemList().getProblems().get(0),problem);
 
         //addDoctor, removeDoctor, getDoctors
-        Doctor doctor = new Doctor("Doctor","12345");
-        Doctor doctor1 = new Doctor("Doctor1","1234");
+        Doctor doctor = new Doctor("Doctor");
+        Doctor doctor1 = new Doctor("Doctor1");
         patient.addDoctor(doctor);
         assertEquals(patient.getDoctorsUserNames().get(0),doctor.getUserName());
         patient.addDoctor(doctor1);

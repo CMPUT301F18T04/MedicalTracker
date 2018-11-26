@@ -29,6 +29,8 @@ public class User
     private String phoneNumber;
     private String address;
     private String deviceId;
+    private String language;
+    private String district;
 
     public User(String userName, Boolean isDoctor)
     {
@@ -218,4 +220,17 @@ public class User
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
+
+    public void setLanguage(String lang){ this.language=lang; }
+
+    public void setDistrict(String district){ this.district=district; }
+
+    public String getLanguage(){
+        return language;
+    }
+
+    public String getDistrict(){
+        return district;
+    }
 }
+

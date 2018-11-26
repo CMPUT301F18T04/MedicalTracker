@@ -1,11 +1,16 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorActivity;
 import ca.ualberta.t04.medicaltracker.Activity.Patient.PatientActivity;
@@ -53,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 DataController.setUser(doctor);
 
                 if(isNewDevice(user)){
-                    Toast.makeText(this, "You logged in a new device", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
                     user.setDeviceId(deviceId);
                     ElasticSearchController.updateUser(user);
                 }
@@ -67,13 +72,21 @@ public class LoginActivity extends AppCompatActivity {
                 DataController.setUser(patient);
 
                 if(isNewDevice(user)){
-                    Toast.makeText(this, "You logged in a new device", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
                     user.setDeviceId(deviceId);
                     ElasticSearchController.updateUser(user);
                 }
 
                 Intent intent = new Intent(LoginActivity.this, PatientActivity.class);
                 startActivity(intent);
+            }
+            String language = user.getLanguage();
+            String district = user.getDistrict();
+
+            try{
+                setLocale(language,district);
+            }catch(Exception e){
+                setLocale("en","CA");
             }
             finish();
         } else {
@@ -96,5 +109,14 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void setLocale(String lang,String district) {
+        Locale myLocale = new Locale(lang,district);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 }

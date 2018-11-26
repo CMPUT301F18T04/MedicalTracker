@@ -19,9 +19,8 @@ public class UserUnitTest {
     @Test
     public void user_test() {
         // Test the constructor of class User
-        User user = new User("Test", "1234", false);
+        User user = new User("Test",  false);
         assertTrue("UserName should be 'Test'", user.getUserName().equals("Test"));
-        assertTrue("password should be '1234'", user.getPassword().equals("1234"));
         assertTrue("The user should be a patient", user.isDoctor().equals(false));
 
         // Test the setter and getter
@@ -32,12 +31,10 @@ public class UserUnitTest {
         user.setPhoneNumber("123456789");
         user.setEmail("test@gmail.com");
         user.setName("AAA");
-        user.setPassword("4321");
         assertEquals(user.getMale(), true);
         assertEquals(user.getBirthday(), birthday);
         assertEquals(user.getPhoneNumber(), "123456789");
         assertEquals(user.getEmail(), "test@gmail.com");
         assertEquals(user.getName(), "AAA");
-        assertEquals(user.getPassword(), "4321");
     }
 }

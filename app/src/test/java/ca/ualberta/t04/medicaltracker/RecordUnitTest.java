@@ -27,7 +27,8 @@ public class RecordUnitTest {
         Date date = calendar.getTime();
         Location location = null;
         ArrayList<Image> bodyImage = new ArrayList<>();
-        Record record = new Record("RecordTest", date, "This is Unit Test For Record",bodyImage,location);
+        BodyLocation bodyLocation = null;
+        Record record = new Record("RecordTest", date, "This is Unit Test For Record",bodyImage,location,bodyLocation);
 
         assertTrue("Title should be 'RecordTest'", record.getTitle().equals("RecordTest"));
         assertTrue("Description should be 'This is Unit Test For Record'", record.getDescription().equals("This is Unit Test For Record"));
@@ -45,7 +46,7 @@ public class RecordUnitTest {
         ArrayList<String> comments = new ArrayList<>();
         comments.add("Test1");
         comments.add("Test2");
-        Doctor doctor = new Doctor("Doctor1","12345678");
+        Doctor doctor = new Doctor("Doctor1");
         HashMap<String, ArrayList<String>> doctorComments = new HashMap<>();
         doctorComments.put(doctor.getUserName(),comments);
         record.setComments(doctorComments);
@@ -56,14 +57,9 @@ public class RecordUnitTest {
         Image image2 = null;
         Image image3 = null;
 
-        record.addNormalImages(image1);
-        record.addNormalImages(image2);
-        record.removeNormalImages(image1);
-
         ArrayList<Image> testImages= new ArrayList<>();
         testImages.add(image1);
         testImages.add(image3);
-        assertNotEquals(testImages,record.getNormalImages());
 
         //addBodyImage and removeBodyImage test
         Image testImage1 = null;
@@ -72,12 +68,8 @@ public class RecordUnitTest {
         bodyImage.add(testImage1);
         bodyImage.add(testImage2);
 
-        record.addImage(testImage1);
-        record.addImage(testImage2);
-
         assertEquals(bodyImage,record.getPhotos());
 
-        record.removeImage(testImage1);
         assertEquals(bodyImage,record.getPhotos());
     }
 
