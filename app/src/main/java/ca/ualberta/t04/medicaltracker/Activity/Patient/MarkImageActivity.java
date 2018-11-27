@@ -29,34 +29,10 @@ public class MarkImageActivity extends AppCompatActivity {
         imageView.setImageBitmap(bitmap);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-        mCustomView = (CustomView) findViewById(R.id.customView);
-
         Intent intent = new Intent();
         intent.putExtra("data", bitmap);
         setResult(RESULT_OK, intent);
 
-//        getCoordinate();
+        mCustomView = (CustomView) findViewById(R.id.customView);
     }
-
-
-//    private void getCoordinate(){
-//
-//        ImageView imageView = findViewById(R.id.mark_image_view);
-//        imageView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                float x = motionEvent.getX();
-//                float y = motionEvent.getY();
-//
-//                String message = String.format("Coordinate: (%.2%, %.2%)", x, y);
-//
-////                Toast.makeText(MarkImageActivity.this, message, Toast.LENGTH_SHORT).show();
-////                Log.d("Coordinate", message);
-//
-//                return false;
-//            }
-//        });
-//    }
-
 }

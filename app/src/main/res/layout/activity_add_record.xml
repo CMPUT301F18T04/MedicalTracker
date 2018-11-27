@@ -165,9 +165,10 @@
         android:onClick="dispatchTakePictureIntent"
         app:layout_constraintBottom_toTopOf="@+id/add_problem_button_add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/add_record_location" />
+        app:layout_constraintTop_toBottomOf="@+id/add_record_location"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/add_record_photo_pager"
@@ -225,9 +226,9 @@
         android:id="@+id/add_record_photo_display"
         android:layout_width="102dp"
         android:layout_height="84dp"
-        android:layout_marginLeft="148dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="362dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="360dp"
         android:onClick="viewImages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
