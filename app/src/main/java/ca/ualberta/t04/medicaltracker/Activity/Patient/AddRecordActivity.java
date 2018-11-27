@@ -215,11 +215,18 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
+
+//            Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
+//
+//            intent.putExtra("image", bitmap);
+//            startActivityForResult(intent, REQUEST_MARK_IMAGE);
+
             imageView.setImageBitmap(bitmap);
 
-            Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+            //Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
             /*
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -7,6 +7,11 @@
     android:background="@android:color/background_dark"
     tools:context=".Activity.Patient.MarkImageActivity">
 
+    <ca.ualberta.t04.medicaltracker.View.CustomView
+        android:id="@+id/customView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp" />
+
     <ImageView
         android:id="@+id/mark_image_view"
         android:layout_width="0dp"
