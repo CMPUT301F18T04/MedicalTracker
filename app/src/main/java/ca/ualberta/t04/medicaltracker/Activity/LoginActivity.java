@@ -80,7 +80,11 @@ public class LoginActivity extends AppCompatActivity {
             try{
                 setLocale(language,district);
             }catch(Exception e){
-                setLocale("en","CA");
+                String deviceLanguage = Locale.getDefault().toString();
+                String[] separated = deviceLanguage.split("_");
+                String lang = separated[0];
+                String dist = separated[1];
+                setLocale(lang,dist);
             }
             finish();
         } else {

@@ -224,8 +224,5 @@ public class RegisterActivity extends AppCompatActivity {
             user.setMale(isMale);
         }
 
-        // Add language preference to user's information
-        user.setLanguage("en");
-        user.setDistrict("CA");
     }
 }
