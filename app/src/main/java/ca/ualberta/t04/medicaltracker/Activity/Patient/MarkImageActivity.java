@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import ca.ualberta.t04.medicaltracker.R;
+import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 public class MarkImageActivity extends AppCompatActivity {
 
@@ -17,12 +18,20 @@ public class MarkImageActivity extends AppCompatActivity {
 
         Bitmap bitmap = getIntent().getParcelableExtra("image");
 
+        String fileName = System.currentTimeMillis() + ".jpg";
+        Boolean succeed = ImageUtil.saveImage(bitmap, fileName);
+        String path = null;
+        if(succeed){
+            path = ImageUtil.PHOTO_DIRECTORY + fileName;
+        }
+
         ImageView imageView = findViewById(R.id.mark_image_view);
         imageView.setImageBitmap(bitmap);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         Intent intent = new Intent();
         intent.putExtra("data", bitmap);
+        intent.putExtra("path", path);
         setResult(RESULT_OK, intent);
     }
 }

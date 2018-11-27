@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="button_color">#168484</color>
-    <color name="text_color">#efecec</color>
+    <color name="text_color">#fdfdfd</color>
     <color name="button_press_color">#FF539C9C</color>
     <color name="app_background">#f3e1d6</color>
     <color name="list_view_background">#e5d2c5</color>

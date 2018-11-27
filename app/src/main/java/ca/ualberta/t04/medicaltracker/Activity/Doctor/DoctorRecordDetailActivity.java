@@ -3,6 +3,7 @@ package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,7 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 public class DoctorRecordDetailActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
+    private Record record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +60,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         Patient patient = DataController.getDoctor().getPatients().get(patientIndex);
 
         Problem problem = patient.getProblemList().getProblem(problemIndex);
-        final RecordList recordList = problem.getRecordList();
-        final Record record = recordList.getRecord(recordIndex);
+        final RecordList recordList = DataController.getRecordList();
+        record = recordList.getRecord(recordIndex);
 
         if(!record.getPhotos().isEmpty())
             imageView.setImageBitmap(record.getPhotos().get(0));
@@ -67,7 +69,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         date.setText(record.getDateStart().toString());
         description.setText(record.getDescription());
 
-        InitDoctorCommentListView(recordList, record, patient);
+        InitDoctorCommentListView(recordList);
 
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +81,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     }
 
     // Setting up the Doctor comment list view
-    private void InitDoctorCommentListView(RecordList recordList, final Record record, final Patient patient){
+    private void InitDoctorCommentListView(RecordList recordList){
         ListView commentListView = findViewById(R.id.CommentListView);
 
         final HashMap<String, ArrayList<String>> dComment = record.getComments();
@@ -114,7 +116,6 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
                 doctorList.addAll(record.getComments().keySet());
                 comments.addAll(getComment(dComment, doctorList));
                 adapter.notifyDataSetChanged();
-                ElasticSearchController.updateUser(patient);
             }
         });
     }

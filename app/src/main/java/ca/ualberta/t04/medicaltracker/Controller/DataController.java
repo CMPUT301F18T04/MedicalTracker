@@ -4,12 +4,13 @@ import java.util.Date;
 
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.Model.User;
 
 public class DataController
 {
     private static User user;
-
+    private static RecordList recordList;
 
     public static User getUser() {
         return user;
@@ -45,4 +46,11 @@ public class DataController
         return (Doctor) user;
     }
 
+    public static RecordList getRecordList() {
+        return recordList;
+    }
+
+    public static void setRecordList(RecordList recordList) {
+        DataController.recordList = recordList;
+    }
 }

@@ -53,7 +53,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.saveButton);
 
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
-        final RecordList recordList = problem.getRecordList();
+        final RecordList recordList = DataController.getRecordList();
         final Record record = recordList.getRecord(recordIndex);
 
         // set the information

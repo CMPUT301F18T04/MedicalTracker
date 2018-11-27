@@ -47,8 +47,6 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         // Enter the test account's information
         solo.enterText((EditText) solo.getView(R.id.register_username), "patient");
-        solo.enterText((EditText) solo.getView(R.id.register_password), "123456");
-        solo.enterText((EditText) solo.getView(R.id.register_confirmed_password), "123456");
 
         // Click button to sign up
         solo.clickOnView(solo.getView(R.id.register_button_signup));

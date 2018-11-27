@@ -37,7 +37,6 @@ public class SlideShowActivity extends AppCompatActivity {
 
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
 
-
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 
