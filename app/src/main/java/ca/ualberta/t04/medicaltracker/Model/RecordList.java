@@ -193,6 +193,12 @@ public class RecordList
             listeners.put(key, listener);
     }
 
+    public void replaceListener(String key, Listener listener){
+        if(listeners==null)
+            listeners = new HashMap<>();
+        listeners.put(key, listener);
+    }
+
     /**
      * notifies all the listeners
      */

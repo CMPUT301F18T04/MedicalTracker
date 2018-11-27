@@ -87,6 +87,7 @@ public class DoctorActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DataController.clearRecordList();
                 refreshPatientListView();
                 Snackbar.make(view, "Refresh completed", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -259,8 +260,9 @@ public class DoctorActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DataController.setRecordList(problems.get(position).getRecordList());
-                refreshRecordListView(DataController.getRecordList());
+                Problem problem = problems.get(position);
+                DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+                refreshRecordListView(DataController.getRecordList().get(problem.getProblemId()));
                 currentPage ++;
                 problemIndex = position;
             }
@@ -356,6 +358,7 @@ public class DoctorActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
             DataController.setUser(null);
+            DataController.clearRecordList();
             Intent intent = new Intent(DoctorActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

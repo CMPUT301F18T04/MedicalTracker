@@ -321,6 +321,7 @@ public class PatientActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_logout) { // if the button setting is clicked, LoginActivity will come up
             DataController.setUser(null); // notify the DataController to set the user as null
+            DataController.clearRecordList();
             Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

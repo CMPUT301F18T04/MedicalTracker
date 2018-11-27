@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
@@ -18,27 +19,32 @@ import ca.ualberta.t04.medicaltracker.R;
   This class represents a custom adapter for displaying the doctor list
  */
 
-public class DoctorListAdapter extends ArrayAdapter{
+public class CommentAdapter extends ArrayAdapter{
     private int resourceId;
-    private List<Doctor> doctors;
+    private ArrayList<String> comments;
 
-    public DoctorListAdapter(@NonNull Context context, int resource, @NonNull List<Doctor> doctors) {
-        super(context, resource, doctors);
+    public CommentAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> comments) {
+        super(context, resource, comments);
         resourceId = resource;
-        this.doctors = doctors;
+        this.comments = comments;
     }
 
     // returns the custom view
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final Doctor doctor = (Doctor) getItem(position);
+        final String comment = (String) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
 
-        TextView userName = view.findViewById(R.id.doctor_username);
+        TextView userName = view.findViewById(R.id.doctor_comment_text_view);
 
-        userName.setText(doctor.getUserName());
+        userName.setText(comment);
 
         return view;
+    }
+
+    @Override
+    public int getCount() {
+        return comments.size();
     }
 }

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,9 +53,14 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.saveButton);
 
+
+
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
-        final RecordList recordList = DataController.getRecordList();
+        final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
         final Record record = recordList.getRecord(recordIndex);
+
+        ImageView imageView = findViewById(R.id.imageView3);
+        imageView.setImageBitmap(record.getPhotos().get(0));
 
         // set the information
         title.setText(record.getTitle());

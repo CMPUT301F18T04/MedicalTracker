@@ -18,10 +18,12 @@ import java.util.HashMap;
 import ca.ualberta.t04.medicaltracker.Activity.InformationActivity;
 import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Activity.ProfileActivity;
+import ca.ualberta.t04.medicaltracker.Adapter.CommentAdapter;
 import ca.ualberta.t04.medicaltracker.CommentPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
+import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
@@ -34,7 +36,7 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 
 public class DoctorRecordDetailActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> adapter;
+    private RecordList recordList;
     private Record record;
 
     @Override
@@ -59,8 +61,8 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
         Patient patient = DataController.getDoctor().getPatients().get(patientIndex);
 
-        Problem problem = patient.getProblemList().getProblem(problemIndex);
-        final RecordList recordList = DataController.getRecordList();
+        final Problem problem = patient.getProblemList().getProblem(problemIndex);
+        recordList = DataController.getRecordList().get(problem.getProblemId());
         record = recordList.getRecord(recordIndex);
 
         if(!record.getPhotos().isEmpty())
@@ -69,7 +71,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         date.setText(record.getDateStart().toString());
         description.setText(record.getDescription());
 
-        InitDoctorCommentListView(recordList);
+        InitDoctorCommentListView();
 
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,16 +83,17 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     }
 
     // Setting up the Doctor comment list view
-    private void InitDoctorCommentListView(RecordList recordList){
+    private void InitDoctorCommentListView(){
         ListView commentListView = findViewById(R.id.CommentListView);
 
         final HashMap<String, ArrayList<String>> dComment = record.getComments();
+        Log.d("Succeed", dComment.toString());
 
         // get all the doctor names in an array
         final ArrayList<String> doctorList = new ArrayList<>(dComment.keySet());
-        final ArrayList<String> comments = getComment(dComment, doctorList);
+        final ArrayList<String> comments = new ArrayList<>(getComment(dComment, doctorList));
 
-        adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, comments);
+        final CommentAdapter adapter = new CommentAdapter(this, R.layout.doctor_comment_list, comments);
         commentListView.setAdapter(adapter);
 
         commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,12 +111,12 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             }
         });
 
-        recordList.addListener("ListenToComment", new Listener() {
+        recordList.replaceListener("ListenToComment", new Listener() {
             @Override
             public void update() {
-                comments.clear();
                 doctorList.clear();
-                doctorList.addAll(record.getComments().keySet());
+                doctorList.addAll(dComment.keySet());
+                comments.clear();
                 comments.addAll(getComment(dComment, doctorList));
                 adapter.notifyDataSetChanged();
             }

@@ -50,8 +50,8 @@ public class RecordHistoryActivity extends AppCompatActivity {
     // init the problem list view
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
-        DataController.setRecordList(problem.getRecordList());
-        final RecordList recordList = DataController.getRecordList();
+        DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+        final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
         final ArrayList<Record> records = recordList.getRecords();
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
         listView.setAdapter(adapter);

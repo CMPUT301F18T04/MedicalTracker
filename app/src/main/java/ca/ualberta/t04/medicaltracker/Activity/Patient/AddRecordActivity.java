@@ -46,6 +46,7 @@ import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.BodyLocation;
 import ca.ualberta.t04.medicaltracker.BodyLocationPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 import ca.ualberta.t04.medicaltracker.R;
@@ -81,6 +82,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private BodyLocation bodyLocation = null;
     private BodyLocationPopup bodyLocationPopup = null;
 
+    private Problem problem;
+
     // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +110,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
-
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
+        problem = DataController.getPatient().getProblemList().getProblem(problem_index);
     }
 
     // recordSetDate method is used for set a date using DatePickerDialog
@@ -316,10 +319,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null, bodyLocation);
         // if no network, then add the record in the offline record and wait for reconnecting
         if(!NetworkUtil.isNetworkConnected(this)){
-            DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addOfflineRecord(record);
+            DataController.getRecordList().get(problem.getProblemId()).addOfflineRecord(record);
         }
         // use dataController to notify the change of record
-        DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
+        DataController.getRecordList().get(problem.getProblemId()).addRecord(record);
 
         // notification message
         Toast.makeText(AddRecordActivity.this, R.string.add_record_toast2, Toast.LENGTH_SHORT).show();
