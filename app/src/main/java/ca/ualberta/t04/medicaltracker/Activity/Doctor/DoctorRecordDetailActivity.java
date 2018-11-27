@@ -1,26 +1,31 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.CommentPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
-import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
+import ca.ualberta.t04.medicaltracker.R;
+
 
 /**
  * This class is for displaying the information of a record and commenting for a doctor user
@@ -41,8 +46,10 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
         final TextView title = findViewById(R.id.doctorRecordTitle);
         final TextView date = findViewById(R.id.dRecordDetailDate);
+        final TextView location = findViewById(R.id.doctorRecordLocation);
+        final TextView body_location = findViewById(R.id.doctorRecordBodyLocation);
         final TextView description = findViewById(R.id.dRecordDetailDescription);
-        ImageView imageView = findViewById(R.id.imageView3);
+        ImageView imageView = findViewById(R.id.recordImageView);
 
         Button commentButton = findViewById(R.id.doctorCommentButton);
 
@@ -58,8 +65,27 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
         if(!record.getPhotos().isEmpty())
             imageView.setImageBitmap(record.getPhotos().get(0));
+
+        // When the image view is clicked
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(record.getPhotos().isEmpty()){
+                    Toast.makeText(DoctorRecordDetailActivity.this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(DoctorRecordDetailActivity.this, SlideShowActivity.class);
+                    BitmapHolder.setBitmaps(record.getPhotos());
+                    startActivity(intent);
+                }
+            }
+        });
+
+
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
+        //location.setText(record.getLocation().toString());
+        //body_location.setText(record.getBodyLocation().name());
         description.setText(record.getDescription());
 
         InitDoctorCommentListView(recordList, record, patient);

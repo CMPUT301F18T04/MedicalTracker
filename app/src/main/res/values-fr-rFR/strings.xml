@@ -15,6 +15,9 @@
     <string name="nav_header_subtitle">Patient ou Docteur</string>
     <string name="nav_header_desc">En-tête de navigation</string>
     <string name="action_settings">Paramètres</string>
+    <string name="login_toast1">Nom d\'utilisateur ne peut pas vide!</string>
+    <string name="login_toast2">Nom d\'utilisateur n\'existe pas!</string>
+    <string name="login_toast4">Vous vous êtes connecté à un nouvel appareil</string>
 
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">Ouvrez la navigation</string>
@@ -44,6 +47,15 @@
     <string name="register_text_patient">Patient</string>
     <string name="register_text_doctor">Docteur</string>
     <string name="register_button_sign_up">S\'inscrire</string>
+    <string name="register_toast1">Nom d\'utilisateur ne peut pas vide!</string>
+    <string name="register_toast2">Nom d\'utilisateur devrait entre 4\-15 caractères</string>
+    <string name="register_toast3">Nom d\'utilisateur contenit les caractères non valides!</string>
+    <string name="register_toast8">Numéro de téléphone est non valide!</string>
+    <string name="register_toast9">Email est non valide!</string>
+    <string name="register_toast10">Nom d\'utilisateur en double</string>
+    <string name="register_toast11">s\'inscrire accompli</string>
+    <string name="register_toast12">Numéro de téléphone devrait entre 5\-16 chiffres!</string>
+    <string name="register_toast13">Votre annivaersaire est au-delà de temps actuels!</string>
 
 
 
@@ -52,6 +64,7 @@
     <string name="doctor_page_title">Vos patients</string>
     <string name="nav_header_subtitle_patient">Patient</string>
     <string name="nav_header_subtitle_doctor">Docteur</string>
+
 
     <!-- String for Profile Page -->
     <string name="profile_title">Votre Profil:</string>
@@ -62,6 +75,10 @@
     <string name="profile_email">Email:</string>
     <string name="profile_address">Addresse:</string>
     <string name="profile_button_edit">Sauver</string>
+    <string name="profile_toast1">Votre annivaersaire est au-delà de temps actuels</string>
+    <string name="profile_toast2">Numéro de téléphone est non valide!</string>
+    <string name="profile_toast3">Email est non valide!</string>
+    <string name="profile_toast4">Votre profil est au courant</string>
     <!-- end for Profile Page -->
 
     <!-- String for About Page -->
@@ -73,13 +90,19 @@
     <!-- String for Setting Page -->
     <string name="title_nickname">Surnom:</string>
     <string name="apply_change">Appliquer</string>
-    <string name="change_password">Changer le mot de passe</string>
     <string name="change_language">Changer la langue</string>
+    <string name="Chinese">Chinois</string>
+    <string name="Japanese">Japonais</string>
+    <string name="French">Français</string>
+    <string name="English">Anglais Canadian</string>
+    <string name="HK">Chinois Traditionnel(HK)</string>
+    <string name="Macao">Chinois Traditionnel(Macao)</string>
+    <string name="language_change_toast">Se connecter à appliquer les changements</string>
     <!-- end for Setting Page -->
 
     <!-- String for Change Password Page -->
     <string name="old_password">Vieux Mot De Passe:</string>
-    <string name="new_password">nouveaux Mot De Passe:</string>
+    <string name="new_password">Nouveaux Mot De Passe:</string>
     <string name="confirmed_password">Confirmer votre mot de passe:</string>
     <string name="save_password">Sauver</string>
     <!-- end for Change Password Page -->
@@ -91,20 +114,28 @@
     <string name="add_patient_button_search">Chercher</string>
     <string name="add_patient_button_add">Ajouter</string>
     <string name="add_patient_detail">Ce patient a %d problème(s)</string>
+    <string name="add_patient_toast1">Nom de patient ne peut pas vide!</string>
+    <string name="add_patient_toast2">Il n\'y a pas un patient avec ce nom d\'utilisateur!</string>
     <!-- end for Add Patient Page -->
 
     <!-- String for Patient Page -->
     <string name="patient_page_description">Description: </string>
     <string name="patient_inner_text_record">archive(s)</string>
+    <string name="patient_toast12"> a vous ajouté dans sa liste de patient</string>
+    <string name="patient_toast2">Supprimez un problem</string>
     <!-- end for Patient Page -->
 
     <!-- String for Record History Page -->
     <string name="record_history_description">Description: </string>
     <string name="record_history_title">Les archives</string>
+    <string name="record_history_toast1">Vous avez supprimé une archive</string>
     <!-- end for Record History Page -->
 
     <!-- String for Doctor View Page -->
     <string name="doctor_view_page_title">Vos Docteurs</string>
+    <string name="doctor_page_toast">Suppression accompli</string>
+    <string name="doctor_page_toast2">Vous avez ajouté un patient</string>
+    <string name="doctor_page_toast3">Ce patient est dans votre liste déja!</string>
     <!-- end for Doctor View Page -->
 
     <!-- String for Menu -->
@@ -121,6 +152,7 @@
     <string name="add_problem_problem_date">Date:</string>
     <string name="add_problem_problem_description">Description Brefe:</string>
     <string name="add_problem_button_add">Ajouter</string>
+    <string name="add_problem_toast">Vous avez ajouté un nouveau problème</string>
     <!-- end for Add Problem Page -->
 
     <!-- String for Add Record Page -->
@@ -129,6 +161,9 @@
     <string name="add_record_record_date">Date:</string>
     <string name="add_record_record_description">Description Brefe:</string>
     <string name="add_record_button_add">Ajouter</string>
+    <string name="add_record_toast">Il y a un erreur!</string>
+    <string name="add_record_toast2">Vous avez ajouté une nouvelle archive</string>
+    <string name="add_record_toast3">Vous ne pouvez pas plus de photo!</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -148,6 +183,8 @@
     <string name="register_button_birthday">Choisir l\'anniversaire</string>
     <string name="title_activity_password">Activité de Mot de Passe</string>
     <string name="title_activity_language">Activité de langue</string>
+    <string name="search_location_button_choose_body_location">Choisir une localisation</string>
+    <string name="search_toast1">Il n\'y a pas de résultat</string>
     <!-- end for Search Page -->
 
     <!-- String for doctor record detail || record detail page -->
@@ -159,6 +196,10 @@
     <string name="doctor_comment">Les commentaires par les autres docteurs:</string>
     <string name="comment_button">Commenter</string>
     <string name="save_button">Sauver</string>
+    <string name="record_location">Localisation:</string>
+    <string name="record_bodyLocation">Localisation de Corps:</string>
+    <string name="record_toast1">Nouvelles révisions sont sauvé</string>
+    <string name="record_toast2">Il n\'y a pas de photo</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -177,6 +218,9 @@
     <string name="doctor_record_list_title">Les Archives</string>
     <!-- end for doctor record list page -->
 
+    <!-- Common String -->
+    <string name="common_string_no_network">Vous ne pouvez pas connecter à Internet!</string>
+    <!-- end for Common String -->
 
 
 

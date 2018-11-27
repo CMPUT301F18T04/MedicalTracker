@@ -350,7 +350,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     public void viewImages(View view){
         if(bitmaps.isEmpty()){
-            Toast.makeText(this, "No photos!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(this, SlideShowActivity.class);

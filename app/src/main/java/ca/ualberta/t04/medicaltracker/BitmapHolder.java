@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class BitmapHolder {
     private static ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
     public static void addBitmap(Bitmap bitmap){
         bitmaps.add(bitmap);
     }

@@ -14,7 +14,7 @@
     <string name="login_toast1">UserName cannot be empty!</string>
     <string name="login_toast2">UserName does not exist!</string>
     <string name="login_toast3">UserName does not match the password!</string>
-    <string name="login_toast4">"You logged in a new device"</string>
+    <string name="login_toast4">You logged into a new device</string>
     <!-- end for Login Page -->
 
     <!-- String for Register Page -->
@@ -39,7 +39,7 @@
     <string name="register_toast10">Duplicated UserName</string>
     <string name="register_toast11">Succeeded to Sign Up</string>
     <string name="register_toast12">The phone number should between 5\-16 digits!</string>
-    <string name="register_toast13">Your birthday should beyond current time!</string>
+    <string name="register_toast13">Your birthday is beyond current time!</string>
     <!-- end for Register Page -->
 
     <!-- String for Main Page -->
@@ -61,7 +61,7 @@
     <string name="patient_page_description">Description: </string>
     <string name="patient_inner_text_record">Records</string>
     <string name="patient_toast11">Doctor </string>
-    <string name="patient_toast12"> has added you in his/her patients list.</string>
+    <string name="patient_toast12"> has added you in his/her patients list</string>
     <string name="patient_toast2">A problem has been deleted</string>
     <!-- end for Patient Page -->
 
@@ -120,7 +120,7 @@
     <string name="English">Canadian English</string>
     <string name="HK">Traditional Chinese(HK)</string>
     <string name="Macao">Traditional Chinese(Macao)</string>
-    <string name="language_change_toast">Please re-login to apply the changing</string>
+    <string name="language_change_toast">Please re-login to apply changes</string>
     <!-- end for Setting Page -->
 
     <!-- String for About Page -->
@@ -162,7 +162,7 @@
     <string name="add_record_record_date">Date Start:</string>
     <string name="add_record_record_description">Brief Description:</string>
     <string name="add_record_button_add">Add</string>
-    <string name="add_record_toast">An error occurs</string>
+    <string name="add_record_toast">An error occurred</string>
     <string name="add_record_toast2">Added a new record</string>
     <string name="add_record_toast3">You can\'t add more photos!</string>
     <!-- end for Add Record Page -->
@@ -198,6 +198,10 @@
     <string name="doctor_comment">Comments by other doctors:</string>
     <string name="comment_button">Comment</string>
     <string name="save_button">Save</string>
+    <string name="record_location">Location:</string>
+    <string name="record_bodyLocation">Body Location:</string>
+    <string name="record_toast1">New edits saved</string>
+    <string name="record_toast2">No photo uploads</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
