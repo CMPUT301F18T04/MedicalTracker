@@ -97,7 +97,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private Geocoder geocoder;
     private List<Address> addresses;
     private ArrayList<Bitmap> bitmaps = new ArrayList<>();
-    private Location location;
+    private Location location = null;
     private GoogleApiClient mGoogleApiClient;
 
     // onCreate method
@@ -122,8 +122,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // get the current location
-            location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-            onLocationChanged(location); // call onLocationChanged
+            //location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+            location = null;
         }
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
