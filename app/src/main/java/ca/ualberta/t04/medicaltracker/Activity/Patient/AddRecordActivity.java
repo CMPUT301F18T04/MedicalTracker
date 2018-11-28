@@ -43,6 +43,7 @@ import java.util.Locale;
 import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 import ca.ualberta.t04.medicaltracker.R;
@@ -132,8 +133,22 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                Date currentDate = new Date();
                 String date = year + "-" + month + "-" + day;
-                record_date.setText(date);
+                Date problemDate = DataController.getPatient().getProblemList().getProblem(problem_index).getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
+                try {
+                    Date selectedDate = sdf.parse(date);
+                    if (selectedDate.after(currentDate)){
+                        Toast.makeText(AddRecordActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
+                    } else if (problemDate.after(selectedDate)){
+                        Toast.makeText(AddRecordActivity.this, "The record time is before problem time", Toast.LENGTH_SHORT).show();
+                    } else {
+                        record_date.setText(date);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
     }
@@ -161,7 +176,19 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 String time = hour + ":" + minute;
-                record_time.setText(time);
+                String tempTime = record_date.getText().toString()+"T"+hour + ":" + minute;
+                SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.TIME_FORMAT);
+                try {
+                    Date currentDate = new Date();
+                    Date selectedTime = sdf.parse(tempTime);
+                    if (selectedTime.after(currentDate)){
+                        Toast.makeText(AddRecordActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
+                    }else{
+                        record_time.setText(time);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
     }
