@@ -218,7 +218,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            imageView.setImageBitmap(bitmap);
+            // imageView.setImageBitmap(bitmap);
 
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
@@ -240,6 +240,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
             intent.putExtra("image", bitmap);
             startActivityForResult(intent, REQUEST_MARK_IMAGE);
+
+            bitmap = getIntent().getParcelableExtra("data");
+            imageView.setImageBitmap(bitmap);
 
 
         }

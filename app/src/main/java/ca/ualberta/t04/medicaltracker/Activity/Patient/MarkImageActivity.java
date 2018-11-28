@@ -18,6 +18,7 @@ import ca.ualberta.t04.medicaltracker.View.CustomView;
 public class MarkImageActivity extends AppCompatActivity {
 
     private CustomView mCustomView;
+    static final int REQUEST_RECORD = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MarkImageActivity extends AppCompatActivity {
         Bitmap bitmap = getIntent().getParcelableExtra("image");
 
         mCustomView = findViewById(R.id.customView);
+        //mCustomView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         mCustomView.setBitmap(bitmap);
     }
 
@@ -34,5 +36,6 @@ public class MarkImageActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("data", mCustomView.getBitmap());
         setResult(RESULT_OK, intent);
+        finish();
     }
 }

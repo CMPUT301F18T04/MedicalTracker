@@ -6,12 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
-public class CustomView extends View {
+import android.widget.ImageView;
+
+public class CustomView extends AppCompatImageView {
     private Paint mPaintCircle;
     private float mCircleX, mCircleY;
     private float mCircleRadius = 20f;
@@ -47,6 +49,8 @@ public class CustomView extends View {
         mPaintCircle = new Paint();
         mPaintCircle.setAntiAlias(true);
         mPaintCircle.setColor(Color.RED);
+        setAdjustViewBounds(true);
+        this.setScaleType(ScaleType.FIT_CENTER);
 
     }
 
@@ -68,26 +72,25 @@ public class CustomView extends View {
         }
         this.bitmapHeight = newHeight;
         this.bitmapWidth = newWidth;
-        this.bitmap = Bitmap.createScaledBitmap(bitmap, (int)newWidth, (int)newHeight, false);
+        this.bitmap = bitmap.copy(bitmap.getConfig(), true);
+        //this.bitmap = Bitmap.createScaledBitmap(bitmap, (int)newWidth, (int)newHeight, false);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         startTop = (height - bitmapHeight)/2;
         startLeft = (width - bitmapWidth)/2;
-        if(!isTouch)
-            canvas.drawBitmap(bitmap, startLeft, startTop, mPaintCircle);
-        else{
-            canvas.drawBitmap(bitmap, startLeft, startTop, mPaintCircle);
-            canvas = new Canvas(bitmap);
-            canvas.drawBitmap(bitmap, startLeft*(bitmapWidth/width)+bitmapWidth , startTop*(bitmapHeight/height)+bitmapHeight, mPaintCircle);
-            canvas.drawCircle(mCircleX - startLeft, mCircleY - startTop, mCircleRadius, mPaintCircle);
-        }
+
+        canvas.drawBitmap(bitmap, startLeft, startTop, mPaintCircle);
+        Canvas bitmapCanvas = new Canvas(bitmap);
+        //canvas.drawBitmap(bitmap, startLeft*(bitmapWidth/width)+bitmapWidth , startTop*(bitmapHeight/height)+bitmapHeight, mPaintCircle);
+        bitmapCanvas.drawCircle(mCircleX - startLeft, mCircleY - startTop, mCircleRadius, mPaintCircle);
+
     }
 
     public void setBitmap(Bitmap bitmap){
         this.bitmap = bitmap;
-
+        Log.d("test", String.valueOf(bitmap.getByteCount()));
     }
 
     @Override
@@ -113,6 +116,7 @@ public class CustomView extends View {
     }
 
     public Bitmap getBitmap() {
+        Log.d("test", String.valueOf(bitmap.getByteCount()));
         return bitmap;
     }
 }
