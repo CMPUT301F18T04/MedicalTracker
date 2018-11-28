@@ -25,7 +25,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:configChanges="locale|orientation"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDqANdCmDel-N73fOWDIhsd4Pa3aV8JBQs"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".Activity.LoginActivity"
             android:theme="@style/AppTheme">
@@ -65,6 +75,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.Doctor.ScanActivity" />
         <activity android:name=".Activity.Patient.MarkImageActivity"></activity>
+        <activity android:name=".Activity.MapViewActivity"></activity>
+        <activity android:name=".Activity.Patient.MapAddLocationActivity"></activity>
     </application>
 
 </manifest>

@@ -115,7 +115,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -227,23 +227,39 @@
         android:layout_height="84dp"
         android:layout_marginLeft="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="362dp"
+        android:layout_marginTop="370dp"
         android:onClick="viewImages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu_gallery" />
 
-    <EditText
+
+    <TextView
         android:id="@+id/add_record_location"
-        android:layout_width="281dp"
+        android:layout_width="240dp"
         android:layout_height="39dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text"
-        android:textSize="10sp"
+        android:singleLine="false"
+        android:textSize="14sp"
+        android:scrollbars = "vertical"
         app:layout_constraintStart_toEndOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/add_record_description" />
+
+    <ImageView
+        android:id="@+id/record_add_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add_record_location"
+        app:layout_constraintTop_toBottomOf="@+id/add_record_description"
+        app:srcCompat="@drawable/ic_add_location" />
 
 </android.support.constraint.ConstraintLayout>
