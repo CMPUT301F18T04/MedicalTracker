@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.View.CustomView;
 
@@ -25,14 +26,13 @@ public class MarkImageActivity extends AppCompatActivity {
 
         Bitmap bitmap = getIntent().getParcelableExtra("image");
 
-        ImageView imageView = findViewById(R.id.mark_image_view);
-        imageView.setImageBitmap(bitmap);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        mCustomView = findViewById(R.id.customView);
+        mCustomView.setBitmap(bitmap);
+    }
 
+    public void finishMarking(View view){
         Intent intent = new Intent();
-        intent.putExtra("data", bitmap);
+        intent.putExtra("data", mCustomView.getBitmap());
         setResult(RESULT_OK, intent);
-
-        mCustomView = (CustomView) findViewById(R.id.customView);
     }
 }
