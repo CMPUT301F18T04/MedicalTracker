@@ -53,7 +53,7 @@
     <string name="add_patient_button_search">搜索</string>
     <string name="add_patient_button_add">添加</string>
     <string name="add_patient_detail">这位患者有 %d 问题</string>
-    <string name="add_patient_toast1">这位患者的名字不能为空</string>
+    <string name="add_patient_toast1">患者的名字不能为空</string>
     <string name="add_patient_toast2">无法找到此患者</string>
     <!-- end for Add Patient Page -->
 
@@ -127,7 +127,7 @@
 
     <!-- String for About Page -->
     <string name="about_title">关于我们:</string>
-    <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有.</string>
+    <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有</string>
     <string name="about_text_developer">开发人员:(排名不分先后)</string>
     <!-- end for About Page -->
 
