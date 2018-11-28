@@ -216,6 +216,27 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d(TAG, "onRequestPermissionsResult");
+        mLocationPermissionsGranted = false;
+
+        switch (requestCode){
+            case LOCATION_PERMISSION_REQUEST_CODE:{
+                if(grantResults.length>0){
+                    for (int i = 0; i < grantResults.length; i++){
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            mLocationPermissionsGranted = false;
+                            return;
+                        }
+                    }
+                    mLocationPermissionsGranted = true;
+                    initMap();
+                }
+            }
+        }
+    }
+
     private void initMap() {
         Log.d(TAG, "initMap");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
