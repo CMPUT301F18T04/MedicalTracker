@@ -13,11 +13,17 @@ import android.view.MotionEvent;
 
 import android.widget.ImageView;
 
-public class CustomView extends AppCompatImageView {
+import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
+
+public class MarkImageView extends AppCompatImageView {
     private Paint mPaintCircle;
+    private float circleWidth = 10;
+
     private float mCircleX, mCircleY;
-    private float mCircleRadius = 20f;
+    private float mCircleRadius = 40f;
     private Bitmap bitmap;
+    private Bitmap editBitmap;
+
     private float height = 0;
     private float width = 0;
     private float bitmapHeight = 0;
@@ -25,21 +31,22 @@ public class CustomView extends AppCompatImageView {
     private float startTop;
     private float startLeft;
 
-    private boolean isTouch = false;
+    private float originHeight = 0;
+    private float originWeight = 0;
 
-    public CustomView(Context context) {
+    public MarkImageView(Context context) {
         super(context);
 
         init(null);
     }
 
-    public CustomView(Context context, @Nullable AttributeSet attrs) {
+    public MarkImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         init(attrs);
     }
 
-    public CustomView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MarkImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init(attrs);
@@ -49,9 +56,8 @@ public class CustomView extends AppCompatImageView {
         mPaintCircle = new Paint();
         mPaintCircle.setAntiAlias(true);
         mPaintCircle.setColor(Color.RED);
-        setAdjustViewBounds(true);
-        this.setScaleType(ScaleType.FIT_CENTER);
-
+        mPaintCircle.setStyle(Paint.Style.STROKE);
+        mPaintCircle.setStrokeWidth(circleWidth);
     }
 
     @Override
@@ -72,8 +78,14 @@ public class CustomView extends AppCompatImageView {
         }
         this.bitmapHeight = newHeight;
         this.bitmapWidth = newWidth;
-        this.bitmap = bitmap.copy(bitmap.getConfig(), true);
-        //this.bitmap = Bitmap.createScaledBitmap(bitmap, (int)newWidth, (int)newHeight, false);
+        originHeight = bitmap.getHeight();
+        originWeight = bitmap.getWidth();
+        Log.d("Succeed", "Before:" + String.valueOf(originHeight) + "," + String.valueOf(originWeight));
+        Log.d("Succeed", "Before:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+        //this.bitmap = bitmap.copy(bitmap.getConfig(), true);
+        this.bitmap = Bitmap.createScaledBitmap(bitmap, (int)newWidth, (int)newHeight, false);
+        Log.d("Succeed", "Scaled:" + String.valueOf(newWidth) + "," + String.valueOf(newHeight));
+        Log.d("Succeed", "Scaled:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
     }
 
     @Override
@@ -81,9 +93,11 @@ public class CustomView extends AppCompatImageView {
         startTop = (height - bitmapHeight)/2;
         startLeft = (width - bitmapWidth)/2;
 
-        canvas.drawBitmap(bitmap, startLeft, startTop, mPaintCircle);
-        Canvas bitmapCanvas = new Canvas(bitmap);
-        //canvas.drawBitmap(bitmap, startLeft*(bitmapWidth/width)+bitmapWidth , startTop*(bitmapHeight/height)+bitmapHeight, mPaintCircle);
+        editBitmap = bitmap.copy(bitmap.getConfig(), true);
+        canvas.drawBitmap(editBitmap, startLeft, startTop, mPaintCircle);
+
+        Canvas bitmapCanvas = new Canvas(editBitmap);
+
         bitmapCanvas.drawCircle(mCircleX - startLeft, mCircleY - startTop, mCircleRadius, mPaintCircle);
 
     }
@@ -107,16 +121,15 @@ public class CustomView extends AppCompatImageView {
             mCircleX = x;
             mCircleY = y;
 
-            isTouch = true;
-
             postInvalidate();
-
         }
         return value;
     }
 
     public Bitmap getBitmap() {
-        Log.d("test", String.valueOf(bitmap.getByteCount()));
-        return bitmap;
+        this.editBitmap = Bitmap.createScaledBitmap(editBitmap, (int)originWeight, (int)originHeight, false);
+        Log.d("Succeed", "Get:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+        return editBitmap;
     }
+
 }

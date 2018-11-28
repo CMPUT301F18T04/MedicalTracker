@@ -240,11 +240,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
             intent.putExtra("image", bitmap);
             startActivityForResult(intent, REQUEST_MARK_IMAGE);
-
-            bitmap = getIntent().getParcelableExtra("data");
-            imageView.setImageBitmap(bitmap);
-
-
         }
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
             bitmaps = BitmapHolder.getBitmaps();
@@ -256,6 +251,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
             Bitmap bitmap = data.getParcelableExtra("data");
             bitmaps.add(bitmap);
+            imageView.setImageBitmap(bitmap);
         }
     }
 
