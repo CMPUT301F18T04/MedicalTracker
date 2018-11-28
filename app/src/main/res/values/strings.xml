@@ -156,6 +156,15 @@
     <string name="add_problem_toast">Added a new problem</string>
     <!-- end for Add Problem Page -->
 
+    <!-- String for Add Problem Page -->
+    <string name="edit_problem_title">Edit A Problem</string>
+    <string name="edit_problem_problem_title">Problem Title:</string>
+    <string name="edit_problem_problem_date">Date Start:</string>
+    <string name="edit_problem_problem_description">Brief Description:</string>
+    <string name="edit_problem_button_edit">Edit</string>
+    <string name="edit_problem_toast">Saved changes</string>
+    <!-- end for Add Problem Page -->
+
     <!-- String for Add Record Page -->
     <string name="add_record_title">Add A Record</string>
     <string name="add_record_record_title">Record Title:</string>

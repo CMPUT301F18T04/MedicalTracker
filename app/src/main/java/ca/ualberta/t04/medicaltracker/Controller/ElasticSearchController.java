@@ -116,7 +116,6 @@ public class ElasticSearchController
     {
         @Override
         protected Void doInBackground(User... users) {
-            Log.d(TAG, "doInBackground: 119");
             setClient();
 
             User user = users[0];
@@ -132,7 +131,6 @@ public class ElasticSearchController
                     Log.d("Succeed", "Updated it!");
                 }
             } catch (IOException e) {
-                Log.d("Succeed", "Failed!");
                 e.printStackTrace();
                 return null;
             }
@@ -144,7 +142,6 @@ public class ElasticSearchController
     {
         @Override
         protected Void doInBackground(String... userNames) {
-            Log.d(TAG, "doInBackground: 147");
             setClient();
 
             String userName = userNames[0];
@@ -184,7 +181,6 @@ public class ElasticSearchController
     {
         @Override
         protected ArrayList<Patient> doInBackground(String... userNames) {
-            Log.d(TAG, "doInBackground: 187");
             setClient();
 
             String userName = userNames[0];
@@ -238,7 +234,6 @@ public class ElasticSearchController
     {
         @Override
         protected User doInBackground(String... userNames) {
-            Log.d(TAG, "doInBackground: 241");
             setClient();
 
             String userName = userNames[0];
@@ -294,7 +289,6 @@ public class ElasticSearchController
     {
         @Override
         protected Boolean doInBackground(User... users) {
-            Log.d(TAG, "doInBackground: 297");
             setClient();
             User user = users[0];
 
@@ -355,7 +349,6 @@ public class ElasticSearchController
     {
         @Override
         protected Void doInBackground(Record... records) {
-            Log.d(TAG, "doInBackground: 358");
             setClient();
 
             Record record = records[0];
@@ -383,7 +376,6 @@ public class ElasticSearchController
 
         @Override
         protected Boolean doInBackground(Record... records) {
-            Log.d(TAG, "doInBackground: 386");
             setClient();
             Record record = records[0];
             Index recordIndex = new Index.Builder(record).index(INDEX_NAME).type(RECORD_TYPE).id(record.getRecordId()).build();
@@ -406,7 +398,6 @@ public class ElasticSearchController
     {
         @Override
         protected Record doInBackground(String... recordIds) {
-            Log.d(TAG, "doInBackground: 409");
             setClient();
 
             String recordId = recordIds[0];
@@ -430,7 +421,6 @@ public class ElasticSearchController
     {
         @Override
         protected ArrayList<Record> doInBackground(String... recordIds) {
-            Log.d(TAG, "doInBackground: 433");
             setClient();
 
             String query = "{\n" +
@@ -485,7 +475,6 @@ public class ElasticSearchController
     public static class DeleteRecordListTask extends AsyncTask<String, Void, Void>{
         @Override
         protected Void doInBackground(String... recordIds) {
-            Log.d(TAG, "doInBackground: 488");
             setClient();
 
             ArrayList<Delete> deletes = new ArrayList<>();
@@ -520,7 +509,6 @@ public class ElasticSearchController
     {
         @Override
         protected Void doInBackground(String... recordIds) {
-            Log.d(TAG, "doInBackground: 523");
             setClient();
 
             String recordId = recordIds[0];

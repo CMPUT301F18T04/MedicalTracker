@@ -76,7 +76,7 @@
         <activity android:name=".Activity.Doctor.ScanActivity" />
         <activity android:name=".Activity.Patient.MarkImageActivity"></activity>
         <activity android:name=".Activity.MapViewActivity"></activity>
-        <activity android:name=".Activity.Patient.MapAddLocationActivity"></activity>
+        <activity android:name=".Activity.Patient.EditProblemActivity"></activity>
     </application>
 
 </manifest>
