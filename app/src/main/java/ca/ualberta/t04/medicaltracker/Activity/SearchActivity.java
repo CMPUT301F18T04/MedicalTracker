@@ -33,6 +33,14 @@ import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.SearchType;
 
+/**
+ * This activity is for searching based on a keyword
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for searching based on a keyword
  */

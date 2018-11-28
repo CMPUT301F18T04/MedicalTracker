@@ -50,6 +50,15 @@ import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
+
+/**
+ * This class adds a new record for a patient user
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for adding a record to a problem for a patient user
  */

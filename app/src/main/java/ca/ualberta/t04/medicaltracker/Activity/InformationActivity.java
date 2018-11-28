@@ -10,6 +10,14 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.User;
 
+/**
+ * The activity needs a userName for a specific user.
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
     The activity needs a userName for a specific user.
     UserName is sent by intent. The key of the intent data is "username".

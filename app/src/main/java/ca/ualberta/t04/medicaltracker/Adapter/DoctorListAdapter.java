@@ -14,6 +14,14 @@ import java.util.List;
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.R;
 
+/**
+ * This class represents a custom adapter for displaying the doctor list
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This class represents a custom adapter for displaying the doctor list
  */

@@ -23,6 +23,14 @@ import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
+/**
+ * This activity is for displaying the profile detail of a general user
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for displaying the profile detail of a general user
  */

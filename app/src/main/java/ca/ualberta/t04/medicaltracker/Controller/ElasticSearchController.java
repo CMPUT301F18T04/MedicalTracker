@@ -31,6 +31,15 @@ import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+
+/**
+ * This class is exclusively the entire implementation of elastic search used for the application
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
     The idea of this part is from Lab5 of CMPUT301
  */

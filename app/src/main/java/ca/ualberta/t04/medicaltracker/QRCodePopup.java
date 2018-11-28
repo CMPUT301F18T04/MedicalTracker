@@ -14,7 +14,7 @@ import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import ca.ualberta.t04.medicaltracker.Util.QRCodeUtil;
 
 /**
- * This class displays a pop up window for the doctor to add a comment
+ * This class displays a pop up window for showing the QRcode of the user logged in
  */
 
 public class QRCodePopup {

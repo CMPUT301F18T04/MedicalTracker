@@ -201,6 +201,7 @@
     <string name="record_toast1">Nouvelles révisions sont sauvé</string>
     <string name="record_toast2">Il n\'y a pas de photo</string>
     <string name="upload_button">Télécharger un photo</string>
+    <string name="location_text">Il n\'y a pas de localisation</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->

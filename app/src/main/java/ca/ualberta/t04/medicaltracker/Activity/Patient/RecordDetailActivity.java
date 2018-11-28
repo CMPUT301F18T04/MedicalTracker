@@ -144,6 +144,8 @@ public class RecordDetailActivity extends AppCompatActivity {
 
                 recordList.setDescription(record, description.getText().toString());
 
+                recordList.addBodyLocationImage(record, bitmaps.get(0));
+
                 ElasticSearchController.updateRecord(record);
 
                 Toast.makeText(RecordDetailActivity.this, R.string.record_toast1, Toast.LENGTH_SHORT).show();
@@ -214,20 +216,6 @@ public class RecordDetailActivity extends AppCompatActivity {
 
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
-            /*
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            Log.d("Succeed", String.valueOf(baos.toByteArray().length));
-
-            Uri uri = data.getData();
-
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-
-            if(cursor!=null && cursor.moveToFirst()){
-                String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
-                Log.d("Succeed", path);
-            }
-            */
             Intent intent = new Intent(RecordDetailActivity.this, MarkImageActivity.class);
 
             intent.putExtra("image", bitmap);
