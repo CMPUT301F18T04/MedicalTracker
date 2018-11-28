@@ -66,6 +66,7 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
     private Location mLocation;
     private ArrayList<Location> locations  = new ArrayList<>();
     private int patientIndex;
+    private Location deviceLocation;
 
 
     @Override
@@ -94,6 +95,8 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_map_view);
+        mGps = (ImageView)findViewById(R.id.my_location);
+        mAllLocations = (ImageView)findViewById(R.id.all_locations);
 
         Intent mIntent = getIntent();
         final int problemIndex = mIntent.getIntExtra("problem_index", -1);
@@ -112,8 +115,6 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
                     .getRecordList().getRecord(recordIndex)
                     .getLocation();
         }
-        mGps = (ImageView)findViewById(R.id.my_location);
-        mAllLocations = (ImageView)findViewById(R.id.all_locations);
 
         getLocationPermission();
     }
@@ -138,7 +139,6 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
     private void init(){
         Log.d(TAG,"init: initializing");
 
-        //mMap.clear();
         moveCamera(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), DEFAULT_ZOOM, "Record Location");
 
         mGps.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +146,8 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked gps icon");
                 getDeviceLocation();
+                moveCamera(new LatLng(deviceLocation.getLatitude(),deviceLocation.getLongitude()), DEFAULT_ZOOM, "My Location");
+                Toast.makeText(MapViewActivity.this, "You are here !",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -184,6 +186,7 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng));
         }
+        Toast.makeText(MapViewActivity.this, "Move around to check other marked locations.",Toast.LENGTH_LONG).show();
     }
 
     private void getDeviceLocation() {
@@ -198,9 +201,8 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location");
-                            Location currentLocation = (Location) task.getResult();
-
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM,"My Location");
+                            deviceLocation= (Location) task.getResult();
+                            //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM,"My Location");
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapViewActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -211,6 +213,7 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         } catch (SecurityException e) {
             Log.d(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
+
     }
 
     private void initMap() {
@@ -222,13 +225,10 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to : lat" + latLng.latitude + ", lng: " + latLng.longitude);
-        mMap.clear();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         if (!title.equals("My Location")){
             MarkerOptions options = new MarkerOptions().position(latLng).title(title);
             mMap.addMarker(options);
-        }else{
-            mMap.addMarker(new MarkerOptions().position(latLng));
         }
     }
 
