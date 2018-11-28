@@ -200,8 +200,11 @@
     <string name="save_button">Save</string>
     <string name="record_location">Location:</string>
     <string name="record_bodyLocation">Body Location:</string>
+    <string name="upload_button">Upload Photo</string>
+    <string name="location_text">No location selected</string>
     <string name="record_toast1">New edits saved</string>
     <string name="record_toast2">No photo uploads</string>
+
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->

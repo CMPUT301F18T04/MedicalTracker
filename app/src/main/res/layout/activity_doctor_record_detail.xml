@@ -219,7 +219,7 @@
     <TextView
         android:id="@+id/doctorRecordLocation"
         android:layout_width="152dp"
-        android:layout_height="37dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/recordImageView"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"

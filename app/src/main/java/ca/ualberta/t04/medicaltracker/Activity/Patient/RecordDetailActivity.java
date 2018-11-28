@@ -1,8 +1,19 @@
 package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,8 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 
 import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
@@ -25,6 +39,7 @@ import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
+import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 import static ca.ualberta.t04.medicaltracker.Activity.Patient.AddRecordActivity.REQUEST_UPDATE_DATA;
 
@@ -35,6 +50,13 @@ import static ca.ualberta.t04.medicaltracker.Activity.Patient.AddRecordActivity.
 public class RecordDetailActivity extends AppCompatActivity {
 
     public static ArrayAdapter<String> adapter;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_UPDATE_DATA = 2;
+    static final int REQUEST_MARK_IMAGE = 3;
+    private Geocoder geocoder;
+    private List<Address> addresses;
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
+    private ImageView recordImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +69,18 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         Intent mIntent = getIntent();
         final int problemIndex = mIntent.getIntExtra("problem_index", -1);
-        final int recordIndex = mIntent.getIntExtra("record_index",-1);
+        final int recordIndex = mIntent.getIntExtra("record_index", -1);
 
         final EditText title = findViewById(R.id.addCommentEditText);
         final TextView date = findViewById(R.id.dateTextView);
         final TextView location = findViewById(R.id.locationTextView);
         final TextView body_location = findViewById(R.id.bodyLocationTextView);
         final EditText description = findViewById(R.id.descriptionEditText);
+        Button uploadButton = findViewById(R.id.uploadButton);
 
 
         Button saveButton = findViewById(R.id.saveButton);
-        ImageView recordImageView = findViewById(R.id.recordImageView);
+        recordImageView = findViewById(R.id.recordImageView);
 
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
         final RecordList recordList = problem.getRecordList();
@@ -66,23 +89,47 @@ public class RecordDetailActivity extends AppCompatActivity {
         // set the information
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
-        //location.setText(record.getLocation().toString());
-        //body_location.setText(record.getBodyLocation().toString());
+
+        Location recordLocation = record.getLocation();
+        if (recordLocation == null) {
+            location.setText(R.string.location_text);
+        } else {
+
+            double longitude = recordLocation.getLongitude();
+            double latitude = recordLocation.getLatitude();
+            geocoder = new Geocoder(RecordDetailActivity.this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                String address_line = addresses.get(0).getAddressLine(0); // the full address is stored in the variable address_line
+                location.setText(address_line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (record.getBodyLocation() == null) {
+            body_location.setText("");
+        } else {
+            body_location.setText(record.getBodyLocation().name());
+        }
+
         description.setText(record.getDescription());
 
-        if(!record.getPhotos().isEmpty())
+        if (!record.getPhotos().isEmpty())
             recordImageView.setImageBitmap(record.getPhotos().get(0));
 
         // When the image view is clicked
         recordImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(record.getPhotos().isEmpty()){
+                if (record.getPhotos().isEmpty()) {
                     Toast.makeText(RecordDetailActivity.this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Intent intent = new Intent(RecordDetailActivity.this, SlideShowActivity.class);
                     BitmapHolder.setBitmaps(record.getPhotos());
+                    intent.putExtra("recordIndex", recordIndex);
+                    intent.putExtra("problemIndex", problemIndex);
                     startActivityForResult(intent, REQUEST_UPDATE_DATA);
                 }
             }
@@ -102,6 +149,27 @@ public class RecordDetailActivity extends AppCompatActivity {
                 Toast.makeText(RecordDetailActivity.this, R.string.record_toast1, Toast.LENGTH_SHORT).show();
 
                 finish();
+            }
+        });
+
+        // When the upload Button is clicked
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(RecordDetailActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(RecordDetailActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(RecordDetailActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                } else {
+                    if (bitmaps.size() < 10) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                        }
+                    } else {
+                        Toast.makeText(RecordDetailActivity.this, getString(R.string.add_record_toast3), Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -135,6 +203,49 @@ public class RecordDetailActivity extends AppCompatActivity {
             }
         }
         return comments;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            recordImageView.setImageBitmap(bitmap);
+
+            Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+
+            /*
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            Log.d("Succeed", String.valueOf(baos.toByteArray().length));
+
+            Uri uri = data.getData();
+
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+                Log.d("Succeed", path);
+            }
+            */
+            Intent intent = new Intent(RecordDetailActivity.this, MarkImageActivity.class);
+
+            intent.putExtra("image", bitmap);
+            startActivityForResult(intent, REQUEST_MARK_IMAGE);
+
+
+        }
+        else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
+            bitmaps = BitmapHolder.getBitmaps();
+            if(bitmaps.isEmpty()){
+                recordImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_gallery));
+            } else {
+                recordImageView.setImageBitmap(bitmaps.get(0));
+            }
+        } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
+            Bitmap bitmap = data.getParcelableExtra("data");
+            bitmaps.add(bitmap);
+        }
     }
 
 

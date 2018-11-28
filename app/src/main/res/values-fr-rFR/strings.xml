@@ -200,6 +200,7 @@
     <string name="record_bodyLocation">Localisation de Corps:</string>
     <string name="record_toast1">Nouvelles révisions sont sauvé</string>
     <string name="record_toast2">Il n\'y a pas de photo</string>
+    <string name="upload_button">Télécharger un photo</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->

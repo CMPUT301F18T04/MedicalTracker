@@ -1,6 +1,9 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,9 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
+import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.CommentPopup;
@@ -34,6 +41,8 @@ import ca.ualberta.t04.medicaltracker.R;
 public class DoctorRecordDetailActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
+    private Geocoder geocoder;
+    private List<Address> addresses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +93,31 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
-        //location.setText(record.getLocation().toString());
-        //body_location.setText(record.getBodyLocation().name());
+        Location recordLocation = record.getLocation();
+        if(recordLocation == null){
+            location.setText(R.string.location_text);
+        }else {
+
+            double longitude = recordLocation.getLongitude();
+            double latitude = recordLocation.getLatitude();
+            geocoder = new Geocoder(DoctorRecordDetailActivity.this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                String address_line = addresses.get(0).getAddressLine(0); // the full address is stored in the variable address_line
+                location.setText(address_line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (record.getBodyLocation() == null){
+            body_location.setText("");
+        }
+        else {
+            body_location.setText(record.getBodyLocation().name());
+        }
+
         description.setText(record.getDescription());
 
         InitDoctorCommentListView(recordList, record, patient);

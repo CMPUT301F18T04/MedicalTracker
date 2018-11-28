@@ -13,6 +13,10 @@ import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
 
 /*
@@ -37,6 +41,14 @@ public class SlideShowActivity extends AppCompatActivity {
 
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
 
+        /*
+        Intent mIntent = getIntent();
+        final int problemIndex = mIntent.getIntExtra("problemIndex", -1);
+        final int recordIndex = mIntent.getIntExtra("recordIndex", -1);
+        final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
+        final RecordList recordList = problem.getRecordList();
+        final Record record = recordList.getRecord(recordIndex);
+*/
 
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
@@ -65,6 +77,7 @@ public class SlideShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 bitmaps.remove(currentIndex);
                 returnResult();
+
                 if(bitmaps.isEmpty()){
                     finish();
                 }
