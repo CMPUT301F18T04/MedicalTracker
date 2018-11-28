@@ -100,7 +100,6 @@
     <string name="nav_item_logout">注销</string>
     <string name="nav_item_about">关于我们</string>
     <string name="nav_item_qr_code">二维码</string>
-
     <!-- end for Navigation Drawer -->
 
 
