@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,6 +78,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     private String date;
+    private String time;
+    private Date dateStart;
 
     // onCreate method
     @Override
@@ -89,6 +92,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         ImageButton image_button = findViewById(R.id.imageButton);
         imageView = findViewById(R.id.add_record_photo_display);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        dateStart =  new Date();
+//        DateFormat dateFormat = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
+//        String strDate = dateFormat.format(date);
+
         recordSetDate(); // call recordSetDate
         recordSetTime(); // call recordSetTime
 
@@ -164,9 +171,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         recordTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String time = hour + ":" + minute;
+                time = hour + ":" + minute;
                 record_time.setText(time);
-                date += "T" + time;
+//                date += "T" + time;
             }
         };
     }
@@ -316,11 +323,12 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             return;
         }
 
-        Date dateStart = new Date();
+        Date problemDate = DataController.getPatient().getProblemList().getProblem(problem_index).getTime();
 
         // if the date that the user inputs is not correct, then use the default date
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
+            date += "T" + time;
             dateStart = format.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -329,7 +337,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         if(dateStart.after(new Date())){
             Toast.makeText(AddRecordActivity.this, "You cannot choose a future time.", Toast.LENGTH_SHORT).show();
             return;
-        } else if(dateStart.before(DataController.getPatient().getProblemList().getProblem(problem_index).getTime())){
+        } else if(dateStart.before(problemDate)){
             Toast.makeText(AddRecordActivity.this, "Record time cannot be before the problem time", Toast.LENGTH_SHORT).show();
             return;
         }

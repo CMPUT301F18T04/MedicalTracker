@@ -41,7 +41,7 @@ public class RecordAdapter extends ArrayAdapter {
         TextView date = view.findViewById(R.id.record_list_date);
         TextView description = view.findViewById(R.id.record_list_description);
 
-       // SimpleDateFormat format = new SimpleDateFormat(CommonUtil.TIME_FORMAT, Locale.getDefault());
+        //SimpleDateFormat format = new SimpleDateFormat(CommonUtil.TIME_FORMAT, Locale.getDefault());
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
 
         title.setText(record.getTitle());
