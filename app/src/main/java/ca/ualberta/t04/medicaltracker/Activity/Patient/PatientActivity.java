@@ -268,6 +268,10 @@ public class PatientActivity extends AppCompatActivity
             // still need to fill out this part
             // start another activity of editing problem
             Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PatientActivity.this, EditProblemActivity.class);
+            intent.putExtra("problem_index", index);
+            startActivity(intent);
+
         } else if (id == R.id.option_delete){ // when delete is clicked, an alert dialog is pop up
             AlertDialog.Builder a_builder = new AlertDialog.Builder(PatientActivity.this);
             a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false) // ask you if you want to delete the problem you just clicked

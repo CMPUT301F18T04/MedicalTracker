@@ -289,4 +289,20 @@
         app:layout_constraintTop_toBottomOf="@+id/dRecordDetailDate"
         app:layout_constraintTop_toTopOf="@+id/textView9" />
 
+    <ImageView
+        android:id="@+id/doctor_record_detail_view_location"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/dRecordDetailDate"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/doctorRecordTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_view_location" />
+
 </android.support.constraint.ConstraintLayout>

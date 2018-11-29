@@ -2,6 +2,7 @@ package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +18,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,6 +33,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -70,28 +87,40 @@ import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 // This class has the layout of activity_add_record.xml
 // This class is used for adding a new record
 // This class implements LocationListener which is used for get the current location
-public class AddRecordActivity extends AppCompatActivity implements LocationListener {
+public class AddRecordActivity extends AppCompatActivity implements LocationListener,GoogleApiClient.OnConnectionFailedListener {
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     // initialize
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_UPDATE_DATA = 2;
-    static final int REQUEST_MARK_IMAGE = 3;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_UPDATE_DATA = 2;
+    private static final int REQUEST_MARK_IMAGE = 3;
+    private static final int PLACE_PICKER_REQUEST = 4;
+    private static final String TAG = "AddRecordActivity";
+
+
     private int problem_index;
     private DatePickerDialog.OnDateSetListener recordDateSetListener;
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
     private TextView record_date;
     private TextView record_time;
-    private TextView numPhoto;
-    private EditText record_location;
-    private ImageView imageView;
+
+    private TextView record_location;
+    private ImageView imageView, addLocation;
     private LocationManager locationManager;
     private Geocoder geocoder;
     private List<Address> addresses;
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
+    private Location location = null;
+    private GoogleApiClient mGoogleApiClient;
+
+    private TextView numPhoto;
     private HashMap<Bitmap, String> bitmaps = new HashMap<>();
     private BodyLocation bodyLocation = null;
     private BodyLocationPopup bodyLocationPopup = null;
 
     private Problem problem;
+
 
     // onCreate method
     @Override
@@ -103,7 +132,11 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         numPhoto = findViewById(R.id.add_record_num_photo);
         record_location = findViewById(R.id.add_record_location);
 
+        record_location.setMovementMethod(new ScrollingMovementMethod());
+        ImageButton image_button = findViewById(R.id.imageButton);
+
         imageView = findViewById(R.id.add_record_photo_display);
+        addLocation = findViewById(R.id.record_add_location);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         recordSetDate(); // call recordSetDate
         recordSetTime(); // call recordSetTime
@@ -114,15 +147,21 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // get the current location
-            Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-            onLocationChanged(location); // call onLocationChanged
+            //location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+            location = null;
         }
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
+
+        if (isServicesOK()){
+            initMapApi();
+        }
+
         problem = DataController.getPatient().getProblemList().getProblem(problem_index);
+
     }
 
     // recordSetDate method is used for set a date using DatePickerDialog
@@ -238,29 +277,15 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             String path = data.getStringExtra("path");
             bitmaps.put(bitmap, path);
         }
-    }
+        else if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace( this,data);
 
-    // This method get the current address of the user
-    // The address got will be displayed in the TextView record_location
-    // This method will be called when the location has changed.
-    @Override
-    public void onLocationChanged(Location location) {
-        if(location==null){
-            record_location.setText("");
-            return;
+                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                        .getPlaceById(mGoogleApiClient, place.getId());
+                placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            }
         }
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            String address_line = addresses.get(0).getAddressLine(0); // the full address is stored in the variable address_line
-            record_location.setText(address_line);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     // This method will be called when the provider status changes.
@@ -325,7 +350,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
 
         // create a new record
-        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, null, bodyLocation);
+        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, location, null);
+
         // if no network, then add the record in the offline record and wait for reconnecting
         if(!NetworkUtil.isNetworkConnected(this)){
             DataController.getRecordList().get(problem.getProblemId()).addOfflineRecord(record);
@@ -370,5 +396,96 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         TextView bodyLocationHint = findViewById(R.id.add_record_body_location_hint);
         bodyLocationPopup = new BodyLocationPopup(this, bodyLocationHint);
         bodyLocationPopup.chooseBodyLocation();
+    }
+
+
+    /*
+    -----------------------------------Map and Location methods-----------------------------------
+     */
+
+    public  boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(AddRecordActivity.this);
+
+        if (available == ConnectionResult.SUCCESS){
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        }else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Log.d(TAG, "isServicesOK : an error occurred but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(AddRecordActivity.this,available,9001);
+            dialog.show();
+        }else{
+            Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
+    // This method get the current address of the user
+    // The address got will be displayed in the TextView record_location
+    // This method will be called when the location has changed.
+    @Override
+    public void onLocationChanged(Location location) {
+        if(location==null){
+            record_location.setText("");
+            return;
+        }
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            String address_line = addresses.get(0).getAddressLine(0); // the full address is stored in the variable address_line
+            record_location.setText(address_line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(@NonNull PlaceBuffer places) {
+            if(!places.getStatus().isSuccess()){
+                Log.d(TAG, "onResult: Place query did not complete successfully" + places.getStatus().toString());
+                places.release();
+                return;
+            }
+            final Place place = places.get(0);
+
+            Location chosenLocation = new Location("");
+            chosenLocation.setLatitude(place.getLatLng().latitude);
+            chosenLocation.setLongitude(place.getLatLng().longitude);
+
+            location = chosenLocation;
+            onLocationChanged(chosenLocation);
+
+            places.release();
+
+        }
+    };
+
+    private void initMapApi(){
+
+        Log.d(TAG, "init: initializing");
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this,this)
+                .build();
+
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try{
+                    startActivityForResult(builder.build(AddRecordActivity.this), PLACE_PICKER_REQUEST);
+                }catch(GooglePlayServicesRepairableException e){
+                    Log.d(TAG, "onClick: GooglePlayServicesRepairableException"+ e.getMessage());
+                }catch (GooglePlayServicesNotAvailableException e){
+                    Log.d(TAG, "onClick: GooglePlayServicesNotAvailableException"+  e.getMessage());;
+                }
+            }
+        });
     }
 }
