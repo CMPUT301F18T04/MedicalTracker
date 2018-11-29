@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.View.MarkImageView;
+import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 public class MarkImageActivity extends AppCompatActivity {
 
@@ -27,13 +28,23 @@ public class MarkImageActivity extends AppCompatActivity {
         Bitmap bitmap = getIntent().getParcelableExtra("image");
 
         MarkImageView = findViewById(R.id.markView);
-
         MarkImageView.setBitmap(bitmap);
-    }
+    
 
+        
+    } 
     public void finishMarking(View view){
         Intent intent = new Intent();
         intent.putExtra("data", MarkImageView.getBitmap());
+      
+        String fileName = System.currentTimeMillis() + ".jpg";
+        Boolean succeed = ImageUtil.saveImage(MarkImageView.getBitmap(), fileName);
+        String path = null;
+        if(succeed){
+            path = ImageUtil.PHOTO_DIRECTORY + fileName;
+        }
+        intent.putExtra("path", path);
+
         setResult(RESULT_OK, intent);
         finish();
     }

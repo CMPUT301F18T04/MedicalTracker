@@ -10,6 +10,14 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a custom image adapter
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
    This class represents a custom image adapter
  */

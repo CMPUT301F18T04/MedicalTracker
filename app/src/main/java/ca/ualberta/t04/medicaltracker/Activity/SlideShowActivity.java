@@ -13,7 +13,19 @@ import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.Record;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
+
+/**
+ * This activity is for displaying all the photos in a slideshow format
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
 
 /*
   This activity is for displaying all the photos in a slideshow format
@@ -22,7 +34,6 @@ import ca.ualberta.t04.medicaltracker.R;
 public class SlideShowActivity extends AppCompatActivity {
 
     private int currentIndex;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +76,7 @@ public class SlideShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 bitmaps.remove(currentIndex);
                 returnResult();
+
                 if(bitmaps.isEmpty()){
                     finish();
                 }

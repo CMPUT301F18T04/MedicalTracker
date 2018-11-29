@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/profile"
             android:title="@string/nav_item_profile" />
         <item
             android:id="@+id/nav_gallery"
@@ -18,7 +18,7 @@
             android:title="@string/nav_item_doctor" />
         <item
             android:id="@+id/nav_qr_code"
-            android:icon="@drawable/qr_code"
+            android:icon="@mipmap/qr_code"
             android:title="@string/nav_item_qr_code" />
     </group>
 
@@ -34,7 +34,7 @@
                 android:title="@string/nav_item_about" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@mipmap/logout"
                 android:title="@string/nav_item_logout" />
         </menu>
     </item>
