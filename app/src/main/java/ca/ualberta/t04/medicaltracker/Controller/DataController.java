@@ -1,15 +1,17 @@
 package ca.ualberta.t04.medicaltracker.Controller;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
+import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.Model.User;
 
 public class DataController
 {
     private static User user;
-
+    private static HashMap<String, RecordList> recordList;
 
     public static User getUser() {
         return user;
@@ -45,4 +47,22 @@ public class DataController
         return (Doctor) user;
     }
 
+    public static HashMap<String, RecordList> getRecordList() {
+        if(recordList==null)
+            recordList = new HashMap<>();
+        return recordList;
+    }
+
+    public static void addRecordList(String problemId, RecordList recordList) {
+        if(!getRecordList().containsKey(problemId))
+            getRecordList().put(problemId, recordList);
+    }
+
+    public static void updateRecordList(String problemId, RecordList recordList){
+        getRecordList().put(problemId, recordList);
+    }
+
+    public static void clearRecordList(){
+        getRecordList().clear();
+    }
 }

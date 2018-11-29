@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
+import ca.ualberta.t04.medicaltracker.Activity.InformationActivity;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
@@ -50,9 +53,14 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.saveButton);
 
+
+
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
-        final RecordList recordList = problem.getRecordList();
+        final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
         final Record record = recordList.getRecord(recordIndex);
+
+        ImageView imageView = findViewById(R.id.imageView3);
+        imageView.setImageBitmap(record.getPhotos().get(0));
 
         // set the information
         title.setText(record.getTitle());
@@ -91,6 +99,16 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, R.layout.doctor_comment_list, comments);
         commentListView.setAdapter(adapter);
+
+        commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String doctorUserName = comments.get(position).split(":")[0];
+                Intent intent = new Intent(RecordDetailActivity.this, InformationActivity.class);
+                intent.putExtra("username", doctorUserName);
+                startActivity(intent);
+            }
+        });
     }
 
     // Formatting the list for the commentListView and return it
