@@ -42,7 +42,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
 
 public class CommonUtil {
     public static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm";
-    public static String INDEX_NAME = "cmput301f18t04p5test3";
+    public static String INDEX_NAME = "cmput301f18t04p5test7";
     public static int QR_CODE_HEIGHT = 500;
 
 

@@ -69,8 +69,8 @@ public class AddProblemActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 Date currentDate = new Date();
-                String date = year + "-" + month + "-" + day;
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = year + "-" + month + "-" + day + "T00:00";
+                SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
                 try {
                     Date selectedDate = sdf.parse(date);
                     if (currentDate.after(selectedDate)){

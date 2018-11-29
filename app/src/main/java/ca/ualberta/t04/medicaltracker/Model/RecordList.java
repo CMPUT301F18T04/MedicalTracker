@@ -72,7 +72,7 @@ public class RecordList
         return records;
     }
 
-    public void updateRecords(int index, String recordId){
+    public void updateRecord(int index, String recordId){
         records = ElasticSearchController.searchRecordList(recordIds);
     }
 

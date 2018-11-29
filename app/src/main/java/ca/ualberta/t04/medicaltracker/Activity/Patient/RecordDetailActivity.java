@@ -54,7 +54,6 @@ import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
-import static ca.ualberta.t04.medicaltracker.Activity.Patient.AddRecordActivity.REQUEST_UPDATE_DATA;
 
 /**
  * This class is for displaying and editing the information of a record for a patient user
@@ -85,10 +84,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_record_detail);
 
         //widgets
-        final EditText title = (EditText) findViewById(R.id.addCommentEditText);
-        final TextView date = (TextView) findViewById(R.id.dateTextView);
-        final EditText description = (EditText) findViewById(R.id.descriptionEditText);
-        Button saveButton = (Button) findViewById(R.id.saveButton);
         commentListView = (ListView) findViewById(R.id.CommentListView);
         viewLocation= (ImageView) findViewById(R.id.view_location);
 
@@ -115,8 +110,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         recordImageView = findViewById(R.id.recordImageView);
 
         mPatient = DataController.getPatient();
-        final Problem problem = mPatient.getProblemList().getProblem(problemIndex);
-        final RecordList recordList = problem.getRecordList();
 
         final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
         final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());

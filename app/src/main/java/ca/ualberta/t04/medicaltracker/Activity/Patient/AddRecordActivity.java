@@ -111,7 +111,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private LocationManager locationManager;
     private Geocoder geocoder;
     private List<Address> addresses;
-    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
     private Location location = null;
     private GoogleApiClient mGoogleApiClient;
 
@@ -370,7 +370,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
 
         // create a new record
-        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, location, null);
+        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, location, bodyLocation);
 
         // if no network, then add the record in the offline record and wait for reconnecting
         if(!NetworkUtil.isNetworkConnected(this)){

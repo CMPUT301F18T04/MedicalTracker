@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
@@ -188,7 +189,8 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         EditText birthday = findViewById(R.id.profile_birthday);
-                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+
+                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth + "T00:00");
                     }
                 }, Year, Month, Day);
         datePickerDialog.show();

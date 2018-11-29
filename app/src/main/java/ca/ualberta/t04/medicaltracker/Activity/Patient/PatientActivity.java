@@ -138,7 +138,8 @@ public class PatientActivity extends AppCompatActivity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //DataController.setCurrentProblem(problems.get(position));
+                    Problem problem = problems.get(position);
+                    DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
                     Intent intent = new Intent(activity, RecordHistoryActivity.class);
 
                     intent.putExtra("index", position);
