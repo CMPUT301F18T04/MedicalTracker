@@ -7,71 +7,216 @@
     <string name="developer_LexiLi">李昕阳</string>
     <string name="developer_AnnabelleZhang">张巧燕</string>
     <string name="developer_YuanWang">王源</string>
-    <!-- Login screen -->
+
+    <!-- String for Login Page -->
     <string name="login_text_username">用戶名：</string>
-    <string name="login_text_password">密碼：</string>
     <string name="login_button_login">登錄</string>
     <string name="login_button_register">註冊</string>
+    <string name="login_toast1">用戶名不能為空！</string>
+    <string name="login_toast2">用戶名不存在！</string>
+    <string name="login_toast4">您是首次在此設備上登錄本APP</string>
+    <!-- end for Login Page -->
 
-    <!-- Register page -->
+
+    <!-- String for Register Page -->
     <string name="register_text_username">用戶名：</string>
-    <string name="register_text_password">密碼:</string>
-    <string name="register_text_confirmed_password">請再輸入一次密碼：</string>
     <string name="register_text_email">郵箱：</string>
     <string name="register_text_birthday">出生日期：</string>
-    <string name="register_text_phone">聯繫方式：</string>
-    <string name="register_text_sex">性別：</string>
+    <string name="register_text_phone">聯系方式：</string>
+    <string name="register_text_sex">性别：</string>
     <string name="register_text_male">男</string>
     <string name="register_text_female">女</string>
     <string name="register_text_i_am">我是：</string>
     <string name="register_text_patient">病人</string>
     <string name="register_text_doctor">醫生</string>
     <string name="register_button_sign_up">註冊</string>
+    <string name="register_toast1">用戶名不能為空!</string>
+    <string name="register_toast2">用戶名應為4到15個字符</string>
+    <string name="register_toast3">用戶名包含非法字符!</string>
+    <string name="register_toast8">電話號碼無效!</string>
+    <string name="register_toast9">郵箱無效!</string>
+    <string name="register_toast10">此用戶名已經存在</string>
+    <string name="register_toast11">註冊成功</string>
+    <string name="register_toast12">電話號碼應為5到16位!</string>
+    <string name="register_toast13">出生日期應為過去的時間!</string>
+    <!-- end for Register Page -->
 
-    <!-- Slide bar and title for patient-->
-    <string name="nav_header_patient">患者</string>
+
+    <!-- String for Main Page -->
+    <string name="title_activity_main">主界面</string>
+    <!-- end for Main Page -->
+
+
+    <!-- String for Add Patient Page -->
+    <string name="add_patient_title">查找患者</string>
+    <string name="add_patient_tip">請輸入患者的名字:</string>
+    <string name="add_patient_button_search">搜索</string>
+    <string name="add_patient_button_add">添加</string>
+    <string name="add_patient_detail">這位患者有 %d 問題</string>
+    <string name="add_patient_toast1">患者的名字不能為空</string>
+    <string name="add_patient_toast2">無法找到此患者</string>
+    <!-- end for Add Patient Page -->
+
+    <!-- String for Patient Page -->
     <string name="patient_page_title">病歷</string>
-    <string name="nav_item_profile">個人資料</string>
-    <string name="nav_item_gallery">相冊</string>
-    <string name="nav_item_doctor">主治醫生</string>
-    <string name="nav_item_setting">設置</string>
-    <string name="nav_item_about">關於</string>
-    <string name="nav_item_logout">註銷</string>
+    <string name="patient_page_description">病情描述: </string>
+    <string name="patient_inner_text_record">病情記錄</string>
+    <string name="patient_toast11">醫生</string>
+    <string name="patient_toast12">已經把妳加入TA的患者列表</string>
+    <string name="patient_toast2">壹個病情已經被刪除</string>
+    <!-- end for Patient Page -->
 
-    <!-- Title for doctor-->
-    <string name="nav_header_doctor">醫生</string>
-    <string name="doctor_page_title">你的病人</string>
+    <!-- String for Doctor Page -->
+    <string name="doctor_page_title">您的患者</string>
+    <string name="doctor_page_toast">刪除成功</string>
+    <string name="doctor_page_toast2">添加了病人</string>
+    <string name="doctor_page_toast3">這個病人已經在妳的列表裏了</string>
+    <!-- end for Doctor Page -->
+
+
+    <!-- String for Record History Page -->
+    <string name="record_history_description">詳情: </string>
+    <string name="record_history_title">記錄</string>
+    <string name="record_history_toast1">壹個記錄已經被刪除</string>
+    <!-- end for Record History Page -->
+
+    <!-- String for Doctor View Page -->
+    <string name="doctor_view_page_title">妳的醫生</string>
+    <!-- end for Doctor View Page -->
+
+
+    <!-- String for Navigation Drawer -->
+    <string name="navigation_drawer_open">打開導航欄</string>
+    <string name="navigation_drawer_close">關閉導航欄</string>
+    <string name="nav_header_title">用戶名</string>
     <string name="nav_header_subtitle_patient">患者</string>
-    <string name="nav_header_subtitle_doctor">医生</string>
+    <string name="nav_header_subtitle_doctor">醫生</string>
+    <string name="nav_header_desc">導航欄</string>
+    <string name="nav_item_profile">個人資料</string>
+    <string name="nav_item_gallery">相册</string>
+    <string name="nav_item_doctor">主治醫生</string>
+    <string name="nav_item_other">其他</string>
+    <string name="nav_item_setting">設置</string>
+    <string name="nav_item_logout">註銷</string>
+    <string name="nav_item_about">關於我們</string>
+    <string name="nav_item_qr_code">二維碼</string>
 
-    <!-- String for Profile Page -->
-    <string name="profile_title">你的資料:</string>
-    <string name="profile_username">用戶名:</string>
-    <string name="profile_birthday">出生日期:</string>
-    <string name="profile_sex">性別:</string>
-    <string name="profile_tel">聯繫方式:</string>
-    <string name="profile_email">郵箱:</string>
-    <string name="profile_address">地址:</string>
-    <string name="profile_button_edit">保存</string>
-    <!-- end for Profile Page -->
+    <!-- end for Navigation Drawer -->
+
+
+    <!-- String for Menu -->
+    <string name="action_add">添加</string>
+    <string name="action_search">搜索</string>
+    <string name="action_refresh">刷新</string>
+    <string name="doctor_page_menu_item_detail">查看詳情</string>
+    <string name="doctor_page_menu_item_delete">删除</string>
+    <!-- end for Menu -->
+
+    <!-- String for Setting Page -->
+    <string name="title_activity_settings">設置</string>
+    <string name="title_nickname">昵稱:</string>
+    <string name="change_language">更改語言</string>
+    <string name="Chinese">簡體中文</string>
+    <string name="Japanese">日語</string>
+    <string name="French">法語(加拿大)</string>
+    <string name="English">英語(加拿大)</string>
+    <string name="HK">繁體中文(香港)</string>
+    <string name="Macao">繁體中文(澳門)</string>
+    <string name="language_change_toast">請重新登錄以使更改生效</string>
+    <!-- end for Setting Page -->
 
     <!-- String for About Page -->
     <string name="about_title">關於我們:</string>
-    <string name="about_text_description">此程序最終解釋權歸"CMPUT301F18T4"所有.</string>
+    <string name="about_text_description">此程序最終解釋權歸"CMPUT301F18T4"所有</string>
     <string name="about_text_developer">開發人員:(排名不分先後)</string>
+    <!-- end for About Page -->
 
-    <!-- String for Setting Page -->
-    <string name="title_nickname">昵稱:</string>
-    <string name="apply_change">應用</string>
-    <string name="change_password">更改密碼:</string>
-    <string name="change_language">更改語言:</string>
-    <!-- end for Setting Page -->
+    <!-- String for Profile Page -->
+    <string name="profile_title">您的資料:</string>
+    <string name="profile_username">用戶名:</string>
+    <string name="profile_birthday">出生日期:</string>
+    <string name="profile_sex">性别:</string>
+    <string name="profile_tel">聯系方式:</string>
+    <string name="profile_email">郵箱:</string>
+    <string name="profile_address">地址:</string>
+    <string name="profile_button_edit">保存</string>
+    <string name="profile_toast1">出生日期應為過去的時間!</string>
+    <string name="profile_toast2">電話號碼無效!</string>
+    <string name="profile_toast3">郵箱無效!</string>
+    <string name="profile_toast4">資料更新成功！</string>
 
-    <!-- String for Change Password Page -->
-    <string name="old_password">舊密碼:</string>
-    <string name="new_password">新密碼:</string>
-    <string name="confirmed_password">確認密碼:</string>
-    <string name="save_password">保存
-    </string>
-    <!-- end for Change Password Page -->
+    <!-- end for Profile Page -->
+
+
+    <!-- String for Add Problem Page -->
+    <string name="add_problem_title">添加壹個病情</string>
+    <string name="add_problem_problem_title">標題:</string>
+    <string name="add_problem_problem_date">開始日期:</string>
+    <string name="add_problem_problem_description">簡短描述:</string>
+    <string name="add_problem_button_add">添加</string>
+    <string name="add_problem_toast">妳已經添加了壹個新的病情</string>
+    <!-- end for Add Problem Page -->
+
+    <!-- String for Add Record Page -->
+    <string name="add_record_title">添加記錄</string>
+    <string name="add_record_record_title">標題:</string>
+    <string name="add_record_record_date">開始日期:</string>
+    <string name="add_record_record_description">簡短描述:</string>
+    <string name="add_record_button_add">添加</string>
+    <string name="add_record_toast">出現了壹個問題</string>
+    <string name="add_record_toast2">妳已經添加了壹個新的記錄</string>
+    <!-- end for Add Record Page -->
+
+    <!-- String for information Page -->
+    <string name="information_username">用戶名:</string>
+    <string name="information_sex">性别:</string>
+    <string name="information_email">郵箱:</string>
+    <string name="information_TeleNo">電話號碼:</string>
+    <string name="information_address">地址:</string>
+    <string name="information_name">昵稱:</string>
+    <!-- end for information Page -->
+
+    <!-- String for Search Page -->
+    <string name="search_tip">請輸入關鍵字索引:</string>
+    <string name="search_query_hint">查找問題/記錄</string>
+    <string name="search_button_search">搜索</string>
+    <string name="record_detail_location_text">坐標:</string>
+    <string name="register_button_birthday">設置出生日期</string>
+    <string name="title_activity_language">設置語言</string>
+    <string name="search_toast1">未找到任何結果</string>
+    <!-- end for Search Page -->
+
+    <!-- String for doctor record detail || record detail page -->
+    <string name="doctor_record_detail_title">記錄詳情</string>
+    <string name="edit_doctor_record_detail">編輯記錄</string>
+    <string name="record_title">標題:</string>
+    <string name="record_date">開始日期:</string>
+    <string name="record_description">描述:</string>
+    <string name="doctor_comment">其他醫生的評價:</string>
+    <string name="comment_button">評價</string>
+    <string name="save_button">保存</string>
+    <!-- end for doctor record detail || record detail page -->
+
+    <!-- String for Detailed Comments page -->
+    <string name="doctor_comment_detail_title">刪除評論</string>
+    <!-- end for Detailed Comments page -->
+
+    <!-- String for pop up comments page -->
+    <string name="doctor_comment_title">添加新的評論</string>
+    <string name="comment_toast1">成功添加了新的評論</string>
+    <!-- end for pop up comments page -->
+
+    <!-- String for doctor problem list page -->
+    <string name="doctor_problem_list_title">病情</string>
+    <!-- end for doctor problem list page -->
+
+    <!-- String for doctor record list page -->
+    <string name="doctor_record_list_title">記錄</string>
+    <!-- end for doctor record list page -->
+
+    <!-- String for slide show page -->
+    <string name="slide_show_button">删除</string>
+    <!-- end for slide show page -->
+
+
 </resources>
