@@ -49,6 +49,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -122,6 +123,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private Problem problem;
 
 
+    private String date;
+    private String time;
+
     // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +142,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         imageView = findViewById(R.id.add_record_photo_display);
         addLocation = findViewById(R.id.record_add_location);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
         recordSetDate(); // call recordSetDate
         recordSetTime(); // call recordSetTime
 
@@ -189,8 +194,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = year + "-" + month + "-" + day;
+                date = year + "-" + month + "-" + day;
                 record_date.setText(date);
+
             }
         };
     }
@@ -217,8 +223,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         recordTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String time = hour + ":" + minute;
+                time = hour + ":" + minute;
                 record_time.setText(time);
+//                date += "T" + time;
             }
         };
     }
@@ -249,10 +256,13 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
+
             imageView.setImageBitmap(bitmap);
             numPhoto.setText(String.valueOf(bitmaps.size()+1));
+
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
             Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
@@ -332,16 +342,24 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
                 bodyLocation = bodyLocationPopup.getBodyLocation();
             }
         }
-
+        Date problemDate = DataController.getPatient().getProblemList().getProblem(problem_index).getTime();
         Date dateStart = new Date();
 
         // if the date that the user inputs is not correct, then use the default date
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.TIME_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
-            String tempTime = record_date.getText().toString()+"T"+record_time.getText().toString();
-            dateStart = format.parse(tempTime);
+            date += "T" + time;
+            dateStart = format.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        if(dateStart.after(new Date())){
+            Toast.makeText(AddRecordActivity.this, "You cannot choose a future time.", Toast.LENGTH_SHORT).show();
+            return;
+        } else if(dateStart.before(problemDate)){
+            Toast.makeText(AddRecordActivity.this, "Record time cannot be before the problem time", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         if(bitmaps.size()<2){

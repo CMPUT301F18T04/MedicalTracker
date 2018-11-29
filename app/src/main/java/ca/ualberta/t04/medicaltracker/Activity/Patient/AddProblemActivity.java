@@ -68,8 +68,19 @@ public class AddProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                Date currentDate = new Date();
                 String date = year + "-" + month + "-" + day;
-                problem_date.setText(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date selectedDate = sdf.parse(date);
+                    if (currentDate.after(selectedDate)){
+                        problem_date.setText(date);
+                    } else {
+                        Toast.makeText(AddProblemActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
     }

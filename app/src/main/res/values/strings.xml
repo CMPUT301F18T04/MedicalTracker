@@ -242,4 +242,9 @@
     <!-- Common String -->
     <string name="common_string_no_network">Cannot connect to network!</string>
     <!-- end for Common String -->
+  
+    <!-- String for Mark Image Page -->
+    <string name="mark_image_hint">Please click to add a point</string>
+    <string name="mark_image_add">Add</string>
+    <!-- end for Mark Image Page -->
 </resources>
