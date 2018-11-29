@@ -79,7 +79,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     private String date;
     private String time;
-    private Date dateStart;
 
     // onCreate method
     @Override
@@ -92,9 +91,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         ImageButton image_button = findViewById(R.id.imageButton);
         imageView = findViewById(R.id.add_record_photo_display);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        dateStart =  new Date();
-//        DateFormat dateFormat = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
-//        String strDate = dateFormat.format(date);
 
         recordSetDate(); // call recordSetDate
         recordSetTime(); // call recordSetTime
@@ -324,6 +320,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
 
         Date problemDate = DataController.getPatient().getProblemList().getProblem(problem_index).getTime();
+        Date dateStart =  new Date();
 
         // if the date that the user inputs is not correct, then use the default date
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
