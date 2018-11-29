@@ -271,11 +271,13 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             startActivityForResult(intent, REQUEST_MARK_IMAGE);
         }
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
-            for(Bitmap bitmap:BitmapHolder.getBitmaps()){
-                if(!bitmaps.containsKey(bitmap)){
+            HashMap<Bitmap, String> temp = (HashMap<Bitmap, String>) bitmaps.clone();
+            for(Bitmap bitmap:temp.keySet()){
+                if(!BitmapHolder.getBitmaps().contains(bitmap)){
                     bitmaps.remove(bitmap);
                 }
             }
+
             numPhoto.setText(String.valueOf(bitmaps.size()));
             if(bitmaps.isEmpty()){
                 imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_gallery));

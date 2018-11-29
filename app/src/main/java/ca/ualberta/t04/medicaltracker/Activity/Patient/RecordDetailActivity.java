@@ -76,6 +76,8 @@ public class RecordDetailActivity extends AppCompatActivity {
     private List<Address> addresses;
     private ArrayList<Bitmap> bitmaps = new ArrayList<>();
     private ImageView recordImageView;
+    private HashMap<Bitmap, String> bitmapHashMap = new HashMap<>();
+    private ArrayList<Bitmap> originBitmaps = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +118,14 @@ public class RecordDetailActivity extends AppCompatActivity {
         final Problem problem = mPatient.getProblemList().getProblem(problemIndex);
         final RecordList recordList = problem.getRecordList();
 
-       
-
+        final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
+        final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
         final Record record = recordList.getRecord(recordIndex);
 
-        ImageView imageView = findViewById(R.id.imageView3);
-        imageView.setImageBitmap(record.getPhotos().get(0));
+        originBitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
+
+        bitmaps = record.getPhotos();
+        Log.d("Succeed", String.valueOf(bitmaps.size()));
 
         // set the information
         title.setText(record.getTitle());
@@ -164,7 +168,7 @@ public class RecordDetailActivity extends AppCompatActivity {
                     Toast.makeText(RecordDetailActivity.this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(RecordDetailActivity.this, SlideShowActivity.class);
-                    BitmapHolder.setBitmaps(record.getPhotos());
+                    BitmapHolder.setBitmaps(bitmaps);
                     intent.putExtra("recordIndex", recordIndex);
                     intent.putExtra("problemIndex", problemIndex);
                     startActivityForResult(intent, REQUEST_UPDATE_DATA);
@@ -181,7 +185,17 @@ public class RecordDetailActivity extends AppCompatActivity {
 
                 recordList.setDescription(record, description.getText().toString());
 
-                recordList.addBodyLocationImage(record, bitmaps.get(0));
+                Log.d("Succeed", String.valueOf(bitmapHashMap.size()));
+                for(Bitmap bitmap:bitmapHashMap.keySet()){
+                    record.addImage(bitmap, bitmapHashMap.get(bitmap));
+                }
+
+                ArrayList<Bitmap> temp = record.getPhotos();
+                for(Bitmap bitmap:originBitmaps){
+                    if(!BitmapHolder.getBitmaps().contains(bitmap)){
+                        record.removeImage(originBitmaps.indexOf(bitmap));
+                    }
+                }
 
                 ElasticSearchController.updateRecord(record);
 
@@ -304,8 +318,6 @@ public class RecordDetailActivity extends AppCompatActivity {
 
             intent.putExtra("image", bitmap);
             startActivityForResult(intent, REQUEST_MARK_IMAGE);
-
-
         }
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
             bitmaps = BitmapHolder.getBitmaps();
@@ -314,8 +326,11 @@ public class RecordDetailActivity extends AppCompatActivity {
             } else {
                 recordImageView.setImageBitmap(bitmaps.get(0));
             }
+
         } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
             Bitmap bitmap = data.getParcelableExtra("data");
+            String path = data.getStringExtra("path");
+            bitmapHashMap.put(bitmap, path);
             bitmaps.add(bitmap);
         }
     }
