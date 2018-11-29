@@ -12,7 +12,7 @@ import ca.ualberta.t04.medicaltracker.View.MarkImageView;
 
 public class MarkImageActivity extends AppCompatActivity {
 
-    private MarkImageView mMarkImageView;
+    private MarkImageView MarkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +26,14 @@ public class MarkImageActivity extends AppCompatActivity {
 
         Bitmap bitmap = getIntent().getParcelableExtra("image");
 
-        mMarkImageView = findViewById(R.id.customView);
+        MarkImageView = findViewById(R.id.markView);
 
-        mMarkImageView.setBitmap(bitmap);
+        MarkImageView.setBitmap(bitmap);
     }
 
     public void finishMarking(View view){
         Intent intent = new Intent();
-        intent.putExtra("data", mMarkImageView.getBitmap());
+        intent.putExtra("data", MarkImageView.getBitmap());
         setResult(RESULT_OK, intent);
         finish();
     }

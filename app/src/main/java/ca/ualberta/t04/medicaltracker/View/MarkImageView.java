@@ -16,11 +16,11 @@ import android.widget.ImageView;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 public class MarkImageView extends AppCompatImageView {
-    private Paint mPaintCircle;
+    private Paint paint;
     private float circleWidth = 10;
 
-    private float mCircleX, mCircleY;
-    private float mCircleRadius = 40f;
+    private float circleX, circleY;
+    private float circleRadius = 40f;
     private Bitmap bitmap;
     private Bitmap editBitmap;
 
@@ -53,11 +53,11 @@ public class MarkImageView extends AppCompatImageView {
     }
 
     private void init(@Nullable AttributeSet set){
-        mPaintCircle = new Paint();
-        mPaintCircle.setAntiAlias(true);
-        mPaintCircle.setColor(Color.RED);
-        mPaintCircle.setStyle(Paint.Style.STROKE);
-        mPaintCircle.setStrokeWidth(circleWidth);
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(circleWidth);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class MarkImageView extends AppCompatImageView {
         float scale = bitmapHeight/bitmapWidth;
         float newWidth = width;
         float newHeight = newWidth * scale;
-        Log.d("test", String.valueOf(newHeight) + "," + String.valueOf(newWidth));
+        // Log.d("test", String.valueOf(newHeight) + "," + String.valueOf(newWidth));
         if(newHeight>height){
             newHeight = height;
             newWidth = newHeight / scale;
@@ -80,12 +80,12 @@ public class MarkImageView extends AppCompatImageView {
         this.bitmapWidth = newWidth;
         originHeight = bitmap.getHeight();
         originWeight = bitmap.getWidth();
-        Log.d("Succeed", "Before:" + String.valueOf(originHeight) + "," + String.valueOf(originWeight));
-        Log.d("Succeed", "Before:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+        // Log.d("Succeed", "Before:" + String.valueOf(originHeight) + "," + String.valueOf(originWeight));
+        // Log.d("Succeed", "Before:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
         //this.bitmap = bitmap.copy(bitmap.getConfig(), true);
         this.bitmap = Bitmap.createScaledBitmap(bitmap, (int)newWidth, (int)newHeight, false);
-        Log.d("Succeed", "Scaled:" + String.valueOf(newWidth) + "," + String.valueOf(newHeight));
-        Log.d("Succeed", "Scaled:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+        // Log.d("Succeed", "Scaled:" + String.valueOf(newWidth) + "," + String.valueOf(newHeight));
+        //Log.d("Succeed", "Scaled:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
     }
 
     @Override
@@ -94,17 +94,17 @@ public class MarkImageView extends AppCompatImageView {
         startLeft = (width - bitmapWidth)/2;
 
         editBitmap = bitmap.copy(bitmap.getConfig(), true);
-        canvas.drawBitmap(editBitmap, startLeft, startTop, mPaintCircle);
+        canvas.drawBitmap(editBitmap, startLeft, startTop, paint);
 
         Canvas bitmapCanvas = new Canvas(editBitmap);
 
-        bitmapCanvas.drawCircle(mCircleX - startLeft, mCircleY - startTop, mCircleRadius, mPaintCircle);
+        bitmapCanvas.drawCircle(circleX - startLeft, circleY - startTop, circleRadius, paint);
 
     }
 
     public void setBitmap(Bitmap bitmap){
         this.bitmap = bitmap;
-        Log.d("test", String.valueOf(bitmap.getByteCount()));
+        // Log.d("test", String.valueOf(bitmap.getByteCount()));
     }
 
     @Override
@@ -118,8 +118,8 @@ public class MarkImageView extends AppCompatImageView {
             if(x<startLeft || x>startLeft + bitmapWidth || y>bitmapHeight + startTop || y<startTop)
                 return value;
 
-            mCircleX = x;
-            mCircleY = y;
+            circleX = x;
+            circleY = y;
 
             postInvalidate();
         }
@@ -128,7 +128,7 @@ public class MarkImageView extends AppCompatImageView {
 
     public Bitmap getBitmap() {
         this.editBitmap = Bitmap.createScaledBitmap(editBitmap, (int)originWeight, (int)originHeight, false);
-        Log.d("Succeed", "Get:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
+        // Log.d("Succeed", "Get:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
         return editBitmap;
     }
 
