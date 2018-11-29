@@ -7,16 +7,19 @@
     <string name="developer_LexiLi">李昕阳</string>
     <string name="developer_AnnabelleZhang">张巧燕</string>
     <string name="developer_YuanWang">王源</string>
-    <!-- Login screen -->
+
+
+    <!-- String for Login Page -->
     <string name="login_text_username">ユーザー名：</string>
-    <string name="login_text_password">パスワード：</string>
     <string name="login_button_login">ログイン</string>
     <string name="login_button_register">登録</string>
+    <string name="login_toast1">ユーザー名は空にできません！</string>
+    <string name="login_toast2">ユーザー名が存在しません！</string>
+    <string name="login_toast4">あなたはこのデバイスに初めてこのアプリにログインしています</string>
+    <!-- end for Login Page -->
 
-    <!-- Register page -->
+    <!-- String for Register Page -->
     <string name="register_text_username">ユーザー名：</string>
-    <string name="register_text_password">パスワード:</string>
-    <string name="register_text_confirmed_password">パスワードの確認：</string>
     <string name="register_text_email">メール：</string>
     <string name="register_text_birthday">誕生日：</string>
     <string name="register_text_phone">電話：</string>
@@ -27,22 +30,106 @@
     <string name="register_text_patient">患者さん</string>
     <string name="register_text_doctor">先生</string>
     <string name="register_button_sign_up">登録完了</string>
+    <string name="register_toast1">ユーザー名は空にできません！!</string>
+    <string name="register_toast2">ユーザー名は4〜15文字にする必要があります</string>
+    <string name="register_toast3">ユーザー名に不正な文字が含まれています!</string>
+    <string name="register_toast8">電話番号が無効です!</string>
+    <string name="register_toast9">メールボックスが無効です!</string>
+    <string name="register_toast10">このユーザー名は既に存在します</string>
+    <string name="register_toast11">成功した登録</string>
+    <string name="register_toast12">電話番号は5〜16桁です!</string>
+    <string name="register_toast13">生年月日は過去である必要があります!</string>
+    <!-- end for Register Page -->
 
-    <!-- Slide bar and title for patient-->
-    <string name="nav_header_patient">患者さん</string>
+
+    <!-- String for Main Page -->
+    <string name="title_activity_main">メインインターフェイス</string>
+    <!-- end for Main Page -->
+
+
+    <!-- String for Add Patient Page -->
+    <string name="add_patient_title">患者を見つける</string>
+    <string name="add_patient_tip">患者の名前を入力してください:</string>
+    <string name="add_patient_button_search">検索</string>
+    <string name="add_patient_button_add">追加</string>
+    <string name="add_patient_detail">この患者は %d 問題</string>
+    <string name="add_patient_toast1">患者の名前は空にできません</string>
+    <string name="add_patient_toast2">この患者を見つけることができません</string>
+    <!-- end for Add Patient Page -->
+
+    <!-- String for Patient Page -->
     <string name="patient_page_title">医療記録</string>
-    <string name="nav_item_profile">個人データ</string>
-    <string name="nav_item_gallery">アルバム</string>
-    <string name="nav_item_doctor">先生</string>
-    <string name="nav_item_setting">設定</string>
-    <string name="nav_item_about">私たちについて</string>
-    <string name="nav_item_logout">ログアウト</string>
+    <string name="patient_page_description">条件の説明: </string>
+    <string name="patient_inner_text_record">条件レコード</string>
+    <string name="patient_toast11">先生</string>
+    <string name="patient_toast12">既にあなたをTAに追加した患者のリスト</string>
+    <string name="patient_toast2">条件が削除されました</string>
+    <!-- end for Patient Page -->
 
-    <!-- Title for doctor-->
-    <string name="nav_header_doctor">先生</string>
+    <!-- String for Doctor Page -->
     <string name="doctor_page_title">あなたの患者</string>
+    <string name="doctor_page_toast">正常に削除されました</string>
+    <string name="doctor_page_toast2">追加された患者</string>
+    <string name="doctor_page_toast3">この患者はすでにあなたのリストに入っています</string>
+    <!-- end for Doctor Page -->
+
+
+    <!-- String for Record History Page -->
+    <string name="record_history_description">詳細: </string>
+    <string name="record_history_title">レコード</string>
+    <string name="record_history_toast1">レコードが削除されました</string>
+    <!-- end for Record History Page -->
+
+    <!-- String for Doctor View Page -->
+    <string name="doctor_view_page_title">あなたの医者</string>
+    <!-- end for Doctor View Page -->
+
+    <!-- String for Navigation Drawer -->
+    <string name="navigation_drawer_open">ナビゲーションバーを開く</string>
+    <string name="navigation_drawer_close">ナビゲーションバーを閉じる</string>
+    <string name="nav_header_title">ユーザー名</string>
     <string name="nav_header_subtitle_patient">患者</string>
     <string name="nav_header_subtitle_doctor">先生</string>
+    <string name="nav_header_desc">ナビゲーションバー</string>
+    <string name="nav_item_profile">個人情報</string>
+    <string name="nav_item_gallery">アルバム</string>
+    <string name="nav_item_doctor">先生</string>
+    <string name="nav_item_other">其他</string>
+    <string name="nav_item_setting">設定</string>
+    <string name="nav_item_logout">ログアウト</string>
+    <string name="nav_item_about">私たちについて</string>
+    <string name="nav_item_qr_code">QRコード</string>
+    <!-- end for Navigation Drawer -->
+
+    <!-- String for Menu -->
+    <string name="action_add">追加</string>
+    <string name="action_search">検索</string>
+    <string name="action_refresh">リフレッシュ</string>
+    <string name="doctor_page_menu_item_detail">詳細を見る</string>
+    <string name="doctor_page_menu_item_delete">削除</string>
+    <!-- end for Menu -->
+
+
+    <!-- String for Setting Page -->
+    <string name="title_activity_settings">設定</string>
+    <string name="title_nickname">ニックネーム:</string>
+    <string name="change_language">言語を変更する</string>
+    <string name="Chinese">中国語</string>
+    <string name="Japanese">日本語</string>
+    <string name="French">フランス語（カナダ）</string>
+    <string name="English">英語（カナダ）</string>
+    <string name="HK">繁体字中国語（香港）</string>
+    <string name="Macao">繁体字中国語（マカオ語)</string>
+    <string name="language_change_toast">変更を有効にするには、再度ログインしてください</string>
+    <!-- end for Setting Page -->
+
+
+    <!-- String for About Page -->
+    <string name="about_title">私たちについて:</string>
+    <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有</string>
+    <string name="about_text_developer">開発者:(特定の順序で)</string>
+    <!-- end for About Page -->
+
 
     <!-- String for Profile Page -->
     <string name="profile_title">あなたの情報。:</string>
@@ -53,23 +140,82 @@
     <string name="profile_email">メール:</string>
     <string name="profile_address">住所:</string>
     <string name="profile_button_edit">保存</string>
+    <string name="profile_toast1">生年月日は過去である必要があります!</string>
+    <string name="profile_toast2">電話番号が無効です!</string>
+    <string name="profile_toast3">メールボックスが無効です!</string>
+    <string name="profile_toast4">成功したデータ更新！</string>
     <!-- end for Profile Page -->
 
-    <!-- String for About Page -->
-    <string name="about_title">私たちについて:</string>
-    <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有.</string>
-    <string name="about_text_developer">開発者:(特定の順序で)</string>
+    <!-- String for Add Problem Page -->
+    <string name="add_problem_title">条件を追加する</string>
+    <string name="add_problem_problem_title">タイトル:</string>
+    <string name="add_problem_problem_date">開始日:</string>
+    <string name="add_problem_problem_description">簡単な説明:</string>
+    <string name="add_problem_button_add">追加</string>
+    <string name="add_problem_toast">あなたは新しい条件を追加しました</string>
+    <!-- end for Add Problem Page -->
 
-    <!-- String for Setting Page -->
-    <string name="title_nickname">あだ名:</string>
-    <string name="apply_change">適用</string>
-    <string name="change_password">パスワードの変更:</string>
-    <string name="change_language">言語の変更:</string>
-    <!-- end for Setting Page -->
 
-    <!-- String for Change Password Page -->
-    <string name="old_password">元のパスワード:</string>
-    <string name="new_password">新規パスワード:</string>
-    <string name="confirmed_password">パスワードの確認:</string>
-    <string name="save_password">保存</string>
+
+
+    <!-- String for Add Record Page -->
+    <string name="add_record_title">レコードを追加</string>
+    <string name="add_record_record_title">タイトル:</string>
+    <string name="add_record_record_date">開始日:</string>
+    <string name="add_record_record_description">簡単な説明:</string>
+    <string name="add_record_button_add">追加</string>
+    <string name="add_record_toast">問題がありました</string>
+    <string name="add_record_toast2">あなたは新しいレコードを追加しました</string>
+    <!-- end for Add Record Page -->
+
+    <!-- String for information Page -->
+    <string name="information_username">ユーザー名:</string>
+    <string name="information_sex">ジェンダー:</string>
+    <string name="information_email">メールボックス:</string>
+    <string name="information_TeleNo">電話番号:</string>
+    <string name="information_address">住所:</string>
+    <string name="information_name">ニックネーム:</string>
+    <!-- end for information Page -->
+
+    <!-- String for Search Page -->
+    <string name="search_tip">キーワードインデックスを入力してください:</string>
+    <string name="search_query_hint">問題の発見/記録</string>
+    <string name="search_button_search">検索</string>
+    <string name="record_detail_location_text">座標:</string>
+    <string name="register_button_birthday">生年月日を設定する</string>
+    <string name="title_activity_language">言語の設定</string>
+    <string name="search_toast1">結果が見つかりません</string>
+    <!-- end for Search Page -->
+
+    <!-- String for doctor record detail || record detail page -->
+    <string name="doctor_record_detail_title">记录的详情</string>
+    <string name="edit_doctor_record_detail">レコードを編集する</string>
+    <string name="record_title">タイトル:</string>
+    <string name="record_date">開始日:</string>
+    <string name="record_description">説明:</string>
+    <string name="doctor_comment">他の医者の評価:</string>
+    <string name="comment_button">評価</string>
+    <string name="save_button">保存する</string>
+    <!-- end for doctor record detail || record detail page -->
+
+    <!-- String for Detailed Comments page -->
+    <string name="doctor_comment_detail_title">コメントを削除する</string>
+    <!-- end for Detailed Comments page -->
+
+    <!-- String for pop up comments page -->
+    <string name="doctor_comment_title">新しいコメントを追加</string>
+    <string name="comment_toast1">新しいコメントを追加しました</string>
+    <!-- end for pop up comments page -->
+
+    <!-- String for doctor problem list page -->
+    <string name="doctor_problem_list_title">条件</string>
+    <!-- end for doctor problem list page -->
+
+    <!-- String for doctor record list page -->
+    <string name="doctor_record_list_title">レコード</string>
+    <!-- end for doctor record list page -->
+
+    <!-- String for slide show page -->
+    <string name="slide_show_button">削除</string>
+    <!-- end for slide show page -->
 </resources>

@@ -16,7 +16,7 @@ import java.io.IOException;
 import id.zelory.compressor.Compressor;
 
 public class ImageUtil {
-    private static String PHOTO_DIRECTORY = Environment.getExternalStorageDirectory() + "/MedicalTracker/photo/";
+    public static String PHOTO_DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MedicalTracker/photo/";
 
     public static Bitmap convertStringToBitmap(String string){
         byte[] bytes = Base64.decode(string, Base64.DEFAULT);
@@ -43,11 +43,12 @@ public class ImageUtil {
         return compressedImage;
     }
 
-    public static File saveImage(Bitmap bmp, String fileName) {
+    public static Boolean saveImage(Bitmap bmp, String fileName) {
+        Log.d("Succeed", "Directory:" + PHOTO_DIRECTORY);
         File photoDir = new File(PHOTO_DIRECTORY);
         if (!photoDir.exists()) {
             if(!photoDir.mkdir()){
-                Log.d("Succeed", "Error!");
+                Log.d("Succeed", "Error to create directory!");
             }
         }
         File file = new File(photoDir, fileName);
@@ -56,11 +57,12 @@ public class ImageUtil {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return file;
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class SearchActivity extends AppCompatActivity {
     private BodyLocation bodyLocation = null;
     private int currentPage = 0;
     private TextView locationInfo;
+    protected BodyLocationPopup popup;
 
     private ArrayList<Object[]> result = new ArrayList<>();
     @Override
@@ -72,6 +74,14 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(locationType.equals(SearchType.BodyLocation)) {
+                    if (popup == null || popup.getBodyLocation() == null) {
+                        Toast.makeText(SearchActivity.this, R.string.search_toast2, Toast.LENGTH_SHORT).show();
+                        return false;
+                    } else {
+                        bodyLocation = popup.getBodyLocation();
+                    }
+                }
                 // Object[] -> (userName, Problem/Record)
                 result = search(searchView.getQuery().toString(), searchType);
                 if(result.size()==0){
@@ -95,76 +105,14 @@ public class SearchActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    initPopupWindow();
+                    //initPopupWindow();
+                    popup = new BodyLocationPopup(SearchActivity.this, textView);
+                    popup.chooseBodyLocation();
                 }
             });
         }
     }
 
-    private void initPopupWindow(){
-        LayoutInflater layoutInflater = LayoutInflater.from(SearchActivity.this);
-        final View promptView = layoutInflater.inflate(R.layout.body_location_popup, null);
-
-        Button head = promptView.findViewById(R.id.body_location_head);
-        Button leftArm = promptView.findViewById(R.id.body_location_left_arm);
-        Button rightArm = promptView.findViewById(R.id.body_location_right_arm);
-        Button torso = promptView.findViewById(R.id.body_location_torso);
-        Button leftLeg = promptView.findViewById(R.id.body_location_left_leg);
-        Button rightLeg = promptView.findViewById(R.id.body_location_right_leg);
-
-        final AlertDialog ad = new AlertDialog.Builder(SearchActivity.this)
-                .setView(promptView)
-                .create();
-
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.Head, ad);
-            }
-        });
-
-        leftArm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.LeftArm, ad);
-            }
-        });
-
-        rightArm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.RightArm, ad);
-            }
-        });
-
-        torso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.Torso, ad);
-            }
-        });
-
-        leftLeg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.LeftLeg, ad);
-            }
-        });
-
-        rightLeg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignBodyLocation(BodyLocation.RightLeg, ad);
-            }
-        });
-        ad.show();
-    }
-
-    private void assignBodyLocation(BodyLocation bodyLocation, AlertDialog ad){
-        this.bodyLocation = bodyLocation;
-        locationInfo.setText(bodyLocation.name());
-        ad.dismiss();
-    }
 
     // init the first spinner
     private void initSearchSpinner(){

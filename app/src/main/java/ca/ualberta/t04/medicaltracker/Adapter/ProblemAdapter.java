@@ -50,7 +50,7 @@ public class ProblemAdapter extends ArrayAdapter {
 
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
 
-        title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecords().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
+        title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecordIds().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));
 
         String description_text = problem.getDescription();

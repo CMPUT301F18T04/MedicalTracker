@@ -39,8 +39,7 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         // Enter the test account's information
         solo.enterText((EditText) solo.getView(R.id.register_username),"doctor1");
-        solo.enterText((EditText) solo.getView(R.id.register_password),"123456");
-        solo.enterText((EditText) solo.getView(R.id.register_confirmed_password),"123456");
+
         RadioButton rb = (RadioButton) solo.getView(R.id.register_doctor);
         solo.clickOnView(rb);
 

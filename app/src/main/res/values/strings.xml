@@ -162,7 +162,10 @@
     <string name="add_record_record_date">Date Start:</string>
     <string name="add_record_record_description">Brief Description:</string>
     <string name="add_record_button_add">Add</string>
-    <string name="add_record_toast">An error occurred</string>
+    <string name="add_record_body_location_hint">Choose body location</string>
+    <string name="add_record_photo_hint">Current photos: </string>
+    <string name="add_record_toast">An error occured</string>
+
     <string name="add_record_toast2">Added a new record</string>
     <string name="add_record_toast3">You can\'t add more photos!</string>
     <!-- end for Add Record Page -->
@@ -187,6 +190,7 @@
     <string name="register_button_birthday">Set birthday</string>
     <string name="title_activity_language">LanguageActivity</string>
     <string name="search_toast1">No results found</string>
+    <string name="search_toast2">You didn\'t choose a body location</string>
     <!-- end for Search Page -->
 
     <!-- String for doctor record detail || record detail page -->

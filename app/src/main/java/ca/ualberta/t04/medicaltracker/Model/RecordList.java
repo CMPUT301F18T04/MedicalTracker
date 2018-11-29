@@ -72,10 +72,8 @@ public class RecordList
         return records;
     }
 
-    public void updateRecord(int index, String recordId){
-        Record record = ElasticSearchController.searchRecord(recordId);
-        if(record!=null)
-            records.set(index, record);
+    public void updateRecords(int index, String recordId){
+        records = ElasticSearchController.searchRecordList(recordIds);
     }
 
     /**
@@ -124,25 +122,26 @@ public class RecordList
     }
 
     /**
-     * Adds a bodylocation image
+     * Adds a photo
      * @param record Record
-     * @param bodyLocationImage Image
+     * @param photo Bitmap
+     * @param path String
      */
-    public void addBodyLocationImage(Record record, Bitmap bodyLocationImage) {
+    public void addPhoto(Record record, Bitmap photo, String path) {
         if(records.contains(record)){
-            record.addImage(bodyLocationImage);
+            record.addImage(photo, path);
         }
         notifyAllListener();
     }
 
     /**
-     * Removes a bodylocation image
+     * Removes a photo
      * @param record Record
-     * @param bodyLocationImage Image
+     * @param index int
      */
-    public void removeBodyLocationImage(Record record, Bitmap bodyLocationImage) {
+    public void removePhoto(Record record, int index) {
         if(records.contains(record)){
-            record.removeImage(bodyLocationImage);
+            record.removeImage(index);
         }
         notifyAllListener();
     }
@@ -194,6 +193,12 @@ public class RecordList
             listeners.put(key, listener);
     }
 
+    public void replaceListener(String key, Listener listener){
+        if(listeners==null)
+            listeners = new HashMap<>();
+        listeners.put(key, listener);
+    }
+
     /**
      * notifies all the listeners
      */
@@ -240,5 +245,9 @@ public class RecordList
         if(offlineRecords==null)
             offlineRecords = new ArrayList<>();
         offlineRecords.add(record);
+    }
+
+    public void updateComment(Record record){
+        record.updateComment();
     }
 }

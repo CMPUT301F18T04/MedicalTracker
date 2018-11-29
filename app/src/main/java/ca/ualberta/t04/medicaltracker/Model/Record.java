@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Model;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.util.Log;
 
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 import ca.ualberta.t04.medicaltracker.BodyLocation;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.Photo;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 /**
@@ -28,23 +31,26 @@ public class Record
     private String problemId;
 
     // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
-    private ArrayList<String> photos;
+    private ArrayList<Photo> photos;
+    private transient ArrayList<Bitmap> bitmaps;
 
     private HashMap<String, ArrayList<String>> comments;
     private Location location;
     private BodyLocation bodyLocation;
 
-    public Record(String title, Date dateStart, String description, ArrayList<Bitmap> bitmaps, Location location, BodyLocation bodyLocation)
+    public Record(String title, Date dateStart, String description, HashMap<Bitmap, String> bitmaps, Location location, BodyLocation bodyLocation)
     {
         this.title = title;
         this.dateStart = dateStart;
         this.description = description;
         this.photos = new ArrayList<>();
         if(bitmaps!=null){
-            for(Bitmap bitmap:bitmaps){
+            for(Bitmap bitmap:bitmaps.keySet()){
                 String string = ImageUtil.convertBitmapToString(bitmap);
                 if(string.length()<65536){
-                    this.photos.add(string);
+                    String path = bitmaps.get(bitmap);
+                    Photo photo = new Photo(string, path);
+                    this.photos.add(photo);
                 } else {
                     Log.d("Succeed", "Too long" + String.valueOf(string.length()));
                 }
@@ -113,42 +119,71 @@ public class Record
         if(photos==null){
             photos = new ArrayList<>();
         }
-        ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        for(String str:photos){
-            bitmaps.add(ImageUtil.convertStringToBitmap(str));
+
+        if(bitmaps!=null){
+            return bitmaps;
+        }
+
+        Boolean update = false;
+        bitmaps = new ArrayList<>();
+        for(Photo photo:photos){
+            String path = photo.getPath();
+            Bitmap bitmap = null;
+            if(path!=null){
+                 bitmap = BitmapFactory.decodeFile(path);
+            }
+            if(bitmap==null){
+                bitmap = ImageUtil.convertStringToBitmap(photo.getBase64Bitmap());
+                String fileName = System.currentTimeMillis() + ".jpg";
+                Boolean succeed = ImageUtil.saveImage(bitmap, fileName);
+                Log.d("Succeed", String.valueOf(succeed));
+                if(succeed){
+                    String localPath = ImageUtil.PHOTO_DIRECTORY + fileName;
+                    photo.setPath(localPath);
+                    update = true;
+                }
+            }
+            bitmaps.add(bitmap);
+        }
+        if(update){
+            ElasticSearchController.updateRecord(this);
         }
         return bitmaps;
     }
 
-
-
     /**
      * Adds a body location image of a record
      * @param image Image
+     * @param path String
      */
-    public void addImage(Bitmap image) {
+
+    public void addImage(Bitmap image, String path) {
         if(this.photos==null){
             this.photos = new ArrayList<>();
         }
         String string = ImageUtil.convertBitmapToString(image);
         if(string.length()<65536){
-            this.photos.add(string);
+            Photo photo = new Photo(string, path);
+            this.photos.add(photo);
+            this.bitmaps.add(image);
         } else {
             Log.d("Succeed", "Too long");
         }
     }
 
+
     /**
      * removes a body location image of a record
-     * @param image Image
+     * @param index int
      */
-    public void removeImage(Bitmap image) {
+    public void removeImage(int index) {
         if(this.photos==null){
             this.photos = new ArrayList<>();
         }
-        String string = ImageUtil.convertBitmapToString(image);
-        if(this.photos.contains(string)){
-            this.photos.remove(string);
+        if(photos.size()>index){
+            Photo photo = photos.get(index);
+            photos.remove(index);
+            bitmaps.remove(ImageUtil.convertStringToBitmap(photo.getBase64Bitmap()));
         }
     }
 
@@ -225,5 +260,10 @@ public class Record
 
     public void setProblemId(String problemId) {
         this.problemId = problemId;
+    }
+
+    public void updateComment(){
+        HashMap<String, ArrayList<String>> comments = ElasticSearchController.searchRecordComment(getRecordId());
+        setComments(comments);
     }
 }

@@ -1,6 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,6 +96,7 @@ public class DoctorActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DataController.clearRecordList();
                 refreshPatientListView();
                 Snackbar.make(view, "Refresh completed", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -131,6 +134,10 @@ public class DoctorActivity extends AppCompatActivity
             userRole.setText(getText(R.string.nav_header_subtitle_doctor));
 
             userDisplayName.setText(DataController.getUser().getName());
+
+            ImageView icon = headerView.findViewById(R.id.nav_bar_icon);
+
+            icon.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.doctor));
 
             DataController.getUser().addListener("SaveData", new Listener() {
                 @Override
@@ -257,11 +264,14 @@ public class DoctorActivity extends AppCompatActivity
         ListView listView = findViewById(R.id.main_page_list_view);
         final ArrayList<Problem> problems = problemList.getProblems();
         final ProblemAdapter adapter = new ProblemAdapter(this, R.layout.problem_list, problems);
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                refreshRecordListView(problems.get(position).getRecordList());
+                Problem problem = problems.get(position);
+                DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+                refreshRecordListView(DataController.getRecordList().get(problem.getProblemId()));
                 currentPage ++;
                 problemIndex = position;
             }
@@ -357,6 +367,7 @@ public class DoctorActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
             DataController.setUser(null);
+            DataController.clearRecordList();
             Intent intent = new Intent(DoctorActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

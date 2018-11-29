@@ -49,15 +49,6 @@ public class SlideShowActivity extends AppCompatActivity {
 
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
 
-        /*
-        Intent mIntent = getIntent();
-        final int problemIndex = mIntent.getIntExtra("problemIndex", -1);
-        final int recordIndex = mIntent.getIntExtra("recordIndex", -1);
-        final Problem problem = DataController.getPatient().getProblemList().getProblem(problemIndex);
-        final RecordList recordList = problem.getRecordList();
-        final Record record = recordList.getRecord(recordIndex);
-*/
-
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 

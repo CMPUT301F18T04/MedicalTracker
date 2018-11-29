@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
 
@@ -37,9 +38,9 @@ public class ProblemUnitTest {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         Location location = null;
-        ArrayList<Image> bodyImage = new ArrayList<>();
-        Record record = new Record("ProblemTest", date, "This is Unit Test For Problem",bodyImage,location);
-        Record record1 = new Record("ProblemTest1", date, "This is Unit Test For Problem1",bodyImage,location);
+        HashMap<Bitmap, String> bodyImage = new HashMap<>();
+        Record record = new Record("ProblemTest", date, "This is Unit Test For Problem",bodyImage,location, null);
+        Record record1 = new Record("ProblemTest1", date, "This is Unit Test For Problem1",bodyImage,location, null);
 
         problem.getRecordList().addRecord(record);
         problem.getRecordList().addRecord(record1);
