@@ -22,6 +22,7 @@ import ca.ualberta.t04.medicaltracker.R;
 public class SlideShowActivity extends AppCompatActivity {
 
     private int currentIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,6 @@ public class SlideShowActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
-
 
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
