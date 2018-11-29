@@ -76,6 +76,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private List<Address> addresses;
     private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
+    private String date;
+
     // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,22 +135,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                Date currentDate = new Date();
-                String date = year + "-" + month + "-" + day;
-                Date problemDate = DataController.getPatient().getProblemList().getProblem(problem_index).getTime();
-                SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
-                try {
-                    Date selectedDate = sdf.parse(date);
-                    if (selectedDate.after(currentDate)){
-                        Toast.makeText(AddRecordActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
-                    } else if (problemDate.after(selectedDate)){
-                        Toast.makeText(AddRecordActivity.this, "The record time is before problem time", Toast.LENGTH_SHORT).show();
-                    } else {
-                        record_date.setText(date);
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                date = year + "-" + month + "-" + day;
+                record_date.setText(date);
+
             }
         };
     }
@@ -176,19 +165,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 String time = hour + ":" + minute;
-                String tempTime = record_date.getText().toString()+"T"+hour + ":" + minute;
-                SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.TIME_FORMAT);
-                try {
-                    Date currentDate = new Date();
-                    Date selectedTime = sdf.parse(tempTime);
-                    if (selectedTime.after(currentDate)){
-                        Toast.makeText(AddRecordActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
-                    }else{
-                        record_time.setText(time);
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                record_time.setText(time);
+                date += "T" + time;
             }
         };
     }
@@ -341,14 +319,20 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         Date dateStart = new Date();
 
         // if the date that the user inputs is not correct, then use the default date
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.TIME_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
-            String tempTime = record_date.getText().toString()+"T"+record_time.getText().toString();
-            dateStart = format.parse(tempTime);
+            dateStart = format.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        if(dateStart.after(new Date())){
+            Toast.makeText(AddRecordActivity.this, "You cannot choose a future time.", Toast.LENGTH_SHORT).show();
+            return;
+        } else if(dateStart.before(DataController.getPatient().getProblemList().getProblem(problem_index).getTime())){
+            Toast.makeText(AddRecordActivity.this, "Record time cannot be before the problem time", Toast.LENGTH_SHORT).show();
+            return;
+        }
         /*
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
         for (String path:paths){
