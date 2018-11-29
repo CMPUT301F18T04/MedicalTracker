@@ -260,7 +260,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
 
-            imageView.setImageBitmap(bitmap);
             numPhoto.setText(String.valueOf(bitmaps.size()+1));
 
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
@@ -288,6 +287,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             Bitmap bitmap = data.getParcelableExtra("data");
             String path = data.getStringExtra("path");
             bitmaps.put(bitmap, path);
+            imageView.setImageBitmap(bitmap);
         }
         else if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {

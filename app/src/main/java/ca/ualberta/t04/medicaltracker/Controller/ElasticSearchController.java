@@ -359,6 +359,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to update or create a record
     private static class UpdateRecordTask extends AsyncTask<Record, Void, Void>
     {
         @Override
@@ -386,28 +387,7 @@ public class ElasticSearchController
         }
     }
 
-    private static class CreateRecordTask extends AsyncTask<Record, Void, Boolean>{
-
-        @Override
-        protected Boolean doInBackground(Record... records) {
-            setClient();
-            Record record = records[0];
-            Index recordIndex = new Index.Builder(record).index(INDEX_NAME).type(RECORD_TYPE).id(record.getRecordId()).build();
-
-            try
-            {
-                DocumentResult result = client.execute(recordIndex);
-                if(result.isSucceeded()){
-                    Log.d("Succeed", "Succeed to create a record!");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
+    // Used to search a record
     private static class SearchRecordTask extends AsyncTask<String, Void, Record>
     {
         @Override
@@ -442,6 +422,7 @@ public class ElasticSearchController
         return null;
     }
 
+    // Used to search a specific record's comments
     private static class SearchRecordCommentTask extends AsyncTask<String, Void, HashMap<String, ArrayList<String>>>
     {
         @Override
@@ -486,6 +467,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to search many records by one call
     private static class SearchRecordListTask extends AsyncTask<String, Void, ArrayList<Record>>
     {
         @Override
@@ -541,6 +523,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to delete many records by one call
     public static class DeleteRecordListTask extends AsyncTask<String, Void, Void>{
         @Override
         protected Void doInBackground(String... recordIds) {
@@ -574,6 +557,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to delete a record
     public static class DeleteRecordTask extends AsyncTask<String, Void, Void>
     {
         @Override
