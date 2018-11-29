@@ -105,6 +105,7 @@
     <string name="action_add">Add</string>
     <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
+    <string name="action_album">Album</string>
     <string name="doctor_page_menu_item_detail">View Detail</string>
     <string name="doctor_page_menu_item_delete">Delete</string>
     <!-- end for Menu -->
