@@ -187,6 +187,17 @@ public class Record
         }
     }
 
+    public void removeImage(Bitmap bitmap){
+        if(this.photos==null){
+            this.photos = new ArrayList<>();
+        }
+        for(Photo photo:photos){
+            if(photo.getBase64Bitmap().equals(ImageUtil.convertBitmapToString(bitmap))){
+                photos.remove(bitmap);
+            }
+        }
+    }
+
     /**
      * Gets the doctor's comments of a record
      * @return HashMap comments
