@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -101,6 +102,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         final EditText title = findViewById(R.id.addCommentEditText);
         final TextView date = findViewById(R.id.dateTextView);
         final TextView location = findViewById(R.id.locationTextView);
+        location.setMovementMethod(new ScrollingMovementMethod());
         final TextView body_location = findViewById(R.id.bodyLocationTextView);
         final EditText description = findViewById(R.id.descriptionEditText);
         Button uploadButton = findViewById(R.id.uploadButton);
