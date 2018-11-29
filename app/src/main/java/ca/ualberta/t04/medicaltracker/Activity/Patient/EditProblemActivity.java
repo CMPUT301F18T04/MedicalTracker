@@ -52,10 +52,11 @@ public class EditProblemActivity extends AppCompatActivity{
 
         problemTitle.setText(mProblem.getTitle());
         problemDescription.setText(mProblem.getDescription());
-        Calendar cal = Calendar.getInstance();
-        int month = cal.get(Calendar.MONTH) + 1;
-        String date = cal.get(Calendar.YEAR) +"-"+ month +"-" + cal.get(Calendar.DAY_OF_MONTH);
-        problemDate.setText(date);
+        //Calendar cal = Calendar.getInstance();
+        //int month = cal.get(Calendar.MONTH) + 1;
+        //String date = cal.get(Calendar.YEAR) +"-"+ month +"-" + cal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
+        problemDate.setText(sdf.format(mProblem.getTime()));
         init();
     }
 
@@ -82,7 +83,7 @@ public class EditProblemActivity extends AppCompatActivity{
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = year + "-" + month + "-" + day;
+                String date = year + "-" + month + "-" + day+"T00:00";
                 problemDate.setText(date);
             }
         };
