@@ -156,14 +156,14 @@
     <string name="add_problem_toast">Added a new problem</string>
     <!-- end for Add Problem Page -->
 
-    <!-- String for Add Problem Page -->
+    <!-- String for Edit Problem Page -->
     <string name="edit_problem_title">Edit A Problem</string>
     <string name="edit_problem_problem_title">Problem Title:</string>
     <string name="edit_problem_problem_date">Date Start:</string>
     <string name="edit_problem_problem_description">Brief Description:</string>
     <string name="edit_problem_button_edit">Edit</string>
     <string name="edit_problem_toast">Saved changes</string>
-    <!-- end for Add Problem Page -->
+    <!-- end for Edit Problem Page -->
 
     <!-- String for Add Record Page -->
     <string name="add_record_title">Add A Record</string>
@@ -171,6 +171,8 @@
     <string name="add_record_record_date">Date Start:</string>
     <string name="add_record_record_description">Brief Description:</string>
     <string name="add_record_button_add">Add</string>
+    <string name="add_record_body_location_hint">Choose body location</string>
+    <string name="add_record_photo_hint">Current photos: </string>
     <string name="add_record_toast">An error occurs</string>
     <string name="add_record_toast2">Added a new record</string>
     <string name="add_record_toast3">You can\'t add more photos!</string>
@@ -196,6 +198,7 @@
     <string name="register_button_birthday">Set birthday</string>
     <string name="title_activity_language">LanguageActivity</string>
     <string name="search_toast1">No results found</string>
+    <string name="search_toast2">You didn\'t choose a body location</string>
     <!-- end for Search Page -->
 
     <!-- String for doctor record detail || record detail page -->
@@ -207,6 +210,12 @@
     <string name="doctor_comment">Comments by other doctors:</string>
     <string name="comment_button">Comment</string>
     <string name="save_button">Save</string>
+    <string name="record_location">Location:</string>
+    <string name="record_bodyLocation">Body Location:</string>
+    <string name="upload_button">Upload Photo</string>
+    <string name="location_text">No location selected</string>
+    <string name="record_toast1">New edits saved</string>
+    <string name="record_toast2">No photo uploads</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->

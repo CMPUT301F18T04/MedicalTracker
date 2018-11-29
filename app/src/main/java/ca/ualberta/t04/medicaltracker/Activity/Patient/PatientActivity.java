@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -178,6 +180,10 @@ public class PatientActivity extends AppCompatActivity
 
             userDisplayName.setText(DataController.getUser().getName());
 
+            ImageView icon = headerView.findViewById(R.id.nav_bar_icon);
+
+            icon.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.patient));
+
             DataController.getUser().addListener("PatientListener1", new Listener() {
                 @Override
                 public void update() {
@@ -319,6 +325,7 @@ public class PatientActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_logout) { // if the button setting is clicked, LoginActivity will come up
             DataController.setUser(null); // notify the DataController to set the user as null
+            DataController.clearRecordList();
             Intent intent = new Intent(PatientActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

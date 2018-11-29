@@ -62,6 +62,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
     }
 
     // init the problem list view
+
     private void initListView(){
         Log.d(TAG, "initListView: 0");
         final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, mRecords);
@@ -73,7 +74,9 @@ public class RecordHistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Record record = mRecords.get(position);
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
+
                 mRecordList.updateRecord(position, record.getRecordId());
+
                 intent.putExtra("problem_index", problem_index);
                 intent.putExtra("record_index", position);
                 startActivity(intent);
@@ -84,7 +87,6 @@ public class RecordHistoryActivity extends AppCompatActivity {
         mRecordList.addListener("RecordListener1", new Listener() {
             @Override
             public void update() {
-
                 adapter.notifyDataSetChanged();
                 // We don't need it anymore, since we only need to update user once.
                 //ElasticSearchController.updateUser(DataController.getUser());

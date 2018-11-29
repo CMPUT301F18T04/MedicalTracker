@@ -54,18 +54,31 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
+import ca.ualberta.t04.medicaltracker.BodyLocation;
+import ca.ualberta.t04.medicaltracker.BodyLocationPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
+
+
+/**
+ * This class adds a new record for a patient user
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
 
 /*
   This activity is for adding a record to a problem for a patient user
@@ -91,6 +104,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private TimePickerDialog.OnTimeSetListener recordTimeSetListener;
     private TextView record_date;
     private TextView record_time;
+
     private TextView record_location;
     private ImageView imageView, addLocation;
     private LocationManager locationManager;
@@ -100,6 +114,14 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private Location location = null;
     private GoogleApiClient mGoogleApiClient;
 
+    private TextView numPhoto;
+    private HashMap<Bitmap, String> bitmaps = new HashMap<>();
+    private BodyLocation bodyLocation = null;
+    private BodyLocationPopup bodyLocationPopup = null;
+
+    private Problem problem;
+
+
     // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +129,12 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         setContentView(R.layout.activity_add_record);
         record_date = findViewById(R.id.add_record_date);
         record_time = findViewById(R.id.add_record_time);
+        numPhoto = findViewById(R.id.add_record_num_photo);
         record_location = findViewById(R.id.add_record_location);
+
         record_location.setMovementMethod(new ScrollingMovementMethod());
         ImageButton image_button = findViewById(R.id.imageButton);
+
         imageView = findViewById(R.id.add_record_photo_display);
         addLocation = findViewById(R.id.record_add_location);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -127,7 +152,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
         // Get the index of the problem list
         problem_index = getIntent().getIntExtra("index", -1);
-
         if(problem_index==-1){
             Toast.makeText(AddRecordActivity.this, R.string.add_record_toast, Toast.LENGTH_SHORT).show();
         }
@@ -135,6 +159,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         if (isServicesOK()){
             initMapApi();
         }
+
+        problem = DataController.getPatient().getProblemList().getProblem(problem_index);
+
     }
 
     // recordSetDate method is used for set a date using DatePickerDialog
@@ -201,8 +228,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         if (ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED ||  ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);}
-        else{
+            ActivityCompat.requestPermissions(AddRecordActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        } else{
             if(bitmaps.size()<10){
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -215,29 +242,6 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     }
 
-    /*
-    private File createImageFile()
-    {
-        // External sdcard location
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                "MedicalTracker");
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Toast.makeText(this, "Unable to save image file!", Toast.LENGTH_SHORT).show();
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                + "IMG_" + timeStamp + ".jpg");
-
-        return mediaFile;
-    }
-    */
-
     // This method will be called automatically after startActivityForResult
     // This method returns the result of the activity
     // in this case, the result of taking a  photo is a picture
@@ -248,26 +252,30 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(bitmap);
-
+            numPhoto.setText(String.valueOf(bitmaps.size()+1));
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
             Intent intent = new Intent(AddRecordActivity.this, MarkImageActivity.class);
 
             intent.putExtra("image", bitmap);
             startActivityForResult(intent, REQUEST_MARK_IMAGE);
-
-
         }
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
-            bitmaps = BitmapHolder.getBitmaps();
+            for(Bitmap bitmap:BitmapHolder.getBitmaps()){
+                if(!bitmaps.containsKey(bitmap)){
+                    bitmaps.remove(bitmap);
+                }
+            }
+            numPhoto.setText(String.valueOf(bitmaps.size()));
             if(bitmaps.isEmpty()){
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_gallery));
+                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_gallery));
             } else {
-                imageView.setImageBitmap(bitmaps.get(0));
+                imageView.setImageBitmap((Bitmap) bitmaps.keySet().toArray()[0]);
             }
         } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
             Bitmap bitmap = data.getParcelableExtra("data");
-            bitmaps.add(bitmap);
+            String path = data.getStringExtra("path");
+            bitmaps.put(bitmap, path);
         }
         else if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -313,6 +321,18 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             return;
         }
 
+        TextView bodyLocationHint = findViewById(R.id.add_record_body_location_hint);
+        if(bodyLocation==null){
+            if(bodyLocationPopup==null || bodyLocationPopup.getBodyLocation()==null)
+            {
+                Toast.makeText(AddRecordActivity.this, "You didn\'t choose body location.", Toast.LENGTH_SHORT).show();
+                bodyLocationHint.setTextColor(Color.RED);
+                return;
+            } else {
+                bodyLocation = bodyLocationPopup.getBodyLocation();
+            }
+        }
+
         Date dateStart = new Date();
 
         // if the date that the user inputs is not correct, then use the default date
@@ -324,26 +344,20 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             e.printStackTrace();
         }
 
-        /*
-        ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        for (String path:paths){
-            try {
-                bitmaps.add(ImageUtil.compressImageFile(this, path));
-            } catch (IOException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Error occurs!", Toast.LENGTH_SHORT).show();
-            }
+        if(bitmaps.size()<2){
+            Toast.makeText(AddRecordActivity.this, "You need to take at least two photos.", Toast.LENGTH_SHORT).show();
+            return;
         }
-        */
 
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, location, null);
+
         // if no network, then add the record in the offline record and wait for reconnecting
         if(!NetworkUtil.isNetworkConnected(this)){
-            DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addOfflineRecord(record);
+            DataController.getRecordList().get(problem.getProblemId()).addOfflineRecord(record);
         }
         // use dataController to notify the change of record
-        DataController.getPatient().getProblemList().getProblem(problem_index).getRecordList().addRecord(record);
+        DataController.getRecordList().get(problem.getProblemId()).addRecord(record);
 
         // notification message
         Toast.makeText(AddRecordActivity.this, R.string.add_record_toast2, Toast.LENGTH_SHORT).show();
@@ -352,7 +366,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     public void viewImages(View view){
         if(bitmaps.isEmpty()){
-            Toast.makeText(this, "No photos!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(this, SlideShowActivity.class);
@@ -369,17 +383,19 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         bundle.putSerializable("image", bytesBitmaps);
         intent.putExtras(bundle);
         */
-        BitmapHolder.setBitmaps(bitmaps);
+        ArrayList<Bitmap> slideShowBitmaps = new ArrayList<>();
+        for(Bitmap bitmap:bitmaps.keySet()){
+            slideShowBitmaps.add(bitmap);
+        }
+        BitmapHolder.setBitmaps(slideShowBitmaps);
 
         startActivityForResult(intent, REQUEST_UPDATE_DATA);
     }
 
-    private byte[] convertToBytes(Bitmap bitmap) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        byteArrayOutputStream.close();
-        return bytes;
+    public void chooseBodyLocation(View view){
+        TextView bodyLocationHint = findViewById(R.id.add_record_body_location_hint);
+        bodyLocationPopup = new BodyLocationPopup(this, bodyLocationHint);
+        bodyLocationPopup.chooseBodyLocation();
     }
 
 

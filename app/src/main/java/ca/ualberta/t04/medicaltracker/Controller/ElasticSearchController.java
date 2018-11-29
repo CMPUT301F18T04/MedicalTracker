@@ -3,14 +3,19 @@ package ca.ualberta.t04.medicaltracker.Controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,7 +37,16 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+
 import static android.support.constraint.Constraints.TAG;
+
+/**
+ * This class is exclusively the entire implementation of elastic search used for the application
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
 
 /*
     The idea of this part is from Lab5 of CMPUT301
@@ -409,6 +423,61 @@ public class ElasticSearchController
                 DocumentResult result = client.execute(get);
                 Record record = result.getSourceAsObject(Record.class);
                 return record;
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    public static HashMap<String, ArrayList<String>> searchRecordComment(String recordId){
+        try {
+            return new SearchRecordCommentTask().execute(recordId).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static class SearchRecordCommentTask extends AsyncTask<String, Void, HashMap<String, ArrayList<String>>>
+    {
+        @Override
+        protected HashMap<String, ArrayList<String>> doInBackground(String... recordIds) {
+            setClient();
+
+            String recordId = recordIds[0];
+
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"values\" : [\"" + recordId + "\"]\n" +
+                    "                  }\n" +
+                    "                },\n" +
+                    "    \"_source\": [\"comments\"]\n" +
+                    "}";
+
+            Search search = new Search.Builder(query)
+                    // multiple index or types can be added.
+                    .addIndex(INDEX_NAME)
+                    .addType(RECORD_TYPE)
+                    .build();
+
+            // If searched, then return object, otherwise return null
+            try {
+                SearchResult result = client.execute(search);
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(result.getSourceAsString()).getAsJsonObject();
+
+                Log.d("Succeed", jsonObject.get("comments").toString());
+
+                Gson gson = new Gson();
+                HashMap<String, ArrayList<String>> comments = gson.fromJson(jsonObject.get("comments").toString(), HashMap.class);
+
+                Log.d("Succeed", comments.toString());
+                return comments;
             } catch (IOException e) {
                 Log.d("Succeed", "Failed!");
                 e.printStackTrace();

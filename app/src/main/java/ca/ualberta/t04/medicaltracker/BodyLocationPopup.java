@@ -16,7 +16,7 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
 
 /**
- * This class displays a pop up window for the doctor to add a comment
+ * This class displays a pop up window for the patient to add a body location
  */
 
 public class BodyLocationPopup {
@@ -27,9 +27,8 @@ public class BodyLocationPopup {
     private BodyLocation bodyLocation;
     private TextView textView;
 
-    public BodyLocationPopup(Context context, BodyLocation bodyLocation, TextView textView) {
+    public BodyLocationPopup(Context context, TextView textView) {
         this.context = context;
-        this.bodyLocation = bodyLocation;
         this.textView = textView;
     }
 
@@ -98,5 +97,9 @@ public class BodyLocationPopup {
         this.bodyLocation = bodyLocation;
         textView.setText(bodyLocation.name());
         ad.dismiss();
+    }
+
+    public BodyLocation getBodyLocation() {
+        return bodyLocation;
     }
 }

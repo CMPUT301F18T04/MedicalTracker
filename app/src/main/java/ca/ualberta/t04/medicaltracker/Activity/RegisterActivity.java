@@ -27,6 +27,14 @@ import ca.ualberta.t04.medicaltracker.Model.User;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
+/**
+ * This activity is for registering a general user
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for registering a general user
  */
@@ -229,8 +237,5 @@ public class RegisterActivity extends AppCompatActivity {
             user.setMale(isMale);
         }
 
-        // Add language preference to user's information
-        user.setLanguage("en");
-        user.setDistrict("CA");
     }
 }

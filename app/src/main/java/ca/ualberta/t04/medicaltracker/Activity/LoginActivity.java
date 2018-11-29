@@ -23,6 +23,14 @@ import ca.ualberta.t04.medicaltracker.Model.User;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
+/**
+ * This activity is for logging in
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for logging in
  */
@@ -86,7 +94,11 @@ public class LoginActivity extends AppCompatActivity {
             try{
                 setLocale(language,district);
             }catch(Exception e){
-                setLocale("en","CA");
+                String deviceLanguage = Locale.getDefault().toString();
+                String[] separated = deviceLanguage.split("_");
+                String lang = separated[0];
+                String dist = separated[1];
+                setLocale(lang,dist);
             }
             finish();
         } else {

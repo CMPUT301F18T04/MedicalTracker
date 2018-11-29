@@ -17,6 +17,14 @@ import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
+/**
+ * This class represents a custom adapter for displaying problems
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This class represents a custom adapter for displaying problems
  */
@@ -42,7 +50,7 @@ public class ProblemAdapter extends ArrayAdapter {
 
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
 
-        title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecords().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
+        title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecordIds().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));
 
         String description_text = problem.getDescription();
