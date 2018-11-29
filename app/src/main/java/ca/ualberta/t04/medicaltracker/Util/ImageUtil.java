@@ -16,7 +16,7 @@ import java.io.IOException;
 import id.zelory.compressor.Compressor;
 
 public class ImageUtil {
-    public static String PHOTO_DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MedicalTracker/photo/";
+    public static String PHOTO_DIRECTORY = Environment.getExternalStoragePublicDirectory(Environment.MEDIA_SHARED) + "/";
 
     public static Bitmap convertStringToBitmap(String string){
         byte[] bytes = Base64.decode(string, Base64.DEFAULT);
