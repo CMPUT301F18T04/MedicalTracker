@@ -14,6 +14,14 @@ import com.google.zxing.Result;
 import ca.ualberta.t04.medicaltracker.R;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * This class for scanning QRcode for a user
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 // Idea comes from https://www.youtube.com/watch?v=A2PqYkLb_-A
 public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 

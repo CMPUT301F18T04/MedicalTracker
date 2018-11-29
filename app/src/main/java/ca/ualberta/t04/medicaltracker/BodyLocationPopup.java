@@ -16,7 +16,7 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
 
 /**
- * This class displays a pop up window for the doctor to add a comment
+ * This class displays a pop up window for the patient to add a body location
  */
 
 public class BodyLocationPopup {

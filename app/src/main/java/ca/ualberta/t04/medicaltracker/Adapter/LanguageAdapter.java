@@ -15,6 +15,14 @@ import java.util.List;
 import ca.ualberta.t04.medicaltracker.Model.Language;
 import ca.ualberta.t04.medicaltracker.R;
 
+/**
+ * This activity is a custom language list adapter for the application
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 
 public class LanguageAdapter extends ArrayAdapter {
 

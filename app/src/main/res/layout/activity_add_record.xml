@@ -11,6 +11,7 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -18,8 +19,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/add_record_record_description"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_record_description"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -27,6 +29,7 @@
         android:id="@+id/add_record_description"
         android:layout_width="359dp"
         android:layout_height="66dp"
+
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -35,7 +38,9 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:maxLength="300"
+        app:layout_constraintBottom_toTopOf="@+id/textView34"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -43,6 +48,7 @@
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -50,6 +56,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/add_record_record_date"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView30"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +66,7 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -66,6 +74,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/add_record_record_title"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView29"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +84,7 @@
         android:id="@+id/add_record_title"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
@@ -82,7 +92,9 @@
         android:ems="10"
         android:inputType="text"
         android:maxLength="30"
+
         app:layout_constraintBaseline_toBaselineOf="@+id/textView28"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
@@ -91,6 +103,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -168,10 +181,12 @@
         app:layout_constraintTop_toBottomOf="@+id/add_record_location"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/add_record_date"
         android:layout_width="100dp"
         android:layout_height="30dp"
+
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:clickable="true"
@@ -186,6 +201,7 @@
         android:id="@+id/add_record_time"
         android:layout_width="100dp"
         android:layout_height="30dp"
+
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:clickable="true"
@@ -194,10 +210,12 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
         app:layout_constraintStart_toEndOf="@+id/add_record_date" />
 
+
     <TextView
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
