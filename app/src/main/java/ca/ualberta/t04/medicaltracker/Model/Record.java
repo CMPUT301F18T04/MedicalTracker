@@ -30,7 +30,6 @@ public class Record
     private String recordId;
     private String problemId;
 
-    // We are not recommend to store images by using ElasticSearch. That's why there's a tag transient.
     private ArrayList<Photo> photos;
     private transient ArrayList<Bitmap> bitmaps;
 

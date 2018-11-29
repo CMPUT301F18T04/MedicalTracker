@@ -138,8 +138,6 @@ public class PatientActivity extends AppCompatActivity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Problem problem = problems.get(position);
-                    DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
                     Intent intent = new Intent(activity, RecordHistoryActivity.class);
 
                     intent.putExtra("index", position);
@@ -311,7 +309,7 @@ public class PatientActivity extends AppCompatActivity
             }
             Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {  // if the button gallary is clicked, GalleryActivity will come up
+        } else if (id == R.id.nav_gallery) {  // if the button gallery is clicked, GalleryActivity will come up
             // need to fill in the GalleryActivity
             Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) { // if the button doctor is clicked, DoctorViewActivity will come up
