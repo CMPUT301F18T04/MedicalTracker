@@ -66,10 +66,10 @@ public class RecordHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Record record = records.get(position);
-                Log.d("Succeed", String.valueOf(record.getPhotos().size()));
+
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
 
-                recordList.updateRecord(position, record.getRecordId());
+                recordList.updateComment(record);
 
                 intent.putExtra("problem_index", problem_index);
                 intent.putExtra("record_index", position);
@@ -151,5 +151,4 @@ public class RecordHistoryActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

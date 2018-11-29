@@ -99,7 +99,7 @@ public class MarkImageView extends AppCompatImageView {
         Canvas bitmapCanvas = new Canvas(editBitmap);
         //bitmapCanvas.drawBitmap(editBitmap, startLeft, startTop, paint);
         bitmapCanvas.drawCircle(circleX - startLeft, circleY - startTop, circleRadius, paint);
-
+        canvas.drawBitmap(editBitmap, startLeft, startTop, paint);
     }
 
     public void setBitmap(Bitmap bitmap){

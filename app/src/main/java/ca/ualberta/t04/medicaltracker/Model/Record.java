@@ -170,7 +170,6 @@ public class Record
         }
     }
 
-
     /**
      * removes a body location image of a record
      * @param index int
@@ -180,20 +179,8 @@ public class Record
             this.photos = new ArrayList<>();
         }
         if(photos.size()>index){
-            Photo photo = photos.get(index);
             photos.remove(index);
-            bitmaps.remove(ImageUtil.convertStringToBitmap(photo.getBase64Bitmap()));
-        }
-    }
-
-    public void removeImage(Bitmap bitmap){
-        if(this.photos==null){
-            this.photos = new ArrayList<>();
-        }
-        for(Photo photo:photos){
-            if(photo.getBase64Bitmap().equals(ImageUtil.convertBitmapToString(bitmap))){
-                photos.remove(bitmap);
-            }
+            bitmaps.remove(index);
         }
     }
 

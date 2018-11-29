@@ -117,7 +117,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         originBitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
 
-        bitmaps = record.getPhotos();
+        bitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
         Log.d("Succeed", String.valueOf(bitmaps.size()));
 
         // set the information
@@ -150,14 +150,14 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         description.setText(record.getDescription());
 
-        if (!record.getPhotos().isEmpty())
-            recordImageView.setImageBitmap(record.getPhotos().get(0));
+        if (!bitmaps.isEmpty())
+            recordImageView.setImageBitmap(bitmaps.get(0));
 
         // When the image view is clicked
         recordImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (record.getPhotos().isEmpty()) {
+                if (bitmaps.isEmpty()) {
                     Toast.makeText(RecordDetailActivity.this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(RecordDetailActivity.this, SlideShowActivity.class);
@@ -183,7 +183,6 @@ public class RecordDetailActivity extends AppCompatActivity {
                     record.addImage(bitmap, bitmapHashMap.get(bitmap));
                 }
 
-                ArrayList<Bitmap> temp = record.getPhotos();
                 for(Bitmap bitmap:originBitmaps){
                     if(!BitmapHolder.getBitmaps().contains(bitmap)){
                         record.removeImage(originBitmaps.indexOf(bitmap));
@@ -303,7 +302,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            recordImageView.setImageBitmap(bitmap);
 
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
@@ -325,8 +323,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             String path = data.getStringExtra("path");
             bitmapHashMap.put(bitmap, path);
             bitmaps.add(bitmap);
+            recordImageView.setImageBitmap(bitmap);
         }
     }
-
-
 }
