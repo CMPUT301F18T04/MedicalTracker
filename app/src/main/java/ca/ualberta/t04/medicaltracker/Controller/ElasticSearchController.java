@@ -37,6 +37,9 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+
+import static android.support.constraint.Constraints.TAG;
+
 /**
  * This class is exclusively the entire implementation of elastic search used for the application
  *
@@ -142,7 +145,6 @@ public class ElasticSearchController
                     Log.d("Succeed", "Updated it!");
                 }
             } catch (IOException e) {
-                Log.d("Succeed", "Failed!");
                 e.printStackTrace();
                 return null;
             }

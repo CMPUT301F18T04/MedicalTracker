@@ -1,14 +1,16 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
-import android.content.Intent;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
+
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,9 +21,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
+import ca.ualberta.t04.medicaltracker.Activity.MapViewActivity;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +42,7 @@ import ca.ualberta.t04.medicaltracker.Activity.InformationActivity;
 import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Activity.ProfileActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.CommentAdapter;
+
 import ca.ualberta.t04.medicaltracker.CommentPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
@@ -49,12 +60,17 @@ import ca.ualberta.t04.medicaltracker.R;
  */
 
 public class DoctorRecordDetailActivity extends AppCompatActivity {
+
+    private static final String TAG = "DoctorRecordDetail";
     private ArrayAdapter<String> adapter;
+    private ImageView viewLocation;
+
     private Geocoder geocoder;
     private List<Address> addresses;
 
     private RecordList recordList;
     private Record record;
+
 
 
     @Override
@@ -71,9 +87,11 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         final TextView location = findViewById(R.id.doctorRecordLocation);
         final TextView body_location = findViewById(R.id.doctorRecordBodyLocation);
         final TextView description = findViewById(R.id.dRecordDetailDescription);
+
         ImageView imageView = findViewById(R.id.recordImageView);
 
         Button commentButton = findViewById(R.id.doctorCommentButton);
+        viewLocation = findViewById(R.id.doctor_record_detail_view_location);
 
         final int problemIndex = getIntent().getIntExtra("problem_index", -1);
         final int patientIndex = getIntent().getIntExtra("patient_index", -1);
@@ -142,6 +160,37 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
                 commentPopup.addComment();
             }
         });
+
+        viewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isServicesOK()){
+                    Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
+                    intent.putExtra("problem_index", problemIndex);
+                    intent.putExtra("record_index", recordIndex);
+                    intent.putExtra("patient_index", patientIndex);
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+
+    public  boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(DoctorRecordDetailActivity.this);
+
+        if (available == ConnectionResult.SUCCESS){
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        }else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Log.d(TAG, "isServicesOK : an error occurred but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(DoctorRecordDetailActivity.this,available,0001);
+            dialog.show();
+        }else{
+            Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     // Setting up the Doctor comment list view

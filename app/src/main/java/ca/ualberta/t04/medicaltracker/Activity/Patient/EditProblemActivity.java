@@ -1,11 +1,14 @@
 package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,34 +22,45 @@ import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
-/*
-  This activity is for adding a problem for a patient user
- */
+public class EditProblemActivity extends AppCompatActivity{
 
-// This class has the layout of activity_add_problem.xml
-// This class is used for adding a new problem
-public class AddProblemActivity extends AppCompatActivity {
-    // initialize
     private DatePickerDialog.OnDateSetListener problemDateSetListener;
-    private TextView problem_date;
+    private TextView problemDate;
+    private EditText problemTitle,problemDescription;
+    private Button editButton;
+    private ProblemList mProblemList;
+    private Problem mProblem;
 
-    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_problem);
-        problem_date = findViewById(R.id.add_problem_date);
-        EditText problem_title = findViewById(R.id.add_problem_title);
-        problemSetDate();
-        problem_title.requestFocus();
+        setContentView(R.layout.activity_edit_problem);
+
+        //vars
+        problemDate = findViewById(R.id.edit_problem_date_pick_view);
+        problemTitle = findViewById(R.id.edit_problem_title_text);
+        problemDescription = findViewById(R.id.edit_problem_description_text);
+        editButton = findViewById(R.id.edit_problem_button_edit);
+        Intent mIntent = getIntent();
+        int problemIndex = mIntent.getIntExtra("problem_index", -1);
+        mProblemList = DataController.getPatient().getProblemList();
+        mProblem = mProblemList.getProblem(problemIndex);
+
+        problemTitle.setText(mProblem.getTitle());
+        problemDescription.setText(mProblem.getDescription());
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH) + 1;
+        String date = cal.get(Calendar.YEAR) +"-"+ month +"-" + cal.get(Calendar.DAY_OF_MONTH);
+        problemDate.setText(date);
+        init();
     }
 
-    // problemSetDate method is used for set a date using DatePickerDialog
-    public void problemSetDate(){
-        problem_date.setOnClickListener(new View.OnClickListener(){
+    public void init(){
+        problemDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Calendar cal = Calendar.getInstance();
@@ -54,7 +68,7 @@ public class AddProblemActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(AddProblemActivity.this, android.R.style.ThemeOverlay_Material_Dialog,
+                DatePickerDialog dialog = new DatePickerDialog(EditProblemActivity.this, android.R.style.ThemeOverlay_Material_Dialog,
                         problemDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
@@ -68,32 +82,25 @@ public class AddProblemActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                Date currentDate = new Date();
                 String date = year + "-" + month + "-" + day;
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    Date selectedDate = sdf.parse(date);
-                    if (currentDate.after(selectedDate)){
-                        problem_date.setText(date);
-                    } else {
-                        Toast.makeText(AddProblemActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                problemDate.setText(date);
             }
         };
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editProblem();
+            }
+        });
     }
 
-    // Used to add a problem
-    public void addProblem(View view){
-        // get title, date and description
-        EditText problem_title = findViewById(R.id.add_problem_title);
-        EditText problem_description = findViewById(R.id.add_problem_description);
+    // Used to edit a problem
+    public void editProblem(){
 
         // check if the title and description are both filled
-        if(problem_title.getText().toString().equals("") || problem_description.getText().toString().equals("")){
-            Toast.makeText(AddProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+        if(problemTitle.getText().toString().equals("") || problemDescription.getText().toString().equals("")){
+            Toast.makeText(EditProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -103,19 +110,19 @@ public class AddProblemActivity extends AppCompatActivity {
         // if the date that the user inputs is not correct, then use the default date
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
-            dateStart = format.parse(problem_date.getText().toString());
+            dateStart = format.parse(problemDate.getText().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        // create a new problem
-        Problem problem = new Problem(problem_title.getText().toString(), dateStart, problem_description.getText().toString());
-
         // use dataController to notify the change of problem
-        DataController.getPatient().getProblemList().addProblem(problem);
+        mProblemList.setTitle(mProblem, problemTitle.getText().toString());
+        mProblemList.setDescription(mProblem, problemDescription.getText().toString());
+        mProblemList.setDateStart(mProblem, dateStart);
 
         // notification message
-        Toast.makeText(AddProblemActivity.this, R.string.add_problem_toast, Toast.LENGTH_SHORT).show();
+        Toast.makeText(EditProblemActivity.this, R.string.edit_problem_toast, Toast.LENGTH_SHORT).show();
         finish();
     }
+
 }
