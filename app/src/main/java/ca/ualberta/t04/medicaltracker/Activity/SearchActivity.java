@@ -1,6 +1,8 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +36,8 @@ import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.SearchType;
 
+import static java.lang.Double.NaN;
+
 /**
  * This activity is for searching based on a keyword
  *
@@ -48,12 +52,16 @@ import ca.ualberta.t04.medicaltracker.SearchType;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private final static int REQUESTCODE = 9090;
+
     private SearchType searchType = SearchType.Problem;
     private SearchType locationType = SearchType.NoLocation;
     private BodyLocation bodyLocation = null;
     private int currentPage = 0;
     private TextView locationInfo;
     protected BodyLocationPopup popup;
+    private Location mLocation;
+
 
     private ArrayList<Object[]> result = new ArrayList<>();
     @Override
@@ -62,6 +70,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         locationInfo = findViewById(R.id.search_location_info);
 
+        double latitude = getIntent().getDoubleExtra("search_latitude", -1);
         initPage();
     }
 
@@ -110,6 +119,32 @@ public class SearchActivity extends AppCompatActivity {
                     popup.chooseBodyLocation();
                 }
             });
+        }else if(locationType.equals(SearchType.GeoLocation)){
+            button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent = new Intent(SearchActivity.this, SearchLocationMapActivity.class);
+                    startActivityForResult(intent, REQUESTCODE);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode==REQUESTCODE && resultCode == RESULT_OK){
+            Double lat = data.getDoubleExtra("search_latitude", NaN);
+            Double lon = data.getDoubleExtra("search_longitude", NaN);
+            if (lat.equals(NaN) || lon.equals(NaN)){
+                locationInfo.setText("No location selected");
+                locationInfo.setTextColor(Color.RED);
+                return;
+            }
+            mLocation = new Location("");
+            mLocation.setLatitude(lat);
+            mLocation.setLongitude(lon);
+            locationInfo.setText("Latitude: " + String.valueOf(lat) + ", Longitude: " + lon);
+            locationInfo.setTextColor(Color.BLACK);
         }
     }
 
@@ -257,6 +292,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         currentPage ++;
+    }
+
+    private ArrayList<Record> searchByGeoLocation(String keyword, Location location){
+        ArrayList<Record> result = new ArrayList<>();
+        return null;
     }
 
     // Used to search problems or records for a specific keyword

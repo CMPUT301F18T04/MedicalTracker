@@ -289,7 +289,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             bitmaps.put(bitmap, path);
             imageView.setImageBitmap(bitmap);
         }
-        else if (requestCode == PLACE_PICKER_REQUEST) {
+        else if (requestCode == PLACE_PICKER_REQUEST ) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace( this,data);
 
