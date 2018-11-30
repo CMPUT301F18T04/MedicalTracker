@@ -57,6 +57,9 @@ import ca.ualberta.t04.medicaltracker.R;
 
 /**
  * This class is for displaying the information of a record and commenting for a doctor user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class DoctorRecordDetailActivity extends AppCompatActivity {

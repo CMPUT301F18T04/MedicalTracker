@@ -57,6 +57,9 @@ import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
 /**
  * This class is for displaying and editing the information of a record for a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class RecordDetailActivity extends AppCompatActivity {
