@@ -467,7 +467,7 @@ public class ElasticSearchController
             return null;
         }
     }
-    
+
     private static class SearchRecordByGeolocationTask extends AsyncTask<Object[], Void, ArrayList<Record>>
     {
         @Override
