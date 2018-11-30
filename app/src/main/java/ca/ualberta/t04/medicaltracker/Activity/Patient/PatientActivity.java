@@ -311,9 +311,6 @@ public class PatientActivity extends AppCompatActivity
             }
             Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {  // if the button gallery is clicked, GalleryActivity will come up
-            // need to fill in the GalleryActivity
-            Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) { // if the button doctor is clicked, DoctorViewActivity will come up
             if(!NetworkUtil.isNetworkConnected(this)){
                 Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
