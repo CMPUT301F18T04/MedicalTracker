@@ -38,23 +38,25 @@ public class SlideShowActivity extends AppCompatActivity {
     private TextView titleView;
     private ArrayList<String> titles;
     private String activity;
+    private Button delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show);
 
         // Determine to hide the "Delete" button or display the record title
-        //try{
-        //    Intent intent = getIntent();
-        //    activity= intent.getStringExtra("activity");
-        //    Button delete = findViewById(R.id.slide_show_button_delete);
-        //    delete.setVisibility(View.GONE);
-        //    titleView = findViewById(R.id.albumText);
-        //    titles = intent.getStringArrayListExtra("Titles");
-        //}
-        //catch (Exception e){
-        //    titleView.setVisibility(View.GONE);
-        //}
+        titleView = findViewById(R.id.albumText);
+        delete = findViewById(R.id.slide_show_button_delete);
+
+        Intent intent = getIntent();
+        activity = intent.getStringExtra("activity");
+        if(activity != null){
+            titles = intent.getStringArrayListExtra("Titles");
+            delete.setVisibility(View.GONE);
+        }
+        else{
+            titleView.setVisibility(View.GONE);
+        }
 
         // Hide the action bar
         getSupportActionBar().hide();
@@ -73,9 +75,7 @@ public class SlideShowActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //if(activity.equals("album")) {
-                //    titleView.setText(titles.get(position));
-                //}
+                if(activity != null) { titleView.setText(titles.get(position));}
             }
 
             @Override
