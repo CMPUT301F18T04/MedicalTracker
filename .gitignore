@@ -9,4 +9,4 @@
 /build
 /captures
 .externalNativeBuild
-keys.xml
+/app/src/main/res/values/keys.xml
