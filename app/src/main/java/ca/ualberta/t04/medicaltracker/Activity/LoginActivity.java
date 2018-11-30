@@ -1,8 +1,10 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorActivity;
+import ca.ualberta.t04.medicaltracker.Activity.Doctor.ScanActivity;
 import ca.ualberta.t04.medicaltracker.Activity.Patient.PatientActivity;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
@@ -37,7 +40,9 @@ import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static int REQUEST_CODE = 0;
     private String deviceId;
+    private User user = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,49 +63,26 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         String userName = username_text.getText().toString();
-        User user = ElasticSearchController.searchUser(userName);
+        user = ElasticSearchController.searchUser(userName);
 
         if (user != null) {
-            if (user.isDoctor()) {
-                Doctor doctor = (Doctor) user;
-                DataController.setUser(doctor);
-
-                if(isNewDevice(user)){
-                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
-                    user.setDeviceId(deviceId);
-                    ElasticSearchController.updateUser(user);
-                }
-
-                Intent intent = new Intent(LoginActivity.this, DoctorActivity.class);
-                startActivity(intent);
-
+            if(isNewDevice(user)){
+                AlertDialog ad = new AlertDialog.Builder(this)
+                        .setTitle("You logged in a new device, you need to scan a QR code to log in.")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(LoginActivity.this, ScanActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .create();
+                ad.show();
+            } else {
+                login();
             }
-            else {
-                Patient patient = (Patient) user;
-                DataController.setUser(patient);
 
-                if(isNewDevice(user)){
-                    Toast.makeText(this, R.string.login_toast4, Toast.LENGTH_SHORT).show();
-                    user.setDeviceId(deviceId);
-                    ElasticSearchController.updateUser(user);
-                }
-
-                Intent intent = new Intent(LoginActivity.this, PatientActivity.class);
-                startActivity(intent);
-            }
-            String language = user.getLanguage();
-            String district = user.getDistrict();
-
-            try{
-                setLocale(language,district);
-            }catch(Exception e){
-                String deviceLanguage = Locale.getDefault().toString();
-                String[] separated = deviceLanguage.split("_");
-                String lang = separated[0];
-                String dist = separated[1];
-                setLocale(lang,dist);
-            }
-            finish();
         } else {
             Toast.makeText(this, R.string.login_toast2, Toast.LENGTH_SHORT).show();
         }
@@ -130,5 +112,53 @@ public class LoginActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode==RESULT_OK){
+            if(data!=null){
+                String userName = data.getStringExtra("result");
+                if(userName.equals(user.getUserName())){
+                    user.setDeviceId(deviceId);
+                    ElasticSearchController.updateUser(user);
+                    login();
+                }
+                else{
+                    Toast.makeText(this, "Username does not match the QR code", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Cannot identify the QR code", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void login(){
+        if(user.isDoctor()){
+            Doctor doctor = (Doctor) user;
+            DataController.setUser(doctor);
+            Intent intent = new Intent(LoginActivity.this, DoctorActivity.class);
+            startActivity(intent);
+        } else {
+            Patient patient = (Patient) user;
+            DataController.setUser(patient);
+            Intent intent = new Intent(LoginActivity.this, PatientActivity.class);
+            startActivity(intent);
+        }
+
+        String language = user.getLanguage();
+        String district = user.getDistrict();
+
+        try{
+            setLocale(language,district);
+        }catch(Exception e){
+            String deviceLanguage = Locale.getDefault().toString();
+            String[] separated = deviceLanguage.split("_");
+            String lang = separated[0];
+            String dist = separated[1];
+            setLocale(lang,dist);
+        }
+        finish();
     }
 }
