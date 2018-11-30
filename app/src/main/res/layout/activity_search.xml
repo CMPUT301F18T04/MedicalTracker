@@ -112,6 +112,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:background="@color/button_color"
         android:text="@string/search_location_button_choose_body_location"
         android:textAllCaps="false"
         android:visibility="gone"
