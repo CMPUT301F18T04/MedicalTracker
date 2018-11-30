@@ -63,7 +63,8 @@ public class SearchResultAdapter extends ArrayAdapter {
     }
 
     private void fillData(TextView username, TextView title, TextView date, TextView description, ImageView imageView, Object[] object){
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat recordFormat = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat problemFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String userName = (String) object[0];
         username.setText(userName);
         if(searchType.equals(SearchType.Problem)){
@@ -71,7 +72,7 @@ public class SearchResultAdapter extends ArrayAdapter {
             imageView.setImageResource(R.mipmap.problem);
 
             title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecords().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
-            date.setText(format.format(problem.getTime()));
+            date.setText(problemFormat.format(problem.getTime()));
 
             String description_text = problem.getDescription();
             if(description_text.length()<20){
@@ -85,7 +86,7 @@ public class SearchResultAdapter extends ArrayAdapter {
             imageView.setImageResource(R.mipmap.record);
 
             title.setText(record.getTitle());
-            date.setText(format.format(record.getDateStart()));
+            date.setText(recordFormat.format(record.getDateStart()));
 
             String description_text = record.getDescription();
             if(description_text.length()<20){

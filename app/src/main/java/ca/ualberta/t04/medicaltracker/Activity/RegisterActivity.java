@@ -131,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Check the validation of birthday
         if(!editText_birthday.equals("")) {
             Date current_date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             try {
                 Date newBirthday = format.parse(birthday);
                 if(current_date.before(newBirthday)){
@@ -217,7 +217,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Add birthday to user's information
         Date birthdayDate = null;
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             birthdayDate = format.parse(birthday);
         } catch (ParseException e) {
