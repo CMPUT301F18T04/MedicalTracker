@@ -123,7 +123,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private Problem problem;
 
 
-    private String date;
+    private String date = "";
     private String time;
 
     // onCreate method

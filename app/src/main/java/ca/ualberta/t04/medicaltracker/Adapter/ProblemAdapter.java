@@ -48,7 +48,7 @@ public class ProblemAdapter extends ArrayAdapter {
         TextView title = view.findViewById(R.id.problem_list_title);
         TextView date = view.findViewById(R.id.problem_list_date);
         TextView description = view.findViewById(R.id.problem_list_description);
-        description.setMovementMethod(new ScrollingMovementMethod());
+        //description.setMovementMethod(new ScrollingMovementMethod());
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
