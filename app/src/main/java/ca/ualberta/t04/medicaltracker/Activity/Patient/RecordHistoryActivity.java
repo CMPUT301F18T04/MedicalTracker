@@ -2,7 +2,9 @@ package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +16,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
@@ -147,6 +152,31 @@ public class RecordHistoryActivity extends AppCompatActivity {
             intent.putExtra("index", problem_index);
             startActivity(intent);
             return true;
+        }
+
+        // Show all the photos of current problem
+        if(id == R.id.action_album){
+            Problem problem = DataController.getPatient().getProblemList().getProblem(problem_index);
+            String problemId = problem.getProblemId();
+            HashMap<String, RecordList> records = DataController.getRecordList();
+            RecordList recordList = records.get(problemId);
+            ArrayList<Record> problemRecords = recordList.getRecords();
+            ArrayList<Bitmap> bitmaps = new ArrayList<>();
+            ArrayList<String> recordTitles = new ArrayList<>();
+            for(Record record:problemRecords){
+                ArrayList<Bitmap> pictures = record.getPhotos();
+                for(Bitmap pic:pictures){
+                    bitmaps.add(pic);
+                    recordTitles.add(record.getTitle());
+                }
+            }
+
+            Intent  intent = new Intent(RecordHistoryActivity.this, SlideShowActivity.class);
+            intent.putExtra("activity","album");
+            intent.putStringArrayListExtra("Titles",recordTitles);
+
+            BitmapHolder.setBitmaps(bitmaps);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
