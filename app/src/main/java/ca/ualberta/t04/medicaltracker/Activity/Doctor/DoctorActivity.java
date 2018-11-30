@@ -40,6 +40,7 @@ import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.Model.ProblemList;
+import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
@@ -172,6 +173,8 @@ public class DoctorActivity extends AppCompatActivity
             startActivity(intent);
         } else if(id==R.id.doctor_page_menu_delete){
             DataController.getDoctor().removePatient(patient);
+            patient.removeDoctor(DataController.getDoctor());
+            ElasticSearchController.updateUser(patient);
             Toast.makeText(DoctorActivity.this, "Succeeded to delete it.", Toast.LENGTH_SHORT).show();
         }
 
@@ -346,8 +349,12 @@ public class DoctorActivity extends AppCompatActivity
                         patient.addDoctor(DataController.getDoctor());
                         ElasticSearchController.updateUser(patient);
                         Toast.makeText(this, R.string.doctor_page_toast2, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
                     }
                 }
+            } else{
+                Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -374,6 +381,10 @@ public class DoctorActivity extends AppCompatActivity
         } else if(id == R.id.nav_about) {
             Intent intent = new Intent(DoctorActivity.this, AboutActivity.class);
             startActivity(intent);
+        } else if(id == R.id.nav_qr_code){
+            QRCodePopup qrCodePopup = new QRCodePopup(this, DataController.getUser().getUserName());
+
+            qrCodePopup.showQRCode();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

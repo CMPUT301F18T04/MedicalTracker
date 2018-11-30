@@ -120,9 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE && resultCode==RESULT_OK){
             if(data!=null){
                 String userName = data.getStringExtra("result");
-                if(userName.equals(user.getUserName())){
-                    user.setDeviceId(deviceId);
-                    ElasticSearchController.updateUser(user);
+                if(userName!=null && userName.equals(user.getUserName())){
                     login();
                 }
                 else{
@@ -135,6 +133,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(){
+        user.setDeviceId(deviceId);
+        ElasticSearchController.updateUser(user);
         if(user.isDoctor()){
             Doctor doctor = (Doctor) user;
             DataController.setUser(doctor);

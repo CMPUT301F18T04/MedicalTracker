@@ -163,6 +163,7 @@
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/button_color"
         android:text="@string/upload_button"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -242,11 +243,14 @@
         android:id="@+id/view_location"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recordImageView"
+        app:layout_constraintTop_toBottomOf="@+id/bodyLocationTextView"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_view_location" />
 
 
