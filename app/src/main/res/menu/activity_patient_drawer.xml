@@ -9,10 +9,6 @@
             android:icon="@mipmap/profile"
             android:title="@string/nav_item_profile" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_item_gallery" />
-        <item
             android:id="@+id/nav_doctor"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/nav_item_doctor" />
