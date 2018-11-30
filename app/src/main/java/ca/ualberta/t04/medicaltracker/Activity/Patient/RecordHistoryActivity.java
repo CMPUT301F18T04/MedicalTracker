@@ -78,7 +78,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         });
 
         // add listener to the record list
-        recordList.addListener("RecordListener1", new Listener() {
+        recordList.replaceListener("RecordListener1", new Listener() {
             @Override
             public void update() {
                 adapter.notifyDataSetChanged();

@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Controller;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -464,6 +465,64 @@ public class ElasticSearchController
                 e.printStackTrace();
             }
             return null;
+        }
+    }
+
+    private static class SearchRecordByGeolocationTask extends AsyncTask<Object[], Void, ArrayList<Record>>
+    {
+        @Override
+        protected ArrayList<Record> doInBackground(Object[]... objects) {
+            setClient();
+
+            Object[] object = objects[0];
+
+            String keyWord = (String) object[0];
+            Location location = (Location) object[1];
+
+            Double lat = location.getLatitude();
+            Double lon = location.getLongitude();
+
+            // Build the search query
+            String query = "{\n" +
+                    "    \"filtered\" : {\n" +
+                    "        \"query\" : {\n" +
+                    "            \"query_string\" : {\n" +
+                    "            \"query\" : \"(title:" + keyWord + " OR description:" + keyWord + ")\" \n" +
+                    "             }\n" +
+                    "        },\n" +
+                    "        \"filter\" : {\n" +
+                    "            \"geo_distance\" : {\n" +
+                    "                \"distance\" : \"2km\",\n" +
+                    "                \"pin.location\" : {\n" +
+                    "                    \"lat\" : " + lat + ",\n" +
+                    "                    \"lon\" : " + lon + "\n" +
+                    "                }\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+
+            Search search = new Search.Builder(query)
+                    // multiple index or types can be added.
+                    .addIndex(INDEX_NAME)
+                    .addType(RECORD_TYPE)
+                    .build();
+            ArrayList<Record> records = null;
+            // If searched, then return object, otherwise return null
+            try {
+                SearchResult searchResult = client.execute(search);
+                if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
+                    Log.d("Succeed", searchResult.getSourceAsStringList().get(0));
+                    records = new ArrayList<>(searchResult.getSourceAsObjectList(Record.class));
+                }
+                else{
+                    Log.d("Succeed", "Nothing Found!");
+                }
+            } catch (IOException e) {
+                Log.d("Succeed", "Failed!");
+                e.printStackTrace();
+            }
+            return records;
         }
     }
 
