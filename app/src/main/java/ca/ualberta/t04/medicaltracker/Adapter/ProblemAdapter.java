@@ -48,7 +48,7 @@ public class ProblemAdapter extends ArrayAdapter {
         TextView date = view.findViewById(R.id.problem_list_date);
         TextView description = view.findViewById(R.id.problem_list_description);
 
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
         title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecordIds().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));

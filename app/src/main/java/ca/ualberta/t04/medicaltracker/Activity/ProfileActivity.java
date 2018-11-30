@@ -65,7 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
         // get birthday
         EditText birthday = findViewById(R.id.profile_birthday);
         if(DataController.getUser().getBirthday()!=null){
-            birthday.setText(DataController.getUser().getBirthdayString());
+            String temp = DataController.getUser().getBirthdayString();
+            String[] arrOfTemp = temp.split("T");
+            birthday.setText(arrOfTemp[0]);
         }
 
         // get sex
@@ -107,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // get new birthday
         EditText birthday = findViewById(R.id.profile_birthday);
-        DateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Date newBirthday = null;
         try {
             newBirthday = format.parse(birthday.getText().toString());
@@ -190,7 +192,8 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         EditText birthday = findViewById(R.id.profile_birthday);
 
-                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth + "T00:00");
+//                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth + "T00:00");
+                        birthday.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
                     }
                 }, Year, Month, Day);
         datePickerDialog.show();
