@@ -41,7 +41,7 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
     private GoogleMap mMap;
     private boolean mLocationPermissionsGranted;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private Marker mMarker;
+    private Location mLocation;
 
     private ImageView pickArea;
 
@@ -78,12 +78,15 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
     }
 
     private void init(){
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            //clear the map
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
-                mMarker = marker;
-                return false;
+            public void onMapClick(LatLng latLng) {
+                MarkerOptions options = new MarkerOptions().position(latLng);
+                mMap.clear();
+                mMap.addMarker(options);
+                mLocation = new Location("");
+                mLocation.setLatitude(latLng.latitude);
+                mLocation.setLongitude(latLng.longitude);
             }
         });
 
@@ -91,8 +94,8 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("search_latitude",mMarker.getPosition().latitude);
-                intent.putExtra("search_longitude", mMarker.getPosition().longitude);
+                intent.putExtra("search_latitude",mLocation.getLatitude());
+                intent.putExtra("search_longitude", mLocation.getLongitude());
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -160,6 +163,10 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
                             Location currentLocation = (Location) task.getResult();
 
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM,"My Location");
+                            MarkerOptions options = new MarkerOptions().position(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()));
+                            mMap.clear();
+                            mMap.addMarker(options);
+                            mLocation = currentLocation;
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(SearchLocationMapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();

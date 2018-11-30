@@ -71,19 +71,23 @@ public class SlideShowActivity extends AppCompatActivity {
 
 
         Button delete = findViewById(R.id.slide_show_button_delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bitmaps.remove(currentIndex);
-                returnResult();
+        if(DataController.getUser().isDoctor()){
+            delete.setVisibility(View.GONE);
+        } else {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bitmaps.remove(currentIndex);
+                    returnResult();
 
-                if(bitmaps.isEmpty()){
-                    finish();
+                    if(bitmaps.isEmpty()){
+                        finish();
+                    }
+
+                    imageAdapter.notifyDataSetChanged();
                 }
-
-                imageAdapter.notifyDataSetChanged();
-            }
-        });
+            });
+        }
     }
 
     public void returnResult() {

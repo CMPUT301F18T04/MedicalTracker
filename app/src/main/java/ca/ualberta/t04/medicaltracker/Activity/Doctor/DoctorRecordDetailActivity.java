@@ -161,10 +161,22 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             }
         });
 
+        if (isServicesOK()){
+            init(problemIndex, recordIndex, patientIndex);
+        }
+
+
+
+    }
+
+    private void init(final int problemIndex, final int recordIndex, final int patientIndex){
         viewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isServicesOK()){
+                if (DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problemIndex).
+                        getRecordList().getRecord(recordIndex).getLocation()==null){
+                    Toast.makeText(DoctorRecordDetailActivity.this,"This record has no location", Toast.LENGTH_SHORT).show();
+                }else {
                     Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
                     intent.putExtra("problem_index", problemIndex);
                     intent.putExtra("record_index", recordIndex);
@@ -173,7 +185,6 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public  boolean isServicesOK(){

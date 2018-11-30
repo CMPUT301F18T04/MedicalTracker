@@ -44,7 +44,7 @@ public class CommonUtil {
     public static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm";
     public static String INDEX_NAME = "cmput301f18t04p5test7";
     public static int QR_CODE_HEIGHT = 500;
-
+    public static float LOCATION_DISTANCE = 2000;
 
     // Idea comes from https://blog.csdn.net/a360940265a/article/details/79907844
     public static String getIMEI() {
