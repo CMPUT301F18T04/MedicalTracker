@@ -402,6 +402,8 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 DocumentResult result = client.execute(get);
+                if(!result.isSucceeded())
+                    return null;
                 Record record = result.getSourceAsObject(Record.class);
                 return record;
             } catch (IOException e) {
@@ -450,6 +452,9 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 SearchResult result = client.execute(search);
+                if(!result.isSucceeded()){
+                    return null;
+                }
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(result.getSourceAsString()).getAsJsonObject();
 
