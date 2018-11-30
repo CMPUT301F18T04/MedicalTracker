@@ -192,6 +192,7 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+
     <!-- <string name="search_location_info">Click here to add information for location search</string> -->
     <string name="search_location_button_choose_body_location">Choose Location</string>
 
