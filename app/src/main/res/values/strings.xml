@@ -105,6 +105,7 @@
     <string name="action_add">Add</string>
     <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
+    <string name="action_album">Album</string>
     <string name="doctor_page_menu_item_detail">View Detail</string>
     <string name="doctor_page_menu_item_delete">Delete</string>
     <!-- end for Menu -->
@@ -191,6 +192,7 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+
     <!-- <string name="search_location_info">Click here to add information for location search</string> -->
     <string name="search_location_button_choose_body_location">Choose Location</string>
 
