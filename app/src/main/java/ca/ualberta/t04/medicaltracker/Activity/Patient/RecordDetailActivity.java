@@ -54,6 +54,7 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 
 /**
@@ -191,7 +192,11 @@ public class RecordDetailActivity extends AppCompatActivity {
                     }
                 }
 
-                ElasticSearchController.updateRecord(record);
+                if(!NetworkUtil.isNetworkConnected(RecordDetailActivity.this)){
+                    recordList.addOfflineRecord(record);
+                } else {
+                    ElasticSearchController.updateRecord(record);
+                }
 
                 Toast.makeText(RecordDetailActivity.this, R.string.record_toast1, Toast.LENGTH_SHORT).show();
 

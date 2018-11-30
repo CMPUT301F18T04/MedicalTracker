@@ -32,7 +32,7 @@
     <string name="register_text_doctor">Doctor</string>
     <string name="register_button_sign_up">Sign up</string>
     <string name="register_toast1">Username can not be empty!</string>
-    <string name="register_toast2">Username should between 4\-15 characters</string>
+    <string name="register_toast2">Username should between 8\-15 characters</string>
     <string name="register_toast3">Username contains invalid characters!</string>
     <string name="register_toast8">Phone number is not valid!</string>
     <string name="register_toast9">Email is not valid!</string>

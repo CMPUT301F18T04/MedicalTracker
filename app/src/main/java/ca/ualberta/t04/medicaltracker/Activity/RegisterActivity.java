@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check if username is too short or too long
-        if(userName.length()<4 || userName.length() > 15){
+        if(userName.length()<8 || userName.length() > 15){
             Toast.makeText(RegisterActivity.this,R.string.register_toast2,Toast.LENGTH_SHORT).show();
             return;
         }

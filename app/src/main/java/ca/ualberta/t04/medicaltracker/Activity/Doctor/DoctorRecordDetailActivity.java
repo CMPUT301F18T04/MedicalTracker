@@ -167,8 +167,6 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             init(problemIndex, recordIndex, patientIndex);
         }
 
-
-
     }
 
     private void init(final int problemIndex, final int recordIndex, final int patientIndex){
