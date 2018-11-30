@@ -31,7 +31,7 @@
     <string name="register_text_doctor">先生</string>
     <string name="register_button_sign_up">登録完了</string>
     <string name="register_toast1">ユーザー名は空にできません！!</string>
-    <string name="register_toast2">ユーザー名は4〜15文字にする必要があります</string>
+    <string name="register_toast2">ユーザー名は8〜15文字にする必要があります</string>
     <string name="register_toast3">ユーザー名に不正な文字が含まれています!</string>
     <string name="register_toast8">電話番号が無効です!</string>
     <string name="register_toast9">メールボックスが無効です!</string>

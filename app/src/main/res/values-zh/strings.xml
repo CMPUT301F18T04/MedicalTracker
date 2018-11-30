@@ -31,7 +31,7 @@
     <string name="register_text_doctor">医生</string>
     <string name="register_button_sign_up">注册</string>
     <string name="register_toast1">用户名不能为空!</string>
-    <string name="register_toast2">用户名应为4到15个字符</string>
+    <string name="register_toast2">用户名应为8到15个字符</string>
     <string name="register_toast3">用户名包含非法字符!</string>
     <string name="register_toast8">电话号码无效!</string>
     <string name="register_toast9">邮箱无效!</string>
