@@ -164,6 +164,8 @@
     <string name="edit_problem_problem_description">Brief Description:</string>
     <string name="edit_problem_button_edit">Edit</string>
     <string name="edit_problem_toast">Saved changes</string>
+    <string name="edit_problem_toast1">You can not select future time</string>
+    <string name="edit_problem_toast2">The title or description cannot be empty.</string>
     <!-- end for Edit Problem Page -->
 
     <!-- String for Add Record Page -->
@@ -218,6 +220,8 @@
     <string name="location_text">No location selected</string>
     <string name="record_toast1">New edits saved</string>
     <string name="record_toast2">No photo uploads</string>
+    <string name="record_toast3">This record has no location</string>
+    <string name="record_toast4">You can\'t make map requests</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -249,4 +253,9 @@
     <string name="mark_image_hint">Please click to add a point</string>
     <string name="mark_image_add">Add</string>
     <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">Move around to check other marked locations.</string>
+    <string name="map_toast_2">Unable to get current location</string>
+    <!-- end for Map View page -->
 </resources>

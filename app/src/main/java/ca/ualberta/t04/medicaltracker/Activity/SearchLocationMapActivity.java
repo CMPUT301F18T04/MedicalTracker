@@ -47,7 +47,6 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: Map is ready");
         mMap = googleMap;
 
@@ -169,7 +168,7 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
                             mLocation = currentLocation;
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(SearchLocationMapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchLocationMapActivity.this, R.string.map_toast_2, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
