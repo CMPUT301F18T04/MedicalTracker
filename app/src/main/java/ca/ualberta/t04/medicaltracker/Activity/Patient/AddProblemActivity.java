@@ -32,6 +32,7 @@ public class AddProblemActivity extends AppCompatActivity {
     // initialize
     private DatePickerDialog.OnDateSetListener problemDateSetListener;
     private TextView problem_date;
+    private String date;
 
     // onCreate method
     @Override
@@ -69,12 +70,13 @@ public class AddProblemActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 Date currentDate = new Date();
-                String date = year + "-" + month + "-" + day + "T00:00";
+                date = year + "-" + month + "-" + day + "T00:00";
                 SimpleDateFormat sdf = new SimpleDateFormat(CommonUtil.DATE_FORMAT);
                 try {
                     Date selectedDate = sdf.parse(date);
                     if (currentDate.after(selectedDate)){
-                        problem_date.setText(date);
+                        String setDate = year + "-" + month + "-" + day;
+                        problem_date.setText(setDate);
                     } else {
                         Toast.makeText(AddProblemActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
                     }
@@ -103,7 +105,8 @@ public class AddProblemActivity extends AppCompatActivity {
         // if the date that the user inputs is not correct, then use the default date
         SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         try {
-            dateStart = format.parse(problem_date.getText().toString());
+            if(date!=null)
+                dateStart = format.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

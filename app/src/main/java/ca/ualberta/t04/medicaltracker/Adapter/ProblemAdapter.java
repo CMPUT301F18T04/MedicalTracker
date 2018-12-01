@@ -3,6 +3,7 @@ package ca.ualberta.t04.medicaltracker.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,9 @@ public class ProblemAdapter extends ArrayAdapter {
         TextView title = view.findViewById(R.id.problem_list_title);
         TextView date = view.findViewById(R.id.problem_list_date);
         TextView description = view.findViewById(R.id.problem_list_description);
+        //description.setMovementMethod(new ScrollingMovementMethod());
 
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
         title.setText(problem.getTitle() + " (" + problem.getRecordList().getRecordIds().size() + " " + getContext().getString(R.string.patient_inner_text_record) + ")");
         date.setText(format.format(problem.getTime()));

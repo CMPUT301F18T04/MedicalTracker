@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
+import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -165,8 +167,27 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         });
 
         if (isServicesOK()){
-            init(patientIndex, problemIndex, recordIndex);
+            init(problemIndex, recordIndex, patientIndex);
         }
+
+    }
+
+    private void init(final int problemIndex, final int recordIndex, final int patientIndex){
+        viewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problemIndex).
+                        getRecordList().getRecord(recordIndex).getLocation()==null){
+                    Toast.makeText(DoctorRecordDetailActivity.this,R.string.record_toast3, Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
+                    intent.putExtra("problem_index", problemIndex);
+                    intent.putExtra("record_index", recordIndex);
+                    intent.putExtra("patient_index", patientIndex);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -182,27 +203,11 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(DoctorRecordDetailActivity.this,available,0001);
             dialog.show();
         }else{
-            Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.record_toast4, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
 
-    private void init(final int patientIndex, final int problem_index, final int recordIndex){
-        viewLocation.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                if (DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problem_index).
-                        getRecordList().getRecord(recordIndex).getLocation()==null){
-                    Toast.makeText(DoctorRecordDetailActivity.this,R.string.location_text, Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
-                    intent.putExtra("problem_index", problem_index);
-                    intent.putExtra("record_index", recordIndex);
-                    startActivity(intent);
-                }
-            }
-        });
-    }
 
     // Setting up the Doctor comment list view
     private void InitDoctorCommentListView(){

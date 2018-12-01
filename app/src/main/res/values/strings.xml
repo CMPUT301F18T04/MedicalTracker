@@ -32,7 +32,7 @@
     <string name="register_text_doctor">Doctor</string>
     <string name="register_button_sign_up">Sign up</string>
     <string name="register_toast1">Username can not be empty!</string>
-    <string name="register_toast2">Username should between 4\-15 characters</string>
+    <string name="register_toast2">Username should between 8\-15 characters</string>
     <string name="register_toast3">Username contains invalid characters!</string>
     <string name="register_toast8">Phone number is not valid!</string>
     <string name="register_toast9">Email is not valid!</string>
@@ -105,6 +105,7 @@
     <string name="action_add">Add</string>
     <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
+    <string name="action_album">Album</string>
     <string name="doctor_page_menu_item_detail">View Detail</string>
     <string name="doctor_page_menu_item_delete">Delete</string>
     <!-- end for Menu -->
@@ -163,6 +164,8 @@
     <string name="edit_problem_problem_description">Brief Description:</string>
     <string name="edit_problem_button_edit">Edit</string>
     <string name="edit_problem_toast">Saved changes</string>
+    <string name="edit_problem_toast1">You can not select future time</string>
+    <string name="edit_problem_toast2">The title or description cannot be empty.</string>
     <!-- end for Edit Problem Page -->
 
     <!-- String for Add Record Page -->
@@ -191,6 +194,7 @@
     <string name="search_tip">Please enter the keywords:</string>
     <string name="search_query_hint">Search problems or records</string>
     <string name="search_button_search">Search</string>
+
     <!-- <string name="search_location_info">Click here to add information for location search</string> -->
     <string name="search_location_button_choose_body_location">Choose Location</string>
 
@@ -216,6 +220,8 @@
     <string name="location_text">No location selected</string>
     <string name="record_toast1">New edits saved</string>
     <string name="record_toast2">No photo uploads</string>
+    <string name="record_toast3">This record has no location</string>
+    <string name="record_toast4">You can\'t make map requests</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -247,4 +253,9 @@
     <string name="mark_image_hint">Please click to add a point</string>
     <string name="mark_image_add">Add</string>
     <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">Move around to check other marked locations.</string>
+    <string name="map_toast_2">Unable to get current location</string>
+    <!-- end for Map View page -->
 </resources>

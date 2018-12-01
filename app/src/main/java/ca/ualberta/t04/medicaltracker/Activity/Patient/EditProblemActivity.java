@@ -52,10 +52,11 @@ public class EditProblemActivity extends AppCompatActivity{
 
         problemTitle.setText(mProblem.getTitle());
         problemDescription.setText(mProblem.getDescription());
-        Calendar cal = Calendar.getInstance();
-        int month = cal.get(Calendar.MONTH) + 1;
-        String date = cal.get(Calendar.YEAR) +"-"+ month +"-" + cal.get(Calendar.DAY_OF_MONTH);
-        problemDate.setText(date);
+        //Calendar cal = Calendar.getInstance();
+        //int month = cal.get(Calendar.MONTH) + 1;
+        //String date = cal.get(Calendar.YEAR) +"-"+ month +"-" + cal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        problemDate.setText(sdf.format(mProblem.getTime()));
         init();
     }
 
@@ -82,8 +83,20 @@ public class EditProblemActivity extends AppCompatActivity{
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                Date currentDate = new Date();
                 String date = year + "-" + month + "-" + day;
-                problemDate.setText(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date selectedDate = sdf.parse(date);
+                    if (currentDate.after(selectedDate)){
+                        String setDate = year + "-" + month + "-" + day;
+                        problemDate.setText(setDate);
+                    } else {
+                        Toast.makeText(EditProblemActivity.this, R.string.edit_problem_toast1, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
@@ -100,7 +113,7 @@ public class EditProblemActivity extends AppCompatActivity{
 
         // check if the title and description are both filled
         if(problemTitle.getText().toString().equals("") || problemDescription.getText().toString().equals("")){
-            Toast.makeText(EditProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProblemActivity.this, R.string.edit_problem_toast2, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -108,9 +121,10 @@ public class EditProblemActivity extends AppCompatActivity{
         Date dateStart = new Date();
 
         // if the date that the user inputs is not correct, then use the default date
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             dateStart = format.parse(problemDate.getText().toString());
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

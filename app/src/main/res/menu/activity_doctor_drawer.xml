@@ -8,6 +8,10 @@
             android:id="@+id/nav_profile"
             android:icon="@mipmap/profile"
             android:title="@string/nav_item_profile" />
+        <item
+            android:id="@+id/nav_qr_code"
+            android:icon="@mipmap/qr_code"
+            android:title="@string/nav_item_qr_code" />
     </group>
 
     <item android:title="@string/nav_item_other">

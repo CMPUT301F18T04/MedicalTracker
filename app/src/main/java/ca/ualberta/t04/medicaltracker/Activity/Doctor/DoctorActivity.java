@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
 import ca.ualberta.t04.medicaltracker.Activity.ProfileActivity;
 import ca.ualberta.t04.medicaltracker.Activity.SearchActivity;
 import ca.ualberta.t04.medicaltracker.Activity.SettingActivity;
+import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.PatientListAdapter;
 import ca.ualberta.t04.medicaltracker.Adapter.ProblemAdapter;
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
@@ -40,6 +42,7 @@ import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.Model.ProblemList;
+import ca.ualberta.t04.medicaltracker.QRCodePopup;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
@@ -172,6 +175,8 @@ public class DoctorActivity extends AppCompatActivity
             startActivity(intent);
         } else if(id==R.id.doctor_page_menu_delete){
             DataController.getDoctor().removePatient(patient);
+            patient.removeDoctor(DataController.getDoctor());
+            ElasticSearchController.updateUser(patient);
             Toast.makeText(DoctorActivity.this, "Succeeded to delete it.", Toast.LENGTH_SHORT).show();
         }
 
@@ -305,7 +310,7 @@ public class DoctorActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
+        menu.removeItem(R.id.action_album);
         return true;
     }
 
@@ -324,6 +329,9 @@ public class DoctorActivity extends AppCompatActivity
         } else if(id == R.id.action_search){
             Intent intent = new Intent(DoctorActivity.this, SearchActivity.class);
             startActivity(intent);
+            return true;
+        } else if(id == R.id.action_album){
+            Intent intent = new Intent(DoctorActivity.this, SlideShowActivity.class);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -346,8 +354,12 @@ public class DoctorActivity extends AppCompatActivity
                         patient.addDoctor(DataController.getDoctor());
                         ElasticSearchController.updateUser(patient);
                         Toast.makeText(this, R.string.doctor_page_toast2, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
                     }
                 }
+            } else{
+                Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -374,6 +386,10 @@ public class DoctorActivity extends AppCompatActivity
         } else if(id == R.id.nav_about) {
             Intent intent = new Intent(DoctorActivity.this, AboutActivity.class);
             startActivity(intent);
+        } else if(id == R.id.nav_qr_code){
+            QRCodePopup qrCodePopup = new QRCodePopup(this, DataController.getUser().getUserName());
+
+            qrCodePopup.showQRCode();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

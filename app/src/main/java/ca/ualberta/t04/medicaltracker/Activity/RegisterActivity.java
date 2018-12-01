@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Check if username is too short or too long
-        if(userName.length()<4 || userName.length() > 15){
+        if(userName.length()<8 || userName.length() > 15){
             Toast.makeText(RegisterActivity.this,R.string.register_toast2,Toast.LENGTH_SHORT).show();
             return;
         }
@@ -131,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Check the validation of birthday
         if(!editText_birthday.equals("")) {
             Date current_date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             try {
                 Date newBirthday = format.parse(birthday);
                 if(current_date.before(newBirthday)){
@@ -217,7 +217,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Add birthday to user's information
         Date birthdayDate = null;
-        SimpleDateFormat format = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             birthdayDate = format.parse(birthday);
         } catch (ParseException e) {

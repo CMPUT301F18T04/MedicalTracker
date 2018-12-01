@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -34,10 +35,28 @@ import ca.ualberta.t04.medicaltracker.R;
 public class SlideShowActivity extends AppCompatActivity {
 
     private int currentIndex;
+    private TextView titleView;
+    private ArrayList<String> titles;
+    private String activity;
+    private Button delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show);
+
+        // Determine to hide the "Delete" button or display the record title
+        titleView = findViewById(R.id.albumText);
+        delete = findViewById(R.id.slide_show_button_delete);
+
+        Intent intent = getIntent();
+        activity = intent.getStringExtra("activity");
+        if(activity != null){
+            titles = intent.getStringArrayListExtra("Titles");
+            delete.setVisibility(View.GONE);
+        }
+        else{
+            titleView.setVisibility(View.GONE);
+        }
 
         // Hide the action bar
         getSupportActionBar().hide();
@@ -52,10 +71,11 @@ public class SlideShowActivity extends AppCompatActivity {
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                if(activity != null) { titleView.setText(titles.get(position));}
             }
 
             @Override
@@ -71,19 +91,23 @@ public class SlideShowActivity extends AppCompatActivity {
 
 
         Button delete = findViewById(R.id.slide_show_button_delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bitmaps.remove(currentIndex);
-                returnResult();
+        if(DataController.getUser().isDoctor()){
+            delete.setVisibility(View.GONE);
+        } else {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bitmaps.remove(currentIndex);
+                    returnResult();
 
-                if(bitmaps.isEmpty()){
-                    finish();
+                    if(bitmaps.isEmpty()){
+                        finish();
+                    }
+
+                    imageAdapter.notifyDataSetChanged();
                 }
-
-                imageAdapter.notifyDataSetChanged();
-            }
-        });
+            });
+        }
     }
 
     public void returnResult() {

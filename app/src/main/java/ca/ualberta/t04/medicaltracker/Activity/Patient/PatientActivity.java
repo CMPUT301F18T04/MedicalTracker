@@ -32,6 +32,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Activity.AboutActivity;
+import ca.ualberta.t04.medicaltracker.Activity.Doctor.ScanActivity;
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
 import ca.ualberta.t04.medicaltracker.Activity.ProfileActivity;
 import ca.ualberta.t04.medicaltracker.Activity.SearchActivity;
@@ -90,7 +91,7 @@ public class PatientActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        new InitListView().execute(this);
+        initProblemListView(this);
 
         connectionReceiver = new BroadcastReceiver() {
             @Override
@@ -117,45 +118,34 @@ public class PatientActivity extends AppCompatActivity
 
     }
 
-    private static class InitListView extends AsyncTask<Activity, Void, Void> {
 
-        @Override
-        protected Void doInBackground(Activity... activities) {
-            Activity activity = activities[0];
-            initProblemListView(activity);
-            return null;
-        }
+    // Init list view of patients
+    private void initProblemListView(final Activity activity){
+        ListView listView = activity.findViewById(R.id.main_page_list_view);
+        final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
+        final ProblemAdapter adapter = new ProblemAdapter(activity, R.layout.problem_list, problems);
+        listView.setAdapter(adapter);
+        activity.registerForContextMenu(listView);
 
-        // Init list view of patients
-        private void initProblemListView(final Activity activity){
-            ListView listView = activity.findViewById(R.id.main_page_list_view);
-            final ArrayList<Problem> problems = DataController.getPatient().getProblemList().getProblems();
-            final ProblemAdapter adapter = new ProblemAdapter(activity, R.layout.problem_list, problems);
-            listView.setAdapter(adapter);
-            activity.registerForContextMenu(listView);
+        // when you click one of the element in the listView, another activity will come up
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, RecordHistoryActivity.class);
 
-            // when you click one of the element in the listView, another activity will come up
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Problem problem = problems.get(position);
-                    DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
-                    Intent intent = new Intent(activity, RecordHistoryActivity.class);
+                intent.putExtra("index", position);
+                activity.startActivity(intent);
+            }
+        });
 
-                    intent.putExtra("index", position);
-                    activity.startActivity(intent);
-                }
-            });
-
-            // notify the change
-            DataController.getPatient().getProblemList().addListener("ProblemListener1", new Listener() {
-                @Override
-                public void update() {
-                    adapter.notifyDataSetChanged();
-                    ElasticSearchController.updateUser(DataController.getPatient());
-                }
-            });
-        }
+        // notify the change
+        DataController.getPatient().getProblemList().addListener("ProblemListener1", new Listener() {
+            @Override
+            public void update() {
+                adapter.notifyDataSetChanged();
+                ElasticSearchController.updateUser(DataController.getPatient());
+            }
+        });
     }
 
 
@@ -195,9 +185,19 @@ public class PatientActivity extends AppCompatActivity
 
             ArrayList<String> notifyDoctors = DataController.getPatient().getNotifyDoctors();
             if(notifyDoctors!=null && notifyDoctors.size()>0){
-                for(String doctorUserName:notifyDoctors){
-                    Toast.makeText(PatientActivity.this, getString(R.string.patient_toast11) + doctorUserName + getString(R.string.patient_toast12), Toast.LENGTH_SHORT).show();
+                String doctors = "";
+                for(int i=0; i<notifyDoctors.size(); i++){
+                    String doctorUserName = notifyDoctors.get(i);
+                    doctors += doctorUserName;
+                    if(i!=notifyDoctors.size()-1){
+                        doctors += ", ";
+                    }
                 }
+                AlertDialog ad = new AlertDialog.Builder(this)
+                        .setTitle("Doctor " + doctors + " has added you in his/her patient list.")
+                        .setPositiveButton(android.R.string.ok, null)
+                        .create();
+                ad.show();
                 DataController.getPatient().clearNotifyDoctors();
             }
         }
@@ -219,6 +219,7 @@ public class PatientActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.removeItem(R.id.action_album);
         return true;
     }
 
@@ -251,7 +252,6 @@ public class PatientActivity extends AppCompatActivity
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
         getMenuInflater().inflate(R.menu.problem_long_click_selection, menu);
     }
 
@@ -311,9 +311,6 @@ public class PatientActivity extends AppCompatActivity
             }
             Intent intent = new Intent(PatientActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {  // if the button gallary is clicked, GalleryActivity will come up
-            // need to fill in the GalleryActivity
-            Toast.makeText(PatientActivity.this, "You clicked gallery.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_doctor) { // if the button doctor is clicked, DoctorViewActivity will come up
             if(!NetworkUtil.isNetworkConnected(this)){
                 Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();

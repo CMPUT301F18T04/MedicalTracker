@@ -2,7 +2,9 @@ package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +16,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import ca.ualberta.t04.medicaltracker.Activity.SlideShowActivity;
 import ca.ualberta.t04.medicaltracker.Adapter.RecordAdapter;
+import ca.ualberta.t04.medicaltracker.BitmapHolder;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
@@ -34,12 +39,6 @@ public class RecordHistoryActivity extends AppCompatActivity {
 
     // initialize
     private int problem_index;
-    private static final String TAG = "RecordHistoryActivity";
-
-    private ListView listView;
-    private Patient mPatient;
-    private ArrayList<Record> mRecords;
-    private RecordList mRecordList;
 
     // onCreate method
     @Override
@@ -47,35 +46,35 @@ public class RecordHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_history);
 
-        listView = findViewById(R.id.record_history_list_view);
-
         getSupportActionBar().setTitle(R.string.record_history_title);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         problem_index = getIntent().getIntExtra("index", -1);
 
-        //initListView(DataController.getPatient().getProblemList().getProblem(problem_index));
-        mPatient = DataController.getPatient();
-        mRecordList = mPatient.getProblemList().getProblem(problem_index).getRecordList();
-        mRecords = mRecordList.getRecords();
-        initListView();
+        initListView(DataController.getPatient().getProblemList().getProblem(problem_index));
     }
 
-    // init the problem list view
+    // init the record list view
+    private void initListView(final Problem problem){
+        ListView listView = findViewById(R.id.record_history_list_view);
 
-    private void initListView(){
-        Log.d(TAG, "initListView: 0");
-        final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, mRecords);
+        DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+
+        final RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
+        final ArrayList<Record> records = recordList.getRecords();
+        final RecordAdapter adapter = new RecordAdapter(this, R.layout.record_list, records);
+
         listView.setAdapter(adapter);
 
         // added in the record list item click
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Record record = mRecords.get(position);
+                Record record = records.get(position);
+
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
 
-                mRecordList.updateRecord(position, record.getRecordId());
+                recordList.updateComment(record);
 
                 intent.putExtra("problem_index", problem_index);
                 intent.putExtra("record_index", position);
@@ -84,7 +83,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         });
 
         // add listener to the record list
-        mRecordList.addListener("RecordListener1", new Listener() {
+        recordList.replaceListener("RecordListener1", new Listener() {
             @Override
             public void update() {
                 adapter.notifyDataSetChanged();
@@ -109,8 +108,8 @@ public class RecordHistoryActivity extends AppCompatActivity {
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Record temp = mRecords.get(index);
-                                mRecordList.removeRecord(temp);
+                                Record temp = records.get(index);
+                                recordList.removeRecord(temp);
                                 DataController.getPatient().getProblemList().notifyAllListener();
                                 adapter.notifyDataSetChanged();
                                 // make notification for user
@@ -155,7 +154,31 @@ public class RecordHistoryActivity extends AppCompatActivity {
             return true;
         }
 
+        // Show all the photos of current problem
+        if(id == R.id.action_album){
+            Problem problem = DataController.getPatient().getProblemList().getProblem(problem_index);
+            String problemId = problem.getProblemId();
+            HashMap<String, RecordList> records = DataController.getRecordList();
+            RecordList recordList = records.get(problemId);
+            ArrayList<Record> problemRecords = recordList.getRecords();
+            ArrayList<Bitmap> bitmaps = new ArrayList<>();
+            ArrayList<String> recordTitles = new ArrayList<>();
+            for(Record record:problemRecords){
+                ArrayList<Bitmap> pictures = record.getPhotos();
+                for(Bitmap pic:pictures){
+                    bitmaps.add(pic);
+                    recordTitles.add(record.getTitle());
+                }
+            }
+
+            Intent  intent = new Intent(RecordHistoryActivity.this, SlideShowActivity.class);
+            intent.putExtra("activity","album");
+            intent.putStringArrayListExtra("Titles",recordTitles);
+
+            BitmapHolder.setBitmaps(bitmaps);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
-
 }

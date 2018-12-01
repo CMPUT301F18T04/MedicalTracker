@@ -31,7 +31,7 @@
     <string name="register_text_doctor">醫生</string>
     <string name="register_button_sign_up">註冊</string>
     <string name="register_toast1">用戶名不能為空!</string>
-    <string name="register_toast2">用戶名應為4到15個字符</string>
+    <string name="register_toast2">用戶名應為8到15個字符</string>
     <string name="register_toast3">用戶名包含非法字符!</string>
     <string name="register_toast8">電話號碼無效!</string>
     <string name="register_toast9">郵箱無效!</string>
@@ -164,7 +164,6 @@
     <string name="add_record_record_description">簡短描述:</string>
     <string name="add_record_button_add">添加</string>
     <string name="add_record_toast">出現了壹個問題</string>
-    <string name="add_record_toast2">妳已經添加了壹個新的記錄</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -184,6 +183,7 @@
     <string name="register_button_birthday">設置出生日期</string>
     <string name="title_activity_language">設置語言</string>
     <string name="search_toast1">未找到任何結果</string>
+    <string name="search_toast2">妳還沒選擇妳的身體部位</string>
     <!-- end for Search Page -->
 
     <!-- String for doctor record detail || record detail page -->
@@ -195,11 +195,18 @@
     <string name="doctor_comment">其他醫生的評價:</string>
     <string name="comment_button">評價</string>
     <string name="save_button">保存</string>
+    <string name="record_location">莅置:</string>
+    <string name="record_bodyLocation">身體部蒞:</string>
+    <string name="upload_button">上傳圖片</string>
+    <string name="location_text">妳還沒選擇位置</string>
+    <string name="record_toast1">新的更改已經保存</string>
+    <string name="record_toast2">妳還沒上傳圖片</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
-    <string name="doctor_comment_detail_title">刪除評論</string>
+    <string name="doctor_comment_detail_title">評論詳情</string>
     <!-- end for Detailed Comments page -->
+
 
     <!-- String for pop up comments page -->
     <string name="doctor_comment_title">添加新的評論</string>
@@ -218,5 +225,12 @@
     <string name="slide_show_button">删除</string>
     <!-- end for slide show page -->
 
+    <!-- Common String -->
+    <string name="common_string_no_network">您正處於離線模式，請稍後再嘗試網絡連接!</string>
+    <!-- end for Common String -->
 
+    <!-- String for Mark Image Page -->
+    <string name="mark_image_hint">請點擊來添加標記</string>
+    <string name="mark_image_add">添加</string>
+    <!-- end for Mark Image Page -->
 </resources>

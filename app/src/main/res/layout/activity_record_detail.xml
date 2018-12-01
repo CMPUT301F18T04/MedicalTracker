@@ -195,6 +195,7 @@
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/button_color"
         android:text="@string/upload_button"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -219,6 +220,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toTopOf="@+id/guideline24" />
+
 
     <TextView
         android:id="@+id/textView24"
@@ -276,6 +278,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toTopOf="@+id/guideline26"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <TextView
         android:id="@+id/textView27"

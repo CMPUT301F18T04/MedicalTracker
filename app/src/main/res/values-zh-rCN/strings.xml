@@ -31,7 +31,7 @@
     <string name="register_text_doctor">医生</string>
     <string name="register_button_sign_up">注册</string>
     <string name="register_toast1">用户名不能为空!</string>
-    <string name="register_toast2">用户名应为4到15个字符</string>
+    <string name="register_toast2">用户名应为8到15个字符</string>
     <string name="register_toast3">用户名包含非法字符!</string>
     <string name="register_toast8">电话号码无效!</string>
     <string name="register_toast9">邮箱无效!</string>
@@ -156,6 +156,15 @@
     <string name="add_problem_toast">你已经添加了一个新的病情</string>
     <!-- end for Add Problem Page -->
 
+    <!-- String for Edit Problem Page -->
+    <string name="edit_problem_title">编辑病情</string>
+    <string name="edit_problem_problem_title">病情标题:</string>
+    <string name="edit_problem_problem_date">开始日期:</string>
+    <string name="edit_problem_problem_description">简短描述:</string>
+    <string name="edit_problem_button_edit">编辑</string>
+    <string name="edit_problem_toast">保存更改</string>
+    <!-- end for Edit Problem Page -->
+
     <!-- String for Add Record Page -->
     <string name="add_record_title">添加记录</string>
     <string name="add_record_record_title">标题:</string>
@@ -164,6 +173,7 @@
     <string name="add_record_button_add">添加</string>
     <string name="add_record_toast">出现了一个问题</string>
     <string name="add_record_toast2">你已经添加了一个新的记录</string>
+    <string name="add_record_toast3">你不能添加更多照片了!</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -183,7 +193,11 @@
     <string name="register_button_birthday">设置出生日期</string>
     <string name="title_activity_language">设置语言</string>
     <string name="search_toast1">未找到任何结果</string>
+    <string name="search_toast2">你还没选择你的身体部位</string>
     <!-- end for Search Page -->
+
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">选择位置</string>
 
     <!-- String for doctor record detail || record detail page -->
     <string name="doctor_record_detail_title">记录详情</string>
@@ -194,10 +208,16 @@
     <string name="doctor_comment">其他医生的评价:</string>
     <string name="comment_button">评价</string>
     <string name="save_button">保存</string>
+    <string name="record_location">位置:</string>
+    <string name="record_bodyLocation">身体部位:</string>
+    <string name="upload_button">上传图片</string>
+    <string name="location_text">你还没选择位置</string>
+    <string name="record_toast1">新的更改已经保存</string>
+    <string name="record_toast2">你还没上传图片</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
-    <string name="doctor_comment_detail_title">删除评论</string>
+    <string name="doctor_comment_detail_title">评论详情</string>
     <!-- end for Detailed Comments page -->
 
     <!-- String for pop up comments page -->
@@ -217,5 +237,12 @@
     <string name="slide_show_button">删除</string>
     <!-- end for slide show page -->
 
+    <!-- Common String -->
+    <string name="common_string_no_network">您正处于离线模式，请稍后再尝试网络连接!</string>
+    <!-- end for Common String -->
 
+    <!-- String for Mark Image Page -->
+    <string name="mark_image_hint">请点击来添加标记</string>
+    <string name="mark_image_add">添加</string>
+    <!-- end for Mark Image Page -->
 </resources>

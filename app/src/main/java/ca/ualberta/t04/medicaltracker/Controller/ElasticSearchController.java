@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Controller;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -273,6 +274,8 @@ public class ElasticSearchController
                 if(searchResult.isSucceeded() && searchResult.getSourceAsStringList().size()>0){
                     Log.d("Succeed", searchResult.getSourceAsStringList().get(0));
 
+                    if(searchResult.getSourceAsString()==null)
+                        return null;
                     // JsonParser is used to convert source string to JsonObject
                     JsonParser parser = new JsonParser();
                     JsonObject jsonObject = parser.parse(searchResult.getSourceAsStringList().get(0)).getAsJsonObject();
@@ -359,6 +362,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to update or create a record
     private static class UpdateRecordTask extends AsyncTask<Record, Void, Void>
     {
         @Override
@@ -386,28 +390,7 @@ public class ElasticSearchController
         }
     }
 
-    private static class CreateRecordTask extends AsyncTask<Record, Void, Boolean>{
-
-        @Override
-        protected Boolean doInBackground(Record... records) {
-            setClient();
-            Record record = records[0];
-            Index recordIndex = new Index.Builder(record).index(INDEX_NAME).type(RECORD_TYPE).id(record.getRecordId()).build();
-
-            try
-            {
-                DocumentResult result = client.execute(recordIndex);
-                if(result.isSucceeded()){
-                    Log.d("Succeed", "Succeed to create a record!");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
+    // Used to search a record
     private static class SearchRecordTask extends AsyncTask<String, Void, Record>
     {
         @Override
@@ -421,6 +404,8 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 DocumentResult result = client.execute(get);
+                if(!result.isSucceeded())
+                    return null;
                 Record record = result.getSourceAsObject(Record.class);
                 return record;
             } catch (IOException e) {
@@ -442,6 +427,7 @@ public class ElasticSearchController
         return null;
     }
 
+    // Used to search a specific record's comments
     private static class SearchRecordCommentTask extends AsyncTask<String, Void, HashMap<String, ArrayList<String>>>
     {
         @Override
@@ -468,6 +454,9 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 SearchResult result = client.execute(search);
+                if(!result.isSucceeded() || result.getSourceAsString()==null){
+                    return null;
+                }
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(result.getSourceAsString()).getAsJsonObject();
 
@@ -486,6 +475,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to search many records by one call
     private static class SearchRecordListTask extends AsyncTask<String, Void, ArrayList<Record>>
     {
         @Override
@@ -541,6 +531,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to delete many records by one call
     public static class DeleteRecordListTask extends AsyncTask<String, Void, Void>{
         @Override
         protected Void doInBackground(String... recordIds) {
@@ -574,6 +565,7 @@ public class ElasticSearchController
         }
     }
 
+    // Used to delete a record
     public static class DeleteRecordTask extends AsyncTask<String, Void, Void>
     {
         @Override

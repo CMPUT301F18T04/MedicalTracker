@@ -30,7 +30,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDqANdCmDel-N73fOWDIhsd4Pa3aV8JBQs"/>
+            android:value="@string/api_key"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -77,6 +77,7 @@
         <activity android:name=".Activity.Patient.MarkImageActivity"></activity>
         <activity android:name=".Activity.MapViewActivity"></activity>
         <activity android:name=".Activity.Patient.EditProblemActivity"></activity>
+        <activity android:name=".Activity.SearchLocationMapActivity"></activity>
     </application>
 
 </manifest>

@@ -49,7 +49,7 @@
     <string name="register_text_doctor">Docteur</string>
     <string name="register_button_sign_up">S\'inscrire</string>
     <string name="register_toast1">Nom d\'utilisateur ne peut pas vide!</string>
-    <string name="register_toast2">Nom d\'utilisateur devrait entre 4\-15 caractères</string>
+    <string name="register_toast2">Nom d\'utilisateur devrait entre 8\-15 caractères</string>
     <string name="register_toast3">Nom d\'utilisateur contenit les caractères non valides!</string>
     <string name="register_toast8">Numéro de téléphone est non valide!</string>
     <string name="register_toast9">Email est non valide!</string>

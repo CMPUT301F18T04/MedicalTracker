@@ -31,7 +31,7 @@
     <string name="register_text_doctor">先生</string>
     <string name="register_button_sign_up">登録完了</string>
     <string name="register_toast1">ユーザー名は空にできません！!</string>
-    <string name="register_toast2">ユーザー名は4〜15文字にする必要があります</string>
+    <string name="register_toast2">ユーザー名は8〜15文字にする必要があります</string>
     <string name="register_toast3">ユーザー名に不正な文字が含まれています!</string>
     <string name="register_toast8">電話番号が無効です!</string>
     <string name="register_toast9">メールボックスが無効です!</string>
@@ -155,7 +155,13 @@
     <string name="add_problem_toast">あなたは新しい条件を追加しました</string>
     <!-- end for Add Problem Page -->
 
-
+    <!-- String for Edit Problem Page -->
+    <string name="edit_problem_title">条件の編集</string>
+    <string name="edit_problem_problem_title">条件タイトル:</string>
+    <string name="edit_problem_problem_date">開始日:</string>
+    <string name="edit_problem_problem_description">簡単な説明:</string>
+    <string name="edit_problem_button_edit">編集</string>
+    <string name="edit_problem_toast">変更を保存する</string>
 
 
     <!-- String for Add Record Page -->
@@ -166,6 +172,7 @@
     <string name="add_record_button_add">追加</string>
     <string name="add_record_toast">問題がありました</string>
     <string name="add_record_toast2">あなたは新しいレコードを追加しました</string>
+    <string name="add_record_toast3">写真を追加することはできません!</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -185,7 +192,11 @@
     <string name="register_button_birthday">生年月日を設定する</string>
     <string name="title_activity_language">言語の設定</string>
     <string name="search_toast1">結果が見つかりません</string>
+    <string name="search_toast2">あなたはまだあなたの体の部分を選択していません。</string>
     <!-- end for Search Page -->
+
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">場所を選択</string>
 
     <!-- String for doctor record detail || record detail page -->
     <string name="doctor_record_detail_title">记录的详情</string>
@@ -196,10 +207,16 @@
     <string name="doctor_comment">他の医者の評価:</string>
     <string name="comment_button">評価</string>
     <string name="save_button">保存する</string>
+    <string name="record_location">場所:</string>
+    <string name="record_bodyLocation">ボディパーツ:</string>
+    <string name="upload_button">写真をアップロードする</string>
+    <string name="location_text">あなたはまだ場所を選択していません</string>
+    <string name="record_toast1">新しい変更が保存されました</string>
+    <string name="record_toast2">あなたはまだ写真をアップロードしていません</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
-    <string name="doctor_comment_detail_title">コメントを削除する</string>
+    <string name="doctor_comment_detail_title">コメントの詳細</string>
     <!-- end for Detailed Comments page -->
 
     <!-- String for pop up comments page -->
@@ -218,4 +235,13 @@
     <!-- String for slide show page -->
     <string name="slide_show_button">削除</string>
     <!-- end for slide show page -->
+
+    <!-- Common String -->
+    <string name="common_string_no_network">あなたはオフラインモードです。後でインターネット接続をもう一度お試しください！</string>
+    <!-- end for Common String -->
+
+    <!-- String for Mark Image Page -->
+    <string name="mark_image_hint">タグを追加</string>
+    <string name="mark_image_add">追加</string>
+    <!-- end for Mark Image Page -->
 </resources>

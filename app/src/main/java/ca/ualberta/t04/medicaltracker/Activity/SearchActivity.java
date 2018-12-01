@@ -1,6 +1,9 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+
 import android.content.Intent;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorRecordDetailActivity;
@@ -27,12 +32,18 @@ import ca.ualberta.t04.medicaltracker.Adapter.SearchResultAdapter;
 import ca.ualberta.t04.medicaltracker.BodyLocation;
 import ca.ualberta.t04.medicaltracker.BodyLocationPopup;
 import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 import ca.ualberta.t04.medicaltracker.Model.Patient;
 import ca.ualberta.t04.medicaltracker.Model.Problem;
+import ca.ualberta.t04.medicaltracker.Model.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.SearchType;
+import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
+
+import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
+import static java.lang.Double.NaN;
 
 /**
  * This activity is for searching based on a keyword
@@ -48,12 +59,16 @@ import ca.ualberta.t04.medicaltracker.SearchType;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private final static int REQUESTCODE = 9090;
+
     private SearchType searchType = SearchType.Problem;
     private SearchType locationType = SearchType.NoLocation;
     private BodyLocation bodyLocation = null;
     private int currentPage = 0;
     private TextView locationInfo;
     protected BodyLocationPopup popup;
+    private Location mLocation;
+
 
     private ArrayList<Object[]> result = new ArrayList<>();
     @Override
@@ -62,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         locationInfo = findViewById(R.id.search_location_info);
 
+        double latitude = getIntent().getDoubleExtra("search_latitude", -1);
         initPage();
     }
 
@@ -81,9 +97,16 @@ public class SearchActivity extends AppCompatActivity {
                     } else {
                         bodyLocation = popup.getBodyLocation();
                     }
+                } else if(locationType.equals(SearchType.GeoLocation)){
+                    if(mLocation==null){
+                        Toast.makeText(SearchActivity.this, "You didn\'t choose a geo-location", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
                 }
+
                 // Object[] -> (userName, Problem/Record)
                 result = search(searchView.getQuery().toString(), searchType);
+
                 if(result.size()==0){
                     Toast.makeText(SearchActivity.this, R.string.search_toast1, Toast.LENGTH_SHORT).show();
                     return false;
@@ -110,6 +133,32 @@ public class SearchActivity extends AppCompatActivity {
                     popup.chooseBodyLocation();
                 }
             });
+        }else if(locationType.equals(SearchType.GeoLocation)){
+            button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent = new Intent(SearchActivity.this, SearchLocationMapActivity.class);
+                    startActivityForResult(intent, REQUESTCODE);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode==REQUESTCODE && resultCode == RESULT_OK){
+            Double lat = data.getDoubleExtra("search_latitude", NaN);
+            Double lon = data.getDoubleExtra("search_longitude", NaN);
+            if (lat.equals(NaN) || lon.equals(NaN)){
+                locationInfo.setText("No location selected");
+                locationInfo.setTextColor(Color.RED);
+                return;
+            }
+            mLocation = new Location("");
+            mLocation.setLatitude(lat);
+            mLocation.setLongitude(lon);
+            locationInfo.setText("Latitude: " + String.valueOf(lat) + ", Longitude: " + lon);
+            locationInfo.setTextColor(Color.BLACK);
         }
     }
 
@@ -162,11 +211,12 @@ public class SearchActivity extends AppCompatActivity {
                     initInformationTextView(locationInfo);
                     Spinner searchSpinner = findViewById(R.id.search_spinner);
                     searchSpinner.setSelection(1);
-                    bodyLocation = null;
                 } else {
                     locationInfo.setVisibility(View.GONE);
                     button.setVisibility(View.GONE);
                 }
+                bodyLocation = null;
+                mLocation = null;
             }
 
             @Override
@@ -200,7 +250,9 @@ public class SearchActivity extends AppCompatActivity {
                 Object[] objects = result.get(position);
                 Object object = objects[1];
                 if(object instanceof Problem){
-                    refreshRecordListView(((Problem) object).getRecordList(), objects);
+                    Problem problem = (Problem) object;
+                    DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+                    refreshRecordListView(DataController.getRecordList().get(problem.getProblemId()), objects);
                 } else if (object instanceof Record){
                     Intent intent;
                     if(DataController.getUser().isDoctor())
@@ -283,7 +335,9 @@ public class SearchActivity extends AppCompatActivity {
                 for (Patient patient : patients) {
                     ArrayList<Problem> problems = patient.getProblemList().getProblems();
                     for (Problem problem : problems) {
-                        ArrayList<Record> records = problem.getRecordList().getRecords();
+                        DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+                        RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
+                        ArrayList<Record> records = recordList.getRecords();
                         for (Record record : records) {
                             if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
                                 if(bodyLocation!=null && record.getBodyLocation().equals(bodyLocation)){
@@ -294,7 +348,7 @@ public class SearchActivity extends AppCompatActivity {
                                     searchedRecord[3] = problems.indexOf(problem);
                                     searchedRecord[4] = records.indexOf(record);
                                     result.add(searchedRecord);
-                                } else if(bodyLocation==null){
+                                } else if(bodyLocation==null && mLocation==null){
                                     Object[] searchedRecord = new Object[5];
                                     searchedRecord[0] = patient.getUserName();
                                     searchedRecord[1] = record;
@@ -302,6 +356,21 @@ public class SearchActivity extends AppCompatActivity {
                                     searchedRecord[3] = problems.indexOf(problem);
                                     searchedRecord[4] = records.indexOf(record);
                                     result.add(searchedRecord);
+                                } else if(mLocation!=null){
+                                    if(record.getLocation()==null){
+                                        continue;
+                                    }
+                                    LatLng searchedLocation = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
+                                    LatLng recordLocation = new LatLng(record.getLocation().getLatitude(), record.getLocation().getLongitude());
+                                    if(computeDistanceBetween(searchedLocation, recordLocation)<= CommonUtil.LOCATION_DISTANCE){
+                                        Object[] searchedRecord = new Object[5];
+                                        searchedRecord[0] = patient.getUserName();
+                                        searchedRecord[1] = record;
+                                        searchedRecord[2] = patients.indexOf(patient);
+                                        searchedRecord[3] = problems.indexOf(problem);
+                                        searchedRecord[4] = records.indexOf(record);
+                                        result.add(searchedRecord);
+                                    }
                                 }
                             }
                         }
@@ -326,7 +395,9 @@ public class SearchActivity extends AppCompatActivity {
             } else if(searchType.equals(SearchType.Record)){
                 ArrayList<Problem> problems = patient.getProblemList().getProblems();
                 for (Problem problem : problems) {
-                    ArrayList<Record> records = problem.getRecordList().getRecords();
+                    DataController.addRecordList(problem.getProblemId(), problem.getRecordList());
+                    RecordList recordList = DataController.getRecordList().get(problem.getProblemId());
+                    ArrayList<Record> records = recordList.getRecords();
                     for (Record record : records) {
                         if (record.getTitle().contains(keyword) || record.getDescription().contains(keyword)) {
                             if(bodyLocation!=null && record.getBodyLocation().equals(bodyLocation)){
@@ -337,7 +408,7 @@ public class SearchActivity extends AppCompatActivity {
                                 searchedRecord[3] = problems.indexOf(problem);
                                 searchedRecord[4] = records.indexOf(record);
                                 result.add(searchedRecord);
-                            } else if(bodyLocation==null){
+                            } else if(bodyLocation==null && mLocation==null){
                                 Object[] searchedRecord = new Object[5];
                                 searchedRecord[0] = patient.getUserName();
                                 searchedRecord[1] = record;
@@ -345,6 +416,21 @@ public class SearchActivity extends AppCompatActivity {
                                 searchedRecord[3] = problems.indexOf(problem);
                                 searchedRecord[4] = records.indexOf(record);
                                 result.add(searchedRecord);
+                            } else if(mLocation!=null){
+                                if(record.getLocation()==null){
+                                    continue;
+                                }
+                                LatLng searchedLocation = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
+                                LatLng recordLocation = new LatLng(record.getLocation().getLatitude(), record.getLocation().getLongitude());
+                                if(computeDistanceBetween(searchedLocation, recordLocation)<= CommonUtil.LOCATION_DISTANCE){
+                                    Object[] searchedRecord = new Object[5];
+                                    searchedRecord[0] = patient.getUserName();
+                                    searchedRecord[1] = record;
+                                    searchedRecord[2] = -1;
+                                    searchedRecord[3] = problems.indexOf(problem);
+                                    searchedRecord[4] = records.indexOf(record);
+                                    result.add(searchedRecord);
+                                }
                             }
                         }
                     }

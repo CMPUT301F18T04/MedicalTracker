@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -53,6 +54,7 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
+import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 
 /**
@@ -104,6 +106,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         final EditText title = findViewById(R.id.addCommentEditText);
         final TextView date = findViewById(R.id.dateTextView);
         final TextView location = findViewById(R.id.locationTextView);
+        location.setMovementMethod(new ScrollingMovementMethod());
         final TextView body_location = findViewById(R.id.bodyLocationTextView);
         final EditText description = findViewById(R.id.descriptionEditText);
         Button uploadButton = findViewById(R.id.uploadButton);
@@ -120,7 +123,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         originBitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
 
-        bitmaps = record.getPhotos();
+        bitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
         Log.d("Succeed", String.valueOf(bitmaps.size()));
 
         // set the information
@@ -153,14 +156,14 @@ public class RecordDetailActivity extends AppCompatActivity {
 
         description.setText(record.getDescription());
 
-        if (!record.getPhotos().isEmpty())
-            recordImageView.setImageBitmap(record.getPhotos().get(0));
+        if (!bitmaps.isEmpty())
+            recordImageView.setImageBitmap(bitmaps.get(0));
 
         // When the image view is clicked
         recordImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (record.getPhotos().isEmpty()) {
+                if (bitmaps.isEmpty()) {
                     Toast.makeText(RecordDetailActivity.this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(RecordDetailActivity.this, SlideShowActivity.class);
@@ -186,14 +189,17 @@ public class RecordDetailActivity extends AppCompatActivity {
                     record.addImage(bitmap, bitmapHashMap.get(bitmap));
                 }
 
-                ArrayList<Bitmap> temp = record.getPhotos();
                 for(Bitmap bitmap:originBitmaps){
                     if(!BitmapHolder.getBitmaps().contains(bitmap)){
                         record.removeImage(originBitmaps.indexOf(bitmap));
                     }
                 }
 
-                ElasticSearchController.updateRecord(record);
+                if(!NetworkUtil.isNetworkConnected(RecordDetailActivity.this)){
+                    recordList.addOfflineRecord(record);
+                } else {
+                    ElasticSearchController.updateRecord(record);
+                }
 
                 Toast.makeText(RecordDetailActivity.this, R.string.record_toast1, Toast.LENGTH_SHORT).show();
 
@@ -236,7 +242,8 @@ public class RecordDetailActivity extends AppCompatActivity {
             public void onClick(View view){
                 if (DataController.getPatient().getProblemList().getProblem(problem_index).
                         getRecordList().getRecord(recordIndex).getLocation()==null){
-                    Toast.makeText(RecordDetailActivity.this,R.string.location_text, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecordDetailActivity.this,R.string.record_toast3, Toast.LENGTH_SHORT).show();
+
                 }else {
                     Intent intent = new Intent(RecordDetailActivity.this, MapViewActivity.class);
                     intent.putExtra("problem_index", problem_index);
@@ -259,7 +266,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(RecordDetailActivity.this,available,0001);
             dialog.show();
         }else{
-            Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.record_toast4, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -306,7 +313,6 @@ public class RecordDetailActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            recordImageView.setImageBitmap(bitmap);
 
             Log.d("Succeed", "Compressed:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));
 
@@ -328,8 +334,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             String path = data.getStringExtra("path");
             bitmapHashMap.put(bitmap, path);
             bitmaps.add(bitmap);
+            recordImageView.setImageBitmap(bitmap);
         }
     }
-
-
 }
