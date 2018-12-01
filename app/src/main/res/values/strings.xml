@@ -63,6 +63,8 @@
     <string name="patient_toast11">Doctor </string>
     <string name="patient_toast12"> has added you in his/her patients list.</string>
     <string name="patient_toast2">A problem has been deleted</string>
+    <string name="patient_toast1">Network connected, your data has been updated!</string>
+    <string name="patient_toast_edit">Edit is selected!</string>
     <!-- end for Patient Page -->
 
     <!-- String for Doctor Page -->
@@ -155,6 +157,8 @@
     <string name="add_problem_problem_description">Brief Description:</string>
     <string name="add_problem_button_add">Add</string>
     <string name="add_problem_toast">Added a new problem</string>
+    <string name="add_problem_toast_time">You can not select future time</string>
+    <string name="add_problem_toast_empty">The title/description cannot be empty.</string>
     <!-- end for Add Problem Page -->
 
     <!-- String for Edit Problem Page -->
@@ -177,6 +181,12 @@
     <string name="add_record_toast">An error occurs</string>
     <string name="add_record_toast2">Added a new record</string>
     <string name="add_record_toast3">You can\'t add more photos!</string>
+    <string name="add_record_toast_empty">The title/description cannot be empty.</string>
+    <string name="add_record_toast_body_location">You didn\'t choose body location.</string>
+    <string name="add_record_toast_time">Record time cannot be before the problem time.</string>
+    <string name="add_record_toast_future_time">You cannot choose a future time.</string>
+    <string name="add_record_toast_photo">You need to take at least two photos.</string>
+
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
