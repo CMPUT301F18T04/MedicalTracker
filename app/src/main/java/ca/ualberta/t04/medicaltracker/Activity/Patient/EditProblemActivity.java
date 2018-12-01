@@ -92,7 +92,7 @@ public class EditProblemActivity extends AppCompatActivity{
                         String setDate = year + "-" + month + "-" + day;
                         problemDate.setText(setDate);
                     } else {
-                        Toast.makeText(EditProblemActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProblemActivity.this, R.string.edit_problem_toast1, Toast.LENGTH_SHORT).show();
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -113,7 +113,7 @@ public class EditProblemActivity extends AppCompatActivity{
 
         // check if the title and description are both filled
         if(problemTitle.getText().toString().equals("") || problemDescription.getText().toString().equals("")){
-            Toast.makeText(EditProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProblemActivity.this, R.string.edit_problem_toast2, Toast.LENGTH_SHORT).show();
             return;
         }
 

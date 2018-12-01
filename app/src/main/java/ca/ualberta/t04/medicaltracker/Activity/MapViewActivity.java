@@ -71,7 +71,6 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: Map is ready");
         mMap = googleMap;
 
@@ -186,7 +185,7 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng));
         }
-        Toast.makeText(MapViewActivity.this, "Move around to check other marked locations.",Toast.LENGTH_LONG).show();
+        Toast.makeText(MapViewActivity.this, R.string.map_toast_1,Toast.LENGTH_LONG).show();
     }
 
     private void getDeviceLocation() {

@@ -239,7 +239,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             public void onClick(View view){
                 if (DataController.getPatient().getProblemList().getProblem(problem_index).
                         getRecordList().getRecord(recordIndex).getLocation()==null){
-                    Toast.makeText(RecordDetailActivity.this,"This record has no location", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecordDetailActivity.this,R.string.record_toast3, Toast.LENGTH_SHORT).show();
                 }else {
                     Intent intent = new Intent(RecordDetailActivity.this, MapViewActivity.class);
                     intent.putExtra("problem_index", problem_index);
@@ -262,7 +262,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(RecordDetailActivity.this,available,0001);
             dialog.show();
         }else{
-            Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.record_toast4, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
