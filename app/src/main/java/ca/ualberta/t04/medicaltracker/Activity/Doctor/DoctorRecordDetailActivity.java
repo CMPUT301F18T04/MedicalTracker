@@ -164,18 +164,9 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             }
         });
 
-        viewLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isServicesOK()){
-                    Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
-                    intent.putExtra("problem_index", problemIndex);
-                    intent.putExtra("record_index", recordIndex);
-                    intent.putExtra("patient_index", patientIndex);
-                    startActivity(intent);
-                }
-            }
-        });
+        if (isServicesOK()){
+            init(patientIndex, problemIndex, recordIndex);
+        }
 
     }
 
@@ -194,6 +185,23 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "you can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+
+    private void init(final int patientIndex, final int problem_index, final int recordIndex){
+        viewLocation.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblem(problem_index).
+                        getRecordList().getRecord(recordIndex).getLocation()==null){
+                    Toast.makeText(DoctorRecordDetailActivity.this,R.string.location_text, Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(DoctorRecordDetailActivity.this, MapViewActivity.class);
+                    intent.putExtra("problem_index", problem_index);
+                    intent.putExtra("record_index", recordIndex);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     // Setting up the Doctor comment list view
