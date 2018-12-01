@@ -329,7 +329,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
         // check if the title and description are both filled
         if(record_title.getText().toString().equals("") || record_description.getText().toString().equals("")){
-            Toast.makeText(AddRecordActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_empty, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -337,7 +337,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         if(bodyLocation==null){
             if(bodyLocationPopup==null || bodyLocationPopup.getBodyLocation()==null)
             {
-                Toast.makeText(AddRecordActivity.this, "You didn\'t choose body location.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_body_location, Toast.LENGTH_SHORT).show();
                 bodyLocationHint.setTextColor(Color.RED);
                 return;
             } else {
@@ -357,15 +357,15 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
 
         if(dateStart.after(new Date())){
-            Toast.makeText(AddRecordActivity.this, "You cannot choose a future time.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_future_time, Toast.LENGTH_SHORT).show();
             return;
         } else if(dateStart.before(problemDate)){
-            Toast.makeText(AddRecordActivity.this, "Record time cannot be before the problem time", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_time, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(bitmaps.size()<2){
-            Toast.makeText(AddRecordActivity.this, "You need to take at least two photos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_photo, Toast.LENGTH_SHORT).show();
             return;
         }
 

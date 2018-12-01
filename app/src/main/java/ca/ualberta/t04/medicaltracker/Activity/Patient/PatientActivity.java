@@ -105,7 +105,7 @@ public class PatientActivity extends AppCompatActivity
                             ElasticSearchController.createRecord(record);
                         }
                     }
-                    Toast.makeText(context, "Network connected, your data has been updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.patient_toast1, Toast.LENGTH_SHORT).show();
                     offline = false;
                 } else if(!NetworkUtil.isNetworkConnected(context)){
                     offline = true;
@@ -268,7 +268,7 @@ public class PatientActivity extends AppCompatActivity
         if (id == R.id.option_edit){ // when edit is clicked, a notification is pop up
             // still need to fill out this part
             // start another activity of editing problem
-            Toast.makeText(this, "Edit is selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.patient_toast_edit, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(PatientActivity.this, EditProblemActivity.class);
             intent.putExtra("problem_index", index);
             startActivity(intent);

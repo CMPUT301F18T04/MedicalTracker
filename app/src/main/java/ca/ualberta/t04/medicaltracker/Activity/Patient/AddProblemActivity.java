@@ -78,7 +78,7 @@ public class AddProblemActivity extends AppCompatActivity {
                         String setDate = year + "-" + month + "-" + day;
                         problem_date.setText(setDate);
                     } else {
-                        Toast.makeText(AddProblemActivity.this, "You can not select future time", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddProblemActivity.this, R.string.add_problem_toast_time, Toast.LENGTH_SHORT).show();
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -95,7 +95,7 @@ public class AddProblemActivity extends AppCompatActivity {
 
         // check if the title and description are both filled
         if(problem_title.getText().toString().equals("") || problem_description.getText().toString().equals("")){
-            Toast.makeText(AddProblemActivity.this, "The title/description cannot be empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddProblemActivity.this, R.string.add_problem_toast_empty, Toast.LENGTH_SHORT).show();
             return;
         }
 
