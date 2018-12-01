@@ -196,6 +196,9 @@
     <string name="search_toast2">你还没选择你的身体部位</string>
     <!-- end for Search Page -->
 
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">选择位置</string>
+
     <!-- String for doctor record detail || record detail page -->
     <string name="doctor_record_detail_title">记录详情</string>
     <string name="edit_doctor_record_detail">编辑记录</string>
@@ -214,7 +217,7 @@
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
-    <string name="doctor_comment_detail_title">删除评论</string>
+    <string name="doctor_comment_detail_title">评论详情</string>
     <!-- end for Detailed Comments page -->
 
     <!-- String for pop up comments page -->
