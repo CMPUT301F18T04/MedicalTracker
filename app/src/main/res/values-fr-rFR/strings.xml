@@ -31,6 +31,7 @@
     <string name="nav_header_patient">Patient</string>
     <string name="patient_page_title">Les Problèmes</string>
     <string name="nav_item_about">À Propos de Nous</string>
+    <string name="nav_item_qr_code">Code QR</string>
 
 
     <!-- Register page -->
@@ -155,6 +156,18 @@
     <string name="add_problem_toast">Vous avez ajouté un nouveau problème</string>
     <!-- end for Add Problem Page -->
 
+
+    <!-- String for Edit Problem Page -->
+    <string name="edit_problem_title">Réviser le détail de problème</string>
+    <string name="edit_problem_problem_title">Titre de problème:</string>
+    <string name="edit_problem_problem_date">Date:</string>
+    <string name="edit_problem_problem_description">Description Brefe:</string>
+    <string name="edit_problem_button_edit">Réviser </string>
+    <string name="edit_problem_toast">Les cahgnements sont sauvé</string>
+    <string name="edit_problem_toast1">Vous ne choisiissez le temps dans l\'avenir</string>
+    <string name="edit_problem_toast2">Le titre et la description ne peuvent pas être vides</string>
+    <!-- end for Edit Problem Page -->
+
     <!-- String for Add Record Page -->
     <string name="add_record_title">Ajouter une archive</string>
     <string name="add_record_record_title">Titre d\'archives:</string>
@@ -164,6 +177,8 @@
     <string name="add_record_toast">Il y a un erreur!</string>
     <string name="add_record_toast2">Vous avez ajouté une nouvelle archive</string>
     <string name="add_record_toast3">Vous ne pouvez pas plus de photo!</string>
+    <string name="add_record_body_location_hint">Localisation de Corps</string>
+    <string name="add_record_photo_hint">Photos Actuelles: </string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -202,6 +217,8 @@
     <string name="record_toast2">Il n\'y a pas de photo</string>
     <string name="upload_button">Télécharger un photo</string>
     <string name="location_text">Il n\'y a pas de localisation</string>
+    <string name="record_toast3">L\'archive n\'a pas de localisation</string>
+    <string name="record_toast4">Vous n\'avez pas la requête pour la carte</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -224,6 +241,19 @@
     <string name="common_string_no_network">Vous ne pouvez pas connecter à Internet!</string>
     <!-- end for Common String -->
 
+    <!-- String for slide show page -->
+    <string name="slide_show_button">Supprimer</string>
+    <!-- end for slide show page -->
+
+    <!-- String for Mark Image Page -->
+    <string name="mark_image_hint">Cliquer pour ajouter un point</string>
+    <string name="mark_image_add">Ajouter</string>
+    <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">Déplacer pour voir les autres localisatoin marqué</string>
+    <string name="map_toast_2">Vous ne pouvez pas obtenir la localisatoin acteulle</string>
+    <!-- end for Map View page -->
 
 
 </resources>

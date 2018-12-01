@@ -119,6 +119,7 @@
     <string name="add_problem_problem_date">Date:</string>
     <string name="add_problem_problem_description">Description Brefe:</string>
     <string name="add_problem_button_add">Ajouter</string>
+    <string name="add_problem_date">Choisir une date</string>
     <!-- end for Add Problem Page -->
 
     <!-- String for Add Record Page -->
@@ -127,6 +128,10 @@
     <string name="add_record_record_date">Date:</string>
     <string name="add_record_record_description">Description Brefe:</string>
     <string name="add_record_button_add">Ajouter</string>
+    <string name="add_record_date">La Date</string>
+    <string name="add_record_time">Le temps</string>
+    <string name="add_record_body_location_hint">Choose body location</string>
+    <string name="add_record_photo_hint">Current photos: </string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->

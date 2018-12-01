@@ -59,6 +59,9 @@ import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 /**
  * This class is for displaying and editing the information of a record for a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class RecordDetailActivity extends AppCompatActivity {
@@ -240,6 +243,7 @@ public class RecordDetailActivity extends AppCompatActivity {
                 if (DataController.getPatient().getProblemList().getProblem(problem_index).
                         getRecordList().getRecord(recordIndex).getLocation()==null){
                     Toast.makeText(RecordDetailActivity.this,R.string.record_toast3, Toast.LENGTH_SHORT).show();
+
                 }else {
                     Intent intent = new Intent(RecordDetailActivity.this, MapViewActivity.class);
                     intent.putExtra("problem_index", problem_index);
