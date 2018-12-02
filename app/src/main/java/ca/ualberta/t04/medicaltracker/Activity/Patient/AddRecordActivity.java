@@ -382,6 +382,11 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             return;
         }
 
+        if(!frontBackHashMap.values().contains(true) || !frontBackHashMap.values().contains(false)){
+            Toast.makeText(AddRecordActivity.this, R.string.add_record_toast_photo2, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // create a new record
         Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, frontBackHashMap, location, bodyLocation);
 

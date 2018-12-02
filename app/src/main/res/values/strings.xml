@@ -190,7 +190,7 @@
     <string name="add_record_toast_time">Record time cannot be before the problem time.</string>
     <string name="add_record_toast_future_time">You cannot choose a future time.</string>
     <string name="add_record_toast_photo">You need to take at least two photos.</string>
-
+    <string name="add_record_toast_photo2">You need to take at least one front and one back body-location photo.</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -273,4 +273,8 @@
     <string name="map_toast_1">Move around to check other marked locations.</string>
     <string name="map_toast_2">Unable to get current location</string>
     <!-- end for Map View page -->
+
+    <!-- Error Message -->
+    <string name="error_message">An error occurs.</string>
+    <!-- end for Error Message -->
 </resources>

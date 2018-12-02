@@ -84,7 +84,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RecordHistoryActivity.this, RecordDetailActivity.class);
 
-                recordList.updateComment(record);
+                try{
+                    recordList.updateComment(record);
+                } catch (NullPointerException e){
+                    Toast.makeText(RecordHistoryActivity.this, getText(R.string.error_message), Toast.LENGTH_SHORT).show();
+                }
+
 
                 intent.putExtra("problem_index", problem_index);
                 intent.putExtra("record_index", position);

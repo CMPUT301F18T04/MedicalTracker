@@ -458,7 +458,9 @@ public class ElasticSearchController
                     return null;
                 }
                 JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(result.getSourceAsString()).getAsJsonObject();
+                JsonObject jsonObject;
+                Log.d("Succeed", "??:" + result.getSourceAsString());
+                jsonObject = parser.parse(result.getSourceAsString()).getAsJsonObject();
 
                 Log.d("Succeed", jsonObject.get("comments").toString());
 
