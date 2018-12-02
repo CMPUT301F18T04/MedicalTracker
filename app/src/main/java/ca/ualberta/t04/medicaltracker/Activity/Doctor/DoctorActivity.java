@@ -2,6 +2,8 @@ package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -82,6 +84,7 @@ public class DoctorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         /*
         ListView patientListView = findViewById(R.id.main_page_list_view);
         ArrayList<Patient> patients = DataController.getDoctor().getPatients();

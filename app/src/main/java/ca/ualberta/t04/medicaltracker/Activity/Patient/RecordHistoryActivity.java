@@ -3,6 +3,8 @@ package ca.ualberta.t04.medicaltracker.Activity.Patient;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
@@ -53,6 +55,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_history);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         getSupportActionBar().setTitle(R.string.record_history_title);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 

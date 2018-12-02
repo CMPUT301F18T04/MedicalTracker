@@ -1,5 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         String[] developers = {getString(R.string.developer_AnnabelleZhang), getString(R.string.developer_DevinDai), getString(R.string.developer_HumphreyLu),
                             getString(R.string.developer_LexiLi), getString(R.string.developer_PeterMa), getString(R.string.developer_YuanWang)};

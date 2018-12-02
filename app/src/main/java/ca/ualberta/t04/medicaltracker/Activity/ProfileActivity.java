@@ -1,6 +1,8 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
@@ -47,6 +49,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         EditText birthday = findViewById(R.id.profile_birthday);
         birthday.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,7 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioButton;
@@ -34,6 +36,7 @@ public class InformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infomation);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         informationEmail = (TextView) findViewById(R.id.information_email);

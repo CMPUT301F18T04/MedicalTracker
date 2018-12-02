@@ -1,6 +1,9 @@
 package ca.ualberta.t04.medicaltracker.Activity;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
@@ -41,6 +44,7 @@ import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 public class RegisterActivity extends AppCompatActivity {
 
+
     /**
      * onCreate
      * @param savedInstanceState Bundle
@@ -49,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         EditText editText_username = findViewById(R.id.register_username);
         editText_username.requestFocus();

@@ -132,6 +132,8 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         record_date = findViewById(R.id.add_record_date);
         record_time = findViewById(R.id.add_record_time);
         numPhoto = findViewById(R.id.add_record_num_photo);
