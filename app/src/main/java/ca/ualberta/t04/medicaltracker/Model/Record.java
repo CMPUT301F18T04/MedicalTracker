@@ -32,12 +32,13 @@ public class Record
 
     private ArrayList<Photo> photos;
     private transient ArrayList<Bitmap> bitmaps;
+    private transient ArrayList<Boolean> frontBackArrayList;
 
     private HashMap<String, ArrayList<String>> comments;
     private Location location;
     private BodyLocation bodyLocation;
 
-    public Record(String title, Date dateStart, String description, HashMap<Bitmap, String> bitmaps, Location location, BodyLocation bodyLocation)
+    public Record(String title, Date dateStart, String description, HashMap<Bitmap, String> bitmaps, HashMap<Bitmap, Boolean> frontBack, Location location, BodyLocation bodyLocation)
     {
         this.title = title;
         this.dateStart = dateStart;
@@ -49,6 +50,7 @@ public class Record
                 if(string.length()<65536){
                     String path = bitmaps.get(bitmap);
                     Photo photo = new Photo(string, path);
+                    photo.setBackStatus(frontBack.get(bitmap));
                     this.photos.add(photo);
                 } else {
                     Log.d("Succeed", "Too long" + String.valueOf(string.length()));
@@ -119,6 +121,9 @@ public class Record
             photos = new ArrayList<>();
         }
 
+        if(frontBackArrayList==null)
+            frontBackArrayList = new ArrayList<>();
+
         if(bitmaps!=null){
             return bitmaps;
         }
@@ -143,11 +148,18 @@ public class Record
                 }
             }
             bitmaps.add(bitmap);
+            frontBackArrayList.add(photo.isBack());
         }
         if(update){
             ElasticSearchController.updateRecord(this);
         }
         return bitmaps;
+    }
+
+    public ArrayList<Boolean> getFrontBackArrayList() {
+        if(frontBackArrayList==null)
+            frontBackArrayList = new ArrayList<>();
+        return frontBackArrayList;
     }
 
     /**
@@ -156,15 +168,17 @@ public class Record
      * @param path String
      */
 
-    public void addImage(Bitmap image, String path) {
+    public void addImage(Bitmap image, String path, Boolean isBack) {
         if(this.photos==null){
             this.photos = new ArrayList<>();
         }
         String string = ImageUtil.convertBitmapToString(image);
         if(string.length()<65536){
             Photo photo = new Photo(string, path);
+            photo.setBackStatus(isBack);
             this.photos.add(photo);
             this.bitmaps.add(image);
+            this.frontBackArrayList.add(isBack);
         } else {
             Log.d("Succeed", "Too long");
         }
@@ -181,6 +195,7 @@ public class Record
         if(photos.size()>index){
             photos.remove(index);
             bitmaps.remove(index);
+            frontBackArrayList.remove(index);
         }
     }
 

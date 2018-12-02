@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ca.ualberta.t04.medicaltracker.Adapter.ImageAdapter;
 import ca.ualberta.t04.medicaltracker.BitmapHolder;
@@ -52,6 +54,7 @@ public class SlideShowActivity extends AppCompatActivity {
         activity = intent.getStringExtra("activity");
         if(activity != null){
             titles = intent.getStringArrayListExtra("Titles");
+            titleView.setText(titles.get(0));
             delete.setVisibility(View.GONE);
         }
         else{
@@ -67,6 +70,7 @@ public class SlideShowActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
+        final ArrayList<Boolean> frontBackArrayList = BitmapHolder.getFrontBackArrayList();
 
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
@@ -75,12 +79,15 @@ public class SlideShowActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(activity != null) { titleView.setText(titles.get(position));}
             }
 
             @Override
             public void onPageSelected(int position) {
                 currentIndex = position;
+                if(activity != null) {
+                    titleView.setText(titles.get(position));
+                }
+                Toast.makeText(SlideShowActivity.this, String.valueOf(frontBackArrayList.get(position)), Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -117,6 +117,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     private TextView numPhoto;
     private HashMap<Bitmap, String> bitmaps = new HashMap<>();
+    private HashMap<Bitmap, Boolean> frontBackHashMap = new HashMap<>();
     private BodyLocation bodyLocation = null;
     private BodyLocationPopup bodyLocationPopup = null;
 
@@ -274,6 +275,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             for(Bitmap bitmap:temp.keySet()){
                 if(!BitmapHolder.getBitmaps().contains(bitmap)){
                     bitmaps.remove(bitmap);
+                    frontBackHashMap.remove(bitmap);
                 }
             }
 
@@ -286,7 +288,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
             Bitmap bitmap = data.getParcelableExtra("data");
             String path = data.getStringExtra("path");
+            Boolean isBack = data.getBooleanExtra("isBack", false);
             bitmaps.put(bitmap, path);
+            frontBackHashMap.put(bitmap, isBack);
             imageView.setImageBitmap(bitmap);
         }
         else if (requestCode == PLACE_PICKER_REQUEST ) {
@@ -370,7 +374,7 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
 
         // create a new record
-        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, location, bodyLocation);
+        Record record = new Record(record_title.getText().toString(), dateStart, record_description.getText().toString(), bitmaps, frontBackHashMap, location, bodyLocation);
 
         // if no network, then add the record in the offline record and wait for reconnecting
         if(!NetworkUtil.isNetworkConnected(this)){
@@ -408,6 +412,13 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
             slideShowBitmaps.add(bitmap);
         }
         BitmapHolder.setBitmaps(slideShowBitmaps);
+
+        ArrayList<Boolean> frontBackArrayList = new ArrayList<>();
+        for(Bitmap bitmap:slideShowBitmaps){
+            frontBackArrayList.add(frontBackHashMap.get(bitmap));
+        }
+
+        BitmapHolder.setFrontBackArrayList(frontBackArrayList);
 
         startActivityForResult(intent, REQUEST_UPDATE_DATA);
     }

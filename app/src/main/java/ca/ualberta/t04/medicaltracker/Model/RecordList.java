@@ -39,14 +39,18 @@ public class RecordList
      * @param record Record
      */
     public void addRecord(Record record) {
-        String recordId = DataController.getUser().getUserName() + problemId + String.valueOf(currentId);
-        record.setRecordId(recordId);
-        record.setProblemId(problemId);
-        this.records.add(record);
-        addRecordId(recordId);
-        currentId += 1;
-        ElasticSearchController.createRecord(record);
-        notifyAllListener();
+        try {
+            String recordId = DataController.getUser().getUserName() + problemId + String.valueOf(currentId);
+            record.setRecordId(recordId);
+            record.setProblemId(problemId);
+            this.records.add(record);
+            addRecordId(recordId);
+            currentId += 1;
+            ElasticSearchController.createRecord(record);
+            notifyAllListener();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -127,12 +131,13 @@ public class RecordList
      * @param photo Bitmap
      * @param path String
      */
-    public void addPhoto(Record record, Bitmap photo, String path) {
+    public void addPhoto(Record record, Bitmap photo, String path, Boolean isBack) {
         if(records.contains(record)){
-            record.addImage(photo, path);
+            record.addImage(photo, path, isBack);
         }
         notifyAllListener();
     }
+
 
     /**
      * Removes a photo
