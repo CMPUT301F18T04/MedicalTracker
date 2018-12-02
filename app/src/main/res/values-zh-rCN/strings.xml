@@ -64,6 +64,8 @@
     <string name="patient_toast11">医生</string>
     <string name="patient_toast12"> 已经把你加入TA的患者列表</string>
     <string name="patient_toast2">一个病情已经被删除</string>
+    <string name="patient_toast1">网络恢复，你的资料已经更新！</string>
+    <string name="patient_toast_edit">你选择了编辑</string>
     <!-- end for Patient Page -->
 
     <!-- String for Doctor Page -->
@@ -154,6 +156,8 @@
     <string name="add_problem_problem_description">简短描述:</string>
     <string name="add_problem_button_add">添加</string>
     <string name="add_problem_toast">你已经添加了一个新的病情</string>
+    <string name="add_problem_toast_time">你不能选择还没到的时间</string>
+    <string name="add_problem_toast_empty">标题/描述 不能为空</string>
     <!-- end for Add Problem Page -->
 
     <!-- String for Edit Problem Page -->
@@ -163,6 +167,8 @@
     <string name="edit_problem_problem_description">简短描述:</string>
     <string name="edit_problem_button_edit">编辑</string>
     <string name="edit_problem_toast">保存更改</string>
+    <string name="edit_problem_toast1">你不能选择还没到的时间</string>
+    <string name="edit_problem_toast2">标题/描述 不能为空</string>
     <!-- end for Edit Problem Page -->
 
     <!-- String for Add Record Page -->
@@ -174,6 +180,11 @@
     <string name="add_record_toast">出现了一个问题</string>
     <string name="add_record_toast2">你已经添加了一个新的记录</string>
     <string name="add_record_toast3">你不能添加更多照片了!</string>
+    <string name="add_record_toast_empty">标题/描述 不能为空.</string>
+    <string name="add_record_toast_body_location">你还没选择身体部位</string>
+    <string name="add_record_toast_time">记录时间必须在病情开始日期之后</string>
+    <string name="add_record_toast_future_time">你不能选择还没到时间</string>
+    <string name="add_record_toast_photo">你必须拍至少两张照片</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -214,6 +225,8 @@
     <string name="location_text">你还没选择位置</string>
     <string name="record_toast1">新的更改已经保存</string>
     <string name="record_toast2">你还没上传图片</string>
+    <string name="record_toast3">这个记录没有位置信息</string>
+    <string name="record_toast4">无法发起地图请求</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -244,5 +257,11 @@
     <!-- String for Mark Image Page -->
     <string name="mark_image_hint">请点击来添加标记</string>
     <string name="mark_image_add">添加</string>
+    <string name="mark_image_switch">背部身体位置</string>
     <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">移动以查看其他标记过的位置</string>
+    <string name="map_toast_2">无法获取当前位置</string>
+    <!-- end for Map View page -->
 </resources>
