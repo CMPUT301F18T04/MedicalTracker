@@ -41,6 +41,10 @@ import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sign up a user
+     * @param view View
+     */
     public void signUp(View view){
         if(!NetworkUtil.isNetworkConnected(this)){
             Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
@@ -174,6 +182,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets the birthday for the user
+     * @param view View
+     */
     public void setBirthday(View view){
 
         int Year, Month, Day ;
@@ -196,6 +208,7 @@ public class RegisterActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+
     private boolean isValid(final String password) {
 
         Pattern pattern;
@@ -208,7 +221,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    // If optional information is input by user, then add them to the user's information
+    /**
+     * If optional information is input by user, then add them to the user's information
+     * @param user User
+     * @param email String
+     * @param birthday String
+     * @param phoneNumber String
+     * @param isMale Boolean
+     */
     private void addInformationToUser(User user, String email, String birthday, String phoneNumber, Boolean isMale){
         // Add email to user's information
         if(!email.equals("")){

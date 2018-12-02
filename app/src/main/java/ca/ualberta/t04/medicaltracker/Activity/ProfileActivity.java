@@ -38,6 +38,11 @@ import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
 public class ProfileActivity extends AppCompatActivity {
 
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
         initPage();
     }
 
+    /**
+     * Initialize the page
+     */
     private void initPage(){
         // get username
         TextView username = findViewById(R.id.profile_username);
@@ -101,6 +109,10 @@ public class ProfileActivity extends AppCompatActivity {
         birthday.requestFocus();
     }
 
+    /**
+     * For editing the profile of the current user
+     * @param view View
+     */
     public void edit(View view){
 
         // get new nickname
@@ -174,7 +186,10 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
 
-
+    /**
+     * Sets the birthday of the current user
+     * @param view View
+     */
     public void setBirthday(View view){
 
         int Year, Month, Day ;

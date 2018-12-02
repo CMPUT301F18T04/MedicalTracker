@@ -19,12 +19,12 @@
         android:layout_marginTop="8dp"
         android:text="@string/login_text_username"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toStartOf="@+id/login_username"
-        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintHorizontal_bias="0.385"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_bar_icon"
-        app:layout_constraintVertical_bias="0.301" />
+        app:layout_constraintTop_toTopOf="@+id/guideline64"
+        app:layout_constraintVertical_bias="0.567" />
 
     <ImageView
         android:id="@+id/nav_bar_icon"
@@ -36,11 +36,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline64"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134"
+        app:layout_constraintTop_toTopOf="@+id/guideline65"
+        app:layout_constraintVertical_bias="0.392"
         app:srcCompat="@mipmap/icon" />
 
     <EditText
@@ -61,45 +61,37 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button_click"
+        android:background="@drawable/bg_login_button"
         android:onClick="login"
         android:text="@string/login_button_login"
         android:textAllCaps="false"
         android:textColor="#efecec"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintBottom_toTopOf="@+id/guideline63"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline15"
-        app:layout_constraintVertical_bias="0.507" />
+        app:layout_constraintVertical_bias="0.757" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button_click"
+        android:background="@drawable/bg_login_button"
         android:onClick="register"
         android:text="@string/login_button_register"
         android:textAllCaps="false"
-        android:textColor="@color/text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#efecec"
+        app:layout_constraintBottom_toTopOf="@+id/guideline59"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toTopOf="@+id/guideline15" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline63"
+        app:layout_constraintVertical_bias="0.789" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline13"
@@ -113,6 +105,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7475538" />
+        app:layout_constraintGuide_begin="343dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="506dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="432dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="216dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="54dp" />
 
 </android.support.constraint.ConstraintLayout>

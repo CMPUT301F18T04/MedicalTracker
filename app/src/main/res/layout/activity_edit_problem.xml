@@ -142,7 +142,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/button_color"
+        android:background="@drawable/bg_button_pressed"
         android:onClick="addProblem"
         android:text="@string/edit_problem_button_edit"
         android:textAllCaps="false"

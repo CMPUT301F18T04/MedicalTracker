@@ -170,7 +170,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
 
     }
 
-    // recordSetDate method is used for set a date using DatePickerDialog
+    /**
+     * recordSetDate method is used for set a date using DatePickerDialog
+     */
     public void recordSetDate(){
         record_date.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -202,7 +204,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         };
     }
 
-    // recordSetTime method is used for set a time using TimePickerDialog
+
+    /**
+     * recordSetTime method is used for set a time using TimePickerDialog
+     */
     public void recordSetTime(){
         record_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +236,11 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         };
     }
 
-    // Method dispatchTakePictureIntent starts the activity of launch the camera of the phone
+
+    /**
+     *  Method dispatchTakePictureIntent starts the activity of launch the camera of the phone
+     * @param view View
+     */
     public void dispatchTakePictureIntent(View view) {
         if (ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED ||  ContextCompat.checkSelfPermission(AddRecordActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -388,6 +397,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         finish();
     }
 
+    /**
+     * For viewing the images
+     * @param view View
+     */
     public void viewImages(View view){
         if(bitmaps.isEmpty()){
             Toast.makeText(this, R.string.record_toast2, Toast.LENGTH_SHORT).show();
@@ -423,6 +436,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         startActivityForResult(intent, REQUEST_UPDATE_DATA);
     }
 
+    /**
+     * For choosing the body location
+     * @param view View
+     */
     public void chooseBodyLocation(View view){
         TextView bodyLocationHint = findViewById(R.id.add_record_body_location_hint);
         bodyLocationPopup = new BodyLocationPopup(this, bodyLocationHint);
@@ -434,6 +451,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     -----------------------------------Map and Location methods-----------------------------------
      */
 
+    /**
+     * Check the service
+     * @return Boolean
+     */
     public  boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(AddRecordActivity.this);
@@ -473,6 +494,9 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     }
 
+    /**
+     * ResultCallback
+     */
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
@@ -495,8 +519,10 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
         }
     };
 
+    /**
+     * initMapApi
+     */
     private void initMapApi(){
-
         Log.d(TAG, "init: initializing");
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)

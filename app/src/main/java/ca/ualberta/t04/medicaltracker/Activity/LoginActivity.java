@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,11 @@ public class LoginActivity extends AppCompatActivity {
     private static int REQUEST_CODE = 0;
     private String deviceId;
     private User user = null;
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    /**
+     * For logging in
+     * @param view View
+     */
     public void login(View view) {
         if(!NetworkUtil.isNetworkConnected(this)){
             Toast.makeText(this, getString(R.string.common_string_no_network), Toast.LENGTH_SHORT).show();
@@ -88,12 +98,21 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Goes to the register page
+     * @param view
+     */
     public void register(View view)
     {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Check if it is a new device
+     * @param user User
+     * @return Boolean
+     */
     private Boolean isNewDevice(User user){
         deviceId = CommonUtil.getIMEI();
         if(user.getDeviceId().equals("")){
@@ -105,6 +124,11 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Set the language
+     * @param lang String
+     * @param district String
+     */
     public void setLocale(String lang,String district) {
         Locale myLocale = new Locale(lang,district);
         Resources res = getResources();
@@ -132,6 +156,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * For logging in
+     */
     private void login(){
         user.setDeviceId(deviceId);
         ElasticSearchController.updateUser(user);

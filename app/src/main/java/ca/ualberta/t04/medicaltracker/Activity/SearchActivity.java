@@ -69,8 +69,12 @@ public class SearchActivity extends AppCompatActivity {
     protected BodyLocationPopup popup;
     private Location mLocation;
 
-
     private ArrayList<Object[]> result = new ArrayList<>();
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,9 @@ public class SearchActivity extends AppCompatActivity {
         initPage();
     }
 
+    /**
+     * Initialize the page
+     */
     private void initPage(){
         initSearchSpinner();
         initLocationSpinner();
@@ -122,6 +129,10 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialize the text view
+     * @param textView TextView
+     */
     private void initInformationTextView(final TextView textView){
         Button button = findViewById(R.id.search_button_choose_location);
         if(locationType.equals(SearchType.BodyLocation)){
@@ -163,7 +174,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    // init the first spinner
+    /**
+     * init the first spinner
+     */
     private void initSearchSpinner(){
         final String[] types = new String[]{SearchType.Problem.name(), SearchType.Record.name()};
 
@@ -190,7 +203,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    // init the second spinner
+    /**
+     * init the second spinner
+     */
     private void initLocationSpinner(){
         final String[] locationTypes = new String[]{SearchType.NoLocation.name(), SearchType.GeoLocation.name(), SearchType.BodyLocation.name()};
         Spinner locationSpinner = findViewById(R.id.search_spinner2);
@@ -238,6 +253,10 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Refreshes the search results
+     * @param result ArrayList
+     */
     private void refreshSearchResultListView(final ArrayList<Object[]> result){
         ListView listView = findViewById(R.id.search_result_list_view);
         SearchResultAdapter adapter = new SearchResultAdapter(SearchActivity.this, R.layout.search_result_list, result, searchType);
@@ -285,6 +304,11 @@ public class SearchActivity extends AppCompatActivity {
     }
     */
 
+    /**
+     * Refreshes the list view for records
+     * @param recordList RecordList
+     * @param data Object[]
+     */
     private void refreshRecordListView(final RecordList recordList, final Object[] data){
         ListView listView = findViewById(R.id.search_result_list_view);
         final ArrayList<Record> records = recordList.getRecords();
@@ -311,7 +335,12 @@ public class SearchActivity extends AppCompatActivity {
         currentPage ++;
     }
 
-    // Used to search problems or records for a specific keyword
+    /**
+     * Used to search problems or records for a specific keyword
+     * @param keyword String
+     * @param searchType SearchType
+     * @return result ArrayList
+     */
     private ArrayList<Object[]> search(String keyword, SearchType searchType){
         ArrayList<Object[]> result = new ArrayList<>();
       

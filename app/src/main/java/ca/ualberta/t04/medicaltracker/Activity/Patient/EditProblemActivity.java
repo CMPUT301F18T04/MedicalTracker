@@ -26,6 +26,14 @@ import ca.ualberta.t04.medicaltracker.Model.ProblemList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
+/**
+ * This activity is for editing a problem of a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
+
 public class EditProblemActivity extends AppCompatActivity{
 
     private DatePickerDialog.OnDateSetListener problemDateSetListener;
@@ -35,6 +43,10 @@ public class EditProblemActivity extends AppCompatActivity{
     private ProblemList mProblemList;
     private Problem mProblem;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +72,9 @@ public class EditProblemActivity extends AppCompatActivity{
         init();
     }
 
+    /**
+     * initialize the page
+     */
     public void init(){
         problemDate.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -108,7 +123,10 @@ public class EditProblemActivity extends AppCompatActivity{
         });
     }
 
-    // Used to edit a problem
+
+    /**
+     * Used to edit a problem
+     */
     public void editProblem(){
 
         // check if the title and description are both filled

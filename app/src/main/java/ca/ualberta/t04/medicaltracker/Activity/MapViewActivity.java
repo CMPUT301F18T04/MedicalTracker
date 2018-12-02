@@ -45,6 +45,13 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Activity.Doctor.DoctorRecordDetailActivity;
 import ca.ualberta.t04.medicaltracker.Activity.Patient.RecordDetailActivity;
 
+/**
+ * This activity is for show the google map for the application
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 
 public class MapViewActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.OnConnectionFailedListener {
     @Override
@@ -89,6 +96,10 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +129,9 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         getLocationPermission();
     }
 
+    /**
+     * Ask for permission from the current device
+     */
     private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission");
         String[] permissions = {FINE_LOCATION, COARSE_LOCATION};
@@ -135,6 +149,9 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
+    /**
+     * Initialize the page
+     */
     private void init(){
         Log.d(TAG,"init: initializing");
 
@@ -158,6 +175,9 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         });
     }
 
+    /**
+     * Get all the locations of the records for a problem
+     */
     private void getLocations(){
         if (DataController.getUser().isDoctor()){
             ArrayList<Problem> problems = DataController.getDoctor().getPatients().get(patientIndex).getProblemList().getProblems();
@@ -188,6 +208,9 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         Toast.makeText(MapViewActivity.this, R.string.map_toast_1,Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * get the current location of the device
+     */
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the device current location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -236,6 +259,9 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
+    /**
+     * Initialize the map
+     */
     private void initMap() {
         Log.d(TAG, "initMap");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -243,6 +269,12 @@ public class MapViewActivity extends AppCompatActivity implements OnMapReadyCall
         mapFragment.getMapAsync(MapViewActivity.this);
     }
 
+    /**
+     * For moving the map
+     * @param latLng LatLng
+     * @param zoom float
+     * @param title String
+     */
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to : lat" + latLng.latitude + ", lng: " + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));

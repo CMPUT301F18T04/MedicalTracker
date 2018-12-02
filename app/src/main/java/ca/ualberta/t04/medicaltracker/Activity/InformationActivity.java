@@ -48,6 +48,10 @@ public class InformationActivity extends AppCompatActivity {
         initPage(user);
     }
 
+    /**
+     * Initialize the page
+     * @param user User
+     */
     private void initPage(User user){
         TextView userName = findViewById(R.id.information_username);
         userName.setText(user.getUserName());

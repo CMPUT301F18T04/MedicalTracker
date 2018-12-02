@@ -73,6 +73,10 @@ public class DoctorActivity extends AppCompatActivity
     private int problemIndex = -1;
     private int patientIndex = -1;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,9 @@ public class DoctorActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Initialize page
+     */
     private void initPage(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -118,6 +125,9 @@ public class DoctorActivity extends AppCompatActivity
         refreshPatientListView();
     }
 
+    /**
+     * onStart
+     */
     public void onStart()
     {
         super.onStart();
@@ -152,6 +162,12 @@ public class DoctorActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Context menue
+     * @param menu ContextMenu
+     * @param v View
+     * @param menuInfo ContextMenu.ContextMenuInfo
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -159,6 +175,11 @@ public class DoctorActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.doctor_page_menu, menu);
     }
 
+    /**
+     * Selected context menu
+     * @param item MenuItem
+     * @return super.onContextItemSelected(item)
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -183,6 +204,9 @@ public class DoctorActivity extends AppCompatActivity
         return super.onContextItemSelected(item);
     }
 
+    /**
+     * When backButton is pressed
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

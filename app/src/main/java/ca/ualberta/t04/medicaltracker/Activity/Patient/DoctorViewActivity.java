@@ -17,6 +17,13 @@ import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Listener;
 import ca.ualberta.t04.medicaltracker.R;
 
+/**
+ * This activity displays all doctors of a certain patient
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*This activity displays all doctors of a certain patient.*/
 
 public class DoctorViewActivity extends AppCompatActivity {
@@ -46,7 +53,9 @@ public class DoctorViewActivity extends AppCompatActivity {
         });
     }
 
-    //Set the adapter for doctors listview and add listener.
+    /**
+     * Set the adapter for doctors list view and add listener.
+     */
     private void initPage(){
 
         TextView doctorViewTitle = findViewById(R.id.doctor_view_title);

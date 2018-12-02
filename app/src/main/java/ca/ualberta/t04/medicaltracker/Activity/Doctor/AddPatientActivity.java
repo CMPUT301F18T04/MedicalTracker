@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,10 @@ import ca.ualberta.t04.medicaltracker.R;
 
 public class AddPatientActivity extends AppCompatActivity {
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +43,10 @@ public class AddPatientActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.add_patient_title));
     }
 
-    // Used to search patients
+    /**
+     * Used to search patients
+     * @param view View
+     */
     public void searchPatient(View view){
         EditText editText = findViewById(R.id.add_patient_username);
         if(editText.getText().toString().equals("")){
@@ -58,6 +66,11 @@ public class AddPatientActivity extends AppCompatActivity {
         patient_list.setAdapter(adapter);
     }
 
+    /**
+     * Removes existing patient
+     * @param patients ArrayList
+     * @return result
+     */
     private ArrayList<Patient> removeExistedPatient(ArrayList<Patient> patients){
         ArrayList<Patient> result = new ArrayList<>();
         for(Patient patient:patients){

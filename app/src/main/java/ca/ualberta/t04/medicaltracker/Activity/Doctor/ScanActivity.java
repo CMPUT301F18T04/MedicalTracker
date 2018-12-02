@@ -27,6 +27,10 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     private ZXingScannerView zXingScannerView;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

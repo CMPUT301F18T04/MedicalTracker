@@ -32,6 +32,11 @@ import ca.ualberta.t04.medicaltracker.R;
 public class LanguageActivity extends AppCompatActivity {
 
     List<Language> languageData;
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,11 @@ public class LanguageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Reset the language by relogging in
+     * @param lang String
+     * @param district String
+     */
     public void setLocale(String lang,String district) {
         DataController.updateLanguage(lang,district);
         Locale myLocale = new Locale(lang,district);

@@ -77,7 +77,10 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     private Record record;
 
 
-
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +176,12 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Init
+     * @param problemIndex int
+     * @param recordIndex int
+     * @param patientIndex int
+     */
     private void init(final int problemIndex, final int recordIndex, final int patientIndex){
         viewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +201,10 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Check service
+     * @return Boolean
+     */
     public  boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(DoctorRecordDetailActivity.this);
@@ -209,8 +222,9 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         return false;
     }
 
-
-    // Setting up the Doctor comment list view
+    /**
+     * Setting up the Doctor comment list view
+     */
     private void InitDoctorCommentListView(){
         ListView commentListView = findViewById(R.id.CommentListView);
 
@@ -252,7 +266,12 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
     }
 
 
-    // Formatting the list for the commentListView and return it
+    /**
+     * Formatting the list for the commentListView and return it
+     * @param dComment HashMap
+     * @param doctorList ArrayList
+     * @return comments ArrayList
+     */
     private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
         final ArrayList<String> comments = new ArrayList<>();
         String doctorUserName;

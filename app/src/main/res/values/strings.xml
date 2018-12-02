@@ -179,6 +179,8 @@
     <string name="add_record_record_description">Brief Description:</string>
     <string name="add_record_button_add">Add</string>
     <string name="add_record_body_location_hint">Choose body location</string>
+    <string name="add_record_date">Pick a date</string>
+    <string name="add_record_time">Pick a time</string>
     <string name="add_record_photo_hint">Current photos: </string>
     <string name="add_record_toast">An error occurs</string>
     <string name="add_record_toast2">Added a new record</string>
