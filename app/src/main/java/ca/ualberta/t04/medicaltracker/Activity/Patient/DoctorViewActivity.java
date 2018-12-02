@@ -1,6 +1,8 @@
 package ca.ualberta.t04.medicaltracker.Activity.Patient;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,8 +34,9 @@ public class DoctorViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_doctor_view);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         doctorListView = (ListView)findViewById(R.id.doctor_listview);
 
         initPage();

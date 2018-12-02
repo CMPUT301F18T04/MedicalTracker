@@ -3,6 +3,7 @@ package ca.ualberta.t04.medicaltracker.Activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -80,6 +81,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         locationInfo = findViewById(R.id.search_location_info);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         double latitude = getIntent().getDoubleExtra("search_latitude", -1);
         initPage();

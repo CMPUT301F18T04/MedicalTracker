@@ -49,6 +49,8 @@ public class AddProblemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         problem_date = findViewById(R.id.add_problem_date);
         EditText problem_title = findViewById(R.id.add_problem_title);
         problemSetDate();

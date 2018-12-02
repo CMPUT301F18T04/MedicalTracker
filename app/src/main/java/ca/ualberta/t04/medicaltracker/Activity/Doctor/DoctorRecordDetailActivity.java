@@ -4,6 +4,8 @@ package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -87,6 +89,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_record_detail);
 
         // Initialize all the variables used
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         getSupportActionBar().setTitle(R.string.doctor_record_detail_title);
 

@@ -52,6 +52,8 @@ public class EditProblemActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
+
         //vars
         problemDate = findViewById(R.id.edit_problem_date_pick_view);
         problemTitle = findViewById(R.id.edit_problem_title_text);

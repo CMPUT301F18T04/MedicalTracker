@@ -1,5 +1,6 @@
 package ca.ualberta.t04.medicaltracker.Activity.Doctor;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class AddPatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_patient);
 
         getSupportActionBar().setTitle(getString(R.string.add_patient_title));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
     }
 
     /**
