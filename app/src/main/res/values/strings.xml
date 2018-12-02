@@ -255,6 +255,8 @@
 
     <!-- String for slide show page -->
     <string name="slide_show_button">Delete</string>
+    <string name="slide_show_front">It is a front body-location photo</string>
+    <string name="slide_show_back">It is a back body-location photo</string>
     <!-- end for slide show page -->
 
     <!-- Common String -->
