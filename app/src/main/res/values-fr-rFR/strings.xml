@@ -174,6 +174,8 @@
     <string name="add_record_record_date">Date:</string>
     <string name="add_record_record_description">Description Brefe:</string>
     <string name="add_record_button_add">Ajouter</string>
+    <string name="add_record_date">Date</string>
+    <string name="add_record_time">Temps</string>
     <string name="add_record_toast">Il y a un erreur!</string>
     <string name="add_record_toast2">Vous avez ajouté une nouvelle archive</string>
     <string name="add_record_toast3">Vous ne pouvez pas plus de photo!</string>

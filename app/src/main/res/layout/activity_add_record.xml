@@ -200,7 +200,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="12dp"
         android:clickable="true"
-        android:hint="@string/add_problem_date"
+        android:hint="@string/add_record_time"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView29"
         app:layout_constraintEnd_toStartOf="@+id/guideline58"
