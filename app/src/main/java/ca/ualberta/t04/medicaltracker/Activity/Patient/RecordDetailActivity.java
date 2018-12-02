@@ -128,7 +128,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         bitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
         Log.d("Succeed", String.valueOf(bitmaps.size()));
 
-        frontBackArrayList = record.getFrontBackArrayList();
+        frontBackArrayList = (ArrayList<Boolean>) record.getFrontBackArrayList().clone();
 
         // set the information
         title.setText(record.getTitle());
@@ -190,11 +190,13 @@ public class RecordDetailActivity extends AppCompatActivity {
                 recordList.setDescription(record, description.getText().toString());
 
                 Log.d("Succeed", String.valueOf(bitmapHashMap.size()));
-                for(Bitmap bitmap:bitmapHashMap.keySet()){
-                    record.addImage(bitmap, bitmapHashMap.get(bitmap), frontBackHashMap.get(bitmap));
+                for(Bitmap bitmap:bitmaps){
+                    if(bitmapHashMap.containsKey(bitmap))
+                        record.addImage(bitmap, bitmapHashMap.get(bitmap), frontBackHashMap.get(bitmap));
                 }
 
-                for(Bitmap bitmap:originBitmaps){
+                for(int i=originBitmaps.size()-1; i>=0; i--){
+                    Bitmap bitmap = originBitmaps.get(i);
                     if(!BitmapHolder.getBitmaps().contains(bitmap)){
                         record.removeImage(originBitmaps.indexOf(bitmap));
                     }
@@ -354,6 +356,7 @@ public class RecordDetailActivity extends AppCompatActivity {
             bitmapHashMap.put(bitmap, path);
             frontBackHashMap.put(bitmap, isBack);
             bitmaps.add(bitmap);
+            frontBackArrayList.add(isBack);
             recordImageView.setImageBitmap(bitmap);
         }
     }

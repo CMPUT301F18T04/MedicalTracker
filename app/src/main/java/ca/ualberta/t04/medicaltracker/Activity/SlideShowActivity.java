@@ -38,6 +38,7 @@ public class SlideShowActivity extends AppCompatActivity {
 
     private int currentIndex;
     private TextView titleView;
+    private TextView frontBack;
     private ArrayList<String> titles;
     private String activity;
     private Button delete;
@@ -54,6 +55,7 @@ public class SlideShowActivity extends AppCompatActivity {
         // Determine to hide the "Delete" button or display the record title
         titleView = findViewById(R.id.albumText);
         delete = findViewById(R.id.slide_show_button_delete);
+        frontBack = findViewById(R.id.slide_show_front_back);
 
         Intent intent = getIntent();
         activity = intent.getStringExtra("activity");
@@ -77,6 +79,8 @@ public class SlideShowActivity extends AppCompatActivity {
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
         final ArrayList<Boolean> frontBackArrayList = BitmapHolder.getFrontBackArrayList();
 
+        frontBack.setText(getFrontBackMessage(frontBackArrayList.get(0)));
+
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);
 
@@ -84,6 +88,7 @@ public class SlideShowActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -92,7 +97,7 @@ public class SlideShowActivity extends AppCompatActivity {
                 if(activity != null) {
                     titleView.setText(titles.get(position));
                 }
-                Toast.makeText(SlideShowActivity.this, String.valueOf(frontBackArrayList.get(position)), Toast.LENGTH_SHORT).show();
+                frontBack.setText(getFrontBackMessage(frontBackArrayList.get(position)));
             }
 
             @Override
@@ -110,6 +115,7 @@ public class SlideShowActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     bitmaps.remove(currentIndex);
+                    frontBackArrayList.remove(currentIndex);
                     returnResult();
 
                     if(bitmaps.isEmpty()){
@@ -129,5 +135,13 @@ public class SlideShowActivity extends AppCompatActivity {
         Intent intent = new Intent();
 
         setResult(RESULT_OK, intent);
+    }
+
+    // Get the message of front/back body-location
+    private String getFrontBackMessage(Boolean isBack){
+        if(isBack)
+            return getString(R.string.slide_show_back);
+        else
+            return getString(R.string.slide_show_front);
     }
 }
