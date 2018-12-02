@@ -49,6 +49,13 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.NetworkUtil;
 import ca.ualberta.t04.medicaltracker.Util.QRCodeUtil;
 
+/**
+ * This activity is for the main page of a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for the main page of a patient user
  */
@@ -118,7 +125,9 @@ public class PatientActivity extends AppCompatActivity
 
     }
 
-
+    /**
+     * Init list view of patients
+     */
     // Init list view of patients
     private void initProblemListView(final Activity activity){
         ListView listView = activity.findViewById(R.id.main_page_list_view);

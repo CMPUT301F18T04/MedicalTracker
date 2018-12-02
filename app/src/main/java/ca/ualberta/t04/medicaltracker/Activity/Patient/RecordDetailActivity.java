@@ -254,6 +254,10 @@ public class RecordDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Check the service
+     * @return Boolean
+     */
     public  boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(RecordDetailActivity.this);
@@ -271,7 +275,10 @@ public class RecordDetailActivity extends AppCompatActivity {
         return false;
     }
 
-    // Setting up the Doctor comment list view
+    /**
+     * Setting up the Doctor comment list view
+     * @param record Record
+     */
     private void InitCommentListView(Record record){
 
         final HashMap<String, ArrayList<String>> dComment = record.getComments();
@@ -294,7 +301,12 @@ public class RecordDetailActivity extends AppCompatActivity {
         });
     }
 
-    // Formatting the list for the commentListView and return it
+    /**
+     * Formatting the list for the commentListView and return it
+     * @param dComment HashMap
+     * @param doctorList ArrayList
+     * @return ArrayList
+     */
     private ArrayList<String> getComment(HashMap<String, ArrayList<String>> dComment, ArrayList<String> doctorList){
         final ArrayList<String> comments = new ArrayList<>();
         String doctorUserName;

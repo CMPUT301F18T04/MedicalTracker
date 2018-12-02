@@ -39,6 +39,11 @@ public class SlideShowActivity extends AppCompatActivity {
     private ArrayList<String> titles;
     private String activity;
     private Button delete;
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +115,9 @@ public class SlideShowActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Returns the results
+     */
     public void returnResult() {
         Intent intent = new Intent();
 

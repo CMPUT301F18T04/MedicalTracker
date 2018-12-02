@@ -15,6 +15,9 @@ import ca.ualberta.t04.medicaltracker.Util.QRCodeUtil;
 
 /**
  * This class displays a pop up window for showing the QRcode of the user logged in
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class QRCodePopup {
@@ -30,7 +33,9 @@ public class QRCodePopup {
         this.userName = userName;
     }
 
-    // The method that shows the alert dialogue for commenting
+    /**
+     * The method that shows the alert dialogue for commenting
+     */
     public void showQRCode() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.qr_code, null);
@@ -54,6 +59,9 @@ public class QRCodePopup {
         ad.show();
     }
 
+    /**
+     * Create QRCode
+     */
     private static class CreateQRCode extends AsyncTask<String, Void, Bitmap> {
 
         @Override

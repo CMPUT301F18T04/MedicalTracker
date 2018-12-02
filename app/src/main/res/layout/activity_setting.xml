@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:onClick="changeLanguage"
         android:text="@string/change_language"
+        android:background="@drawable/bg_button_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

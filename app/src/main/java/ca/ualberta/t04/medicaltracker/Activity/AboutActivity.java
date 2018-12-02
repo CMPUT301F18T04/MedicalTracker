@@ -21,6 +21,10 @@ import ca.ualberta.t04.medicaltracker.R;
 
 public class AboutActivity extends AppCompatActivity {
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

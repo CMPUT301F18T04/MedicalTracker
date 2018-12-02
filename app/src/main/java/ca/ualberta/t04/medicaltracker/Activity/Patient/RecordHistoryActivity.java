@@ -29,6 +29,13 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 
+/**
+ * This activity is for displaying the record history list for a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for displaying the record history list for a patient user
  */
@@ -54,7 +61,10 @@ public class RecordHistoryActivity extends AppCompatActivity {
         initListView(DataController.getPatient().getProblemList().getProblem(problem_index));
     }
 
-    // init the record list view
+    /**
+     * init the record list view
+     * @param problem Problem
+     */
     private void initListView(final Problem problem){
         ListView listView = findViewById(R.id.record_history_list_view);
 

@@ -29,6 +29,13 @@ import com.google.android.gms.tasks.Task;
 
 import ca.ualberta.t04.medicaltracker.R;
 
+/**
+ * This activity searches for all the results based on the location
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 public class SearchLocationMapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private final static String TAG = "SearchLocationMap";
@@ -76,6 +83,9 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
 
     }
 
+    /**
+     * Init
+     */
     private void init(){
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -140,6 +150,9 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
         }
     }
 
+    /**
+     * Init the map
+     */
     private void initMap(){
         Log.d(TAG, "initMap");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -178,6 +191,12 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
         }
     }
 
+    /**
+     * Moving the map
+     * @param latLng LatLng
+     * @param zoom float
+     * @param title String
+     */
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to : lat" + latLng.latitude + ", lng: " + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));

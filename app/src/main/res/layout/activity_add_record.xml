@@ -149,7 +149,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/button_color"
+        android:background="@drawable/bg_button_pressed"
         android:onClick="addRecord"
         android:text="@string/add_record_button_add"
         android:textAllCaps="false"

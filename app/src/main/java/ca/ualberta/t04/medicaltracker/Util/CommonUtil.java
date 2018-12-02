@@ -47,6 +47,11 @@ public class CommonUtil {
     public static float LOCATION_DISTANCE = 2000;
 
     // Idea comes from https://blog.csdn.net/a360940265a/article/details/79907844
+
+    /**
+     * Gets the device id
+     * @return String
+     */
     public static String getIMEI() {
         String serial;
 

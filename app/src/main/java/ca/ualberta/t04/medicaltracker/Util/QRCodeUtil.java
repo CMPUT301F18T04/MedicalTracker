@@ -14,6 +14,14 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.Hashtable;
 
+/**
+ * Stores the QRcode utils used throughout the project
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 04 1.0
+ * @since 1.0
+ */
+
 public class QRCodeUtil {
     // Reference from https://www.jianshu.com/p/b275e818de6a
     @Nullable

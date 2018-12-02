@@ -15,6 +15,9 @@ import ca.ualberta.t04.medicaltracker.Model.RecordList;
 
 /**
  * This class displays a pop up window for the doctor to add a comment
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class CommentPopup {
@@ -33,7 +36,9 @@ public class CommentPopup {
         this.doctor = doctor;
     }
 
-    // The method that shows the alert dialogue for commenting
+    /**
+     * The method that shows the alert dialogue for commenting
+     */
     public void addComment() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.activity_doctor_add_comment, null);

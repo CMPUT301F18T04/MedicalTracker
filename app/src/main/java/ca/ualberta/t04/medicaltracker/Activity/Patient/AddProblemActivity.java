@@ -22,6 +22,13 @@ import ca.ualberta.t04.medicaltracker.Model.Problem;
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.Util.CommonUtil;
 
+/**
+ * This activity is for adding a problem for a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 /*
   This activity is for adding a problem for a patient user
  */
@@ -34,7 +41,10 @@ public class AddProblemActivity extends AppCompatActivity {
     private TextView problem_date;
     private String date;
 
-    // onCreate method
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +55,10 @@ public class AddProblemActivity extends AppCompatActivity {
         problem_title.requestFocus();
     }
 
-    // problemSetDate method is used for set a date using DatePickerDialog
+
+    /**
+     * problemSetDate method is used for set a date using DatePickerDialog
+     */
     public void problemSetDate(){
         problem_date.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -87,7 +100,11 @@ public class AddProblemActivity extends AppCompatActivity {
         };
     }
 
-    // Used to add a problem
+
+    /**
+     * Used to add a problem
+     * @param view View
+     */
     public void addProblem(View view){
         // get title, date and description
         EditText problem_title = findViewById(R.id.add_problem_title);

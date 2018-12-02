@@ -11,10 +11,21 @@ import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.View.MarkImageView;
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
+/**
+ * This activity is for marking a uploaded photo for a patient user
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 public class MarkImageActivity extends AppCompatActivity {
 
     private MarkImageView MarkImageView;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +40,13 @@ public class MarkImageActivity extends AppCompatActivity {
 
         MarkImageView = findViewById(R.id.markView);
         MarkImageView.setBitmap(bitmap);
-    
-
         
-    } 
+    }
+
+    /**
+     * final image with the marking
+     * @param view View
+     */
     public void finishMarking(View view){
         Intent intent = new Intent();
         intent.putExtra("data", MarkImageView.getBitmap());
