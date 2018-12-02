@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="2059.2913mm"
-   height="1998.3899mm"
-   viewBox="0 0 2059.2913 1998.3899"
+   width="3261.1953mm"
+   height="2141.2473mm"
+   viewBox="0 0 3261.1954 2141.2473"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -35,8 +35,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.175"
-     inkscape:cx="2270.4909"
-     inkscape:cy="5816.8255"
+     inkscape:cx="2994.3568"
+     inkscape:cy="6086.5069"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -61,7 +61,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(389.56302,198.5281)">
+     transform="translate(581.08588,270.03223)">
     <path
        id="path5606"
        d="m -253.81006,-179.28184 h -7.78928 v -12.31891 h 1.62983 v 10.85843 h 6.15945 z"
@@ -130,12 +130,12 @@
          sodipodi:role="line">to login, </tspan><tspan
          id="tspan8059"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-30.977142"
+         y="-30.977139"
          x="-467.2074"
          sodipodi:role="line">then goto</tspan><tspan
          id="tspan8061"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-9.8104753"
+         y="-9.8104734"
          x="-467.2074"
          sodipodi:role="line">Main Page</tspan></text>
     <text
@@ -1077,7 +1077,7 @@ YhQAgDD/P2EYChIVs4nRAAAAAElFTkSuQmCC
          sodipodi:role="line">Tap here </tspan><tspan
          id="tspan7805-5"
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="65.282822"
+         y="65.282829"
          x="-59.501335"
          sodipodi:role="line">to register</tspan></text>
     <path
@@ -2528,12 +2528,12 @@ gI2MAgCwkVEAADYB7jwLHFPHwykAAAAASUVORK5CYII=
          id="tspan7766-51"
          sodipodi:role="line">Tap here to view </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="1.8469507"
+         y="1.8469443"
          x="595.02155"
          sodipodi:role="line"
          id="tspan6672">the record history</tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="23.013607"
+         y="23.013611"
          x="595.02155"
          sodipodi:role="line"
          id="tspan5946">for this problem</tspan></text>
@@ -2575,12 +2575,12 @@ gI2MAgCwkVEAADYB7jwLHFPHwykAAAAASUVORK5CYII=
          sodipodi:role="line"
          id="tspan6371-2-5-5">Tap here to </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-236.00021"
+         y="-236.0002"
          x="381.25858"
          sodipodi:role="line"
          id="tspan6647-4">open the </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-214.83356"
+         y="-214.83354"
          x="381.25858"
          sodipodi:role="line"
          id="tspan6649-6">Search Page</tspan></text>
@@ -3354,7 +3354,7 @@ CgBAjBgFACBGjAIAECNGAQCIEaMAAMT8P+z7uFlClXTTAAAAAElFTkSuQmCC
          sodipodi:role="line"
          id="tspan6112">DatePickerDialog to </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="115.71063"
+         y="115.71062"
          x="952.97589"
          sodipodi:role="line"
          id="tspan6114">choose a date</tspan></text>
@@ -5200,7 +5200,7 @@ AABIQxgFAACANIRRAAAASEMYBQAAgDT/H2tJ6j9cdEvbAAAAAElFTkSuQmCC
        inkscape:connector-curvature="0"
        id="path7770-3-3-8-8-7-4"
        d="M 2026.599,175.29634 1817.2142,102.01992"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.488;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.48800004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        transform="scale(0.91255281,1.095827)"
        id="text7768-3-0-9-6-2-1-9-2-9-9"
@@ -5292,7 +5292,7 @@ AABIQxgFAACANIRRAAAASEMYBQAAgDT/H2tJ6j9cdEvbAAAAAElFTkSuQmCC
        inkscape:connector-curvature="0"
        id="path7770-31-9-6-5"
        d="m 1412.9987,-130.43839 -223.6296,-1.97875"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.229;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.22899997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-9-5-8-5"
        y="-141.13087"
@@ -5305,12 +5305,12 @@ AABIQxgFAACANIRRAAAASEMYBQAAgDT/H2tJ6j9cdEvbAAAAAElFTkSuQmCC
          sodipodi:role="line"
          id="tspan5986-1-5">Tap here to view </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-119.96422"
+         y="-119.96421"
          x="1044.7144"
          sodipodi:role="line"
          id="tspan3204">all photos in this </tspan><tspan
          style="font-size:16.93333244px;fill:#ff0000;stroke-width:0.26458332"
-         y="-98.797554"
+         y="-98.797546"
          x="1044.7144"
          sodipodi:role="line"
          id="tspan3212">problem</tspan></text>
@@ -7755,7 +7755,7 @@ AIhGjAIAEI0YBQAgGjEKAEA0YhQAgGjEKAAA0fw/8F+ty3P8W3oAAAAASUVORK5CYII=
        inkscape:connector-curvature="0"
        id="path7770-3-3-8-1"
        d="m -437.78124,505.68844 114.07447,-15.75327"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.26;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.25999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-3-0-9-7"
        y="496.93481"
@@ -12774,7 +12774,7 @@ AEBGjAIAkBGjAABkxCgAABkxCgBARowCAJARowAAZP4XIL3SqlUzlm0AAAAASUVORK5CYII=
        inkscape:connector-curvature="0"
        id="path7770-24"
        d="m 179.07497,1135.8819 0.82524,-107.8385"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.103;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.10300004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-39-5"
        y="860.28693"
@@ -14133,7 +14133,7 @@ wwAAAABJRU5ErkJggg==
        inkscape:connector-curvature="0"
        id="path7770-24-6-7-6"
        d="m 531.35896,1302.8877 91.94777,-45.6275"
-       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.705;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.70500004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        id="text7768-39-0-2-6"
        y="1323.3125"
