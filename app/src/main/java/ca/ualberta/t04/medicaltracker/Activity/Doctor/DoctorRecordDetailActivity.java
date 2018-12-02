@@ -124,6 +124,7 @@ public class DoctorRecordDetailActivity extends AppCompatActivity {
                 else{
                     Intent intent = new Intent(DoctorRecordDetailActivity.this, SlideShowActivity.class);
                     BitmapHolder.setBitmaps(record.getPhotos());
+                    BitmapHolder.setFrontBackArrayList(record.getFrontBackArrayList());
                     startActivity(intent);
                 }
             }

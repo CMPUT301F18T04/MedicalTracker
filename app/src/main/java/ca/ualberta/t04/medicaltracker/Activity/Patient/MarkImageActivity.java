@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Switch;
 
 import ca.ualberta.t04.medicaltracker.R;
 import ca.ualberta.t04.medicaltracker.View.MarkImageView;
@@ -50,7 +51,7 @@ public class MarkImageActivity extends AppCompatActivity {
     public void finishMarking(View view){
         Intent intent = new Intent();
         intent.putExtra("data", MarkImageView.getBitmap());
-      
+
         String fileName = System.currentTimeMillis() + ".jpg";
         Boolean succeed = ImageUtil.saveImage(MarkImageView.getBitmap(), fileName);
         String path = null;
@@ -58,6 +59,11 @@ public class MarkImageActivity extends AppCompatActivity {
             path = ImageUtil.PHOTO_DIRECTORY + fileName;
         }
         intent.putExtra("path", path);
+
+        Switch bodyLocationSwitch = findViewById(R.id.mark_image_switch);
+        if(bodyLocationSwitch.isChecked()){
+            intent.putExtra("isBack", true);
+        }
 
         setResult(RESULT_OK, intent);
         finish();

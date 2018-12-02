@@ -1,7 +1,5 @@
 package ca.ualberta.t04.medicaltracker;
 
-import android.graphics.Bitmap;
-
 /**
  * This class is for getter and setters for photos uploaded
  * @author CMPUT301F18T04 Team 04
@@ -10,8 +8,9 @@ import android.graphics.Bitmap;
  */
 
 public class Photo {
-    String base64Bitmap;
-    String path;
+    private String base64Bitmap;
+    private String path;
+    private Boolean isBack;
     public Photo(String bitmap, String path){
         this.base64Bitmap = bitmap;
         this.path = path;
@@ -47,5 +46,15 @@ public class Photo {
      */
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public Boolean isBack(){
+        if(isBack==null)
+            isBack = false;
+        return isBack;
+    }
+
+    public void setBackStatus(Boolean isBack){
+        this.isBack = isBack;
     }
 }

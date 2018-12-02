@@ -264,6 +264,7 @@
     <!-- String for Mark Image Page -->
     <string name="mark_image_hint">Please click to add a point</string>
     <string name="mark_image_add">Add</string>
+    <string name="mark_image_switch">Back Body Location</string>
     <!-- end for Mark Image Page -->
 
     <!-- String for Map View page -->

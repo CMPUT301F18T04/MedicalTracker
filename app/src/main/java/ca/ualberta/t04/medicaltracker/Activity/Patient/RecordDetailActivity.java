@@ -82,6 +82,8 @@ public class RecordDetailActivity extends AppCompatActivity {
     private ImageView recordImageView;
     private HashMap<Bitmap, String> bitmapHashMap = new HashMap<>();
     private ArrayList<Bitmap> originBitmaps = new ArrayList<>();
+    private HashMap<Bitmap, Boolean> frontBackHashMap = new HashMap<>();
+    private ArrayList<Boolean> frontBackArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +128,8 @@ public class RecordDetailActivity extends AppCompatActivity {
         bitmaps = (ArrayList<Bitmap>) record.getPhotos().clone();
         Log.d("Succeed", String.valueOf(bitmaps.size()));
 
+        frontBackArrayList = record.getFrontBackArrayList();
+
         // set the information
         title.setText(record.getTitle());
         date.setText(record.getDateStart().toString());
@@ -168,6 +172,7 @@ public class RecordDetailActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(RecordDetailActivity.this, SlideShowActivity.class);
                     BitmapHolder.setBitmaps(bitmaps);
+                    BitmapHolder.setFrontBackArrayList(frontBackArrayList);
                     intent.putExtra("recordIndex", recordIndex);
                     intent.putExtra("problemIndex", problemIndex);
                     startActivityForResult(intent, REQUEST_UPDATE_DATA);
@@ -186,7 +191,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
                 Log.d("Succeed", String.valueOf(bitmapHashMap.size()));
                 for(Bitmap bitmap:bitmapHashMap.keySet()){
-                    record.addImage(bitmap, bitmapHashMap.get(bitmap));
+                    record.addImage(bitmap, bitmapHashMap.get(bitmap), frontBackHashMap.get(bitmap));
                 }
 
                 for(Bitmap bitmap:originBitmaps){
@@ -335,6 +340,7 @@ public class RecordDetailActivity extends AppCompatActivity {
         }
         else if(requestCode == REQUEST_UPDATE_DATA && resultCode == RESULT_OK) {
             bitmaps = BitmapHolder.getBitmaps();
+            frontBackArrayList = BitmapHolder.getFrontBackArrayList();
             if(bitmaps.isEmpty()){
                 recordImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_menu_gallery));
             } else {
@@ -344,7 +350,9 @@ public class RecordDetailActivity extends AppCompatActivity {
         } else if(requestCode == REQUEST_MARK_IMAGE && resultCode == RESULT_OK) {
             Bitmap bitmap = data.getParcelableExtra("data");
             String path = data.getStringExtra("path");
+            Boolean isBack = data.getBooleanExtra("isBack", false);
             bitmapHashMap.put(bitmap, path);
+            frontBackHashMap.put(bitmap, isBack);
             bitmaps.add(bitmap);
             recordImageView.setImageBitmap(bitmap);
         }

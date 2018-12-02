@@ -172,6 +172,9 @@ public class RecordHistoryActivity extends AppCompatActivity {
             RecordList recordList = records.get(problemId);
             ArrayList<Record> problemRecords = recordList.getRecords();
             ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
+            ArrayList<Boolean> frontBackArrayList = new ArrayList<>();
+
             ArrayList<String> recordTitles = new ArrayList<>();
             for(Record record:problemRecords){
                 ArrayList<Bitmap> pictures = record.getPhotos();
@@ -179,6 +182,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                     bitmaps.add(pic);
                     recordTitles.add(record.getTitle());
                 }
+                frontBackArrayList.addAll(record.getFrontBackArrayList());
             }
 
             Intent  intent = new Intent(RecordHistoryActivity.this, SlideShowActivity.class);
@@ -186,6 +190,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
             intent.putStringArrayListExtra("Titles",recordTitles);
 
             BitmapHolder.setBitmaps(bitmaps);
+            BitmapHolder.setFrontBackArrayList(frontBackArrayList);
             startActivity(intent);
         }
 
