@@ -31,6 +31,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        getSupportActionBar().setTitle(R.string.about_title);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         String[] developers = {getString(R.string.developer_AnnabelleZhang), getString(R.string.developer_DevinDai), getString(R.string.developer_HumphreyLu),

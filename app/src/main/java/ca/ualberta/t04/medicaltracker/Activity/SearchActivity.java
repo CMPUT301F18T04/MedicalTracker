@@ -82,6 +82,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         locationInfo = findViewById(R.id.search_location_info);
 
+        getSupportActionBar().setTitle(getString(R.string.search_button_search));
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
 
         double latitude = getIntent().getDoubleExtra("search_latitude", -1);

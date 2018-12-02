@@ -36,6 +36,7 @@ public class DoctorViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_view);
 
+        getSupportActionBar().setTitle(R.string.doctor_page_title);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         doctorListView = (ListView)findViewById(R.id.doctor_listview);
 

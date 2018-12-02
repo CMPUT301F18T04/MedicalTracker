@@ -84,7 +84,6 @@ public class DoctorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
         /*
         ListView patientListView = findViewById(R.id.main_page_list_view);
         ArrayList<Patient> patients = DataController.getDoctor().getPatients();
@@ -102,6 +101,8 @@ public class DoctorActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#20B2AA")));
+
         getSupportActionBar().setTitle(getString(R.string.doctor_page_title));
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
