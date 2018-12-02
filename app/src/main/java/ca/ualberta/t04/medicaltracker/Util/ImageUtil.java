@@ -15,15 +15,33 @@ import java.io.IOException;
 
 import id.zelory.compressor.Compressor;
 
+/**
+ * Stores the image utils used throughout the project
+ *
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 04 1.0
+ * @since 1.0
+ */
+
 public class ImageUtil {
     public static String PHOTO_DIRECTORY = Environment.getExternalStoragePublicDirectory(Environment.MEDIA_SHARED) + "/";
 
+    /**
+     * convertStringToBitmap
+     * @param string String
+     * @return Bitmap
+     */
     public static Bitmap convertStringToBitmap(String string){
         byte[] bytes = Base64.decode(string, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         return bitmap;
     }
 
+    /**
+     * convertBitmapToString
+     * @param bitmap Bitmap
+     * @return String
+     */
     public static String convertBitmapToString(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -31,6 +49,13 @@ public class ImageUtil {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
+    /**
+     * compressImageFile
+     * @param context Context
+     * @param path String
+     * @return compressedImage
+     * @throws IOException
+     */
     public static Bitmap compressImageFile(Context context, String path) throws IOException {
         File file = new File(path);
         Bitmap compressedImage = new Compressor(context)
@@ -43,6 +68,12 @@ public class ImageUtil {
         return compressedImage;
     }
 
+    /**
+     * saves the images
+     * @param bmp Bitmap
+     * @param fileName String
+     * @return Boolean
+     */
     public static Boolean saveImage(Bitmap bmp, String fileName) {
         Log.d("Succeed", "Directory:" + PHOTO_DIRECTORY);
         File photoDir = new File(PHOTO_DIRECTORY);

@@ -15,14 +15,26 @@ import java.util.ArrayList;
 public class BitmapHolder {
     private static ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
+    /**
+     * removes the bitmap
+     * @param bitmap Bitmap
+     */
     public static void removeBitmap(Bitmap bitmap){
         bitmaps.remove(bitmap);
     }
 
+    /**
+     * gets the bitmaps in a list
+     * @return bitmaps ArrayList
+     */
     public static ArrayList<Bitmap> getBitmaps(){
         return bitmaps;
     }
 
+    /**
+     * Sets the bitmap
+     * @param newBitmaps ArrayList
+     */
     public static void setBitmaps(ArrayList<Bitmap> newBitmaps){
         bitmaps = newBitmaps;
     }

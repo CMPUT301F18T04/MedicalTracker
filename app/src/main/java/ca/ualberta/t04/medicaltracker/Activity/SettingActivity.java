@@ -24,12 +24,20 @@ import ca.ualberta.t04.medicaltracker.R;
 
 public class SettingActivity extends AppCompatActivity {
 
+    /**
+     * oncreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
     }
 
+    /**
+     * change the App language
+     * @param view View
+     */
     public void changeLanguage(View view){
         Intent language = new Intent(SettingActivity.this,LanguageActivity.class);
         startActivity(language);

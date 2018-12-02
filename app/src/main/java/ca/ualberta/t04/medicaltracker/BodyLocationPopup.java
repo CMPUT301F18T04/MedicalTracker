@@ -17,6 +17,9 @@ import ca.ualberta.t04.medicaltracker.R;
 
 /**
  * This class displays a pop up window for the patient to add a body location
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
  */
 
 public class BodyLocationPopup {
@@ -32,7 +35,10 @@ public class BodyLocationPopup {
         this.textView = textView;
     }
 
-    // The method that shows the alert dialogue for commenting
+    /**
+     * The method that shows the alert dialogue for commenting
+     * @return BodyLocation
+     */
     public BodyLocation chooseBodyLocation() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View promptView = layoutInflater.inflate(R.layout.body_location_popup, null);
@@ -93,12 +99,21 @@ public class BodyLocationPopup {
         return this.bodyLocation;
     }
 
+    /**
+     * Assign Body Location
+     * @param bodyLocation BodyLocation
+     * @param ad AlertDialog
+     */
     private void assignBodyLocation(BodyLocation bodyLocation, AlertDialog ad){
         this.bodyLocation = bodyLocation;
         textView.setText(bodyLocation.name());
         ad.dismiss();
     }
 
+    /**
+     * Gets the body location
+     * @return bodyLocation BodyLocation
+     */
     public BodyLocation getBodyLocation() {
         return bodyLocation;
     }

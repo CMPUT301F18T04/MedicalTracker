@@ -28,6 +28,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="finishMarking"
         android:text="@string/mark_image_add"
+        android:background="@drawable/bg_button_pressed"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -15,6 +15,13 @@ import android.widget.ImageView;
 
 import ca.ualberta.t04.medicaltracker.Util.ImageUtil;
 
+/**
+ * This activity shows the marked photo
+ * @author CMPUT301F18T04 Team 04
+ * @version Project part 05 1.0
+ * @since 1.0
+ */
+
 public class MarkImageView extends AppCompatImageView {
     private Paint paint;
     private float circleWidth = 10;
@@ -34,24 +41,43 @@ public class MarkImageView extends AppCompatImageView {
     private float originHeight = 0;
     private float originWeight = 0;
 
+    /**
+     * MarkImageView
+     * @param context Context
+     */
     public MarkImageView(Context context) {
         super(context);
 
         init(null);
     }
 
+    /**
+     * MarkImageView
+     * @param context Context
+     * @param attrs AttributeSet
+     */
     public MarkImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         init(attrs);
     }
 
+    /**
+     * MarkImageView
+     * @param context Context
+     * @param attrs AttributeSet
+     * @param defStyleAttr int
+     */
     public MarkImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init(attrs);
     }
 
+    /**
+     * init
+     * @param set AttributeSet
+     */
     private void init(@Nullable AttributeSet set){
         paint = new Paint();
         paint.setAntiAlias(true);
@@ -126,6 +152,10 @@ public class MarkImageView extends AppCompatImageView {
         return value;
     }
 
+    /**
+     * gets the image bitmap
+     * @return editBitmap Bitmap
+     */
     public Bitmap getBitmap() {
         this.editBitmap = Bitmap.createScaledBitmap(editBitmap, (int)originWeight, (int)originHeight, false);
         // Log.d("Succeed", "Get:" + String.valueOf(ImageUtil.convertBitmapToString(bitmap).length()));

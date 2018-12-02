@@ -34,6 +34,7 @@
         android:layout_marginBottom="180dp"
         android:text="@string/slide_show_button"
         android:textAllCaps="false"
+        android:background="@drawable/bg_button_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
