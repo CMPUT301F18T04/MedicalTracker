@@ -64,6 +64,8 @@
     <string name="patient_toast11">醫生</string>
     <string name="patient_toast12">已經把妳加入TA的患者列表</string>
     <string name="patient_toast2">壹個病情已經被刪除</string>
+    <string name="patient_toast1">網絡恢復，妳的資料已經更新！</string>
+    <string name="patient_toast_edit">妳選擇了編輯</string>
     <!-- end for Patient Page -->
 
     <!-- String for Doctor Page -->
@@ -147,7 +149,6 @@
 
     <!-- end for Profile Page -->
 
-
     <!-- String for Add Problem Page -->
     <string name="add_problem_title">添加壹個病情</string>
     <string name="add_problem_problem_title">標題:</string>
@@ -155,7 +156,21 @@
     <string name="add_problem_problem_description">簡短描述:</string>
     <string name="add_problem_button_add">添加</string>
     <string name="add_problem_toast">妳已經添加了壹個新的病情</string>
+    <string name="add_problem_toast_time">妳不能選擇還沒到的時間</string>
+    <string name="add_problem_toast_empty">標題/描述 不能為空</string>
     <!-- end for Add Problem Page -->
+
+    <!-- String for Edit Problem Page -->
+    <string name="edit_problem_title">編輯病情</string>
+    <string name="edit_problem_problem_title">病情標題:</string>
+    <string name="edit_problem_problem_date">開始日期:</string>
+    <string name="edit_problem_problem_description">簡短描述:</string>
+    <string name="edit_problem_button_edit">編輯</string>
+    <string name="edit_problem_toast">保存更改</string>
+    <string name="edit_problem_toast1">妳不能選擇還沒到的時間</string>
+    <string name="edit_problem_toast2">標題/描述 不能為空</string>
+    <!-- end for Edit Problem Page -->
+
 
     <!-- String for Add Record Page -->
     <string name="add_record_title">添加記錄</string>
@@ -164,6 +179,14 @@
     <string name="add_record_record_description">簡短描述:</string>
     <string name="add_record_button_add">添加</string>
     <string name="add_record_toast">出現了壹個問題</string>
+    <string name="add_record_toast2">妳已經添加了壹個新的記錄</string>
+    <string name="add_record_toast3">妳不能添加更多照片了!</string>
+    <string name="add_record_toast_empty">標題/描述 不能為空.</string>
+    <string name="add_record_toast_body_location">妳還沒選擇身體部位</string>
+    <string name="add_record_toast_time">記錄時間必須在病情開始日期之後</string>
+    <string name="add_record_toast_future_time">妳不能選擇還沒到時間</string>
+    <string name="add_record_toast_photo">妳必須拍至少兩張照片</string>
+    <string name="add_record_toast_photo2">妳需要拍至少身體前面和後面各壹張照片</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -201,6 +224,8 @@
     <string name="location_text">妳還沒選擇位置</string>
     <string name="record_toast1">新的更改已經保存</string>
     <string name="record_toast2">妳還沒上傳圖片</string>
+    <string name="record_toast3">這個記錄沒有位置信息</string>
+    <string name="record_toast4">無法發起地圖請求</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -232,5 +257,15 @@
     <!-- String for Mark Image Page -->
     <string name="mark_image_hint">請點擊來添加標記</string>
     <string name="mark_image_add">添加</string>
+    <string name="mark_image_switch">背部身體位置</string>
     <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">移動以查看其他標記過的位置</string>
+    <string name="map_toast_2">無法獲取當前位置</string>
+    <!-- end for Map View page -->
+
+    <!-- Error Message -->
+    <string name="error_message">發生故障</string>
+    <!-- end for Error Message -->
 </resources>
