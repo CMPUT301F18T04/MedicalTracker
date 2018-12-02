@@ -17,7 +17,6 @@
     <string name="login_toast4">您是首次在此设备上登录本APP</string>
     <!-- end for Login Page -->
 
-
     <!-- String for Register Page -->
     <string name="register_text_username">用户名：</string>
     <string name="register_text_email">邮箱：</string>
@@ -41,11 +40,9 @@
     <string name="register_toast13">出生日期应为过去的时间!</string>
     <!-- end for Register Page -->
 
-
     <!-- String for Main Page -->
     <string name="title_activity_main">主界面</string>
     <!-- end for Main Page -->
-
 
     <!-- String for Add Patient Page -->
     <string name="add_patient_title">查找患者</string>
@@ -75,7 +72,6 @@
     <string name="doctor_page_toast3">这个病人已经在你的列表里了</string>
     <!-- end for Doctor Page -->
 
-
     <!-- String for Record History Page -->
     <string name="record_history_description">详情: </string>
     <string name="record_history_title">记录</string>
@@ -85,7 +81,6 @@
     <!-- String for Doctor View Page -->
     <string name="doctor_view_page_title">你的医生</string>
     <!-- end for Doctor View Page -->
-
 
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">打开导航栏</string>
@@ -103,7 +98,6 @@
     <string name="nav_item_about">关于我们</string>
     <string name="nav_item_qr_code">二维码</string>
     <!-- end for Navigation Drawer -->
-
 
     <!-- String for Menu -->
     <string name="action_add">添加</string>
@@ -145,9 +139,7 @@
     <string name="profile_toast2">电话号码无效!</string>
     <string name="profile_toast3">邮箱无效!</string>
     <string name="profile_toast4">资料更新成功！</string>
-
     <!-- end for Profile Page -->
-
 
     <!-- String for Add Problem Page -->
     <string name="add_problem_title">添加一个病情</string>

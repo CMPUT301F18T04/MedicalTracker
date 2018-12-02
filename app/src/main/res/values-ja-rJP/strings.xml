@@ -8,7 +8,6 @@
     <string name="developer_AnnabelleZhang">张巧燕</string>
     <string name="developer_YuanWang">王源</string>
 
-
     <!-- String for Login Page -->
     <string name="login_text_username">ユーザー名：</string>
     <string name="login_button_login">ログイン</string>
@@ -41,11 +40,9 @@
     <string name="register_toast13">生年月日は過去である必要があります!</string>
     <!-- end for Register Page -->
 
-
     <!-- String for Main Page -->
     <string name="title_activity_main">メインインターフェイス</string>
     <!-- end for Main Page -->
-
 
     <!-- String for Add Patient Page -->
     <string name="add_patient_title">患者を見つける</string>
@@ -64,6 +61,8 @@
     <string name="patient_toast11">先生</string>
     <string name="patient_toast12">既にあなたをTAに追加した患者のリスト</string>
     <string name="patient_toast2">条件が削除されました</string>
+    <string name="patient_toast1">ネットワーク復旧、あなたの情報は更新されました！</string>
+    <string name="patient_toast_edit">編集を選択しました</string>
     <!-- end for Patient Page -->
 
     <!-- String for Doctor Page -->
@@ -72,7 +71,6 @@
     <string name="doctor_page_toast2">追加された患者</string>
     <string name="doctor_page_toast3">この患者はすでにあなたのリストに入っています</string>
     <!-- end for Doctor Page -->
-
 
     <!-- String for Record History Page -->
     <string name="record_history_description">詳細: </string>
@@ -109,7 +107,6 @@
     <string name="doctor_page_menu_item_delete">削除</string>
     <!-- end for Menu -->
 
-
     <!-- String for Setting Page -->
     <string name="title_activity_settings">設定</string>
     <string name="title_nickname">ニックネーム:</string>
@@ -123,13 +120,11 @@
     <string name="language_change_toast">変更を有効にするには、再度ログインしてください</string>
     <!-- end for Setting Page -->
 
-
     <!-- String for About Page -->
     <string name="about_title">私たちについて:</string>
     <string name="about_text_description">此程序最终解释权归"CMPUT301F18T4"所有</string>
     <string name="about_text_developer">開発者:(特定の順序で)</string>
     <!-- end for About Page -->
-
 
     <!-- String for Profile Page -->
     <string name="profile_title">あなたの情報。:</string>
@@ -153,6 +148,8 @@
     <string name="add_problem_problem_description">簡単な説明:</string>
     <string name="add_problem_button_add">追加</string>
     <string name="add_problem_toast">あなたは新しい条件を追加しました</string>
+    <string name="add_problem_toast_time">まだ到着していない時間は選択できません</string>
+    <string name="add_problem_toast_empty">タイトル/説明 空ではありません</string>
     <!-- end for Add Problem Page -->
 
     <!-- String for Edit Problem Page -->
@@ -162,7 +159,8 @@
     <string name="edit_problem_problem_description">簡単な説明:</string>
     <string name="edit_problem_button_edit">編集</string>
     <string name="edit_problem_toast">変更を保存する</string>
-
+    <string name="edit_problem_toast1">まだ到着していない時間は選択できません</string>
+    <string name="edit_problem_toast2">タイトル/説明 空ではありません</string>
 
     <!-- String for Add Record Page -->
     <string name="add_record_title">レコードを追加</string>
@@ -173,6 +171,12 @@
     <string name="add_record_toast">問題がありました</string>
     <string name="add_record_toast2">あなたは新しいレコードを追加しました</string>
     <string name="add_record_toast3">写真を追加することはできません!</string>
+    <string name="add_record_toast_empty">タイトル/説明 空ではありません</string>
+    <string name="add_record_toast_body_location">あなたはまだボディパーツを選択していません</string>
+    <string name="add_record_toast_time">録音時間は、条件の開始日より後でなければなりません</string>
+    <string name="add_record_toast_future_time">まだ到着していない時間は選択できません</string>
+    <string name="add_record_toast_photo">少なくとも2枚の写真を撮る必要があります</string>
+    <string name="add_record_toast_photo2">あなたは身体の前と後ろに少なくとも1枚の写真を撮る必要があります。</string>
     <!-- end for Add Record Page -->
 
     <!-- String for information Page -->
@@ -213,6 +217,8 @@
     <string name="location_text">あなたはまだ場所を選択していません</string>
     <string name="record_toast1">新しい変更が保存されました</string>
     <string name="record_toast2">あなたはまだ写真をアップロードしていません</string>
+    <string name="record_toast3">このレコードには位置情報はありません</string>
+    <string name="record_toast4">ロケーションリクエストを開始できません</string>
     <!-- end for doctor record detail || record detail page -->
 
     <!-- String for Detailed Comments page -->
@@ -243,5 +249,15 @@
     <!-- String for Mark Image Page -->
     <string name="mark_image_hint">タグを追加</string>
     <string name="mark_image_add">追加</string>
+    <string name="mark_image_switch">戻る</string>
     <!-- end for Mark Image Page -->
+
+    <!-- String for Map View page -->
+    <string name="map_toast_1">他のマークされた場所を見るために移動する</string>
+    <string name="map_toast_2">現在の場所を取得できません</string>
+    <!-- end for Map View page -->
+
+    <!-- Error Message -->
+    <string name="error_message">機能不全</string>
+    <!-- end for Error Message -->
 </resources>
