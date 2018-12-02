@@ -1,4 +1,9 @@
 ca.ualberta.t04.medicaltracker
 ca.ualberta.t04.medicaltracker.Activity
+ca.ualberta.t04.medicaltracker.Activity.Doctor
+ca.ualberta.t04.medicaltracker.Activity.Patient
 ca.ualberta.t04.medicaltracker.Adapter
 ca.ualberta.t04.medicaltracker.Controller
+ca.ualberta.t04.medicaltracker.Model
+ca.ualberta.t04.medicaltracker.Util
+ca.ualberta.t04.medicaltracker.View
