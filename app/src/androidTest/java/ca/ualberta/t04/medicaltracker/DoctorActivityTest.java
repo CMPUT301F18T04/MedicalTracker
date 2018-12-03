@@ -67,9 +67,15 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.clickOnView(solo.getView(R.id.doctor_record_detail_view_location));
         assertTrue(solo.waitForActivity("MapViewActivity"));
 
+<<<<<<< Updated upstream
         //View all Locations of a patient.
         solo.clickOnView(solo.getView(R.id.all_locations));
         assertTrue(solo.waitForText("Move around"));
+=======
+        //In AddPatientActivity, test search patients function.
+        //solo.enterText((EditText) solo.getView(R.id.add_patient_username), "test5");
+        //solo.clickOnButton("Search");
+>>>>>>> Stashed changes
 
         //View the device location.
         solo.clickOnView(solo.getView(R.id.my_location));

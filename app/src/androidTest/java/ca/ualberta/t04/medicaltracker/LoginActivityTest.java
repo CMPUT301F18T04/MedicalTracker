@@ -16,10 +16,10 @@ import ca.ualberta.t04.medicaltracker.Model.User;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
-public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private Solo solo;
 
-    public SettingActivityTest() {
+    public LoginActivityTest() {
         super(LoginActivity.class);
     }
 
@@ -33,7 +33,7 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         solo.finishOpenedActivities();
     }
 
-    public void testSettingPasswordChange() throws Throwable {
+    public void testLogin() throws Throwable {
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intentTest");
@@ -43,20 +43,5 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
-        // Open slide Bar
-        //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
-        //drawerLayout.openDrawer(Gravity.LEFT);
-        solo.clickOnImageButton(0);
-        //solo.pressMenuItem(0);
-        solo.clickOnMenuItem("Setting");
-
-        // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("SettingActivity"));
-
-        // Click Change language button
-        solo.clickOnButton("Change Language");
-        assertTrue(solo.waitForActivity("LanguageActivity"));
-
     }
-
 }
