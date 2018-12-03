@@ -260,7 +260,7 @@
     <!-- end for Map View page -->
 
     <!-- Error Message -->
-    <string name="error_message">An error occurs.</string>
+    <string name="error_message">Il y a une erreur.</string>
     <!-- end for Error Message -->
 
     <!-- String for BodyLocation Popup -->
