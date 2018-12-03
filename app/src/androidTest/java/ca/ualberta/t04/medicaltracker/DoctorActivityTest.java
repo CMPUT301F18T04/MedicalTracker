@@ -38,7 +38,7 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
 
         // Enter the test account's information
-        solo.enterText((EditText) solo.getView(R.id.register_username),"doctor1");
+        solo.enterText((EditText) solo.getView(R.id.register_username),"doctor000");
 
         RadioButton rb = (RadioButton) solo.getView(R.id.register_doctor);
         solo.clickOnView(rb);
@@ -52,38 +52,48 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
             solo.getCurrentActivity().finish();
         }
 
-        solo.enterText((EditText) solo.getView(R.id.login_username), "doctor1");
-
+        //Log in
+        solo.enterText((EditText) solo.getView(R.id.login_username), "doctor000");
         solo.clickOnButton("Login");
-
         assertTrue(solo.waitForActivity("DoctorActivity"));
-
-
-        //Let the robot press the second button in the menu to test addPatientActivity.
-        //The first one is the search button
-
-        solo.clickOnView(solo.getView(R.id.action_add));
-        assertTrue(solo.waitForActivity("AddPatientActivity"));
-
-        //In AddPatientActivity, test search patients function.
-        solo.enterText((EditText) solo.getView(R.id.add_patient_username), "test5");
-        solo.clickOnButton("Search");
-
-        //Check if the search result is correct
-        if (!(solo.waitForText("Cannot"))){
-            solo.clickOnButton("Add");
-        };
-
-        solo.goBackToActivity("DoctorActivity");
 
         //Click on the first patient, click on the first problem,Click on the first record  to view record detail
         solo.clickInList(0);
         solo.clickInList(0);
         solo.clickInList(0);
-
         assertTrue(solo.waitForActivity("DoctorRecordDetailActivity"));
 
-        solo.goBackToActivity("DoctorActivity");
+       //Click on Map ImageView to checkout location
+        solo.clickOnView(solo.getView(R.id.doctor_record_detail_view_location));
+        assertTrue(solo.waitForActivity("MapViewActivity"));
+
+        //View all Locations of a patient.
+        solo.clickOnView(solo.getView(R.id.all_locations));
+        assertTrue(solo.waitForText("Move around"));
+
+        //View the device location.
+        solo.clickOnView(solo.getView(R.id.my_location));
+        assertTrue(solo.waitForText("You are here"));
+
+        //Go back to doctor record detail activity.
+        solo.goBack();
+
+        //Click comment button in the bottom.
+        solo.clickOnView(solo.getView(R.id.doctorCommentButton));
+        solo.enterText((EditText) solo.getView(R.id.addCommentEditText), "This looks not good.");
+        solo.clickOnButton("OK");
+        assertTrue(solo.waitForText("Successfully"));
+
+        //Click the image showing in the upper right to checkout slide show activity.
+        solo.clickOnView(solo.getView(R.id.recordImageView));
+        assertTrue(solo.waitForActivity("SlideShowActivity"));
+        solo.scrollToSide(Solo.LEFT);
+        solo.scrollToSide(Solo.RIGHT);
+
+        solo.goBack();
+        solo.goBack();
+        solo.goBack();
+        solo.goBack();
 
         // Click the button search
         solo.clickOnView(solo.getView(R.id.action_search));
@@ -107,12 +117,9 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         // Check if the search result is correct
         assertTrue(solo.waitForText("p1"));
 
+        // Check teh refresh function.
         solo.goBackToActivity("DoctorActivity");
-        solo.goBack();
-        solo.goBack();
-
         solo.clickOnView(solo.getView(R.id.fab));
-
         assertTrue(solo.waitForText("Refresh"));
     }
 }
