@@ -48,10 +48,7 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
 
 
         // Enter the test account's information
-        solo.enterText((EditText) solo.getView(R.id.register_username),"doctor000");
-
-        RadioButton rb = (RadioButton) solo.getView(R.id.register_doctor);
-        solo.clickOnView(rb);
+        solo.enterText((EditText) solo.getView(R.id.register_username),"patient000");
 
         //Click button to sign up
         solo.clickOnView(solo.getView(R.id.register_button_signup));
@@ -63,7 +60,7 @@ public class DoctorViewTest extends ActivityInstrumentationTestCase2<LoginActivi
         }
 
         //Login first
-        solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
+        solo.enterText((EditText) solo.getView(R.id.login_username),"patient000");
 
         solo.clickOnButton("Login");
 

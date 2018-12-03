@@ -4,6 +4,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.Gravity;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.robotium.solo.Solo;
 
@@ -35,6 +36,28 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
     public void testAboutUs() throws Throwable {
+
+        //Click the button register to sign up first
+        solo.clickOnButton("Register");
+
+        // Check if the app opens the correct page
+        assertTrue(solo.waitForActivity("RegisterActivity"));
+
+
+        // Enter the test account's information
+        solo.enterText((EditText) solo.getView(R.id.register_username),"doctor000");
+
+        RadioButton rb = (RadioButton) solo.getView(R.id.register_doctor);
+        solo.clickOnView(rb);
+
+        //Click button to sign up
+        solo.clickOnView(solo.getView(R.id.register_button_signup));
+
+        //If the text "Duplicated" occurs, then it means the account is already existed, then
+        //the robot will use the account of doctor to log in
+        if (solo.waitForText("Duplicated")){
+            solo.getCurrentActivity().finish();
+        }
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"patient000");
