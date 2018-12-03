@@ -4,12 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
-
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
-import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Model.User;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -40,8 +35,17 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         solo.clickOnButton("Login");
 
+        // If the username does not exist
+        if (solo.waitForText("exist")){
+            solo.clickOnButton("Register");
+            solo.enterText((EditText) solo.getView(R.id.register_username),"intentTest");
+            solo.clickOnButton("Sign up");
+            solo.clickOnButton("Login");
+        }
+
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
+        solo.goBack();
     }
 }
