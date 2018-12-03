@@ -285,4 +285,19 @@
     <string name="search_geo_location">地理的位置</string>
     <string name="search_body_location">ボディパーツ</string>
     <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">このレコードを削除することを確認しますか？</string>
+    <string name="yes">はい</string>
+    <string name="cancel">キャンセル</string>
+
+    <string name="patient_extra_toast1"> あなたの患者リストにあなたを追加しました.</string>
+    <string name="patient_extra_toast2">医師 </string>
+    <string name="patient_extra_toast3">この問題を削除することを確認していますか？</string>
+
+    <string name="doctor_extra_toast1">リフレッシュが完了しました</string>
+    <string name="doctor_extra_toast2">それを削除するのに成功しました。</string>
+    <string name="doctor_extra_toast3">このQRコードで患者を見つけることができません。</string>
+
+    <string name="problem_long_click_edit">編集</string>
+    <string name="problem_long_click_delete">削除</string>
 </resources>

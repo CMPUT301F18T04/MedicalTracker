@@ -278,5 +278,18 @@
     <string name="search_body_location">Localisation de Corps</string>
     <!-- end for Search Spinner -->
 
+    <string name="record_history_toast2">ÊTES-VOUS SÛR DE SUPPRIMER CE DOSSIER?</string>
+    <string name="yes">OUI</string>
+    <string name="cancel">ANNULER</string>
 
+    <string name="patient_extra_toast1"> vous a ajouté à sa liste de patients.</string>
+    <string name="patient_extra_toast2">Médecin </string>
+    <string name="patient_extra_toast3">ÊTES-VOUS SÛR DE SUPPRIMER CE PROBLÈME?</string>
+
+    <string name="doctor_extra_toast1">Actualisation terminée</string>
+    <string name="doctor_extra_toast2">A réussi à le supprimer.</string>
+    <string name="doctor_extra_toast3">Impossible de trouver un patient avec ce code QR.</string>
+
+    <string name="problem_long_click_edit">Modifier</string>
+    <string name="problem_long_click_delete">Effacer</string>
 </resources>

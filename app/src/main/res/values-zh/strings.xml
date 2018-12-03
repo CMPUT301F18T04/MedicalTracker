@@ -286,4 +286,19 @@
     <string name="search_geo_location">地理位置</string>
     <string name="search_body_location">身体部位</string>
     <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">您是否确实要删除此记录？</string>
+    <string name="yes">是</string>
+    <string name="cancel">取消</string>
+
+    <string name="patient_extra_toast1"> 已将您添加到他/她的患者列表中.</string>
+    <string name="patient_extra_toast2">医生 </string>
+    <string name="patient_extra_toast3">您是否确实要删除这个问题？</string>
+
+    <string name="doctor_extra_toast1">刷新完成</string>
+    <string name="doctor_extra_toast2">删除成功.</string>
+    <string name="doctor_extra_toast3">找不到此二维码患者。</string>
+
+    <string name="problem_long_click_edit">编辑</string>
+    <string name="problem_long_click_delete">删除</string>
 </resources>

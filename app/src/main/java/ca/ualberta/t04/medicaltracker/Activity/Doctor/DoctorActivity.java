@@ -112,7 +112,7 @@ public class DoctorActivity extends AppCompatActivity
             public void onClick(View view) {
                 DataController.clearRecordList();
                 refreshPatientListView();
-                Snackbar.make(view, "Refresh completed", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, getString(R.string.doctor_extra_toast1), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -202,7 +202,7 @@ public class DoctorActivity extends AppCompatActivity
             DataController.getDoctor().removePatient(patient);
             patient.removeDoctor(DataController.getDoctor());
             ElasticSearchController.updateUser(patient);
-            Toast.makeText(DoctorActivity.this, "Succeeded to delete it.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DoctorActivity.this, getString(R.string.doctor_extra_toast2), Toast.LENGTH_SHORT).show();
         }
 
         return super.onContextItemSelected(item);
@@ -383,11 +383,11 @@ public class DoctorActivity extends AppCompatActivity
                         ElasticSearchController.updateUser(patient);
                         Toast.makeText(this, R.string.doctor_page_toast2, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.doctor_extra_toast3), Toast.LENGTH_SHORT).show();
                     }
                 }
             } else{
-                Toast.makeText(this, "Cannot find a patient with this QR code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.doctor_extra_toast3), Toast.LENGTH_SHORT).show();
             }
         }
     }

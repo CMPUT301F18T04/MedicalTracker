@@ -292,4 +292,19 @@
     <string name="search_geo_location">地理位置</string>
     <string name="search_body_location">身體部位</string>
     <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">您是否確實要刪除此記錄？</string>
+    <string name="yes">是</string>
+    <string name="cancel">取消</string>
+
+    <string name="patient_extra_toast1"> 已將您添加到他/她的患者列表中。</string>
+    <string name="patient_extra_toast2">醫生 </string>
+    <string name="patient_extra_toast3">您是否確實要刪除這個問題？</string>
+
+    <string name="doctor_extra_toast1">刷新完成</string>
+    <string name="doctor_extra_toast2">刪除成功.</string>
+    <string name="doctor_extra_toast3">找不到此二維碼患者。</string>
+
+    <string name="problem_long_click_edit">編輯</string>
+    <string name="problem_long_click_delete">刪除</string>
 </resources>
