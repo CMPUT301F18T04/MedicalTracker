@@ -1,5 +1,8 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.test.InstrumentationRegistry;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.EditText;
@@ -10,7 +13,13 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+import ca.ualberta.t04.medicaltracker.Model.Record;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,6 +47,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
     }
 
     public void testPatientPage() throws Throwable {
+        ElasticSearchController.deleteUser("patient001");
         // Click the button register to sign up first
         solo.clickOnButton("Register");
 
@@ -46,18 +56,12 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
 
         // Enter the test account's information
-        solo.enterText((EditText) solo.getView(R.id.register_username), "patient");
+        solo.enterText((EditText) solo.getView(R.id.register_username), "patient001");
 
         // Click button to sign up
         solo.clickOnView(solo.getView(R.id.register_button_signup));
 
-        // If the text "Duplicated" occurs, then it means the account is already existed, then
-        // the robot will use the account of patient to log in
-        if(solo.waitForText("Duplicated")){
-            solo.getCurrentActivity().finish();
-        }
-
-        solo.enterText((EditText) solo.getView(R.id.login_username), "patient");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "patient001");
 
         solo.clickOnButton("Login");
 
@@ -91,10 +95,39 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("AddRecordActivity"));
 
+        if(solo.waitForText("Google"))
+            solo.clickOnButton("OK");
         solo.enterText((EditText) solo.getView(R.id.add_record_title), "testRecord");
         solo.enterText((EditText) solo.getView(R.id.add_record_description), "test");
 
+        solo.clickOnView(solo.getView(R.id.add_record_body_location));
+        solo.clickOnView(solo.getView(R.id.body_location_head));
+
+        solo.clickOnView(solo.getView(R.id.record_add_location));
+
+        solo.goBackToActivity("AddRecordActivity");
+
         solo.clickOnButton("Add");
+
+        HashMap<Bitmap, String> bitmapStringHashMap = new HashMap<>();
+
+        Bitmap bitmap1 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), R.drawable.ic_menu_camera);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), R.drawable.ic_menu_send);
+        bitmapStringHashMap.put(bitmap1, "a");
+        bitmapStringHashMap.put(bitmap2, "b");
+        HashMap<Bitmap, Boolean> frontBack = new HashMap<>();
+        frontBack.put(bitmap1, true);
+        frontBack.put(bitmap2, false);
+        final Record testRecord = new Record("testRecord", new Date(), "test", bitmapStringHashMap, frontBack, null, BodyLocation.Head);
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DataController.getRecordList().get("problem1").addRecord(testRecord);
+            }
+        });
+
+
+        solo.goBackToActivity("RecordHistoryActivity");
 
         assertTrue(solo.waitForText("testRecord"));
 
@@ -105,14 +138,24 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("RecordDetailActivity"));
 
+        if(solo.waitForText("Google"))
+            solo.clickOnButton("OK");
+
         solo.clearEditText((EditText) solo.getView(R.id.addCommentEditText));
         solo.enterText((EditText) solo.getView(R.id.addCommentEditText), "testRecord2");
         solo.clearEditText((EditText) solo.getView(R.id.descriptionEditText));
         solo.enterText((EditText) solo.getView(R.id.descriptionEditText), "test2");
 
+        solo.clickOnView(solo.getView(R.id.recordImageView));
+
+        solo.waitForActivity("SlideShowActivity");
+
+        solo.goBackToActivity("RecordDetailActivity");
+
         solo.clickOnButton("Save");
 
         assertTrue(solo.waitForText("testRecord2"));
+
 
         solo.goBackToActivity("PatientActivity");
 
@@ -144,14 +187,15 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("RecordDetailActivity"));
 
+        if(solo.waitForText("Google"))
+            solo.clickOnButton("OK");
+
         solo.goBack();
         solo.goBack();
 
         assertTrue(solo.waitForText("testProblem"));
 
         solo.goBackToActivity("PatientActivity");
-
-        solo.clickInList(0);
 
     }
 

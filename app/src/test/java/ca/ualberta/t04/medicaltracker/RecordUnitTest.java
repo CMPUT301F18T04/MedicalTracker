@@ -1,11 +1,13 @@
 package ca.ualberta.t04.medicaltracker;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.media.Image;
 
 import org.junit.Test;
 import java.util.*;
 
+import ca.ualberta.t04.medicaltracker.Controller.DataController;
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
 import ca.ualberta.t04.medicaltracker.Model.Record;
 
@@ -26,15 +28,15 @@ public class RecordUnitTest {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         Location location = null;
-        ArrayList<Image> bodyImage = new ArrayList<>();
+        HashMap<Bitmap, String> bodyImage = new HashMap<>();
         BodyLocation bodyLocation = null;
-        Record record = new Record("RecordTest", date, "This is Unit Test For Record",bodyImage,location,bodyLocation);
+        Record record = new Record("RecordTest", date, "This is Unit Test For Record",bodyImage,null, location, bodyLocation);
 
         assertTrue("Title should be 'RecordTest'", record.getTitle().equals("RecordTest"));
         assertTrue("Description should be 'This is Unit Test For Record'", record.getDescription().equals("This is Unit Test For Record"));
         assertEquals(record.getDateStart(),date);
-        assertEquals(record.getPhotos(),bodyImage);
-        assertEquals(record.getLocation(),location);
+        assertEquals(record.getPhotos(), new ArrayList<Bitmap>(bodyImage.keySet()));
+        assertEquals(record.getLocation(), location);
 
         //setLocation and getLocation test
         Location testLocation = null;
@@ -52,25 +54,31 @@ public class RecordUnitTest {
         record.setComments(doctorComments);
         assertEquals(record.getComments(),doctorComments);
 
-        //addNormalImages and removeNormalImages test
-        Image image1 = null;
-        Image image2 = null;
-        Image image3 = null;
+        record.setRecordId("aa");
+        assertEquals("aa", record.getRecordId());
 
-        ArrayList<Image> testImages= new ArrayList<>();
-        testImages.add(image1);
-        testImages.add(image3);
+        record.setProblemId("bb");
+        assertEquals("bb", record.getProblemId());
 
-        //addBodyImage and removeBodyImage test
-        Image testImage1 = null;
-        Image testImage2 = null;
+        record.setBodyLocation(BodyLocation.RightLeg);
+        assertEquals(BodyLocation.RightLeg, record.getBodyLocation());
 
-        bodyImage.add(testImage1);
-        bodyImage.add(testImage2);
+        Date date1 = new Date();
+        record.setDateStart(date1);
+        assertEquals(date1, record.getDateStart());
 
-        assertEquals(bodyImage,record.getPhotos());
+        record.setDescription("cc");
+        assertEquals("cc", record.getDescription());
 
-        assertEquals(bodyImage,record.getPhotos());
+        Location location1 = new Location("");
+        record.setLocation(location1);
+        assertEquals(location1, record.getLocation());
+
+        record.setTitle("dd");
+        assertEquals("dd", record.getTitle());
+
+        record.addComment(doctor, "cccc");
+        assertEquals("cccc", record.getComments().get(doctor.getUserName()).get(2));
     }
 
 }

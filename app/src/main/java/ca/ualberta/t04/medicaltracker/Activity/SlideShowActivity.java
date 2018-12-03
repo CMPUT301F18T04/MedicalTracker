@@ -65,7 +65,8 @@ public class SlideShowActivity extends AppCompatActivity {
         activity = intent.getStringExtra("activity");
         if(activity != null){
             titles = intent.getStringArrayListExtra("Titles");
-            titleView.setText(titles.get(0));
+            if(titles.size()>0)
+                titleView.setText(titles.get(0));
             delete.setVisibility(View.GONE);
         }
         else{
@@ -83,7 +84,8 @@ public class SlideShowActivity extends AppCompatActivity {
         final ArrayList<Bitmap> bitmaps = BitmapHolder.getBitmaps();
         final ArrayList<Boolean> frontBackArrayList = BitmapHolder.getFrontBackArrayList();
 
-        frontBack.setText(getFrontBackMessage(frontBackArrayList.get(0)));
+        if(frontBackArrayList.size()>0)
+            frontBack.setText(getFrontBackMessage(frontBackArrayList.get(0)));
 
         final ImageAdapter imageAdapter = new ImageAdapter(this, bitmaps);
         viewPager.setAdapter(imageAdapter);

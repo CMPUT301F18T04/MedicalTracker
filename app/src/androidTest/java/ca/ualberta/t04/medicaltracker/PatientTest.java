@@ -1,7 +1,13 @@
 package ca.ualberta.t04.medicaltracker;
 
-import org.junit.Test;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.Calendar;
 import java.util.Date;
 
 import ca.ualberta.t04.medicaltracker.Model.Doctor;
@@ -12,7 +18,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-public class PatientUnitTest {
+/**
+ * Instrumented test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+@RunWith(AndroidJUnit4.class)
+public class PatientTest {
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        assertEquals("ca.ualberta.t04.medicaltracker", appContext.getPackageName());
+    }
+
     @Test
     public void patient_test(){
 
@@ -39,5 +59,4 @@ public class PatientUnitTest {
         patient.removeDoctor(doctor);
         assertNotEquals(patient.getDoctorsUserNames().get(0),doctor.getUserName());
     }
-
 }

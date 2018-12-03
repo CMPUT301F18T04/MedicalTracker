@@ -193,7 +193,12 @@ public class RecordHistoryActivity extends AppCompatActivity {
                 frontBackArrayList.addAll(record.getFrontBackArrayList());
             }
 
-            Intent  intent = new Intent(RecordHistoryActivity.this, SlideShowActivity.class);
+            if(bitmaps.size()==0){
+                Toast.makeText(this, getString(R.string.record_toast2), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            Intent intent = new Intent(RecordHistoryActivity.this, SlideShowActivity.class);
             intent.putExtra("activity","album");
             intent.putStringArrayListExtra("Titles",recordTitles);
 

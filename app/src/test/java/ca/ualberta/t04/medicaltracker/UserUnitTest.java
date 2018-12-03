@@ -36,5 +36,20 @@ public class UserUnitTest {
         assertEquals(user.getPhoneNumber(), "123456789");
         assertEquals(user.getEmail(), "test@gmail.com");
         assertEquals(user.getName(), "AAA");
+
+        user.setDeviceId("aaa");
+        assertEquals("aaa", user.getDeviceId());
+
+        user.setAddress("ccc");
+        assertEquals("ccc", user.getAddress());
+
+        user.setDistrict("ddd");
+        assertEquals("ddd", user.getDistrict());
+
+        user.setLanguage("ca");
+        assertEquals("ca", user.getLanguage());
+
+        user.setUserName("test");
+        assertEquals("test", user.getUserName());
     }
 }

@@ -161,23 +161,14 @@ public class ElasticSearchController
 
             String userName = userNames[0];
 
-            // Build the search query
-            String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"query_string\" : {\n" +
-                    "            \"query\" : \"(userName:" + userName + " AND _type:" + USER_TYPE + ")\" \n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
-
-            DeleteByQuery deleteByQuery = new DeleteByQuery.Builder(query)
-                    .addIndex(INDEX_NAME)
-                    .addType(USER_TYPE)
+            Delete delete = new Delete.Builder(userName)
+                    .index(INDEX_NAME)
+                    .type(USER_TYPE)
                     .build();
 
             // If searched, then return object, otherwise return null
             try {
-                JestResult jestResult = client.execute(deleteByQuery);
+                JestResult jestResult = client.execute(delete);
                 if(jestResult.isSucceeded()){
                     Log.d("Succeed", "Deleted!");
                 }
