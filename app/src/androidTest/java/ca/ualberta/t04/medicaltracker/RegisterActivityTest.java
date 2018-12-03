@@ -5,6 +5,8 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -29,6 +31,8 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Login
     }
 
     public void testRegister() throws Throwable {
+
+        ElasticSearchController.deleteUser("testRegister");
 
         // Click register button first
         solo.clickOnButton("Register");

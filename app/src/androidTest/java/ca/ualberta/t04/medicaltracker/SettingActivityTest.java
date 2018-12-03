@@ -35,6 +35,8 @@ public class SettingActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
     public void testSettingPasswordChange() throws Throwable {
 
+        ElasticSearchController.deleteUser("intentTest");
+
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intentTest");
 

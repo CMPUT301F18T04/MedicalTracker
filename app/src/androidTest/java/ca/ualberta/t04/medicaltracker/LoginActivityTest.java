@@ -5,6 +5,8 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
+import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -29,6 +31,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
     public void testLogin() throws Throwable {
+        ElasticSearchController.deleteUser("intentTest");
 
         //Login first
         solo.enterText((EditText) solo.getView(R.id.login_username),"intentTest");
