@@ -37,6 +37,8 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
     public void testAboutUs() throws Throwable {
 
+        ElasticSearchController.deleteUser("doctor000");
+
         //Click the button register to sign up first
         solo.clickOnButton("Register");
 
@@ -55,19 +57,16 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         //If the text "Duplicated" occurs, then it means the account is already existed, then
         //the robot will use the account of doctor to log in
-        if (solo.waitForText("Duplicated")){
+        if (solo.waitForText("Duplicated",0,1000)){
             solo.getCurrentActivity().finish();
         }
 
         //Login first
-        solo.enterText((EditText) solo.getView(R.id.login_username),"patient000");
+        solo.enterText((EditText) solo.getView(R.id.login_username),"doctor000");
         solo.clickOnButton("Login");
 
-        if(solo.waitForText("match")){
-            solo.clickOnButton("Login");
-        }
         // Check if the app opens the correct page
-        assertTrue(solo.waitForActivity("PatientActivity"));
+        assertTrue(solo.waitForActivity("DoctorActivity"));
 
         // Open slide Bar
         //DrawerLayout drawerLayout = solo.getCurrentActivity().findViewById(R.id.drawer_layout);
