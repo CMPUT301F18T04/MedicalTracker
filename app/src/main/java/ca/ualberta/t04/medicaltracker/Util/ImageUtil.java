@@ -1,6 +1,5 @@
 package ca.ualberta.t04.medicaltracker.Util;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -13,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import id.zelory.compressor.Compressor;
 
 /**
  * Stores the image utils used throughout the project
@@ -47,25 +45,6 @@ public class ImageUtil {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] bytes = baos.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    /**
-     * compressImageFile
-     * @param context Context
-     * @param path String
-     * @return compressedImage
-     * @throws IOException
-     */
-    public static Bitmap compressImageFile(Context context, String path) throws IOException {
-        File file = new File(path);
-        Bitmap compressedImage = new Compressor(context)
-                .setMaxWidth(600)
-                .setMaxHeight(480)
-                .setQuality(30)
-                .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                .setDestinationDirectoryPath(PHOTO_DIRECTORY)
-                .compressToBitmap(file);
-        return compressedImage;
     }
 
     /**
