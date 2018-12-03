@@ -66,7 +66,7 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         assertTrue(solo.waitForActivity("AddPatientActivity"));
 
         //In AddPatientActivity, test search patients function.
-        solo.enterText((EditText) solo.getView(R.id.add_patient_username), "test5");
+        //solo.enterText((EditText) solo.getView(R.id.add_patient_username), "test5");
         solo.clickOnButton("Search");
 
         //Check if the search result is correct
