@@ -79,7 +79,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("AboutActivity"));
 
-        solo.goBackToActivity("PatientActivity");
+        solo.goBackToActivity("DoctorActivity");
 
         solo.clickOnImageButton(0);
 
