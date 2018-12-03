@@ -4,12 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
-
 import ca.ualberta.t04.medicaltracker.Activity.LoginActivity;
-import ca.ualberta.t04.medicaltracker.Controller.DataController;
-import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
-import ca.ualberta.t04.medicaltracker.Model.User;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
