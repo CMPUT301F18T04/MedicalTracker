@@ -1,36 +1,8 @@
 package ca.ualberta.t04.medicaltracker.Util;
 
-import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
-import android.content.ContentUris;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import id.zelory.compressor.Compressor;
-
-import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
  * Stores the utils used throughout the project
