@@ -61,7 +61,6 @@
         <activity android:name=".Activity.Patient.AddRecordActivity" />
         <activity android:name=".Activity.Patient.RecordHistoryActivity" />
         <activity android:name=".Activity.Patient.RecordDetailActivity" />
-        <activity android:name=".Activity.Patient.GalleryActivity" />
         <activity android:name=".Activity.Patient.DoctorViewActivity" />
         <activity android:name=".Activity.Patient.AddProblemActivity" />
         <activity android:name=".Activity.InformationActivity" />
