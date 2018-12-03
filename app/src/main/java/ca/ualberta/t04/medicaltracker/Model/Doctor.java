@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
 
+
 /**
  * This class contains all attributes and functionality for a doctor user of the application
  * Extended from User class
@@ -13,7 +14,6 @@ import ca.ualberta.t04.medicaltracker.Controller.ElasticSearchController;
  * @see User
  * @since 1.0
  */
-
 public class Doctor extends User
 {
     // We only save patients' username in database, because in this way, we can reduce the complex of the data

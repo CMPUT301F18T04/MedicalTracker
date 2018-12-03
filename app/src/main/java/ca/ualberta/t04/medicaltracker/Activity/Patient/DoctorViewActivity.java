@@ -31,6 +31,10 @@ import ca.ualberta.t04.medicaltracker.R;
 public class DoctorViewActivity extends AppCompatActivity {
     public ListView doctorListView;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -87,6 +87,10 @@ public class RecordDetailActivity extends AppCompatActivity {
     private HashMap<Bitmap, Boolean> frontBackHashMap = new HashMap<>();
     private ArrayList<Boolean> frontBackArrayList = new ArrayList<>();
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

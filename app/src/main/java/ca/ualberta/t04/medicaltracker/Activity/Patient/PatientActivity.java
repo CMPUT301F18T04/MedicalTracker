@@ -69,6 +69,11 @@ public class PatientActivity extends AppCompatActivity
 
     private boolean offline = false;
     private BroadcastReceiver connectionReceiver;
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
