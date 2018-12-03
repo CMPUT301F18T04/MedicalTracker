@@ -35,8 +35,17 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         solo.clickOnButton("Login");
 
+        // If the username does not exist
+        if (solo.waitForText("exist")){
+            solo.clickOnButton("Register");
+            solo.enterText((EditText) solo.getView(R.id.register_username),"intentTest");
+            solo.clickOnButton("Sign up");
+            solo.clickOnButton("Login");
+        }
+
         // Check if the app opens the correct page
         assertTrue(solo.waitForActivity("PatientActivity"));
 
+        solo.goBack();
     }
 }

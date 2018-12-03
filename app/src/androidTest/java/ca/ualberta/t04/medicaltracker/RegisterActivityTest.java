@@ -40,6 +40,12 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Login
 
         // finish register
         solo.clickOnButton("Sign up");
+
+        // check if the username is exist
+        if (solo.waitForText("Duplicated")){
+            solo.getCurrentActivity().finish();
+        }
+
         assertTrue(solo.waitForActivity("LoginActivity"));
 
         // Check register by logging this account
