@@ -202,7 +202,7 @@ public class PatientActivity extends AppCompatActivity
                     }
                 }
                 AlertDialog ad = new AlertDialog.Builder(this)
-                        .setTitle("Doctor " + doctors + " has added you in his/her patient list.")
+                        .setTitle(getString(R.string.patient_extra_toast2) + doctors + getString(R.string.patient_extra_toast1))
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
                 ad.show();
@@ -283,8 +283,8 @@ public class PatientActivity extends AppCompatActivity
 
         } else if (id == R.id.option_delete){ // when delete is clicked, an alert dialog is pop up
             AlertDialog.Builder a_builder = new AlertDialog.Builder(PatientActivity.this);
-            a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false) // ask you if you want to delete the problem you just clicked
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() { // you can choose YES to delete the problem
+            a_builder.setMessage(getString(R.string.patient_extra_toast3)).setCancelable(false) // ask you if you want to delete the problem you just clicked
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() { // you can choose YES to delete the problem
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) { // notify the DataController that a problem is deleted
                             Problem problem = DataController.getPatient().getProblemList().getProblem(index);
@@ -292,7 +292,7 @@ public class PatientActivity extends AppCompatActivity
                             Toast.makeText(PatientActivity.this, getString(R.string.patient_toast2), Toast.LENGTH_SHORT).show(); // notify the user a problem is deleted
                         }
                     })
-                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() { // you can choose CANCEL if you do not want to delete the problem you just clicked
+                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() { // you can choose CANCEL if you do not want to delete the problem you just clicked
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();

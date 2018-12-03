@@ -445,7 +445,7 @@ public class ElasticSearchController
             // If searched, then return object, otherwise return null
             try {
                 SearchResult result = client.execute(search);
-                if(!result.isSucceeded() || result.getSourceAsString()==null){
+                if(!result.isSucceeded() || result.getSourceAsString()==null || result.getSourceAsString().equals("")){
                     return null;
                 }
                 JsonParser parser = new JsonParser();

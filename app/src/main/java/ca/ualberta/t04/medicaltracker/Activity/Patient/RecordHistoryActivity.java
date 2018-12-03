@@ -125,8 +125,8 @@ public class RecordHistoryActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final int index = position;
                 AlertDialog.Builder a_builder = new AlertDialog.Builder(RecordHistoryActivity.this);
-                a_builder.setMessage("ARE YOU SURE TO DELETE THIS RECORD ?").setCancelable(false)
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                a_builder.setMessage(getString(R.string.record_history_toast2)).setCancelable(false)
+                        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Record temp = records.get(index);
@@ -137,7 +137,7 @@ public class RecordHistoryActivity extends AppCompatActivity {
                                 Toast.makeText(RecordHistoryActivity.this, R.string.record_history_toast1, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();

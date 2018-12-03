@@ -17,7 +17,6 @@
     <string name="login_toast4">您是首次在此設備上登錄本APP</string>
     <!-- end for Login Page -->
 
-
     <!-- String for Register Page -->
     <string name="register_text_username">用戶名：</string>
     <string name="register_text_email">郵箱：</string>
@@ -41,11 +40,9 @@
     <string name="register_toast13">出生日期應為過去的時間!</string>
     <!-- end for Register Page -->
 
-
     <!-- String for Main Page -->
     <string name="title_activity_main">主界面</string>
     <!-- end for Main Page -->
-
 
     <!-- String for Add Patient Page -->
     <string name="add_patient_title">查找患者</string>
@@ -178,6 +175,10 @@
     <string name="add_record_record_date">開始日期:</string>
     <string name="add_record_record_description">簡短描述:</string>
     <string name="add_record_button_add">添加</string>
+    <string name="add_record_body_location_hint">選擇身體部位</string>
+    <string name="add_record_date">選擇日期</string>
+    <string name="add_record_time">選擇時間</string>
+    <string name="add_record_photo_hint">當前照片</string>
     <string name="add_record_toast">出現了壹個問題</string>
     <string name="add_record_toast2">妳已經添加了壹個新的記錄</string>
     <string name="add_record_toast3">妳不能添加更多照片了!</string>
@@ -202,6 +203,10 @@
     <string name="search_tip">請輸入關鍵字索引:</string>
     <string name="search_query_hint">查找問題/記錄</string>
     <string name="search_button_search">搜索</string>
+
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">選擇位置</string>
+
     <string name="record_detail_location_text">坐標:</string>
     <string name="register_button_birthday">設置出生日期</string>
     <string name="title_activity_language">設置語言</string>
@@ -270,4 +275,36 @@
     <!-- Error Message -->
     <string name="error_message">發生故障</string>
     <!-- end for Error Message -->
+
+    <!-- String for BodyLocation Popup -->
+    <string name="body_head">頭</string>
+    <string name="body_left_arm">左胳膊</string>
+    <string name="body_right_arm">右胳膊</string>
+    <string name="body_left_leg">左腿</string>
+    <string name="body_right_leg">右腿</string>
+    <string name="body_Torso">軀體</string>
+    <!-- end for BodyLocation Popup -->
+
+    <!-- String for Search Spinner -->
+    <string name="search_problem">病情</string>
+    <string name="search_record">記錄</string>
+    <string name="search_no_location">没有位置</string>
+    <string name="search_geo_location">地理位置</string>
+    <string name="search_body_location">身體部位</string>
+    <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">您是否確實要刪除此記錄？</string>
+    <string name="yes">是</string>
+    <string name="cancel">取消</string>
+
+    <string name="patient_extra_toast1"> 已將您添加到他/她的患者列表中。</string>
+    <string name="patient_extra_toast2">醫生 </string>
+    <string name="patient_extra_toast3">您是否確實要刪除這個問題？</string>
+
+    <string name="doctor_extra_toast1">刷新完成</string>
+    <string name="doctor_extra_toast2">刪除成功.</string>
+    <string name="doctor_extra_toast3">找不到此二維碼患者。</string>
+
+    <string name="problem_long_click_edit">編輯</string>
+    <string name="problem_long_click_delete">刪除</string>
 </resources>

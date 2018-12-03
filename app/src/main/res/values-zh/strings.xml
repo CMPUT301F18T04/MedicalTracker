@@ -17,7 +17,6 @@
     <string name="login_toast4">您是首次在此设备上登录本APP</string>
     <!-- end for Login Page -->
 
-
     <!-- String for Register Page -->
     <string name="register_text_username">用户名：</string>
     <string name="register_text_email">邮箱：</string>
@@ -41,11 +40,9 @@
     <string name="register_toast13">出生日期应为过去的时间!</string>
     <!-- end for Register Page -->
 
-
     <!-- String for Main Page -->
     <string name="title_activity_main">主界面</string>
     <!-- end for Main Page -->
-
 
     <!-- String for Add Patient Page -->
     <string name="add_patient_title">查找患者</string>
@@ -75,7 +72,6 @@
     <string name="doctor_page_toast3">这个病人已经在你的列表里了</string>
     <!-- end for Doctor Page -->
 
-
     <!-- String for Record History Page -->
     <string name="record_history_description">详情: </string>
     <string name="record_history_title">记录</string>
@@ -85,7 +81,6 @@
     <!-- String for Doctor View Page -->
     <string name="doctor_view_page_title">你的医生</string>
     <!-- end for Doctor View Page -->
-
 
     <!-- String for Navigation Drawer -->
     <string name="navigation_drawer_open">打开导航栏</string>
@@ -103,7 +98,6 @@
     <string name="nav_item_about">关于我们</string>
     <string name="nav_item_qr_code">二维码</string>
     <!-- end for Navigation Drawer -->
-
 
     <!-- String for Menu -->
     <string name="action_add">添加</string>
@@ -145,9 +139,7 @@
     <string name="profile_toast2">电话号码无效!</string>
     <string name="profile_toast3">邮箱无效!</string>
     <string name="profile_toast4">资料更新成功！</string>
-
     <!-- end for Profile Page -->
-
 
     <!-- String for Add Problem Page -->
     <string name="add_problem_title">添加一个病情</string>
@@ -177,6 +169,10 @@
     <string name="add_record_record_date">开始日期:</string>
     <string name="add_record_record_description">简短描述:</string>
     <string name="add_record_button_add">添加</string>
+    <string name="add_record_body_location_hint">选择身体部位</string>
+    <string name="add_record_date">选择日期</string>
+    <string name="add_record_time">选择时间</string>
+    <string name="add_record_photo_hint">当前照片 </string>
     <string name="add_record_toast">出现了一个问题</string>
     <string name="add_record_toast2">你已经添加了一个新的记录</string>
     <string name="add_record_toast3">你不能添加更多照片了!</string>
@@ -201,6 +197,10 @@
     <string name="search_tip">请输入关键字索引:</string>
     <string name="search_query_hint">查找问题/记录</string>
     <string name="search_button_search">搜索</string>
+
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">选择位置</string>
+
     <string name="record_detail_location_text">坐标:</string>
     <string name="register_button_birthday">设置出生日期</string>
     <string name="title_activity_language">设置语言</string>
@@ -208,8 +208,6 @@
     <string name="search_toast2">你还没选择你的身体部位</string>
     <!-- end for Search Page -->
 
-    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
-    <string name="search_location_button_choose_body_location">选择位置</string>
 
     <!-- String for doctor record detail || record detail page -->
     <string name="doctor_record_detail_title">记录详情</string>
@@ -269,6 +267,38 @@
     <!-- end for Map View page -->
 
     <!-- Error Message -->
-    <string name="error_message">有故障发生了</string>
+    <string name="error_message">发生故障</string>
     <!-- end for Error Message -->
+
+    <!-- String for BodyLocation Popup -->
+    <string name="body_head">头</string>
+    <string name="body_left_arm">左胳膊</string>
+    <string name="body_right_arm">右胳膊</string>
+    <string name="body_left_leg">左腿</string>
+    <string name="body_right_leg">右腿</string>
+    <string name="body_Torso">躯体</string>
+    <!-- end for BodyLocation Popup -->
+
+    <!-- String for Search Spinner -->
+    <string name="search_problem">病情</string>
+    <string name="search_record">记录</string>
+    <string name="search_no_location">没有位置</string>
+    <string name="search_geo_location">地理位置</string>
+    <string name="search_body_location">身体部位</string>
+    <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">您是否确实要删除此记录？</string>
+    <string name="yes">是</string>
+    <string name="cancel">取消</string>
+
+    <string name="patient_extra_toast1"> 已将您添加到他/她的患者列表中.</string>
+    <string name="patient_extra_toast2">医生 </string>
+    <string name="patient_extra_toast3">您是否确实要删除这个问题？</string>
+
+    <string name="doctor_extra_toast1">刷新完成</string>
+    <string name="doctor_extra_toast2">删除成功.</string>
+    <string name="doctor_extra_toast3">找不到此二维码患者。</string>
+
+    <string name="problem_long_click_edit">编辑</string>
+    <string name="problem_long_click_delete">删除</string>
 </resources>

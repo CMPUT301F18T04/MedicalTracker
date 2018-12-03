@@ -75,6 +75,7 @@
     <string name="record_history_description">Description: </string>
     <string name="record_history_title">Records</string>
     <string name="record_history_toast1">A record has been deleted</string>
+
     <!-- end for Record History Page -->
 
     <!-- String for Doctor View Page -->
@@ -257,6 +258,7 @@
 
     <!-- Common String -->
     <string name="common_string_no_network">Cannot connect to network!</string>
+
     <!-- end for Common String -->
   
     <!-- String for Mark Image Page -->
@@ -290,4 +292,19 @@
     <string name="search_geo_location">Geo-Location</string>
     <string name="search_body_location">Body-Location</string>
     <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">ARE YOU SURE TO DELETE THIS RECORD?</string>
+    <string name="yes">YES</string>
+    <string name="cancel">CANCEL</string>
+
+    <string name="patient_extra_toast1"> has added you in his/her patient list.</string>
+    <string name="patient_extra_toast2">Doctor </string>
+    <string name="patient_extra_toast3">ARE YOU SURE TO DELETE THIS PROBLEM ?</string>
+
+    <string name="doctor_extra_toast1">Refresh completed</string>
+    <string name="doctor_extra_toast2">Succeeded to delete it.</string>
+    <string name="doctor_extra_toast3">Cannot find a patient with this QR code.</string>
+
+    <string name="problem_long_click_edit">Edit</string>
+    <string name="problem_long_click_delete">Delete</string>
 </resources>

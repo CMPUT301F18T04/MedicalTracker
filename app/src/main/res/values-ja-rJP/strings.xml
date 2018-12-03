@@ -168,6 +168,10 @@
     <string name="add_record_record_date">開始日:</string>
     <string name="add_record_record_description">簡単な説明:</string>
     <string name="add_record_button_add">追加</string>
+    <string name="add_record_body_location_hint">ボディパーツの選択</string>
+    <string name="add_record_date">日付を選択</string>
+    <string name="add_record_time">時間を選択する</string>
+    <string name="add_record_photo_hint">現在の写真</string>
     <string name="add_record_toast">問題がありました</string>
     <string name="add_record_toast2">あなたは新しいレコードを追加しました</string>
     <string name="add_record_toast3">写真を追加することはできません!</string>
@@ -192,6 +196,10 @@
     <string name="search_tip">キーワードインデックスを入力してください:</string>
     <string name="search_query_hint">問題の発見/記録</string>
     <string name="search_button_search">検索</string>
+
+    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
+    <string name="search_location_button_choose_body_location">場所を選択</string>
+
     <string name="record_detail_location_text">座標:</string>
     <string name="register_button_birthday">生年月日を設定する</string>
     <string name="title_activity_language">言語の設定</string>
@@ -199,8 +207,6 @@
     <string name="search_toast2">あなたはまだあなたの体の部分を選択していません。</string>
     <!-- end for Search Page -->
 
-    <!-- <string name="search_location_info">Click here to add information for location search</string> -->
-    <string name="search_location_button_choose_body_location">場所を選択</string>
 
     <!-- String for doctor record detail || record detail page -->
     <string name="doctor_record_detail_title">记录的详情</string>
@@ -240,6 +246,8 @@
 
     <!-- String for slide show page -->
     <string name="slide_show_button">削除</string>
+    <string name="slide_show_front">これは身体の前の写真です</string>
+    <string name="slide_show_back">これは身体の背中の写真です</string>
     <!-- end for slide show page -->
 
     <!-- Common String -->
@@ -260,4 +268,36 @@
     <!-- Error Message -->
     <string name="error_message">機能不全</string>
     <!-- end for Error Message -->
+
+    <!-- String for BodyLocation Popup -->
+    <string name="body_head">ヘッド</string>
+    <string name="body_left_arm">左腕</string>
+    <string name="body_right_arm">右腕</string>
+    <string name="body_left_leg">左脚</string>
+    <string name="body_right_leg">右脚</string>
+    <string name="body_Torso">ボディー</string>
+    <!-- end for BodyLocation Popup -->
+
+    <!-- String for Search Spinner -->
+    <string name="search_problem">条件</string>
+    <string name="search_record">レコード</string>
+    <string name="search_no_location">場所がありません</string>
+    <string name="search_geo_location">地理的位置</string>
+    <string name="search_body_location">ボディパーツ</string>
+    <!-- end for Search Spinner -->
+
+    <string name="record_history_toast2">このレコードを削除することを確認しますか？</string>
+    <string name="yes">はい</string>
+    <string name="cancel">キャンセル</string>
+
+    <string name="patient_extra_toast1"> あなたの患者リストにあなたを追加しました.</string>
+    <string name="patient_extra_toast2">医師 </string>
+    <string name="patient_extra_toast3">この問題を削除することを確認していますか？</string>
+
+    <string name="doctor_extra_toast1">リフレッシュが完了しました</string>
+    <string name="doctor_extra_toast2">それを削除するのに成功しました。</string>
+    <string name="doctor_extra_toast3">このQRコードで患者を見つけることができません。</string>
+
+    <string name="problem_long_click_edit">編集</string>
+    <string name="problem_long_click_delete">削除</string>
 </resources>

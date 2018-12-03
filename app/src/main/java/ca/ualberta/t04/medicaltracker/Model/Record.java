@@ -303,6 +303,7 @@ public class Record
      */
     public void updateComment(){
         HashMap<String, ArrayList<String>> comments = ElasticSearchController.searchRecordComment(getRecordId());
-        setComments(comments);
+        if(comments!=null)
+            setComments(comments);
     }
 }

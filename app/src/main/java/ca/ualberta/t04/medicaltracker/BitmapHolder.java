@@ -18,14 +18,6 @@ public class BitmapHolder {
     private static ArrayList<Boolean> frontBackArrayList = new ArrayList<>();
 
     /**
-     * removes the bitmap
-     * @param bitmap Bitmap
-     */
-    public static void removeBitmap(Bitmap bitmap){
-        bitmaps.remove(bitmap);
-    }
-
-    /**
      * gets the bitmaps in a list
      * @return bitmaps ArrayList
      */
