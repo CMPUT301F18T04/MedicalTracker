@@ -183,10 +183,11 @@ public class SearchActivity extends AppCompatActivity {
      * init the first spinner
      */
     private void initSearchSpinner(){
-        final String[] types = new String[]{SearchType.Problem.name(), SearchType.Record.name()};
+        final String[] types = new String[]{searchType.Problem.name(), searchType.Record.name()};
+        final String[] typesString = new String[]{getString(R.string.search_problem), getString(R.string.search_record)};
 
         Spinner spinner = findViewById(R.id.search_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typesString);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -212,9 +213,11 @@ public class SearchActivity extends AppCompatActivity {
      * init the second spinner
      */
     private void initLocationSpinner(){
-        final String[] locationTypes = new String[]{SearchType.NoLocation.name(), SearchType.GeoLocation.name(), SearchType.BodyLocation.name()};
+        final String[] locationTypes = new String[]{searchType.NoLocation.name(), searchType.GeoLocation.name(), searchType.BodyLocation.name()};
+
+        final String[] locationTypesString = new String[]{getString(R.string.search_no_location), getString(R.string.search_geo_location), getString(R.string.search_body_location)};
         Spinner locationSpinner = findViewById(R.id.search_spinner2);
-        ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationTypes);
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationTypesString);
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(locationAdapter);
 

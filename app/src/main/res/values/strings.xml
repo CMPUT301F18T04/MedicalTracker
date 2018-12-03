@@ -273,4 +273,21 @@
     <!-- Error Message -->
     <string name="error_message">An error occurs.</string>
     <!-- end for Error Message -->
+
+    <!-- String for BodyLocation Popup -->
+    <string name="body_head">Head</string>
+    <string name="body_left_arm">Left Arm</string>
+    <string name="body_right_arm">Right Arm</string>
+    <string name="body_left_leg">Left Leg</string>
+    <string name="body_right_leg">Right Leg</string>
+    <string name="body_Torso">Torso</string>
+    <!-- end for BodyLocation Popup -->
+
+    <!-- String for Search Spinner -->
+    <string name="search_problem">Problem</string>
+    <string name="search_record">Record</string>
+    <string name="search_no_location">No Location</string>
+    <string name="search_geo_location">Geo-Location</string>
+    <string name="search_body_location">Body-Location</string>
+    <!-- end for Search Spinner -->
 </resources>

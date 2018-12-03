@@ -57,42 +57,42 @@ public class BodyLocationPopup {
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.Head, ad);
+                assignBodyLocation(BodyLocation.Head, ad, context.getString(R.string.body_head));
             }
         });
 
         leftArm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.LeftArm, ad);
+                assignBodyLocation(BodyLocation.LeftArm, ad, context.getString(R.string.body_left_arm));
             }
         });
 
         rightArm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.RightArm, ad);
+                assignBodyLocation(BodyLocation.RightArm, ad, context.getString(R.string.body_right_arm));
             }
         });
 
         torso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.Torso, ad);
+                assignBodyLocation(BodyLocation.Torso, ad, context.getString(R.string.body_Torso));
             }
         });
 
         leftLeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.LeftLeg, ad);
+                assignBodyLocation(BodyLocation.LeftLeg, ad, context.getString(R.string.body_left_leg));
             }
         });
 
         rightLeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignBodyLocation(BodyLocation.RightLeg, ad);
+                assignBodyLocation(BodyLocation.RightLeg, ad, context.getString(R.string.body_right_leg));
             }
         });
         ad.show();
@@ -104,9 +104,9 @@ public class BodyLocationPopup {
      * @param bodyLocation BodyLocation
      * @param ad AlertDialog
      */
-    private void assignBodyLocation(BodyLocation bodyLocation, AlertDialog ad){
+    private void assignBodyLocation(BodyLocation bodyLocation, AlertDialog ad, String str){
         this.bodyLocation = bodyLocation;
-        textView.setText(bodyLocation.name());
+        textView.setText(str);
         ad.dismiss();
     }
 
