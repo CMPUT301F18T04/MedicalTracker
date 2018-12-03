@@ -215,6 +215,10 @@ public class RecordList
         }
     }
 
+    /**
+     * getRecordIds
+     * @return recordIds ArrayList
+     */
     public ArrayList<String> getRecordIds() {
         if(recordIds == null){
             return new ArrayList<>();
@@ -222,36 +226,64 @@ public class RecordList
         return recordIds;
     }
 
+    /**
+     * addRecordId
+     * @param recordId String
+     */
     private void addRecordId(String recordId) {
         getRecordIds().add(recordId);
     }
 
+    /**
+     * removeRecordId
+     * @param recordId String
+     */
     private void removeRecordId(String recordId){
         if(getRecordIds().contains(recordId)){
             getRecordIds().remove(recordId);
         }
     }
 
+    /**
+     * getProblemId
+     * @return problemId String
+     */
     public String getProblemId() {
         return problemId;
     }
 
+    /**
+     * setProblemId
+     * @param problemId String
+     */
     public void setProblemId(String problemId) {
         this.problemId = problemId;
     }
 
+    /**
+     * getOfflineRecords
+     * @return offlineRecords ArrayList
+     */
     public ArrayList<Record> getOfflineRecords() {
         if(offlineRecords==null)
             offlineRecords = new ArrayList<>();
         return offlineRecords;
     }
 
+    /**
+     * addOfflineRecord
+     * @param record Record
+     */
     public void addOfflineRecord(Record record) {
         if(offlineRecords==null)
             offlineRecords = new ArrayList<>();
         offlineRecords.add(record);
     }
 
+    /**
+     * updateComment
+     * @param record Record
+     */
     public void updateComment(Record record){
         record.updateComment();
     }

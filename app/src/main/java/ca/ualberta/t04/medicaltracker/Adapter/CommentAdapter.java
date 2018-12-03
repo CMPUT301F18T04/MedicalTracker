@@ -36,7 +36,14 @@ public class CommentAdapter extends ArrayAdapter{
         this.comments = comments;
     }
 
-    // returns the custom view
+
+    /**
+     * returns the custom view
+     * @param position int
+     * @param convertView View
+     * @param parent ViewGroup
+     * @return view View
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -50,6 +57,10 @@ public class CommentAdapter extends ArrayAdapter{
         return view;
     }
 
+    /**
+     * getCount
+     * @return int
+     */
     @Override
     public int getCount() {
         return comments.size();

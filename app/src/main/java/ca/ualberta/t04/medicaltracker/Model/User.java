@@ -211,24 +211,48 @@ public class User
         this.address = address;
     }
 
+    /**
+     * Get Device Id
+     * @return deviceId String
+     */
     public String getDeviceId() {
         if(deviceId==null)
             return "";
         return deviceId;
     }
 
+    /**
+     * setDeviceId
+     * @param deviceId String
+     */
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 
+    /**
+     * setLanguage
+     * @param lang String
+     */
     public void setLanguage(String lang){ this.language=lang; }
 
+    /**
+     * setDistrict
+     * @param district String
+     */
     public void setDistrict(String district){ this.district=district; }
 
+    /**
+     * getLanguage
+     * @return language String
+     */
     public String getLanguage(){
         return language;
     }
 
+    /**
+     * getDistrict
+     * @return district String
+     */
     public String getDistrict(){
         return district;
     }

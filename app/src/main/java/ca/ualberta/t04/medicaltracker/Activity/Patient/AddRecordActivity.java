@@ -127,7 +127,11 @@ public class AddRecordActivity extends AppCompatActivity implements LocationList
     private String date = "";
     private String time;
 
-    // onCreate method
+
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

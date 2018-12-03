@@ -32,17 +32,35 @@ public class ImageAdapter extends android.support.v4.view.PagerAdapter {
     }
 
     // returns the number of images
+
+    /**
+     * getCount
+     * @return int
+     */
     @Override
     public int getCount() {
         return bitmaps.size();
     }
 
     // returns a boolean
+
+    /**
+     * isViewFromObject
+     * @param view View
+     * @param object Object
+     * @return Boolean
+     */
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    /**
+     * instantiateItem
+     * @param container ViewGroup
+     * @param position int
+     * @return Object
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -56,11 +74,22 @@ public class ImageAdapter extends android.support.v4.view.PagerAdapter {
         return imageView;
     }
 
+    /**
+     * destroyItem
+     * @param container ViewGroup
+     * @param position int
+     * @param object Object
+     */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ImageView) object);
     }
 
+    /**
+     * getItemPosition
+     * @param object Object
+     * @return int
+     */
     @Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;

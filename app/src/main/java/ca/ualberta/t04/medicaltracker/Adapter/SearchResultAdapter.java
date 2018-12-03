@@ -43,7 +43,13 @@ public class SearchResultAdapter extends ArrayAdapter {
         this.searchType = searchType;
     }
 
-    // returns the custom view
+    /**
+     * returns the custom view
+     * @param position int
+     * @param convertView View
+     * @param parent ViewGroup
+     * @return view View
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -62,6 +68,15 @@ public class SearchResultAdapter extends ArrayAdapter {
         return view;
     }
 
+    /**
+     * fillData
+     * @param username TextView
+     * @param title TextView
+     * @param date TextView
+     * @param description TextView
+     * @param imageView ImageView
+     * @param object Object[]
+     */
     private void fillData(TextView username, TextView title, TextView date, TextView description, ImageView imageView, Object[] object){
         SimpleDateFormat recordFormat = new SimpleDateFormat(CommonUtil.DATE_FORMAT, Locale.getDefault());
         SimpleDateFormat problemFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

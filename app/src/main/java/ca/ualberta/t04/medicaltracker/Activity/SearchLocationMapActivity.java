@@ -74,6 +74,10 @@ public class SearchLocationMapActivity extends AppCompatActivity implements OnMa
         }
     }
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

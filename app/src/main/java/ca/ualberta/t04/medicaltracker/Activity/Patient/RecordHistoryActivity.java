@@ -49,7 +49,10 @@ public class RecordHistoryActivity extends AppCompatActivity {
     // initialize
     private int problem_index;
 
-    // onCreate method
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
