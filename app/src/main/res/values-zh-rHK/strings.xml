@@ -248,6 +248,8 @@
 
     <!-- String for slide show page -->
     <string name="slide_show_button">删除</string>
+    <string name="slide_show_front">これは身体の前の写真です</string>
+    <string name="slide_show_back">これは身体の背中の写真です</string>
     <!-- end for slide show page -->
 
     <!-- Common String -->

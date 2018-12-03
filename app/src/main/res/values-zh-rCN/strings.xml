@@ -241,6 +241,8 @@
 
     <!-- String for slide show page -->
     <string name="slide_show_button">删除</string>
+    <string name="slide_show_front">这是身体前面的照片</string>
+    <string name="slide_show_back">这是身体背部的照片</string>
     <!-- end for slide show page -->
 
     <!-- Common String -->
