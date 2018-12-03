@@ -37,7 +37,7 @@ public class AboutActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     public void testAboutUs() throws Throwable {
 
         //Login first
-        solo.enterText((EditText) solo.getView(R.id.login_username),"intent");
+        solo.enterText((EditText) solo.getView(R.id.login_username),"patient000");
         solo.clickOnButton("Login");
 
         if(solo.waitForText("match")){
