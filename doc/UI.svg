@@ -10,16 +10,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="3261.1953mm"
-   height="2141.2473mm"
-   viewBox="0 0 3261.1954 2141.2473"
+   width="3266.3467mm"
+   height="2141.8796mm"
+   viewBox="0 0 3266.3468 2141.8796"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="UI.svg"
-   inkscape:export-filename="C:\Users\jma4\Desktop\UI.png"
-   inkscape:export-xdpi="100"
-   inkscape:export-ydpi="100">
+   inkscape:export-filename="G:\School Work\CMPUT\CMPUT301\Project\MedicalTracker\doc\UI.png"
+   inkscape:export-xdpi="50"
+   inkscape:export-ydpi="50">
   <defs
      id="defs2">
     <pattern
@@ -37,9 +37,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="2994.3568"
-     inkscape:cy="2657.9352"
+     inkscape:zoom="0.0875"
+     inkscape:cx="6593.6705"
+     inkscape:cy="4585.8396"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -65,6 +65,13 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(581.08588,270.03223)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.26499999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect2673"
+       width="3262.6904"
+       height="2137.8333"
+       x="-578.06207"
+       y="-266.61826" />
     <path
        id="path5606"
        d="m -253.81006,-179.28184 h -7.78928 v -12.31891 h 1.62983 v 10.85843 h 6.15945 z"
