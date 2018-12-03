@@ -257,5 +257,26 @@
     <string name="map_toast_2">Vous ne pouvez pas obtenir la localisatoin acteulle</string>
     <!-- end for Map View page -->
 
+    <!-- Error Message -->
+    <string name="error_message">An error occurs.</string>
+    <!-- end for Error Message -->
+
+    <!-- String for BodyLocation Popup -->
+    <string name="body_head">Tête</string>
+    <string name="body_left_arm">Bras Gauche</string>
+    <string name="body_right_arm">Bras Droite</string>
+    <string name="body_left_leg">Jambe Gauche</string>
+    <string name="body_right_leg">Jambe Droite</string>
+    <string name="body_Torso">Torse</string>
+    <!-- end for BodyLocation Popup -->
+
+    <!-- String for Search Spinner -->
+    <string name="search_problem">Problème</string>
+    <string name="search_record">Archives</string>
+    <string name="search_no_location">Il n\'y a pas de localisation</string>
+    <string name="search_geo_location">Localisation</string>
+    <string name="search_body_location">Localisation de Corps</string>
+    <!-- end for Search Spinner -->
+
 
 </resources>
