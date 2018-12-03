@@ -143,6 +143,11 @@ public class SlideShowActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
     }
 
+    /**
+     * Checks if the photo is the front or bakc
+     * @param isBack Boolean
+     * @return String
+     */
     // Get the message of front/back body-location
     private String getFrontBackMessage(Boolean isBack){
         if(isBack)

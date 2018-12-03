@@ -84,10 +84,18 @@ public class Problem
     }
 
 
+    /**
+     * Get Problem Id
+     * @return problemId String
+     */
     public String getProblemId() {
         return problemId;
     }
 
+    /**
+     * Set Problem Id
+     * @param problemId String
+     */
     public void setProblemId(String problemId) {
         this.problemId = problemId;
         recordList.setProblemId(problemId);

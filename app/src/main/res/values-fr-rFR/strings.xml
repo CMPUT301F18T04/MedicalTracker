@@ -245,6 +245,8 @@
 
     <!-- String for slide show page -->
     <string name="slide_show_button">Supprimer</string>
+    <string name="slide_show_front">C\'est la photo pour le devant de corps</string>
+    <string name="slide_show_back">C\'est la photo pour le verso de corps</string>
     <!-- end for slide show page -->
 
     <!-- String for Mark Image Page -->

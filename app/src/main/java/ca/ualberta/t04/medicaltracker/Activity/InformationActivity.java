@@ -32,6 +32,10 @@ public class InformationActivity extends AppCompatActivity {
     TextView informationAddress;
     TextView informationDisplayName;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

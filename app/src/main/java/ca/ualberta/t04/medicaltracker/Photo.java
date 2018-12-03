@@ -48,12 +48,20 @@ public class Photo {
         this.path = path;
     }
 
+    /**
+     * isBack
+     * @return isBack Boolean
+     */
     public Boolean isBack(){
         if(isBack==null)
             isBack = false;
         return isBack;
     }
 
+    /**
+     * setBackStatus
+     * @param isBack Boolean
+     */
     public void setBackStatus(Boolean isBack){
         this.isBack = isBack;
     }

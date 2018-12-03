@@ -41,10 +41,18 @@ public class BitmapHolder {
         bitmaps = newBitmaps;
     }
 
+    /**
+     * setFrontBackArrayList
+     * @param frontBackArrayList ArrayList
+     */
     public static void setFrontBackArrayList(ArrayList<Boolean> frontBackArrayList){
         BitmapHolder.frontBackArrayList = frontBackArrayList;
     }
 
+    /**
+     * getFrontBackArrayList
+     * @return frontBackArrayList ArrayList
+     */
     public static ArrayList<Boolean> getFrontBackArrayList(){
         return frontBackArrayList;
     }

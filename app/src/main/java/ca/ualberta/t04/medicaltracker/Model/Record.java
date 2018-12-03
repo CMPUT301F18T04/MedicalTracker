@@ -250,30 +250,57 @@ public class Record
         this.location = location;
     }
 
+    /**
+     * getBodyLocation
+     * @return bodyLocation BodyLocation
+     */
     public BodyLocation getBodyLocation() {
         return bodyLocation;
     }
 
+    /**
+     * setBodyLocation
+     * @param bodyLocation BodyLocation
+     */
     public void setBodyLocation(BodyLocation bodyLocation) {
         this.bodyLocation = bodyLocation;
     }
 
+    /**
+     * getRecordId
+     * @return recordId String
+     */
     public String getRecordId() {
         return recordId;
     }
 
+    /**
+     * setRecordId
+     * @param recordId String
+     */
     public void setRecordId(String recordId) {
         this.recordId = recordId;
     }
 
+    /**
+     * getProblemId
+     * @return problemId String
+     */
     public String getProblemId() {
         return problemId;
     }
 
+    /**
+     * setProblemId
+     * @param problemId String
+     */
     public void setProblemId(String problemId) {
         this.problemId = problemId;
     }
 
+    /**
+     * updateComment
+     */
     public void updateComment(){
         HashMap<String, ArrayList<String>> comments = ElasticSearchController.searchRecordComment(getRecordId());
         setComments(comments);
