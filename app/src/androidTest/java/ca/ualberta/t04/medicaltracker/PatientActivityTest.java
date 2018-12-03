@@ -119,6 +119,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
         frontBack.put(bitmap1, true);
         frontBack.put(bitmap2, false);
         final Record testRecord = new Record("testRecord", new Date(), "test", bitmapStringHashMap, frontBack, null, BodyLocation.Head);
+        // Here, since Robotium cannot take a photo, so adding a record by code
         runTestOnUiThread(new Runnable() {
             @Override
             public void run() {
