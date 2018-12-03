@@ -95,7 +95,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("AddRecordActivity"));
 
-        if(solo.waitForText("Google"))
+        if(solo.waitForText("Google", 0, 1000))
             solo.clickOnButton("OK");
         solo.enterText((EditText) solo.getView(R.id.add_record_title), "testRecord");
         solo.enterText((EditText) solo.getView(R.id.add_record_description), "test");
@@ -103,16 +103,12 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
         solo.clickOnView(solo.getView(R.id.add_record_body_location));
         solo.clickOnView(solo.getView(R.id.body_location_head));
 
-        solo.clickOnView(solo.getView(R.id.record_add_location));
-
-        solo.goBackToActivity("AddRecordActivity");
-
         solo.clickOnButton("Add");
 
         HashMap<Bitmap, String> bitmapStringHashMap = new HashMap<>();
 
-        Bitmap bitmap1 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), R.drawable.ic_menu_camera);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), R.drawable.ic_menu_send);
+        Bitmap bitmap1 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), android.R.drawable.ic_dialog_email);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(InstrumentationRegistry.getTargetContext().getResources(), android.R.drawable.alert_dark_frame);
         bitmapStringHashMap.put(bitmap1, "a");
         bitmapStringHashMap.put(bitmap2, "b");
         HashMap<Bitmap, Boolean> frontBack = new HashMap<>();
@@ -139,7 +135,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("RecordDetailActivity"));
 
-        if(solo.waitForText("Google"))
+        if(solo.waitForText("Google", 0 , 1000))
             solo.clickOnButton("OK");
 
         solo.clearEditText((EditText) solo.getView(R.id.addCommentEditText));
@@ -188,7 +184,7 @@ public class PatientActivityTest extends ActivityInstrumentationTestCase2<LoginA
 
         assertTrue(solo.waitForActivity("RecordDetailActivity"));
 
-        if(solo.waitForText("Google"))
+        if(solo.waitForText("Google", 0, 1000))
             solo.clickOnButton("OK");
 
         solo.goBack();

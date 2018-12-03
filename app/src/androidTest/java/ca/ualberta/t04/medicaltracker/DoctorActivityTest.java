@@ -63,7 +63,7 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         //If the text "Duplicated" occurs, then it means the account is already existed, then
         //the robot will use the account of doctor to log in
-        if (solo.waitForText("Duplicated")){
+        if (solo.waitForText("Duplicated",0,1000)){
             solo.getCurrentActivity().finish();
         }
 
@@ -89,21 +89,6 @@ public class DoctorActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.clickInList(0);
         assertTrue(solo.waitForActivity("DoctorRecordDetailActivity"));
 
-       //Click on Map ImageView to checkout location
-        solo.clickOnView(solo.getView(R.id.doctor_record_detail_view_location));
-        if (solo.waitForActivity("MapViewActivity")){
-
-            //View all Locations of a patient.
-            solo.clickOnView(solo.getView(R.id.all_locations));
-            assertTrue(solo.waitForText("Move around"));
-
-            //View the device location.
-            solo.clickOnView(solo.getView(R.id.my_location));
-            assertTrue(solo.waitForText("You are here"));
-
-            //Go back to doctor record detail activity.
-            solo.goBack();
-        }
         //Click comment button in the bottom.
         solo.clickOnView(solo.getView(R.id.doctorCommentButton));
         solo.enterText((EditText) solo.getView(R.id.addCommentEditText), "This looks not good.");
